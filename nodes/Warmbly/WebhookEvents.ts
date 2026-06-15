@@ -23,17 +23,17 @@ export const webhookEvents: INodePropertyOptions[] = [
 		description: 'An automation was updated.',
 	},
 	{
-		name: 'Bulk operations: Completed',
+		name: 'Bulk Operations: Completed',
 		value: 'bulk_operation.completed',
 		description: 'A bulk import/export completed.',
 	},
 	{
-		name: 'Bulk operations: Failed',
+		name: 'Bulk Operations: Failed',
 		value: 'bulk_operation.failed',
 		description: 'A bulk import/export failed.',
 	},
 	{
-		name: 'Bulk operations: Started',
+		name: 'Bulk Operations: Started',
 		value: 'bulk_operation.started',
 		description: 'A bulk import/export started.',
 	},
@@ -243,27 +243,27 @@ export const webhookEvents: INodePropertyOptions[] = [
 		description: 'A meeting was rescheduled.',
 	},
 	{
-		name: 'Team & access: Created',
+		name: 'Team & Access: Created',
 		value: 'role.created',
 		description: 'A role was created.',
 	},
 	{
-		name: 'Team & access: Deleted',
+		name: 'Team & Access: Deleted',
 		value: 'role.deleted',
 		description: 'A role was deleted.',
 	},
 	{
-		name: 'Team & access: Member Invited',
+		name: 'Team & Access: Member Invited',
 		value: 'team.member_invited',
 		description: 'A teammate was invited.',
 	},
 	{
-		name: 'Team & access: Member Removed',
+		name: 'Team & Access: Member Removed',
 		value: 'team.member_removed',
 		description: 'A teammate was removed.',
 	},
 	{
-		name: 'Team & access: Updated',
+		name: 'Team & Access: Updated',
 		value: 'role.updated',
 		description: 'A role was updated.',
 	},

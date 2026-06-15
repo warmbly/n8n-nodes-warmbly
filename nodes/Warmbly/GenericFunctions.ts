@@ -173,6 +173,18 @@ export function coerceValue(value: unknown, type: string): unknown {
 		}
 		return value;
 	}
+	if (type === 'stringArray') {
+		if (Array.isArray(value)) {
+			return value;
+		}
+		if (typeof value === 'string') {
+			return value
+				.split(',')
+				.map((part) => part.trim())
+				.filter((part) => part.length > 0);
+		}
+		return value;
+	}
 	if (type === 'number') {
 		return typeof value === 'string' ? Number(value) : value;
 	}

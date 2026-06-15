@@ -7,7 +7,6 @@ import type {
 	IWebhookFunctions,
 	IWebhookResponseData,
 } from 'n8n-workflow';
-import { NodeConnectionType } from 'n8n-workflow';
 
 import { extractArray, warmblyApiRequest } from './GenericFunctions';
 import { webhookEvents } from './WebhookEvents';
@@ -25,7 +24,7 @@ export class WarmblyTrigger implements INodeType {
 			name: 'Warmbly Trigger',
 		},
 		inputs: [],
-		outputs: [NodeConnectionType.Main],
+		outputs: ['main'],
 		credentials: [
 			{
 				name: 'warmblyApi',
