@@ -82,7 +82,7 @@ export const crmTaskTypeFields: INodeProperties[] = [
 			{
 				displayName: 'Color',
 				name: 'color',
-				type: 'string',
+				type: 'color',
 				default: '',
 				description: 'Type color (hex).',
 			},
@@ -133,7 +133,7 @@ export const crmTaskTypeFields: INodeProperties[] = [
 			{
 				displayName: 'Color',
 				name: 'color',
-				type: 'string',
+				type: 'color',
 				default: '',
 				description: 'New type color (hex).',
 			},

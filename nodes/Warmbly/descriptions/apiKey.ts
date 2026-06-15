@@ -29,13 +29,13 @@ export const apiKeyOperations: INodeProperties[] = [
 			{
 				name: 'Get Analytics',
 				value: 'getAnalytics',
-				action: 'Per-key usage analytics',
+				action: 'Per key usage analytics',
 				description: 'Per-key usage analytics',
 			},
 			{
 				name: 'Get Logs',
 				value: 'getLogs',
-				action: 'List per-key usage logs',
+				action: 'List per key usage logs',
 				description: 'List per-key usage logs',
 			},
 			{
@@ -53,7 +53,7 @@ export const apiKeyOperations: INodeProperties[] = [
 			{
 				name: 'Get Usage Analytics',
 				value: 'getUsageAnalytics',
-				action: 'Org-wide usage analytics',
+				action: 'Org wide usage analytics',
 				description: 'Org-wide usage analytics',
 			},
 			{

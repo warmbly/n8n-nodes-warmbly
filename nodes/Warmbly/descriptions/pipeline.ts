@@ -24,7 +24,6 @@ export const pipelineOperations: INodeProperties[] = [
 				name: 'Create Stage',
 				value: 'createStage',
 				action: 'Create stage',
-				description: 'Create stage',
 			},
 			{
 				name: 'Delete',
@@ -36,7 +35,6 @@ export const pipelineOperations: INodeProperties[] = [
 				name: 'Delete Stage',
 				value: 'deleteStage',
 				action: 'Delete stage',
-				description: 'Delete stage',
 			},
 			{
 				name: 'Get',
@@ -60,7 +58,6 @@ export const pipelineOperations: INodeProperties[] = [
 				name: 'Update Stage',
 				value: 'updateStage',
 				action: 'Update stage',
-				description: 'Update stage',
 			},
 		],
 		default: 'getAll',
@@ -271,7 +268,7 @@ export const pipelineFields: INodeProperties[] = [
 	{
 		displayName: 'Color',
 		name: 'color',
-		type: 'string',
+		type: 'color',
 		default: '',
 		required: true,
 		description: 'Stage color (hex).',
@@ -368,7 +365,7 @@ export const pipelineFields: INodeProperties[] = [
 			{
 				displayName: 'Color',
 				name: 'color',
-				type: 'string',
+				type: 'color',
 				default: '',
 				description: 'New stage color (hex).',
 			},

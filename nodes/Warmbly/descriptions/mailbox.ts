@@ -18,7 +18,6 @@ export const mailboxOperations: INodeProperties[] = [
 				name: 'Check Domain Authentication',
 				value: 'authCheck',
 				action: 'Check domain authentication',
-				description: 'Check domain authentication',
 			},
 			{
 				name: 'Delete',
@@ -42,19 +41,16 @@ export const mailboxOperations: INodeProperties[] = [
 				name: 'Get Warmup Ban Status',
 				value: 'warmupBanStatus',
 				action: 'Get warmup ban status',
-				description: 'Get warmup ban status',
 			},
 			{
 				name: 'Pause Warmup',
 				value: 'warmupPause',
 				action: 'Pause warmup',
-				description: 'Pause warmup',
 			},
 			{
 				name: 'Resume Warmup',
 				value: 'warmupResume',
 				action: 'Resume warmup',
-				description: 'Resume warmup',
 			},
 			{
 				name: 'Send Email',
@@ -66,13 +62,11 @@ export const mailboxOperations: INodeProperties[] = [
 				name: 'Start Warmup',
 				value: 'warmupStart',
 				action: 'Start warmup',
-				description: 'Start warmup',
 			},
 			{
 				name: 'Stop Warmup',
 				value: 'warmupStop',
 				action: 'Stop warmup',
-				description: 'Stop warmup',
 			},
 			{
 				name: 'Submit Warmup Appeal',
@@ -200,6 +194,7 @@ export const mailboxFields: INodeProperties[] = [
 				type: 'string',
 				default: '',
 				description: 'The address to verify.',
+				placeholder: 'name@email.com',
 			},
 			{
 				displayName: 'Idempotency Key',

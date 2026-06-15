@@ -77,6 +77,7 @@ export const deliverabilityFields: INodeProperties[] = [
 		default: '',
 		required: true,
 		description: 'The recipient address the event is about.',
+		placeholder: 'name@email.com',
 		displayOptions: {
 			show: {
 				resource: [

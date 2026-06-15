@@ -53,8 +53,11 @@ export const deadLetterFields: INodeProperties[] = [
 				displayName: 'Limit',
 				name: 'limit',
 				type: 'number',
-				default: 100,
-				description: 'Max rows to return, 1 to 200 (default 100).',
+				typeOptions: {
+					minValue: 1,
+				},
+				default: 50,
+				description: 'Max number of results to return',
 			},
 			{
 				displayName: 'Status',

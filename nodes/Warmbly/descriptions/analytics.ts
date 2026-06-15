@@ -18,7 +18,6 @@ export const analyticsOperations: INodeProperties[] = [
 				name: 'Compare Campaigns',
 				value: 'compareCampaigns',
 				action: 'Compare campaigns',
-				description: 'Compare campaigns',
 			},
 			{
 				name: 'Get Account',
@@ -42,13 +41,11 @@ export const analyticsOperations: INodeProperties[] = [
 				name: 'Get Campaign Daily Stats',
 				value: 'getCampaignDaily',
 				action: 'Get campaign daily stats',
-				description: 'Get campaign daily stats',
 			},
 			{
 				name: 'Get Campaign Hourly Stats',
 				value: 'getCampaignHourly',
 				action: 'Get campaign hourly stats',
-				description: 'Get campaign hourly stats',
 			},
 			{
 				name: 'Get Dashboard',
@@ -440,6 +437,7 @@ export const analyticsFields: INodeProperties[] = [
 				type: 'string',
 				default: '',
 				description: 'Limit to one email account. Invalid UUIDs are ignored.',
+				placeholder: 'name@email.com',
 			},
 		],
 	},

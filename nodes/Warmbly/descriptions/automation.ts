@@ -369,8 +369,11 @@ export const automationFields: INodeProperties[] = [
 				displayName: 'Limit',
 				name: 'limit',
 				type: 'number',
+				typeOptions: {
+					minValue: 1,
+				},
 				default: 50,
-				description: 'Max runs to return. Defaults to 50.',
+				description: 'Max number of results to return',
 			},
 		],
 	},

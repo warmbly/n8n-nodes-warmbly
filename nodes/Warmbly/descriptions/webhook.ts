@@ -287,8 +287,11 @@ export const webhookFields: INodeProperties[] = [
 				displayName: 'Limit',
 				name: 'limit',
 				type: 'number',
+				typeOptions: {
+					minValue: 1,
+				},
 				default: 50,
-				description: 'Max rows to return. Between 1 and 200. Defaults to 50. Out-of-range values return 400.',
+				description: 'Max number of results to return',
 			},
 		],
 	},

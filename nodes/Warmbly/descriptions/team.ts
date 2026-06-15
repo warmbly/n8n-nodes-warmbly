@@ -99,7 +99,7 @@ export const teamFields: INodeProperties[] = [
 			{
 				displayName: 'Color',
 				name: 'color',
-				type: 'string',
+				type: 'color',
 				default: '',
 				description: 'Hex color (defaults to #94a3b8).',
 			},
@@ -168,7 +168,7 @@ export const teamFields: INodeProperties[] = [
 			{
 				displayName: 'Color',
 				name: 'color',
-				type: 'string',
+				type: 'color',
 				default: '',
 				description: 'Hex color.',
 			},

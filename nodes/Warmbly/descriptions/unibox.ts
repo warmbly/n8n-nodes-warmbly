@@ -60,7 +60,6 @@ export const uniboxOperations: INodeProperties[] = [
 				name: 'Get Thread Labels',
 				value: 'getThreadLabels',
 				action: 'Get thread labels',
-				description: 'Get thread labels',
 			},
 			{
 				name: 'Get Unseen Count',
@@ -84,7 +83,6 @@ export const uniboxOperations: INodeProperties[] = [
 				name: 'Set Thread Labels',
 				value: 'setThreadLabels',
 				action: 'Set thread labels',
-				description: 'Set thread labels',
 			},
 			{
 				name: 'Snooze',
@@ -181,6 +179,7 @@ export const uniboxFields: INodeProperties[] = [
 				type: 'string',
 				default: '',
 				description: 'Restrict to a single mailbox by UUID.',
+				placeholder: 'name@email.com',
 			},
 			{
 				displayName: 'Email IDs',
@@ -188,6 +187,7 @@ export const uniboxFields: INodeProperties[] = [
 				type: 'string',
 				default: '',
 				description: 'Comma-separated mailbox UUIDs. A thread matches if it landed in any of them.',
+				placeholder: 'name@email.com',
 			},
 			{
 				displayName: 'From',
@@ -256,6 +256,7 @@ export const uniboxFields: INodeProperties[] = [
 				type: 'string',
 				default: '',
 				description: 'Optional mailbox UUID to count unread for a single mailbox.',
+				placeholder: 'name@email.com',
 			},
 		],
 	},
@@ -266,6 +267,7 @@ export const uniboxFields: INodeProperties[] = [
 		default: '',
 		required: true,
 		description: 'UUID of the sending mailbox.',
+		placeholder: 'name@email.com',
 		displayOptions: {
 			show: {
 				resource: [
@@ -713,6 +715,7 @@ export const uniboxFields: INodeProperties[] = [
 				type: 'string',
 				default: '',
 				description: 'Optional mailbox UUID to scope the thread to one mailbox. Also accepted as `email`.',
+				placeholder: 'name@email.com',
 			},
 		],
 	},

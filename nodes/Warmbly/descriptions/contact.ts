@@ -59,13 +59,13 @@ export const contactOperations: INodeProperties[] = [
 			{
 				name: 'Get Activities',
 				value: 'getActivities',
-				action: 'List a contact\'s activities',
+				action: 'List a contact s activities',
 				description: 'List a contact\'s activities',
 			},
 			{
 				name: 'Get Deals',
 				value: 'getDeals',
-				action: 'List a contact\'s deals',
+				action: 'List a contact s deals',
 				description: 'List a contact\'s deals',
 			},
 			{
@@ -77,7 +77,7 @@ export const contactOperations: INodeProperties[] = [
 			{
 				name: 'Get Timeline',
 				value: 'getTimeline',
-				action: 'List a contact\'s timeline',
+				action: 'List a contact s timeline',
 				description: 'List a contact\'s timeline',
 			},
 			{
@@ -480,6 +480,7 @@ export const contactFields: INodeProperties[] = [
 		default: '',
 		required: true,
 		description: 'The email address to resolve.',
+		placeholder: 'name@email.com',
 		displayOptions: {
 			show: {
 				resource: [
@@ -937,8 +938,11 @@ export const contactFields: INodeProperties[] = [
 				displayName: 'Limit',
 				name: 'limit',
 				type: 'number',
+				typeOptions: {
+					minValue: 1,
+				},
 				default: 50,
-				description: 'Page size, 1 to 200 (default 50).',
+				description: 'Max number of results to return',
 			},
 		],
 	},
@@ -987,8 +991,11 @@ export const contactFields: INodeProperties[] = [
 				displayName: 'Limit',
 				name: 'limit',
 				type: 'number',
+				typeOptions: {
+					minValue: 1,
+				},
 				default: 50,
-				description: 'Page size, 1 to 200 (default 50).',
+				description: 'Max number of results to return',
 			},
 		],
 	},

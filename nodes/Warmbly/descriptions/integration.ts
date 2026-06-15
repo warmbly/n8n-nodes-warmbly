@@ -47,7 +47,7 @@ export const integrationOperations: INodeProperties[] = [
 			{
 				name: 'Get Bookings',
 				value: 'getBookings',
-				action: 'List meeting bookings (integrations view)',
+				action: 'List meeting bookings integrations view',
 				description: 'List meeting bookings (integrations view)',
 			},
 			{
@@ -96,7 +96,6 @@ export const integrationOperations: INodeProperties[] = [
 				name: 'Replace Field Mappings',
 				value: 'replaceFieldMappings',
 				action: 'Replace field mappings',
-				description: 'Replace field mappings',
 			},
 			{
 				name: 'Test Connection',

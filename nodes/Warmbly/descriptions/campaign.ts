@@ -48,13 +48,11 @@ export const campaignOperations: INodeProperties[] = [
 				name: 'Get A/B Analysis',
 				value: 'getAbAnalysis',
 				action: 'Get A/B analysis',
-				description: 'Get A/B analysis',
 			},
 			{
 				name: 'Get Advanced Settings',
 				value: 'getAdvanced',
 				action: 'Get advanced settings',
-				description: 'Get advanced settings',
 			},
 			{
 				name: 'Get Attachments',
@@ -90,13 +88,11 @@ export const campaignOperations: INodeProperties[] = [
 				name: 'Replace Senders',
 				value: 'replaceSenders',
 				action: 'Replace senders',
-				description: 'Replace senders',
 			},
 			{
 				name: 'Run Preflight',
 				value: 'preflight',
 				action: 'Run preflight',
-				description: 'Run preflight',
 			},
 			{
 				name: 'Send Test Email',
@@ -126,7 +122,6 @@ export const campaignOperations: INodeProperties[] = [
 				name: 'Update Advanced Settings',
 				value: 'updateAdvanced',
 				action: 'Update advanced settings',
-				description: 'Update advanced settings',
 			},
 			{
 				name: 'Upload Attachment',
