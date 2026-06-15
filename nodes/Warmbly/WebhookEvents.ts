@@ -1,0 +1,310 @@
+import type { INodePropertyOptions } from 'n8n-workflow';
+
+// AUTO-GENERATED from Warmbly's outbound webhook event catalog.
+export const webhookEvents: INodePropertyOptions[] = [
+	{
+		name: 'Automation: Created',
+		value: 'automation.created',
+		description: 'An automation was created.',
+	},
+	{
+		name: 'Automation: Deleted',
+		value: 'automation.deleted',
+		description: 'An automation was deleted.',
+	},
+	{
+		name: 'Automation: Run',
+		value: 'automation.run',
+		description: 'An automation run completed.',
+	},
+	{
+		name: 'Automation: Updated',
+		value: 'automation.updated',
+		description: 'An automation was updated.',
+	},
+	{
+		name: 'Bulk operations: Completed',
+		value: 'bulk_operation.completed',
+		description: 'A bulk import/export completed.',
+	},
+	{
+		name: 'Bulk operations: Failed',
+		value: 'bulk_operation.failed',
+		description: 'A bulk import/export failed.',
+	},
+	{
+		name: 'Bulk operations: Started',
+		value: 'bulk_operation.started',
+		description: 'A bulk import/export started.',
+	},
+	{
+		name: 'Campaign: Action',
+		value: 'campaign.action',
+		description: 'A campaign sequence "notify" action fired.',
+	},
+	{
+		name: 'Campaign: Completed',
+		value: 'campaign.completed',
+		description: 'A campaign finished its last scheduled send.',
+	},
+	{
+		name: 'Campaign: Created',
+		value: 'campaign.created',
+		description: 'A campaign was created.',
+	},
+	{
+		name: 'Campaign: Deleted',
+		value: 'campaign.deleted',
+		description: 'A campaign was deleted.',
+	},
+	{
+		name: 'Campaign: Deliverability Warning',
+		value: 'campaign.deliverability_warning',
+		description: 'A campaign entered the deliverability early-warning band.',
+	},
+	{
+		name: 'Campaign: Email Bounced',
+		value: 'campaign.email_bounced',
+		description: 'A campaign email bounced.',
+	},
+	{
+		name: 'Campaign: Email Clicked',
+		value: 'campaign.email_clicked',
+		description: 'A link in a campaign email was clicked. High-volume event; subscribe to it explicitly.',
+	},
+	{
+		name: 'Campaign: Email Delivered',
+		value: 'campaign.email_delivered',
+		description: 'A campaign email was accepted by the receiving server. High-volume event; subscribe to it explicitly.',
+	},
+	{
+		name: 'Campaign: Email Opened',
+		value: 'campaign.email_opened',
+		description: 'A campaign email was opened. High-volume event; subscribe to it explicitly.',
+	},
+	{
+		name: 'Campaign: Email Sent',
+		value: 'campaign.email_sent',
+		description: 'A campaign email was sent to a contact. High-volume event; subscribe to it explicitly.',
+	},
+	{
+		name: 'Campaign: Paused',
+		value: 'campaign.paused',
+		description: 'A campaign was paused (manually or by deliverability guardrails).',
+	},
+	{
+		name: 'Campaign: Reply Received',
+		value: 'campaign.reply_received',
+		description: 'A contact replied to a campaign email.',
+	},
+	{
+		name: 'Campaign: Started',
+		value: 'campaign.started',
+		description: 'A campaign began sending.',
+	},
+	{
+		name: 'Campaign: Unsubscribed',
+		value: 'campaign.unsubscribed',
+		description: 'A contact unsubscribed from a campaign.',
+	},
+	{
+		name: 'Campaign: Updated',
+		value: 'campaign.updated',
+		description: 'A campaign\'s settings or steps changed.',
+	},
+	{
+		name: 'Contact: Created',
+		value: 'contact.created',
+		description: 'A contact was created.',
+	},
+	{
+		name: 'Contact: Deleted',
+		value: 'contact.deleted',
+		description: 'A contact was deleted.',
+	},
+	{
+		name: 'Contact: Updated',
+		value: 'contact.updated',
+		description: 'A contact was updated.',
+	},
+	{
+		name: 'CRM: Deal Created',
+		value: 'crm.deal_created',
+		description: 'A CRM deal was created.',
+	},
+	{
+		name: 'CRM: Deal Deleted',
+		value: 'crm.deal_deleted',
+		description: 'A CRM deal was deleted.',
+	},
+	{
+		name: 'CRM: Deal Updated',
+		value: 'crm.deal_updated',
+		description: 'A CRM deal changed (including stage moves).',
+	},
+	{
+		name: 'CRM: Note Created',
+		value: 'crm.note_created',
+		description: 'A CRM note was added.',
+	},
+	{
+		name: 'CRM: Pipeline Updated',
+		value: 'crm.pipeline_updated',
+		description: 'A CRM pipeline or stage changed.',
+	},
+	{
+		name: 'CRM: Task Created',
+		value: 'crm.task_created',
+		description: 'A CRM task was created.',
+	},
+	{
+		name: 'CRM: Task Updated',
+		value: 'crm.task_updated',
+		description: 'A CRM task changed.',
+	},
+	{
+		name: 'Deliverability: Bounce',
+		value: 'deliverability.bounce',
+		description: 'A bounce was recorded (any source).',
+	},
+	{
+		name: 'Deliverability: Complaint',
+		value: 'deliverability.complaint',
+		description: 'A spam complaint was recorded.',
+	},
+	{
+		name: 'Developer: Event',
+		value: 'custom.event',
+		description: 'A developer-defined custom event was fired.',
+	},
+	{
+		name: 'Inbox: Email Deleted',
+		value: 'inbox.email_deleted',
+		description: 'An inbox email was deleted. High-volume event; subscribe to it explicitly.',
+	},
+	{
+		name: 'Inbox: Email Received',
+		value: 'inbox.email_received',
+		description: 'A new email arrived in a connected mailbox. High-volume event; subscribe to it explicitly.',
+	},
+	{
+		name: 'Inbox: Email Updated',
+		value: 'inbox.email_updated',
+		description: 'An inbox email changed (read state, labels, category). High-volume event; subscribe to it explicitly.',
+	},
+	{
+		name: 'Inbox: Reply Received',
+		value: 'inbox.reply_received',
+		description: 'A human reply was received (including non-campaign replies).',
+	},
+	{
+		name: 'Mailbox: Connected',
+		value: 'email_account.connected',
+		description: 'A mailbox was connected.',
+	},
+	{
+		name: 'Mailbox: Disconnected',
+		value: 'email_account.disconnected',
+		description: 'A mailbox was disconnected.',
+	},
+	{
+		name: 'Mailbox: Error',
+		value: 'email_account.error',
+		description: 'A mailbox hit an auth or sync error.',
+	},
+	{
+		name: 'Mailbox: Health Changed',
+		value: 'email_account.health_changed',
+		description: 'A mailbox\'s health state changed.',
+	},
+	{
+		name: 'Mailbox: Removed',
+		value: 'email_account.removed',
+		description: 'A mailbox was removed.',
+	},
+	{
+		name: 'Mailbox: Synced',
+		value: 'email_account.synced',
+		description: 'A mailbox finished a sync. High-volume event; subscribe to it explicitly.',
+	},
+	{
+		name: 'Meeting: Booked',
+		value: 'meeting.booked',
+		description: 'A meeting was booked.',
+	},
+	{
+		name: 'Meeting: Canceled',
+		value: 'meeting.canceled',
+		description: 'A meeting was canceled.',
+	},
+	{
+		name: 'Meeting: Rescheduled',
+		value: 'meeting.rescheduled',
+		description: 'A meeting was rescheduled.',
+	},
+	{
+		name: 'Team & access: Created',
+		value: 'role.created',
+		description: 'A role was created.',
+	},
+	{
+		name: 'Team & access: Deleted',
+		value: 'role.deleted',
+		description: 'A role was deleted.',
+	},
+	{
+		name: 'Team & access: Member Invited',
+		value: 'team.member_invited',
+		description: 'A teammate was invited.',
+	},
+	{
+		name: 'Team & access: Member Removed',
+		value: 'team.member_removed',
+		description: 'A teammate was removed.',
+	},
+	{
+		name: 'Team & access: Updated',
+		value: 'role.updated',
+		description: 'A role was updated.',
+	},
+	{
+		name: 'Warmup: Blocked',
+		value: 'warmup.blocked',
+		description: 'A mailbox was blocked from the warmup pool.',
+	},
+	{
+		name: 'Warmup: Email Sent',
+		value: 'warmup.email_sent',
+		description: 'A warmup email was sent. High-volume event; subscribe to it explicitly.',
+	},
+	{
+		name: 'Warmup: Health Changed',
+		value: 'warmup.health_changed',
+		description: 'A mailbox\'s warmup health state changed.',
+	},
+	{
+		name: 'Warmup: Placement In Spam',
+		value: 'warmup.placement_in_spam',
+		description: 'A warmup email landed in spam.',
+	},
+	{
+		name: 'Warmup: Quarantined',
+		value: 'warmup.quarantined',
+		description: 'A mailbox was quarantined from the warmup pool.',
+	},
+	{
+		name: 'Workspace: Updated',
+		value: 'lead_sync_source.updated',
+		description: 'A lead-sync source changed.',
+	},
+	{
+		name: 'Workspace: Updated',
+		value: 'settings.updated',
+		description: 'Workspace settings changed.',
+	},
+	{
+		name: 'Workspace: Updated',
+		value: 'subscription.updated',
+		description: 'The plan or subscription changed.',
+	},
+];
