@@ -1,0 +1,18 @@
+{
+	"node": "n8n-nodes-warmbly.warmbly",
+	"nodeVersion": "1.0",
+	"codexVersion": "1.0",
+	"categories": ["Marketing & Content", "Sales", "Communication"],
+	"resources": {
+		"credentialDocumentation": [
+			{
+				"url": "https://docs.warmbly.com/api/authentication"
+			}
+		],
+		"primaryDocumentation": [
+			{
+				"url": "https://docs.warmbly.com/api"
+			}
+		]
+	}
+}

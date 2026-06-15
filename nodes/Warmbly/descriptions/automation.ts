@@ -1,0 +1,431 @@
+import type { INodeProperties } from 'n8n-workflow';
+
+export const automationOperations: INodeProperties[] = [
+	{
+		displayName: 'Operation',
+		name: 'operation',
+		type: 'options',
+		noDataExpression: true,
+		displayOptions: {
+			show: {
+				resource: [
+					'automation',
+				],
+			},
+		},
+		options: [
+			{
+				name: 'Create',
+				value: 'create',
+				action: 'Create an automation',
+				description: 'Create an automation',
+			},
+			{
+				name: 'Delete',
+				value: 'delete',
+				action: 'Delete an automation',
+				description: 'Delete an automation',
+			},
+			{
+				name: 'Get',
+				value: 'get',
+				action: 'Get an automation',
+				description: 'Get an automation',
+			},
+			{
+				name: 'Get Many',
+				value: 'getAll',
+				action: 'Get many automations',
+				description: 'Get many automations',
+			},
+			{
+				name: 'Get Runs',
+				value: 'getRuns',
+				action: 'List automation runs',
+				description: 'List automation runs',
+			},
+			{
+				name: 'Test',
+				value: 'test',
+				action: 'Test an automation',
+				description: 'Test an automation',
+			},
+			{
+				name: 'Update',
+				value: 'update',
+				action: 'Update an automation',
+				description: 'Update an automation',
+			},
+		],
+		default: 'getAll',
+	},
+];
+
+export const automationFields: INodeProperties[] = [
+	{
+		displayName: 'Name',
+		name: 'name',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'Display name.',
+		displayOptions: {
+			show: {
+				resource: [
+					'automation',
+				],
+				operation: [
+					'create',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Trigger Event',
+		name: 'trigger_event',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'The event that fires the flow (e.g. email.replied).',
+		displayOptions: {
+			show: {
+				resource: [
+					'automation',
+				],
+				operation: [
+					'create',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Graph',
+		name: 'graph',
+		type: 'json',
+		default: '',
+		required: true,
+		description: 'The editable flow: nodes plus the edges connecting them.',
+		displayOptions: {
+			show: {
+				resource: [
+					'automation',
+				],
+				operation: [
+					'create',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Additional Fields',
+		name: 'additionalFields',
+		type: 'collection',
+		placeholder: 'Add Field',
+		default: {},
+		displayOptions: {
+			show: {
+				resource: [
+					'automation',
+				],
+				operation: [
+					'create',
+				],
+			},
+		},
+		options: [
+			{
+				displayName: 'Enabled',
+				name: 'enabled',
+				type: 'boolean',
+				default: false,
+				description: 'Whether the automation runs on matching events.',
+			},
+			{
+				displayName: 'Filter',
+				name: 'filter',
+				type: 'json',
+				default: '',
+				description: 'Optional automation-wide gate applied to every action.',
+			},
+			{
+				displayName: 'Idempotency Key',
+				name: 'idempotencyKey',
+				type: 'string',
+				default: '',
+				description: 'Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.',
+			},
+		],
+	},
+	{
+		displayName: 'Automation ID',
+		name: 'id',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'Automation id.',
+		displayOptions: {
+			show: {
+				resource: [
+					'automation',
+				],
+				operation: [
+					'get',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Automation ID',
+		name: 'id',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'Automation id.',
+		displayOptions: {
+			show: {
+				resource: [
+					'automation',
+				],
+				operation: [
+					'update',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Name',
+		name: 'name',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'Display name.',
+		displayOptions: {
+			show: {
+				resource: [
+					'automation',
+				],
+				operation: [
+					'update',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Trigger Event',
+		name: 'trigger_event',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'The event that fires the flow (e.g. email.replied).',
+		displayOptions: {
+			show: {
+				resource: [
+					'automation',
+				],
+				operation: [
+					'update',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Graph',
+		name: 'graph',
+		type: 'json',
+		default: '',
+		required: true,
+		description: 'The editable flow: nodes plus the edges connecting them.',
+		displayOptions: {
+			show: {
+				resource: [
+					'automation',
+				],
+				operation: [
+					'update',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Update Fields',
+		name: 'updateFields',
+		type: 'collection',
+		placeholder: 'Add Field',
+		default: {},
+		displayOptions: {
+			show: {
+				resource: [
+					'automation',
+				],
+				operation: [
+					'update',
+				],
+			},
+		},
+		options: [
+			{
+				displayName: 'Enabled',
+				name: 'enabled',
+				type: 'boolean',
+				default: false,
+				description: 'Whether the automation runs on matching events.',
+			},
+			{
+				displayName: 'Filter',
+				name: 'filter',
+				type: 'json',
+				default: '',
+				description: 'Optional automation-wide gate applied to every action.',
+			},
+			{
+				displayName: 'Idempotency Key',
+				name: 'idempotencyKey',
+				type: 'string',
+				default: '',
+				description: 'Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.',
+			},
+		],
+	},
+	{
+		displayName: 'Automation ID',
+		name: 'id',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'Automation id.',
+		displayOptions: {
+			show: {
+				resource: [
+					'automation',
+				],
+				operation: [
+					'delete',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Additional Fields',
+		name: 'additionalFields',
+		type: 'collection',
+		placeholder: 'Add Field',
+		default: {},
+		displayOptions: {
+			show: {
+				resource: [
+					'automation',
+				],
+				operation: [
+					'delete',
+				],
+			},
+		},
+		options: [
+			{
+				displayName: 'Idempotency Key',
+				name: 'idempotencyKey',
+				type: 'string',
+				default: '',
+				description: 'Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.',
+			},
+		],
+	},
+	{
+		displayName: 'Automation ID',
+		name: 'id',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'Automation id.',
+		displayOptions: {
+			show: {
+				resource: [
+					'automation',
+				],
+				operation: [
+					'getRuns',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Additional Fields',
+		name: 'additionalFields',
+		type: 'collection',
+		placeholder: 'Add Field',
+		default: {},
+		displayOptions: {
+			show: {
+				resource: [
+					'automation',
+				],
+				operation: [
+					'getRuns',
+				],
+			},
+		},
+		options: [
+			{
+				displayName: 'Limit',
+				name: 'limit',
+				type: 'number',
+				typeOptions: {
+					minValue: 1,
+				},
+				default: 50,
+				description: 'Max number of results to return',
+			},
+		],
+	},
+	{
+		displayName: 'Automation ID',
+		name: 'id',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'Automation id.',
+		displayOptions: {
+			show: {
+				resource: [
+					'automation',
+				],
+				operation: [
+					'test',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Additional Fields',
+		name: 'additionalFields',
+		type: 'collection',
+		placeholder: 'Add Field',
+		default: {},
+		displayOptions: {
+			show: {
+				resource: [
+					'automation',
+				],
+				operation: [
+					'test',
+				],
+			},
+		},
+		options: [
+			{
+				displayName: 'Data',
+				name: 'data',
+				type: 'json',
+				default: '',
+				description: 'Sample event payload to evaluate the flow against.',
+			},
+			{
+				displayName: 'Idempotency Key',
+				name: 'idempotencyKey',
+				type: 'string',
+				default: '',
+				description: 'Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.',
+			},
+		],
+	},
+];

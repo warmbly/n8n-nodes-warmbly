@@ -1,0 +1,444 @@
+import type { INodeProperties } from 'n8n-workflow';
+
+export const analyticsOperations: INodeProperties[] = [
+	{
+		displayName: 'Operation',
+		name: 'operation',
+		type: 'options',
+		noDataExpression: true,
+		displayOptions: {
+			show: {
+				resource: [
+					'analytics',
+				],
+			},
+		},
+		options: [
+			{
+				name: 'Compare Campaigns',
+				value: 'compareCampaigns',
+				action: 'Compare campaigns',
+			},
+			{
+				name: 'Get Account',
+				value: 'getAccount',
+				action: 'Get account status',
+				description: 'Get account status',
+			},
+			{
+				name: 'Get Accounts',
+				value: 'getAccounts',
+				action: 'List account statuses',
+				description: 'List account statuses',
+			},
+			{
+				name: 'Get Campaign',
+				value: 'getCampaign',
+				action: 'Get campaign analytics',
+				description: 'Get campaign analytics',
+			},
+			{
+				name: 'Get Campaign Daily Stats',
+				value: 'getCampaignDaily',
+				action: 'Get campaign daily stats',
+			},
+			{
+				name: 'Get Campaign Hourly Stats',
+				value: 'getCampaignHourly',
+				action: 'Get campaign hourly stats',
+			},
+			{
+				name: 'Get Dashboard',
+				value: 'getDashboard',
+				action: 'Get dashboard analytics',
+				description: 'Get dashboard analytics',
+			},
+			{
+				name: 'Get Deliverability',
+				value: 'getDeliverability',
+				action: 'Get deliverability dashboard',
+				description: 'Get deliverability dashboard',
+			},
+			{
+				name: 'Get Usage',
+				value: 'getUsage',
+				action: 'Get usage overview',
+				description: 'Get usage overview',
+			},
+			{
+				name: 'Get Warmup',
+				value: 'getWarmup',
+				action: 'Get warmup analytics',
+				description: 'Get warmup analytics',
+			},
+		],
+		default: 'compareCampaigns',
+	},
+];
+
+export const analyticsFields: INodeProperties[] = [
+	{
+		displayName: 'Account ID',
+		name: 'id',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'Email account id.',
+		displayOptions: {
+			show: {
+				resource: [
+					'analytics',
+				],
+				operation: [
+					'getAccount',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'IDs',
+		name: 'ids',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'Comma-separated campaign UUIDs. Invalid entries are dropped; capped at 10. At least one valid id is required.',
+		displayOptions: {
+			show: {
+				resource: [
+					'analytics',
+				],
+				operation: [
+					'compareCampaigns',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'From',
+		name: 'from',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'Range start (YYYY-MM-DD).',
+		displayOptions: {
+			show: {
+				resource: [
+					'analytics',
+				],
+				operation: [
+					'compareCampaigns',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'To',
+		name: 'to',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'Range end (YYYY-MM-DD).',
+		displayOptions: {
+			show: {
+				resource: [
+					'analytics',
+				],
+				operation: [
+					'compareCampaigns',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Campaign ID',
+		name: 'id',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'Campaign id.',
+		displayOptions: {
+			show: {
+				resource: [
+					'analytics',
+				],
+				operation: [
+					'getCampaign',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Campaign ID',
+		name: 'id',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'Campaign id.',
+		displayOptions: {
+			show: {
+				resource: [
+					'analytics',
+				],
+				operation: [
+					'getCampaignDaily',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'From',
+		name: 'from',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'Range start (YYYY-MM-DD).',
+		displayOptions: {
+			show: {
+				resource: [
+					'analytics',
+				],
+				operation: [
+					'getCampaignDaily',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'To',
+		name: 'to',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'Range end (YYYY-MM-DD).',
+		displayOptions: {
+			show: {
+				resource: [
+					'analytics',
+				],
+				operation: [
+					'getCampaignDaily',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Campaign ID',
+		name: 'id',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'Campaign id.',
+		displayOptions: {
+			show: {
+				resource: [
+					'analytics',
+				],
+				operation: [
+					'getCampaignHourly',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Filters',
+		name: 'filters',
+		type: 'collection',
+		placeholder: 'Add Field',
+		default: {},
+		displayOptions: {
+			show: {
+				resource: [
+					'analytics',
+				],
+				operation: [
+					'getCampaignHourly',
+				],
+			},
+		},
+		options: [
+			{
+				displayName: 'Date',
+				name: 'date',
+				type: 'string',
+				default: '',
+				description: 'Day to report (YYYY-MM-DD). Defaults to today.',
+			},
+		],
+	},
+	{
+		displayName: 'Additional Fields',
+		name: 'additionalFields',
+		type: 'collection',
+		placeholder: 'Add Field',
+		default: {},
+		displayOptions: {
+			show: {
+				resource: [
+					'analytics',
+				],
+				operation: [
+					'getDashboard',
+				],
+			},
+		},
+		options: [
+			{
+				displayName: 'Period',
+				name: 'period',
+				type: 'options',
+				options: [
+					{
+						name: '30d',
+						value: '30d',
+					},
+					{
+						name: '7d',
+						value: '7d',
+					},
+					{
+						name: '90d',
+						value: '90d',
+					},
+				],
+				default: '7d',
+				description: 'One of 7d, 30d, 90d. Any other value falls back to 7d.',
+			},
+		],
+	},
+	{
+		displayName: 'Additional Fields',
+		name: 'additionalFields',
+		type: 'collection',
+		placeholder: 'Add Field',
+		default: {},
+		displayOptions: {
+			show: {
+				resource: [
+					'analytics',
+				],
+				operation: [
+					'getDeliverability',
+				],
+			},
+		},
+		options: [
+			{
+				displayName: 'From',
+				name: 'from',
+				type: 'dateTime',
+				default: '',
+				description: 'Window start as an RFC 3339 timestamp. Defaults to 7 days ago (UTC).',
+			},
+			{
+				displayName: 'To',
+				name: 'to',
+				type: 'dateTime',
+				default: '',
+				description: 'Window end as an RFC 3339 timestamp. Defaults to now (UTC).',
+			},
+		],
+	},
+	{
+		displayName: 'Additional Fields',
+		name: 'additionalFields',
+		type: 'collection',
+		placeholder: 'Add Field',
+		default: {},
+		displayOptions: {
+			show: {
+				resource: [
+					'analytics',
+				],
+				operation: [
+					'getUsage',
+				],
+			},
+		},
+		options: [
+			{
+				displayName: 'Period',
+				name: 'period',
+				type: 'options',
+				options: [
+					{
+						name: 'Day',
+						value: 'day',
+					},
+					{
+						name: 'Month',
+						value: 'month',
+					},
+					{
+						name: 'Week',
+						value: 'week',
+					},
+				],
+				default: 'day',
+				description: 'One of day, week, month. Any other value falls back to day.',
+			},
+		],
+	},
+	{
+		displayName: 'From',
+		name: 'from',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'Range start (YYYY-MM-DD).',
+		displayOptions: {
+			show: {
+				resource: [
+					'analytics',
+				],
+				operation: [
+					'getWarmup',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'To',
+		name: 'to',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'Range end (YYYY-MM-DD).',
+		displayOptions: {
+			show: {
+				resource: [
+					'analytics',
+				],
+				operation: [
+					'getWarmup',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Additional Fields',
+		name: 'additionalFields',
+		type: 'collection',
+		placeholder: 'Add Field',
+		default: {},
+		displayOptions: {
+			show: {
+				resource: [
+					'analytics',
+				],
+				operation: [
+					'getWarmup',
+				],
+			},
+		},
+		options: [
+			{
+				displayName: 'Email ID',
+				name: 'email_id',
+				type: 'string',
+				default: '',
+				description: 'Limit to one email account. Invalid UUIDs are ignored.',
+				placeholder: 'name@email.com',
+			},
+		],
+	},
+];

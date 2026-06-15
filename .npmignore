@@ -1,0 +1,15 @@
+# Source — only dist/ is published (see package.json "files").
+*.ts
+!*.d.ts
+tsconfig.json
+gulpfile.js
+.eslintrc.js
+.eslintrc.prepublish.js
+.prettierrc.js
+.editorconfig
+.github/
+.gen/
+nodes/**/*.ts
+credentials/**/*.ts
+*.tsbuildinfo
+.vscode/

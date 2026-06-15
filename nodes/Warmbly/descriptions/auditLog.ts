@@ -1,0 +1,137 @@
+import type { INodeProperties } from 'n8n-workflow';
+
+export const auditLogOperations: INodeProperties[] = [
+	{
+		displayName: 'Operation',
+		name: 'operation',
+		type: 'options',
+		noDataExpression: true,
+		displayOptions: {
+			show: {
+				resource: [
+					'auditLog',
+				],
+			},
+		},
+		options: [
+			{
+				name: 'Get Many',
+				value: 'getAll',
+				action: 'Get many audit logs',
+				description: 'Get many audit logs',
+			},
+		],
+		default: 'getAll',
+	},
+];
+
+export const auditLogFields: INodeProperties[] = [
+	{
+		displayName: 'Return All',
+		name: 'returnAll',
+		type: 'boolean',
+		default: false,
+		description: 'Whether to return all results or only up to a given limit',
+		displayOptions: {
+			show: {
+				resource: [
+					'auditLog',
+				],
+				operation: [
+					'getAll',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Limit',
+		name: 'limit',
+		type: 'number',
+		typeOptions: {
+			minValue: 1,
+		},
+		default: 50,
+		description: 'Max number of results to return',
+		displayOptions: {
+			show: {
+				resource: [
+					'auditLog',
+				],
+				operation: [
+					'getAll',
+				],
+				returnAll: [
+					false,
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Filters',
+		name: 'filters',
+		type: 'collection',
+		placeholder: 'Add Field',
+		default: {},
+		displayOptions: {
+			show: {
+				resource: [
+					'auditLog',
+				],
+				operation: [
+					'getAll',
+				],
+			},
+		},
+		options: [
+			{
+				displayName: 'Action',
+				name: 'action',
+				type: 'string',
+				default: '',
+				description: 'Filter by action (for example create, update, delete, send, revoke).',
+			},
+			{
+				displayName: 'Actor ID',
+				name: 'actor_id',
+				type: 'string',
+				default: '',
+				description: 'Filter to a single acting member.',
+			},
+			{
+				displayName: 'Date',
+				name: 'date',
+				type: 'string',
+				default: '',
+				description: 'Single-day filter (YYYY-MM-DD), expanded to that whole UTC day.',
+			},
+			{
+				displayName: 'End Date',
+				name: 'end_date',
+				type: 'string',
+				default: '',
+				description: 'Range end. RFC 3339 or YYYY-MM-DD. Overrides date.',
+			},
+			{
+				displayName: 'Entity ID',
+				name: 'entity_id',
+				type: 'string',
+				default: '',
+				description: 'Filter to a single entity.',
+			},
+			{
+				displayName: 'Entity Type',
+				name: 'entity_type',
+				type: 'string',
+				default: '',
+				description: 'Filter by entity type (for example campaign, contact, email_account, api_key, webhook).',
+			},
+			{
+				displayName: 'Start Date',
+				name: 'start_date',
+				type: 'string',
+				default: '',
+				description: 'Range start. RFC 3339 or YYYY-MM-DD. Overrides date.',
+			},
+		],
+	},
+];
