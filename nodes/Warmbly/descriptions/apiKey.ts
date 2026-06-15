@@ -1,0 +1,555 @@
+import type { INodeProperties } from 'n8n-workflow';
+
+export const apiKeyOperations: INodeProperties[] = [
+	{
+		displayName: 'Operation',
+		name: 'operation',
+		type: 'options',
+		noDataExpression: true,
+		displayOptions: {
+			show: {
+				resource: [
+					'apiKey',
+				],
+			},
+		},
+		options: [
+			{
+				name: 'Create',
+				value: 'create',
+				action: 'Create an API key',
+				description: 'Create an API key',
+			},
+			{
+				name: 'Get',
+				value: 'get',
+				action: 'Get an API key',
+				description: 'Get an API key',
+			},
+			{
+				name: 'Get Analytics',
+				value: 'getAnalytics',
+				action: 'Per-key usage analytics',
+				description: 'Per-key usage analytics',
+			},
+			{
+				name: 'Get Logs',
+				value: 'getLogs',
+				action: 'List per-key usage logs',
+				description: 'List per-key usage logs',
+			},
+			{
+				name: 'Get Many',
+				value: 'getAll',
+				action: 'Get many API keys',
+				description: 'Get many API keys',
+			},
+			{
+				name: 'Get Permissions',
+				value: 'getPermissions',
+				action: 'List available permissions',
+				description: 'List available permissions',
+			},
+			{
+				name: 'Get Usage Analytics',
+				value: 'getUsageAnalytics',
+				action: 'Org-wide usage analytics',
+				description: 'Org-wide usage analytics',
+			},
+			{
+				name: 'Get Usage Summary',
+				value: 'getUsageSummary',
+				action: 'Usage summary',
+				description: 'Usage summary',
+			},
+			{
+				name: 'Revoke',
+				value: 'revoke',
+				action: 'Revoke an API key',
+				description: 'Revoke an API key',
+			},
+			{
+				name: 'Update',
+				value: 'update',
+				action: 'Update an API key',
+				description: 'Update an API key',
+			},
+		],
+		default: 'getAll',
+	},
+];
+
+export const apiKeyFields: INodeProperties[] = [
+	{
+		displayName: 'Return All',
+		name: 'returnAll',
+		type: 'boolean',
+		default: false,
+		description: 'Whether to return all results or only up to a given limit',
+		displayOptions: {
+			show: {
+				resource: [
+					'apiKey',
+				],
+				operation: [
+					'getAll',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Limit',
+		name: 'limit',
+		type: 'number',
+		typeOptions: {
+			minValue: 1,
+		},
+		default: 50,
+		description: 'Max number of results to return',
+		displayOptions: {
+			show: {
+				resource: [
+					'apiKey',
+				],
+				operation: [
+					'getAll',
+				],
+				returnAll: [
+					false,
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Name',
+		name: 'name',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'Human-readable label.',
+		displayOptions: {
+			show: {
+				resource: [
+					'apiKey',
+				],
+				operation: [
+					'create',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Permissions',
+		name: 'permissions',
+		type: 'number',
+		default: 0,
+		required: true,
+		description: 'uint64 permission bitmask. Must contain only defined bits; unknown bits are rejected.',
+		displayOptions: {
+			show: {
+				resource: [
+					'apiKey',
+				],
+				operation: [
+					'create',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Additional Fields',
+		name: 'additionalFields',
+		type: 'collection',
+		placeholder: 'Add Field',
+		default: {},
+		displayOptions: {
+			show: {
+				resource: [
+					'apiKey',
+				],
+				operation: [
+					'create',
+				],
+			},
+		},
+		options: [
+			{
+				displayName: 'Allowed Email Accounts',
+				name: 'allowed_email_accounts',
+				type: 'string',
+				default: '',
+				description: 'If set, mailbox-scoped routes accept only these email account ids. Comma-separated list.',
+			},
+			{
+				displayName: 'Allowed Ips',
+				name: 'allowed_ips',
+				type: 'string',
+				default: '',
+				description: 'If set, the key is usable only from these source IPs. Omit or leave empty to allow any IP. Comma-separated list.',
+			},
+			{
+				displayName: 'Description',
+				name: 'description',
+				type: 'string',
+				default: '',
+				description: 'Free-form note about the key\'s purpose.',
+			},
+			{
+				displayName: 'Expires At',
+				name: 'expires_at',
+				type: 'dateTime',
+				default: '',
+				description: 'When the key should stop working (RFC3339). Omit for a non-expiring key.',
+			},
+			{
+				displayName: 'Idempotency Key',
+				name: 'idempotencyKey',
+				type: 'string',
+				default: '',
+				description: 'Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.',
+			},
+			{
+				displayName: 'Rate Limit Per Minute',
+				name: 'rate_limit_per_minute',
+				type: 'number',
+				default: 0,
+				description: 'Per-key request cap. Omit or send 0 to use the default (60 r/m).',
+			},
+		],
+	},
+	{
+		displayName: 'Filters',
+		name: 'filters',
+		type: 'collection',
+		placeholder: 'Add Field',
+		default: {},
+		displayOptions: {
+			show: {
+				resource: [
+					'apiKey',
+				],
+				operation: [
+					'getUsageAnalytics',
+				],
+			},
+		},
+		options: [
+			{
+				displayName: 'From',
+				name: 'from',
+				type: 'dateTime',
+				default: '',
+				description: 'Start of the window (RFC3339). Defaults to 24 hours before to.',
+			},
+			{
+				displayName: 'Interval',
+				name: 'interval',
+				type: 'options',
+				options: [
+					{
+						name: 'Day',
+						value: 'day',
+					},
+					{
+						name: 'Hour',
+						value: 'hour',
+					},
+					{
+						name: 'Minute',
+						value: 'minute',
+					},
+				],
+				default: 'minute',
+				description: 'Bucket granularity.',
+			},
+			{
+				displayName: 'To',
+				name: 'to',
+				type: 'dateTime',
+				default: '',
+				description: 'End of the window (RFC3339). Defaults to now.',
+			},
+		],
+	},
+	{
+		displayName: 'API Key ID',
+		name: 'id',
+		type: 'string',
+		default: '',
+		required: true,
+		displayOptions: {
+			show: {
+				resource: [
+					'apiKey',
+				],
+				operation: [
+					'get',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'API Key ID',
+		name: 'id',
+		type: 'string',
+		default: '',
+		required: true,
+		displayOptions: {
+			show: {
+				resource: [
+					'apiKey',
+				],
+				operation: [
+					'update',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Update Fields',
+		name: 'updateFields',
+		type: 'collection',
+		placeholder: 'Add Field',
+		default: {},
+		displayOptions: {
+			show: {
+				resource: [
+					'apiKey',
+				],
+				operation: [
+					'update',
+				],
+			},
+		},
+		options: [
+			{
+				displayName: 'Allowed Email Accounts',
+				name: 'allowed_email_accounts',
+				type: 'string',
+				default: '',
+				description: 'Replacement mailbox allowlist. Comma-separated list.',
+			},
+			{
+				displayName: 'Allowed Ips',
+				name: 'allowed_ips',
+				type: 'string',
+				default: '',
+				description: 'Replacement IP allowlist. Comma-separated list.',
+			},
+			{
+				displayName: 'Description',
+				name: 'description',
+				type: 'string',
+				default: '',
+				description: 'New description.',
+			},
+			{
+				displayName: 'Idempotency Key',
+				name: 'idempotencyKey',
+				type: 'string',
+				default: '',
+				description: 'Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.',
+			},
+			{
+				displayName: 'Name',
+				name: 'name',
+				type: 'string',
+				default: '',
+				description: 'New label.',
+			},
+			{
+				displayName: 'Permissions',
+				name: 'permissions',
+				type: 'number',
+				default: 0,
+				description: 'Replacement uint64 permission bitmask.',
+			},
+			{
+				displayName: 'Rate Limit Per Minute',
+				name: 'rate_limit_per_minute',
+				type: 'number',
+				default: 0,
+				description: 'New per-key rate cap. 0 means use the default.',
+			},
+		],
+	},
+	{
+		displayName: 'API Key ID',
+		name: 'id',
+		type: 'string',
+		default: '',
+		required: true,
+		displayOptions: {
+			show: {
+				resource: [
+					'apiKey',
+				],
+				operation: [
+					'revoke',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Additional Fields',
+		name: 'additionalFields',
+		type: 'collection',
+		placeholder: 'Add Field',
+		default: {},
+		displayOptions: {
+			show: {
+				resource: [
+					'apiKey',
+				],
+				operation: [
+					'revoke',
+				],
+			},
+		},
+		options: [
+			{
+				displayName: 'Idempotency Key',
+				name: 'idempotencyKey',
+				type: 'string',
+				default: '',
+				description: 'Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.',
+			},
+			{
+				displayName: 'Reason',
+				name: 'reason',
+				type: 'string',
+				default: '',
+				description: 'Optional revocation note stored on the key. Defaults to "Revoked by user".',
+			},
+		],
+	},
+	{
+		displayName: 'API Key ID',
+		name: 'id',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'The API key id, or the literal `all` for the org-wide aggregate.',
+		displayOptions: {
+			show: {
+				resource: [
+					'apiKey',
+				],
+				operation: [
+					'getAnalytics',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Filters',
+		name: 'filters',
+		type: 'collection',
+		placeholder: 'Add Field',
+		default: {},
+		displayOptions: {
+			show: {
+				resource: [
+					'apiKey',
+				],
+				operation: [
+					'getAnalytics',
+				],
+			},
+		},
+		options: [
+			{
+				displayName: 'From',
+				name: 'from',
+				type: 'dateTime',
+				default: '',
+				description: 'Start of the window (RFC3339). Defaults to 24 hours before to.',
+			},
+			{
+				displayName: 'Interval',
+				name: 'interval',
+				type: 'options',
+				options: [
+					{
+						name: 'Day',
+						value: 'day',
+					},
+					{
+						name: 'Hour',
+						value: 'hour',
+					},
+					{
+						name: 'Minute',
+						value: 'minute',
+					},
+				],
+				default: 'minute',
+				description: 'Bucket granularity.',
+			},
+			{
+				displayName: 'To',
+				name: 'to',
+				type: 'dateTime',
+				default: '',
+				description: 'End of the window (RFC3339). Defaults to now.',
+			},
+		],
+	},
+	{
+		displayName: 'API Key ID',
+		name: 'id',
+		type: 'string',
+		default: '',
+		required: true,
+		displayOptions: {
+			show: {
+				resource: [
+					'apiKey',
+				],
+				operation: [
+					'getLogs',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Return All',
+		name: 'returnAll',
+		type: 'boolean',
+		default: false,
+		description: 'Whether to return all results or only up to a given limit',
+		displayOptions: {
+			show: {
+				resource: [
+					'apiKey',
+				],
+				operation: [
+					'getLogs',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Limit',
+		name: 'limit',
+		type: 'number',
+		typeOptions: {
+			minValue: 1,
+		},
+		default: 50,
+		description: 'Max number of results to return',
+		displayOptions: {
+			show: {
+				resource: [
+					'apiKey',
+				],
+				operation: [
+					'getLogs',
+				],
+				returnAll: [
+					false,
+				],
+			},
+		},
+	},
+];
