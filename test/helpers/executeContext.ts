@@ -85,7 +85,24 @@ const sleep = (ms: number): Promise<void> => new Promise((resolve) => setTimeout
 
 /** Transient statuses worth retrying: rate limiting and server hiccups. */
 const RETRYABLE = new Set([429, 502, 503, 504]);
-const MAX_ATTEMPTS = 6;
+const MAX_ATTEMPTS = 8;
+
+/**
+ * Minimum spacing between request *starts*. The suite issues requests serially
+ * (jest --runInBand), but back-to-back `fetch`es land ~100+/s, which trips a
+ * fine-grained burst limiter even though the per-minute volume is tiny. Spacing
+ * to ~25/s keeps us comfortably under it; override with WARMBLY_MIN_INTERVAL_MS.
+ */
+const MIN_INTERVAL_MS = Number(process.env.WARMBLY_MIN_INTERVAL_MS ?? 40);
+let lastRequestStart = 0;
+
+async function pace(): Promise<void> {
+	const wait = MIN_INTERVAL_MS - (Date.now() - lastRequestStart);
+	if (wait > 0) {
+		await sleep(wait);
+	}
+	lastRequestStart = Date.now();
+}
 
 async function liveRequest(apiKey: string, options: HttpOptions): Promise<unknown> {
 	const target = options.url ?? options.uri ?? '';
@@ -118,6 +135,7 @@ async function liveRequest(apiKey: string, options: HttpOptions): Promise<unknow
 	}
 
 	for (let attempt = 1; ; attempt += 1) {
+		await pace();
 		const controller = new AbortController();
 		const timer = setTimeout(() => controller.abort(), E2E_TIMEOUT_MS);
 		let response: Response;
@@ -130,12 +148,12 @@ async function liveRequest(apiKey: string, options: HttpOptions): Promise<unknow
 		// Back off and retry on rate limiting / transient server errors.
 		if (RETRYABLE.has(response.status) && attempt < MAX_ATTEMPTS) {
 			const retryAfter = Number(response.headers.get('retry-after'));
-			// Honour Retry-After, but cap it: a test must never block on a full
-			// rate-limit window. With the high-limit runner key we shouldn't hit
-			// this path at all.
+			// Honour Retry-After so we ride out a full per-user rate-limit window
+			// (capped so a single call can't hang indefinitely). The per-test
+			// timeout is raised to match. With a quiet API this path is rare.
 			const waitMs =
 				Number.isFinite(retryAfter) && retryAfter > 0
-					? Math.min(5000, retryAfter * 1000)
+					? Math.min(65_000, retryAfter * 1000 + 500)
 					: Math.min(2000, 250 * 2 ** (attempt - 1));
 			await sleep(waitMs);
 			continue;
