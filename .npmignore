@@ -13,3 +13,6 @@ nodes/**/*.ts
 credentials/**/*.ts
 *.tsbuildinfo
 .vscode/
+# Tests are never shipped in the published package.
+test/
+jest.config.js

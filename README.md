@@ -207,6 +207,21 @@ Warmbly Trigger (meeting.booked)  →  Warmbly: Deal → Create (pipeline + stag
 - [n8n community nodes](https://docs.n8n.io/integrations/community-nodes/)
 - Found a bug? [Open an issue](https://github.com/warmbly/n8n-nodes-warmbly/issues).
 
+## Development
+
+```bash
+npm install
+npm run build      # compile TypeScript + copy icons into dist/
+npm run lint       # eslint (n8n community-node ruleset)
+npm test           # fast unit tests (signature verification, parsing)
+npm run test:e2e   # live integration suite against a running Warmbly
+```
+
+The end-to-end suite drives the real node against a running Warmbly instance
+(`cd ~/warmbly && make infra && make seed && make run`), smoke-testing every
+read endpoint and running full create → update → delete lifecycles, then writes
+a coverage report. Details in [`test/README.md`](./test/README.md).
+
 ## License
 
 [MIT](./LICENSE) © Warmbly. Not affiliated with n8n GmbH.

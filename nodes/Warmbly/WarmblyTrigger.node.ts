@@ -1,4 +1,3 @@
-import { createHmac, timingSafeEqual } from 'crypto';
 import type {
 	IDataObject,
 	IHookFunctions,
@@ -8,7 +7,7 @@ import type {
 	IWebhookResponseData,
 } from 'n8n-workflow';
 
-import { extractArray, warmblyApiRequest } from './GenericFunctions';
+import { extractArray, verifyWarmblySignature, warmblyApiRequest } from './GenericFunctions';
 import { webhookEvents } from './WebhookEvents';
 
 export class WarmblyTrigger implements INodeType {
@@ -154,28 +153,10 @@ export class WarmblyTrigger implements INodeType {
 		const secret = webhookData.webhookSecret as string | undefined;
 		const signatureHeader = headers['x-warmbly-signature'] as string | undefined;
 		if (secret && signatureHeader) {
-			const parts: Record<string, string> = {};
-			for (const segment of signatureHeader.split(',')) {
-				const idx = segment.indexOf('=');
-				if (idx > 0) {
-					parts[segment.slice(0, idx).trim()] = segment.slice(idx + 1).trim();
-				}
-			}
-			const timestamp = parts.t;
-			const provided = parts.v1;
 			const rawBody = Buffer.isBuffer(req.rawBody)
 				? req.rawBody.toString('utf8')
 				: JSON.stringify(bodyData);
-			const expected = createHmac('sha256', secret)
-				.update(`${timestamp}.${rawBody}`)
-				.digest('hex');
-
-			const valid =
-				typeof provided === 'string' &&
-				provided.length === expected.length &&
-				timingSafeEqual(Buffer.from(provided, 'utf8'), Buffer.from(expected, 'utf8'));
-
-			if (!valid) {
+			if (!verifyWarmblySignature(secret, signatureHeader, rawBody)) {
 				const res = this.getResponseObject();
 				res.status(401).send('Invalid signature');
 				return { noWebhookResponse: true };

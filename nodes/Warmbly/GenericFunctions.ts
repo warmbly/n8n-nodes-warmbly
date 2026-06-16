@@ -1,3 +1,4 @@
+import { createHmac, timingSafeEqual } from 'crypto';
 import type {
 	IDataObject,
 	IExecuteFunctions,
@@ -11,6 +12,39 @@ import type {
 	JsonObject,
 } from 'n8n-workflow';
 import { NodeApiError } from 'n8n-workflow';
+
+/**
+ * Verify a Warmbly webhook signature header of the form `t=<ts>,v1=<hex>`.
+ * The signed payload is `<t>.<rawBody>`, HMAC-SHA256 with the endpoint's secret.
+ * Pure and constant-time; returns false on any missing or malformed input so
+ * callers can treat `false` as "reject the delivery".
+ */
+export function verifyWarmblySignature(
+	secret: string,
+	signatureHeader: string,
+	rawBody: string,
+): boolean {
+	if (!secret || !signatureHeader) {
+		return false;
+	}
+	const parts: Record<string, string> = {};
+	for (const segment of signatureHeader.split(',')) {
+		const idx = segment.indexOf('=');
+		if (idx > 0) {
+			parts[segment.slice(0, idx).trim()] = segment.slice(idx + 1).trim();
+		}
+	}
+	const timestamp = parts.t;
+	const provided = parts.v1;
+	if (typeof provided !== 'string') {
+		return false;
+	}
+	const expected = createHmac('sha256', secret).update(`${timestamp}.${rawBody}`).digest('hex');
+	return (
+		provided.length === expected.length &&
+		timingSafeEqual(Buffer.from(provided, 'utf8'), Buffer.from(expected, 'utf8'))
+	);
+}
 
 type WarmblyContext =
 	| IExecuteFunctions
