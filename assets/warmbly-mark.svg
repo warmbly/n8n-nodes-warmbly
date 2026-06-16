@@ -1,0 +1,10 @@
+<svg width="616" height="616" viewBox="137 69 616 616" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Warmbly">
+  <defs>
+    <linearGradient id="wb" x1="186" y1="108" x2="704" y2="644" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#38bdf8"/>
+      <stop offset="0.55" stop-color="#0ea5e9"/>
+      <stop offset="1" stop-color="#0c4a6e"/>
+    </linearGradient>
+  </defs>
+  <path d="M222.805 644.772L186.274 108.881L704.5 451.158L484.5 451.158L245.5 196.158L444 463.5L222.805 644.772Z" fill="url(#wb)"/>
+</svg>

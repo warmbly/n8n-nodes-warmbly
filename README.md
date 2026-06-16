@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="nodes/Warmbly/warmbly.svg" alt="Warmbly" width="92" height="92" />
+  <img src="assets/warmbly-mark.svg" alt="Warmbly" width="76" height="76" />
 </p>
 
 <p align="center">
