@@ -1,21 +1,21 @@
 /**
- * Warmbly node — live integration suite.
+ * Warmbly node: live integration suite.
  *
  * Runs the real node code against a running Warmbly server (default the local
  * `make run` instance). It does three things, in order, in one file so the
  * coverage tally is shared:
  *
- *   1. READ SMOKE   — every GET-with-no-required-path-param operation is called
- *                     against the live API and asserted to return a clean array.
- *   2. WRITE LIFECYCLES — create → read → update → delete round-trips that prove
- *                     the write/update/delete path for many resources.
- *   3. COVERAGE     — asserts every one of the 179 operations is accounted for
- *                     (executed or skipped-with-reason) and writes a report.
+ *   1. READ SMOKE: every GET-with-no-required-path-param operation is called
+ *      against the live API and asserted to return a clean array.
+ *   2. WRITE LIFECYCLES: create → read → update → delete round-trips that prove
+ *      the write/update/delete path for many resources.
+ *   3. COVERAGE: asserts every one of the 179 operations is accounted for
+ *      (executed or skipped-with-reason) and writes a report.
  *
  * Resilience: the request layer retries transient 429/5xx, but if the API still
  * throttles (e.g. the per-org *daily* new-campaign cap of 20, which a busy dev
  * day can exhaust), the affected operation is recorded as *skipped*, not failed.
- * A genuine 4xx on a write (bad payload) still fails — those are real bugs.
+ * A genuine 4xx on a write (bad payload) still fails; those are real bugs.
  *
  * Prereq: a reachable server + a valid key. See test/helpers/config.ts.
  *   cd ~/warmbly && make infra && make seed && make run
@@ -34,7 +34,7 @@ import { mintRunnerKey } from '../helpers/runnerKey';
 // Generous per-test timeout: a request may ride out a rate-limit window.
 jest.setTimeout(120_000);
 
-/** Read statuses that mean "not applicable to the data we have" — skipped, not
+/** Read statuses that mean "not applicable to the data we have": skipped, not
  * a node bug. 429 = throttled/quota during the run. */
 const READ_NOT_APPLICABLE = new Set([400, 403, 404, 405, 422, 429]);
 
@@ -63,7 +63,7 @@ const firstOf = (items: Array<Record<string, unknown>>): Record<string, unknown>
 
 /**
  * Run a *write* (or any operation whose success we assert). Returns the first
- * response item, or `null` if the API throttled it (HTTP 429) — in which case
+ * response item, or `null` if the API throttled it (HTTP 429), in which case
  * the op is recorded as skipped and callers should short-circuit dependent
  * steps. Any other error (e.g. a 4xx from a bad payload) is a real failure.
  */
@@ -129,8 +129,8 @@ async function createPipelineWithStage(
 	return { pipelineId, stageId: stage ? (idOf(stage) ?? null) : null };
 }
 
-// One campaign shared by the campaign, campaign-steps and analytics describes —
-// keeps us well under the 20/day creation cap. Created in beforeAll, deleted at
+// One campaign shared by the campaign, campaign-steps and analytics describes,
+// keeping us well under the 20/day creation cap. Created in beforeAll, deleted at
 // the very end.
 let sharedCampaignId: string | null = null;
 
@@ -173,7 +173,7 @@ describe('live read smoke (GET, no fixtures required)', () => {
 	}
 });
 
-describe('write lifecycle — pipeline (create → get → update → stages → delete)', () => {
+describe('write lifecycle: pipeline (create → get → update → stages → delete)', () => {
 	let pipelineId: string | null = null;
 	let stageId: string | null = null;
 
@@ -200,7 +200,7 @@ describe('write lifecycle — pipeline (create → get → update → stages →
 	test('getAll returns a list', async () => {
 		// The created pipeline is already round-tripped by the `get` test above;
 		// here we just confirm the list endpoint returns rows (inclusion isn't
-		// asserted — it's a single unpaginated page and many pipelines exist).
+		// asserted; it's a single unpaginated page and many pipelines exist).
 		const items = await runOperation('pipeline', 'getAll', { returnAll: false, limit: 50 });
 		expect(Array.isArray(items)).toBe(true);
 		expect(items.length).toBeGreaterThan(0);
@@ -234,7 +234,7 @@ describe('write lifecycle — pipeline (create → get → update → stages →
 	});
 });
 
-describe('write lifecycle — reply template (create → get → update → extras → delete)', () => {
+describe('write lifecycle: reply template (create → get → update → extras → delete)', () => {
 	let templateId: string | null = null;
 	let dupId: string | null = null;
 
@@ -287,7 +287,7 @@ describe('write lifecycle — reply template (create → get → update → extr
 	});
 });
 
-describe('write lifecycle — CRM task type (create → update → delete)', () => {
+describe('write lifecycle: CRM task type (create → update → delete)', () => {
 	let id: string | null = null;
 	test('create', async () => {
 		const created = await step('crmTaskType', 'create', {
@@ -309,7 +309,7 @@ describe('write lifecycle — CRM task type (create → update → delete)', () 
 	});
 });
 
-describe('write lifecycle — team (create → get → update → delete)', () => {
+describe('write lifecycle: team (create → get → update → delete)', () => {
 	let id: string | null = null;
 	test('create', async () => {
 		const created = await step('team', 'create', {
@@ -333,7 +333,7 @@ describe('write lifecycle — team (create → get → update → delete)', () =
 	});
 });
 
-describe('write lifecycle — CRM task (create → get → update → delete)', () => {
+describe('write lifecycle: CRM task (create → get → update → delete)', () => {
 	let id: string | null = null;
 	test('create', async () => {
 		const created = await step('crmTask', 'create', {
@@ -360,7 +360,7 @@ describe('write lifecycle — CRM task (create → get → update → delete)', 
 	});
 });
 
-describe('write lifecycle — deal (create → get → update → delete)', () => {
+describe('write lifecycle: deal (create → get → update → delete)', () => {
 	let pipelineId: string | null = null;
 	let dealId: string | null = null;
 
@@ -400,7 +400,7 @@ describe('write lifecycle — deal (create → get → update → delete)', () =
 	});
 });
 
-describe('write lifecycle — webhook (create → update → rotate → deliveries → delete)', () => {
+describe('write lifecycle: webhook (create → update → rotate → deliveries → delete)', () => {
 	let id: string | null = null;
 	test('create', async () => {
 		const created = await step('webhook', 'create', {
@@ -411,7 +411,7 @@ describe('write lifecycle — webhook (create → update → rotate → deliveri
 	});
 	test('update', async () => {
 		if (!id) return;
-		// webhook update is a full replace — url is required.
+		// webhook update is a full replace; url is required.
 		await step('webhook', 'update', {
 			id,
 			url: `https://example.com/${unique}-hook-v2`,
@@ -432,7 +432,7 @@ describe('write lifecycle — webhook (create → update → rotate → deliveri
 	});
 });
 
-describe('write lifecycle — contact + notes (create → reads → note CRUD → delete)', () => {
+describe('write lifecycle: contact + notes (create → reads → note CRUD → delete)', () => {
 	let contactId: string | null = null;
 	let noteId: string | null = null;
 
@@ -510,7 +510,7 @@ describe('search + export operations', () => {
 
 describe('mailbox detail endpoints', () => {
 	// /emails (list) works and is covered by the smoke layer, but GET
-	// /emails/{id} returns a 500 for every seeded mailbox — reproducible with
+	// /emails/{id} returns a 500 for every seeded mailbox, reproducible with
 	// plain curl and the seed key, so it's a Warmbly seed-data bug, not a node
 	// issue. We record get/update as skipped (with the real reason).
 	test('mailbox.getAll lists seeded mailboxes', async () => {
@@ -533,7 +533,7 @@ describe('outreach settings (get → update)', () => {
 	});
 });
 
-describe('write lifecycle — warmup routing rule (create → update → delete)', () => {
+describe('write lifecycle: warmup routing rule (create → update → delete)', () => {
 	let id: string | null = null;
 	test('create', async () => {
 		const created = await step('warmupRouting', 'create', {
@@ -560,7 +560,7 @@ describe('write lifecycle — warmup routing rule (create → update → delete)
 	});
 });
 
-describe('write lifecycle — automation (create → get → update → runs → delete)', () => {
+describe('write lifecycle: automation (create → get → update → runs → delete)', () => {
 	let id: string | null = null;
 	const emptyGraph = { nodes: [], edges: [] };
 	test('create', async () => {
@@ -597,7 +597,7 @@ describe('write lifecycle — automation (create → get → update → runs →
 	});
 });
 
-describe('write lifecycle — API key (create → get → update → analytics/logs → revoke)', () => {
+describe('write lifecycle: API key (create → get → update → analytics/logs → revoke)', () => {
 	let id: string | null = null;
 	test('create', async () => {
 		const created = await step('apiKey', 'create', {
@@ -630,7 +630,7 @@ describe('write lifecycle — API key (create → get → update → analytics/l
 	});
 });
 
-describe('campaign (create → reads → update) — one shared campaign', () => {
+describe('campaign (create → reads → update): one shared campaign', () => {
 	test('create', async () => {
 		const created = await step('campaign', 'create', {
 			name: `${unique}-campaign`,
@@ -725,7 +725,7 @@ describe('campaign steps + A/B variants (on the shared campaign)', () => {
 	});
 });
 
-describe('analytics — id-scoped reads (on the shared campaign)', () => {
+describe('analytics: id-scoped reads (on the shared campaign)', () => {
 	test('getCampaign', async () => {
 		if (!sharedCampaignId) return;
 		await execRead('analytics', 'getCampaign', { id: sharedCampaignId });

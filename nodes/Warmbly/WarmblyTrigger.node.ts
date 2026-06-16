@@ -137,7 +137,7 @@ export class WarmblyTrigger implements INodeType {
 
 		// Endpoint-verification handshake: Warmbly POSTs a `webhook.test` event with
 		// a challenge token. Echo it (in the body and the challenge header) and a 2xx
-		// so the endpoint becomes verified — do not start the workflow.
+		// so the endpoint becomes verified; do not start the workflow.
 		const eventType = (headers['x-warmbly-event'] as string) ?? (bodyData.event_type as string);
 		if (eventType === 'webhook.test' || bodyData.challenge !== undefined) {
 			const challenge = bodyData.challenge as string | undefined;

@@ -1,18 +1,21 @@
 <p align="center">
-  <img src="assets/warmbly-mark.svg" alt="Warmbly" width="76" height="76" />
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/warmbly-mark-white.svg" />
+    <img src="assets/warmbly-mark-dark.svg" alt="Warmbly" width="76" height="76" />
+  </picture>
 </p>
 
 <p align="center">
   <strong>n8n-nodes-warmbly</strong><br />
-  The community n8n node for Warmbly — cold email, mailbox warmup, unibox,<br />
+  The community n8n node for Warmbly: cold email, mailbox warmup, unibox,<br />
   CRM and deliverability, automated from your workflows. Your keys, your data.
 </p>
 
 <p align="center">
-  <a href="https://www.npmjs.com/package/n8n-nodes-warmbly"><img src="https://img.shields.io/npm/v/n8n-nodes-warmbly?style=flat-square&labelColor=0c4a6e&color=0ea5e9" alt="npm version" /></a>
-  &nbsp;<img src="https://img.shields.io/badge/n8n-community%20node-0ea5e9?style=flat-square&labelColor=0c4a6e" alt="n8n community node" />
-  &nbsp;<a href="./LICENSE"><img src="https://img.shields.io/badge/License-MIT-10b981?style=flat-square&labelColor=0c4a6e" alt="License: MIT" /></a>
-  &nbsp;<img src="https://img.shields.io/badge/Self--hostable-yes-38bdf8?style=flat-square&labelColor=0c4a6e" alt="Self-hostable" />
+  <a href="https://www.npmjs.com/package/n8n-nodes-warmbly"><img src="https://img.shields.io/npm/v/n8n-nodes-warmbly?style=flat-square&labelColor=1f2937&color=475569" alt="npm version" /></a>
+  &nbsp;<img src="https://img.shields.io/badge/n8n-community%20node-475569?style=flat-square&labelColor=1f2937" alt="n8n community node" />
+  &nbsp;<a href="./LICENSE"><img src="https://img.shields.io/badge/License-MIT-475569?style=flat-square&labelColor=1f2937" alt="License: MIT" /></a>
+  &nbsp;<img src="https://img.shields.io/badge/Self--hostable-yes-475569?style=flat-square&labelColor=1f2937" alt="Self-hostable" />
 </p>
 
 <p align="center">
@@ -32,15 +35,15 @@
 [Warmbly](https://warmbly.com) is an open-source cold-outreach and mailbox-warmup
 platform you can self-host. This package puts the whole Warmbly API inside
 [n8n](https://n8n.io), so the outbound machine that sends, warms, and tracks your
-mail can also be wired to everything else you run — without writing a line of
+mail can also be wired to everything else you run, without writing a line of
 HTTP plumbing.
 
 It ships two nodes:
 
-- **Warmbly** — an action node covering **179 operations across 24 resources**:
+- **Warmbly** is an action node covering **179 operations across 24 resources**:
   campaigns and sequences, mailboxes and warmup, the unibox, contacts and CRM,
   analytics, deliverability, integrations, automations, webhooks and more.
-- **Warmbly Trigger** — a webhook trigger that starts a workflow the moment a
+- **Warmbly Trigger** is a webhook trigger that starts a workflow the moment a
   Warmbly event fires (a reply lands, a meeting is booked, a mailbox is
   quarantined, a deal moves stage), with the delivery signature verified for you.
 
@@ -79,7 +82,7 @@ tool.
 ## Credentials
 
 You authenticate with a Warmbly **API key**. Create one in the dashboard under
-**Settings → API keys**, granting it only the scopes the workflow needs — the
+**Settings → API keys**, granting it only the scopes the workflow needs; the
 key inherits exactly those permissions.
 
 In n8n, create a **Warmbly API** credential:
@@ -104,13 +107,13 @@ Pick a **Resource**, then an **Operation**. Required inputs are first-class
 fields; everything optional lives under **Additional Fields** / **Update Fields**
 / **Filters** so the form stays readable. The node handles the mechanics for you:
 
-- **Pagination** — list operations expose **Return All** (it follows the opaque
+- **Pagination**: list operations expose **Return All** (it follows the opaque
   `next_cursor` to the end) or a **Limit**.
-- **Idempotency** — write operations accept an **Idempotency Key** so a retried
+- **Idempotency**: write operations accept an **Idempotency Key** so a retried
   step never acts twice.
-- **File uploads** — campaign attachments and contact CSV/XLSX imports stream a
+- **File uploads**: campaign attachments and contact CSV/XLSX imports stream a
   binary input field as multipart form data.
-- **Reliability** — honours *Continue On Fail* and attaches `pairedItem` so
+- **Reliability**: honours *Continue On Fail* and attaches `pairedItem` so
   outputs map back to their inputs.
 
 ### Warmbly Trigger
@@ -172,7 +175,7 @@ you need. A few of the most useful:
 | **Deliverability** | `deliverability.bounce`, `deliverability.complaint` |
 
 Firehose events (per-message sends, opens, clicks, syncs) must be selected
-explicitly — they are never included in the "all events" default. See the
+explicitly; they are never included in the "all events" default. See the
 [webhooks guide](https://docs.warmbly.com/guides/webhooks).
 
 ## Examples
@@ -228,13 +231,13 @@ Releases go to npm via **OIDC trusted publishing** (no `NPM_TOKEN`): see
 [`.github/workflows/publish.yml`](./.github/workflows/publish.yml). One-time
 bootstrap, because trusted publishing can't create a brand-new package:
 
-1. **First publish, manually** — `npm login`, then `npm publish`
+1. **First publish, manually**: `npm login`, then `npm publish`
    (`prepublishOnly` builds + lints). This claims the name and creates the
    package on npm.
-2. **Enable trusted publishing** — on npmjs.com → the package → Settings →
+2. **Enable trusted publishing**: on npmjs.com → the package → Settings →
    *Trusted Publisher* → *GitHub Actions*: org `warmbly`, repo
    `n8n-nodes-warmbly`, workflow `publish.yml`.
-3. **From then on** — bump the version, push, and cut a GitHub Release; the
+3. **From then on**: bump the version, push, and cut a GitHub Release; the
    workflow publishes automatically, with provenance, no secrets.
 
 ## License

@@ -1,5 +1,5 @@
 /**
- * Pure unit tests for the webhook signature verifier — the security-critical
+ * Pure unit tests for the webhook signature verifier: the security-critical
  * gate that rejects spoofed Warmbly deliveries. No server required.
  *
  * Mirrors the server's scheme: header `t=<ts>,v1=<hex>`, where

@@ -1,7 +1,7 @@
 {
   "name": "n8n-nodes-warmbly",
   "version": "0.1.0",
-  "description": "n8n community node for Warmbly — cold email, mailbox warmup, unibox, CRM, deliverability and webhooks. Self-hostable.",
+  "description": "n8n community node for Warmbly: cold email, mailbox warmup, unibox, CRM, deliverability and webhooks. Self-hostable.",
   "keywords": [
     "n8n-community-node-package",
     "n8n",

@@ -5,7 +5,7 @@
  * The node's `execute()` only depends on a handful of `IExecuteFunctions`
  * members: parameter access, credentials, and the `helpers.*http*` request
  * functions. We implement exactly those, but route the request helpers at a
- * live HTTP call instead of n8n's internal client — so every test exercises the
+ * live HTTP call instead of n8n's internal client, so every test exercises the
  * node's real field-mapping, pagination, multipart and response-extraction
  * logic, end to end, exactly as n8n would at runtime.
  */

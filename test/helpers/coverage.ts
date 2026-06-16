@@ -2,7 +2,7 @@
  * Coverage bookkeeping for the integration suite.
  *
  * The promise of this suite is: *every* operation in `RESOURCE_OPERATIONS` is
- * accounted for — each is either executed against the live server (passed /
+ * accounted for: each is either executed against the live server (passed /
  * failed) or explicitly skipped with a reason. Nothing is silently uncovered.
  *
  * Specs record outcomes here; a final accounting test asserts the union covers
@@ -60,7 +60,7 @@ export function allOperations(): Array<{
 	return list;
 }
 
-/** A read operation that takes no required path parameter — safe to call with
+/** A read operation that takes no required path parameter, safe to call with
  * no fixtures. These are the backbone of the live smoke layer. */
 export function isReadSmoke(meta: WarmblyOperationMeta): boolean {
 	return meta.method === 'GET' && !meta.path.includes('{');
@@ -74,20 +74,20 @@ export function isReadSmoke(meta: WarmblyOperationMeta): boolean {
 export function skipReason(operation: string, meta: WarmblyOperationMeta): string {
 	const op = operation.toLowerCase();
 	if (meta.multipart) {
-		return 'multipart upload — needs a binary file fixture';
+		return 'multipart upload: needs a binary file fixture';
 	}
 	if (
 		/(send|sendtest|sendemail|start|stop|pause|resume|warmup|appeal|verify|reply|preflight|ingest|replay|test|rotate|push|generate|score|preview|render|export|commit)/.test(
 			op,
 		)
 	) {
-		return 'side-effecting / external-dependency op (email, warmup, DNS, 3rd-party) — exercised manually, not in the automated lifecycle';
+		return 'side-effecting / external-dependency op (email, warmup, DNS, 3rd-party): exercised manually, not in the automated lifecycle';
 	}
 	if (meta.method === 'GET' && meta.path.includes('{')) {
-		return 'single-resource GET — needs a pre-existing id; covered indirectly by lifecycle reads where applicable';
+		return 'single-resource GET: needs a pre-existing id; covered indirectly by lifecycle reads where applicable';
 	}
 	if (['POST', 'PATCH', 'PUT', 'DELETE'].includes(meta.method)) {
-		return 'write op without a dedicated lifecycle scenario yet — add a create→update→delete spec to cover';
+		return 'write op without a dedicated lifecycle scenario yet: add a create→update→delete spec to cover';
 	}
 	return 'not yet categorised';
 }

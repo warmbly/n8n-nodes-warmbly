@@ -1,6 +1,6 @@
 // Two projects:
-//   unit — pure, fast, no network; runs in CI (`npm test`).
-//   e2e  — drives the real node against a running Warmbly server; run locally
+//   unit: pure, fast, no network; runs in CI (`npm test`).
+//   e2e:  drives the real node against a running Warmbly server; run locally
 //          or in an integration job (`npm run test:e2e`).
 //
 // `isolatedModules` transpiles each test with no whole-program type-checking,

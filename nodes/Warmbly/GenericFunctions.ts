@@ -226,7 +226,7 @@ export function coerceValue(value: unknown, type: string): unknown {
 }
 
 // ---------------------------------------------------------------------------
-// loadOptions helpers — populate dropdowns from live workspace data.
+// loadOptions helpers: populate dropdowns from live workspace data.
 // ---------------------------------------------------------------------------
 
 export async function getPipelines(
@@ -259,7 +259,7 @@ export async function getEventTypes(
 ): Promise<INodePropertyOptions[]> {
 	const response = await warmblyApiRequest.call(this, 'GET', '/webhooks/event-types');
 	return extractArray(response).map((event) => ({
-		name: `${(event.category as string) ?? 'Event'} — ${event.type as string}${
+		name: `${(event.category as string) ?? 'Event'}: ${event.type as string}${
 			event.firehose ? ' (firehose)' : ''
 		}`,
 		value: event.type as string,

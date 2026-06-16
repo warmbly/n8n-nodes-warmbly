@@ -44,7 +44,7 @@ module.exports = {
 			extends: ['plugin:n8n-nodes-base/nodes'],
 			rules: {
 				// Structural rules stay on. The rules below are turned off only because
-				// field descriptions are taken verbatim from the Warmbly OpenAPI spec —
+				// field descriptions are taken verbatim from the Warmbly OpenAPI spec:
 				// real API prose that does not follow n8n's in-house wording style
 				// (sentence case, "Whether ..." for booleans, exact ID/JSON/URL casing,
 				// trailing periods). The text is already clear and authoritative.

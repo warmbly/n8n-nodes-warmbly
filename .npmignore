@@ -1,4 +1,4 @@
-# Source — only dist/ is published (see package.json "files").
+# Source: only dist/ is published (see package.json "files").
 *.ts
 !*.d.ts
 tsconfig.json
