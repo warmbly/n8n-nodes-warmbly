@@ -1,7 +1,7 @@
 # Publishes n8n-nodes-warmbly to npm via OIDC "trusted publishing"; no
 # NPM_TOKEN secret required. Provenance attestations are generated automatically.
 #
-# Prerequisites (one-time, see README "Publishing"):
+# Prerequisites (one-time, already completed for this package):
 #   1. Publish v0.1.0 manually once (trusted publishing can't bootstrap a brand
 #      new package; the package must already exist on npm).
 #   2. On npmjs.com → the package → Settings → "Trusted Publisher" → GitHub

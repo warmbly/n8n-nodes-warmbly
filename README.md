@@ -227,18 +227,10 @@ a coverage report. Details in [`test/README.md`](./test/README.md).
 
 ### Publishing
 
-Releases go to npm via **OIDC trusted publishing** (no `NPM_TOKEN`): see
-[`.github/workflows/publish.yml`](./.github/workflows/publish.yml). One-time
-bootstrap, because trusted publishing can't create a brand-new package:
-
-1. **First publish, manually**: `npm login`, then `npm publish`
-   (`prepublishOnly` builds + lints). This claims the name and creates the
-   package on npm.
-2. **Enable trusted publishing**: on npmjs.com → the package → Settings →
-   *Trusted Publisher* → *GitHub Actions*: org `warmbly`, repo
-   `n8n-nodes-warmbly`, workflow `publish.yml`.
-3. **From then on**: bump the version, push, and cut a GitHub Release; the
-   workflow publishes automatically, with provenance, no secrets.
+Releases publish to npm automatically via **OIDC trusted publishing** (no
+`NPM_TOKEN`, provenance attached) whenever a GitHub Release is cut. To ship a
+version, bump `version` in `package.json`, push, and cut the Release. The
+workflow lives in [`.github/workflows/publish.yml`](./.github/workflows/publish.yml).
 
 ## License
 
