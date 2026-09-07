@@ -21,7 +21,9 @@ jobs:
       # two have drifted, the committed sources are stale: re-run
       # `npm run api:sync` (needs a Warmbly checkout) and `npm run generate`.
       - run: npm run generate
-      - run: git diff --exit-code
+      # Scoped to the generated sources: an incidental lockfile touch from
+      # `npm install` is not node drift.
+      - run: git diff --exit-code -- nodes spec
       - run: npm run lint
       - run: npm run build
       # Unit tests only; the e2e suite (npm run test:e2e) needs a running
