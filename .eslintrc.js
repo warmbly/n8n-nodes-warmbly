@@ -64,6 +64,10 @@ module.exports = {
 				// "Analytics" and "Outreach Settings" are legitimate (mass-noun) resource
 				// names that the pluralization heuristic flags as plural.
 				'n8n-nodes-base/node-param-resource-with-plural-option': 'off',
+				// Actions are sentence case, but a proper noun keeps its own
+				// capitals: "Get the Google Sheets connection", "Create an OAuth
+				// application". The rule's heuristic reads those as miscased.
+				'n8n-nodes-base/node-param-operation-option-action-miscased': 'off',
 				'n8n-nodes-base/node-execute-block-missing-continue-on-fail': 'off',
 				'n8n-nodes-base/node-resource-description-filename-against-convention': 'off',
 				'n8n-nodes-base/node-param-fixed-collection-type-unsorted-items': 'off',

@@ -1,0 +1,6718 @@
+{
+	"fields": {
+		"analytics.compareCampaigns.top.from": {
+			"default": "",
+			"description": "Range start (YYYY-MM-DD).",
+			"displayName": "From",
+			"required": true,
+			"type": "string"
+		},
+		"analytics.compareCampaigns.top.ids": {
+			"default": "",
+			"description": "Comma-separated campaign UUIDs. Invalid entries are dropped; capped at 10. At least one valid id is required.",
+			"displayName": "IDs",
+			"required": true,
+			"type": "string"
+		},
+		"analytics.compareCampaigns.top.to": {
+			"default": "",
+			"description": "Range end (YYYY-MM-DD).",
+			"displayName": "To",
+			"required": true,
+			"type": "string"
+		},
+		"analytics.getAccount.top.id": {
+			"default": "",
+			"description": "Email account id.",
+			"displayName": "Account ID",
+			"required": true,
+			"type": "string"
+		},
+		"analytics.getCampaign.top.id": {
+			"default": "",
+			"description": "Campaign id.",
+			"displayName": "Campaign ID",
+			"required": true,
+			"type": "string"
+		},
+		"analytics.getCampaignDaily.top.from": {
+			"default": "",
+			"description": "Range start (YYYY-MM-DD).",
+			"displayName": "From",
+			"required": true,
+			"type": "string"
+		},
+		"analytics.getCampaignDaily.top.id": {
+			"default": "",
+			"description": "Campaign id.",
+			"displayName": "Campaign ID",
+			"required": true,
+			"type": "string"
+		},
+		"analytics.getCampaignDaily.top.to": {
+			"default": "",
+			"description": "Range end (YYYY-MM-DD).",
+			"displayName": "To",
+			"required": true,
+			"type": "string"
+		},
+		"analytics.getCampaignHourly.filters": {
+			"collection": true,
+			"displayName": "Filters",
+			"placeholder": "Add Field"
+		},
+		"analytics.getCampaignHourly.filters.date": {
+			"default": "",
+			"description": "Day to report (YYYY-MM-DD). Defaults to today.",
+			"displayName": "Date",
+			"type": "string"
+		},
+		"analytics.getCampaignHourly.top.id": {
+			"default": "",
+			"description": "Campaign id.",
+			"displayName": "Campaign ID",
+			"required": true,
+			"type": "string"
+		},
+		"analytics.getDashboard.additionalFields": {
+			"collection": true,
+			"displayName": "Additional Fields",
+			"placeholder": "Add Field"
+		},
+		"analytics.getDashboard.additionalFields.period": {
+			"default": "7d",
+			"description": "One of 7d, 30d, 90d. Any other value falls back to 7d.",
+			"displayName": "Period",
+			"options": [
+				{
+					"name": "30d",
+					"value": "30d"
+				},
+				{
+					"name": "7d",
+					"value": "7d"
+				},
+				{
+					"name": "90d",
+					"value": "90d"
+				}
+			],
+			"type": "options"
+		},
+		"analytics.getDeliverability.additionalFields": {
+			"collection": true,
+			"displayName": "Additional Fields",
+			"placeholder": "Add Field"
+		},
+		"analytics.getDeliverability.additionalFields.from": {
+			"default": "",
+			"description": "Window start as an RFC 3339 timestamp. Defaults to 7 days ago (UTC).",
+			"displayName": "From",
+			"type": "dateTime"
+		},
+		"analytics.getDeliverability.additionalFields.to": {
+			"default": "",
+			"description": "Window end as an RFC 3339 timestamp. Defaults to now (UTC).",
+			"displayName": "To",
+			"type": "dateTime"
+		},
+		"analytics.getUsage.additionalFields": {
+			"collection": true,
+			"displayName": "Additional Fields",
+			"placeholder": "Add Field"
+		},
+		"analytics.getUsage.additionalFields.period": {
+			"default": "day",
+			"description": "One of day, week, month. Any other value falls back to day.",
+			"displayName": "Period",
+			"options": [
+				{
+					"name": "Day",
+					"value": "day"
+				},
+				{
+					"name": "Month",
+					"value": "month"
+				},
+				{
+					"name": "Week",
+					"value": "week"
+				}
+			],
+			"type": "options"
+		},
+		"analytics.getWarmup.additionalFields": {
+			"collection": true,
+			"displayName": "Additional Fields",
+			"placeholder": "Add Field"
+		},
+		"analytics.getWarmup.additionalFields.email_id": {
+			"default": "",
+			"description": "Limit to one email account. Invalid UUIDs are ignored.",
+			"displayName": "Email ID",
+			"placeholder": "name@email.com",
+			"type": "string"
+		},
+		"analytics.getWarmup.top.from": {
+			"default": "",
+			"description": "Range start (YYYY-MM-DD).",
+			"displayName": "From",
+			"required": true,
+			"type": "string"
+		},
+		"analytics.getWarmup.top.to": {
+			"default": "",
+			"description": "Range end (YYYY-MM-DD).",
+			"displayName": "To",
+			"required": true,
+			"type": "string"
+		},
+		"apiKey.create.additionalFields": {
+			"collection": true,
+			"displayName": "Additional Fields",
+			"placeholder": "Add Field"
+		},
+		"apiKey.create.additionalFields.allowed_email_accounts": {
+			"default": "",
+			"description": "If set, mailbox-scoped routes accept only these email account ids. Comma-separated list.",
+			"displayName": "Allowed Email Accounts",
+			"type": "string"
+		},
+		"apiKey.create.additionalFields.allowed_ips": {
+			"default": "",
+			"description": "If set, the key is usable only from these source IPs. Omit or leave empty to allow any IP. Comma-separated list.",
+			"displayName": "Allowed Ips",
+			"type": "string"
+		},
+		"apiKey.create.additionalFields.description": {
+			"default": "",
+			"description": "Free-form note about the key's purpose.",
+			"displayName": "Description",
+			"type": "string"
+		},
+		"apiKey.create.additionalFields.expires_at": {
+			"default": "",
+			"description": "When the key should stop working (RFC3339). Omit for a non-expiring key.",
+			"displayName": "Expires At",
+			"type": "dateTime"
+		},
+		"apiKey.create.additionalFields.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"apiKey.create.additionalFields.rate_limit_per_minute": {
+			"default": 0,
+			"description": "Per-key request cap. Omit or send 0 to use the default (60 r/m).",
+			"displayName": "Rate Limit Per Minute",
+			"type": "number"
+		},
+		"apiKey.create.top.name": {
+			"default": "",
+			"description": "Human-readable label.",
+			"displayName": "Name",
+			"required": true,
+			"type": "string"
+		},
+		"apiKey.create.top.permissions": {
+			"default": 0,
+			"description": "uint64 permission bitmask. Must contain only defined bits; unknown bits are rejected.",
+			"displayName": "Permissions",
+			"required": true,
+			"type": "number"
+		},
+		"apiKey.get.top.id": {
+			"default": "",
+			"displayName": "API Key ID",
+			"required": true,
+			"type": "string"
+		},
+		"apiKey.getAnalytics.filters": {
+			"collection": true,
+			"displayName": "Filters",
+			"placeholder": "Add Field"
+		},
+		"apiKey.getAnalytics.filters.from": {
+			"default": "",
+			"description": "Start of the window (RFC3339). Defaults to 24 hours before to.",
+			"displayName": "From",
+			"type": "dateTime"
+		},
+		"apiKey.getAnalytics.filters.interval": {
+			"default": "minute",
+			"description": "Bucket granularity.",
+			"displayName": "Interval",
+			"options": [
+				{
+					"name": "Day",
+					"value": "day"
+				},
+				{
+					"name": "Hour",
+					"value": "hour"
+				},
+				{
+					"name": "Minute",
+					"value": "minute"
+				}
+			],
+			"type": "options"
+		},
+		"apiKey.getAnalytics.filters.to": {
+			"default": "",
+			"description": "End of the window (RFC3339). Defaults to now.",
+			"displayName": "To",
+			"type": "dateTime"
+		},
+		"apiKey.getAnalytics.top.id": {
+			"default": "",
+			"description": "The API key id, or the literal `all` for the org-wide aggregate.",
+			"displayName": "API Key ID",
+			"required": true,
+			"type": "string"
+		},
+		"apiKey.getLogs.top.id": {
+			"default": "",
+			"displayName": "API Key ID",
+			"required": true,
+			"type": "string"
+		},
+		"apiKey.getUsageAnalytics.filters": {
+			"collection": true,
+			"displayName": "Filters",
+			"placeholder": "Add Field"
+		},
+		"apiKey.getUsageAnalytics.filters.from": {
+			"default": "",
+			"description": "Start of the window (RFC3339). Defaults to 24 hours before to.",
+			"displayName": "From",
+			"type": "dateTime"
+		},
+		"apiKey.getUsageAnalytics.filters.interval": {
+			"default": "minute",
+			"description": "Bucket granularity.",
+			"displayName": "Interval",
+			"options": [
+				{
+					"name": "Day",
+					"value": "day"
+				},
+				{
+					"name": "Hour",
+					"value": "hour"
+				},
+				{
+					"name": "Minute",
+					"value": "minute"
+				}
+			],
+			"type": "options"
+		},
+		"apiKey.getUsageAnalytics.filters.to": {
+			"default": "",
+			"description": "End of the window (RFC3339). Defaults to now.",
+			"displayName": "To",
+			"type": "dateTime"
+		},
+		"apiKey.revoke.additionalFields": {
+			"collection": true,
+			"displayName": "Additional Fields",
+			"placeholder": "Add Field"
+		},
+		"apiKey.revoke.additionalFields.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"apiKey.revoke.additionalFields.reason": {
+			"default": "",
+			"description": "Optional revocation note stored on the key. Defaults to \"Revoked by user\".",
+			"displayName": "Reason",
+			"type": "string"
+		},
+		"apiKey.revoke.top.id": {
+			"default": "",
+			"displayName": "API Key ID",
+			"required": true,
+			"type": "string"
+		},
+		"apiKey.update.top.id": {
+			"default": "",
+			"displayName": "API Key ID",
+			"required": true,
+			"type": "string"
+		},
+		"apiKey.update.updateFields": {
+			"collection": true,
+			"displayName": "Update Fields",
+			"placeholder": "Add Field"
+		},
+		"apiKey.update.updateFields.allowed_email_accounts": {
+			"default": "",
+			"description": "Replacement mailbox allowlist. Comma-separated list.",
+			"displayName": "Allowed Email Accounts",
+			"type": "string"
+		},
+		"apiKey.update.updateFields.allowed_ips": {
+			"default": "",
+			"description": "Replacement IP allowlist. Comma-separated list.",
+			"displayName": "Allowed Ips",
+			"type": "string"
+		},
+		"apiKey.update.updateFields.description": {
+			"default": "",
+			"description": "New description.",
+			"displayName": "Description",
+			"type": "string"
+		},
+		"apiKey.update.updateFields.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"apiKey.update.updateFields.name": {
+			"default": "",
+			"description": "New label.",
+			"displayName": "Name",
+			"type": "string"
+		},
+		"apiKey.update.updateFields.permissions": {
+			"default": 0,
+			"description": "Replacement uint64 permission bitmask.",
+			"displayName": "Permissions",
+			"type": "number"
+		},
+		"apiKey.update.updateFields.rate_limit_per_minute": {
+			"default": 0,
+			"description": "New per-key rate cap. 0 means use the default.",
+			"displayName": "Rate Limit Per Minute",
+			"type": "number"
+		},
+		"auditLog.getAll.filters": {
+			"collection": true,
+			"displayName": "Filters",
+			"placeholder": "Add Field"
+		},
+		"auditLog.getAll.filters.action": {
+			"default": "",
+			"description": "Filter by action (for example create, update, delete, send, revoke).",
+			"displayName": "Action",
+			"type": "string"
+		},
+		"auditLog.getAll.filters.actor_id": {
+			"default": "",
+			"description": "Filter to a single acting member.",
+			"displayName": "Actor ID",
+			"type": "string"
+		},
+		"auditLog.getAll.filters.date": {
+			"default": "",
+			"description": "Single-day filter (YYYY-MM-DD), expanded to that whole UTC day.",
+			"displayName": "Date",
+			"type": "string"
+		},
+		"auditLog.getAll.filters.end_date": {
+			"default": "",
+			"description": "Range end. RFC 3339 or YYYY-MM-DD. Overrides date.",
+			"displayName": "End Date",
+			"type": "string"
+		},
+		"auditLog.getAll.filters.entity_id": {
+			"default": "",
+			"description": "Filter to a single entity.",
+			"displayName": "Entity ID",
+			"type": "string"
+		},
+		"auditLog.getAll.filters.entity_type": {
+			"default": "",
+			"description": "Filter by entity type (for example campaign, contact, email_account, api_key, webhook).",
+			"displayName": "Entity Type",
+			"type": "string"
+		},
+		"auditLog.getAll.filters.start_date": {
+			"default": "",
+			"description": "Range start. RFC 3339 or YYYY-MM-DD. Overrides date.",
+			"displayName": "Start Date",
+			"type": "string"
+		},
+		"automation.create.additionalFields": {
+			"collection": true,
+			"displayName": "Additional Fields",
+			"placeholder": "Add Field"
+		},
+		"automation.create.additionalFields.enabled": {
+			"default": false,
+			"description": "Whether the automation runs on matching events.",
+			"displayName": "Enabled",
+			"type": "boolean"
+		},
+		"automation.create.additionalFields.filter": {
+			"default": "",
+			"description": "Optional automation-wide gate applied to every action.",
+			"displayName": "Filter",
+			"type": "json"
+		},
+		"automation.create.additionalFields.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"automation.create.top.graph": {
+			"default": "",
+			"description": "The editable flow: nodes plus the edges connecting them.",
+			"displayName": "Graph",
+			"required": true,
+			"type": "json"
+		},
+		"automation.create.top.name": {
+			"default": "",
+			"description": "Display name.",
+			"displayName": "Name",
+			"required": true,
+			"type": "string"
+		},
+		"automation.create.top.trigger_event": {
+			"default": "",
+			"description": "The event that fires the flow (e.g. email.replied).",
+			"displayName": "Trigger Event",
+			"required": true,
+			"type": "string"
+		},
+		"automation.delete.additionalFields": {
+			"collection": true,
+			"displayName": "Additional Fields",
+			"placeholder": "Add Field"
+		},
+		"automation.delete.additionalFields.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"automation.delete.top.id": {
+			"default": "",
+			"description": "Automation id.",
+			"displayName": "Automation ID",
+			"required": true,
+			"type": "string"
+		},
+		"automation.get.top.id": {
+			"default": "",
+			"description": "Automation id.",
+			"displayName": "Automation ID",
+			"required": true,
+			"type": "string"
+		},
+		"automation.getRuns.additionalFields": {
+			"collection": true,
+			"displayName": "Additional Fields",
+			"placeholder": "Add Field"
+		},
+		"automation.getRuns.additionalFields.limit": {
+			"default": 50,
+			"description": "Max number of results to return",
+			"displayName": "Limit",
+			"type": "number",
+			"typeOptions": {
+				"minValue": 1
+			}
+		},
+		"automation.getRuns.top.id": {
+			"default": "",
+			"description": "Automation id.",
+			"displayName": "Automation ID",
+			"required": true,
+			"type": "string"
+		},
+		"automation.test.additionalFields": {
+			"collection": true,
+			"displayName": "Additional Fields",
+			"placeholder": "Add Field"
+		},
+		"automation.test.additionalFields.data": {
+			"default": "",
+			"description": "Sample event payload to evaluate the flow against.",
+			"displayName": "Data",
+			"type": "json"
+		},
+		"automation.test.additionalFields.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"automation.test.top.id": {
+			"default": "",
+			"description": "Automation id.",
+			"displayName": "Automation ID",
+			"required": true,
+			"type": "string"
+		},
+		"automation.update.top.graph": {
+			"default": "",
+			"description": "The editable flow: nodes plus the edges connecting them.",
+			"displayName": "Graph",
+			"required": true,
+			"type": "json"
+		},
+		"automation.update.top.id": {
+			"default": "",
+			"description": "Automation id.",
+			"displayName": "Automation ID",
+			"required": true,
+			"type": "string"
+		},
+		"automation.update.top.name": {
+			"default": "",
+			"description": "Display name.",
+			"displayName": "Name",
+			"required": true,
+			"type": "string"
+		},
+		"automation.update.top.trigger_event": {
+			"default": "",
+			"description": "The event that fires the flow (e.g. email.replied).",
+			"displayName": "Trigger Event",
+			"required": true,
+			"type": "string"
+		},
+		"automation.update.updateFields": {
+			"collection": true,
+			"displayName": "Update Fields",
+			"placeholder": "Add Field"
+		},
+		"automation.update.updateFields.enabled": {
+			"default": false,
+			"description": "Whether the automation runs on matching events.",
+			"displayName": "Enabled",
+			"type": "boolean"
+		},
+		"automation.update.updateFields.filter": {
+			"default": "",
+			"description": "Optional automation-wide gate applied to every action.",
+			"displayName": "Filter",
+			"type": "json"
+		},
+		"automation.update.updateFields.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"campaign.create.additionalFields": {
+			"collection": true,
+			"displayName": "Additional Fields",
+			"placeholder": "Add Field"
+		},
+		"campaign.create.additionalFields.advanced_overrides": {
+			"default": "",
+			"description": "Advanced outreach overrides for a campaign.",
+			"displayName": "Advanced Overrides",
+			"type": "json"
+		},
+		"campaign.create.additionalFields.bcc": {
+			"default": "",
+			"description": "Comma-separated list.",
+			"displayName": "BCC",
+			"type": "string"
+		},
+		"campaign.create.additionalFields.cc": {
+			"default": "",
+			"description": "Comma-separated list.",
+			"displayName": "CC",
+			"type": "string"
+		},
+		"campaign.create.additionalFields.daily_limit": {
+			"default": 0,
+			"displayName": "Daily Limit",
+			"type": "number"
+		},
+		"campaign.create.additionalFields.days": {
+			"default": 0,
+			"description": "Legacy weekday bitmask (0-127), superseded by schedule_windows.",
+			"displayName": "Days",
+			"type": "number"
+		},
+		"campaign.create.additionalFields.description": {
+			"default": "",
+			"displayName": "Description",
+			"type": "string"
+		},
+		"campaign.create.additionalFields.email_tag_ids": {
+			"default": "",
+			"description": "Mailbox tag ids that resolve the sender pool (tags strategy). Comma-separated list.",
+			"displayName": "Email Tag IDs",
+			"type": "string"
+		},
+		"campaign.create.additionalFields.end_date": {
+			"default": "",
+			"displayName": "End Date",
+			"type": "dateTime"
+		},
+		"campaign.create.additionalFields.end_time": {
+			"default": "",
+			"description": "Legacy daily end (HH:MM).",
+			"displayName": "End Time",
+			"type": "string"
+		},
+		"campaign.create.additionalFields.esp_match_mode": {
+			"default": "off",
+			"displayName": "ESP Match Mode",
+			"options": [
+				{
+					"name": "Off",
+					"value": "off"
+				},
+				{
+					"name": "Prefer",
+					"value": "prefer"
+				},
+				{
+					"name": "Strict",
+					"value": "strict"
+				}
+			],
+			"type": "options"
+		},
+		"campaign.create.additionalFields.folder_ids": {
+			"default": "",
+			"description": "Comma-separated list.",
+			"displayName": "Folder IDs",
+			"type": "string"
+		},
+		"campaign.create.additionalFields.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"campaign.create.additionalFields.link_tracking": {
+			"default": false,
+			"displayName": "Link Tracking",
+			"type": "boolean"
+		},
+		"campaign.create.additionalFields.max_new_leads_per_day": {
+			"default": 0,
+			"description": "0 = unlimited.",
+			"displayName": "Max New Leads Per Day",
+			"type": "number"
+		},
+		"campaign.create.additionalFields.open_tracking": {
+			"default": false,
+			"displayName": "Open Tracking",
+			"type": "boolean"
+		},
+		"campaign.create.additionalFields.prioritize_new_leads": {
+			"default": false,
+			"displayName": "Prioritize New Leads",
+			"type": "boolean"
+		},
+		"campaign.create.additionalFields.ramp_ceiling": {
+			"default": 0,
+			"displayName": "Ramp Ceiling",
+			"type": "number"
+		},
+		"campaign.create.additionalFields.ramp_enabled": {
+			"default": false,
+			"displayName": "Ramp Enabled",
+			"type": "boolean"
+		},
+		"campaign.create.additionalFields.ramp_increment": {
+			"default": 0,
+			"displayName": "Ramp Increment",
+			"type": "number"
+		},
+		"campaign.create.additionalFields.ramp_start": {
+			"default": 0,
+			"displayName": "Ramp Start",
+			"type": "number"
+		},
+		"campaign.create.additionalFields.risky_emails": {
+			"default": false,
+			"displayName": "Risky Emails",
+			"type": "boolean"
+		},
+		"campaign.create.additionalFields.rotation_mode": {
+			"default": "",
+			"displayName": "Rotation Mode",
+			"type": "string"
+		},
+		"campaign.create.additionalFields.schedule_windows": {
+			"default": "",
+			"description": "Per-day sending schedule. 7-element array indexed by time.Weekday (Sunday = 0); each day is a list of {start, end} minute intervals. When non-empty it supersedes days/start_time/end_time.",
+			"displayName": "Schedule Windows",
+			"type": "json"
+		},
+		"campaign.create.additionalFields.sender_strategy": {
+			"default": "tags",
+			"displayName": "Sender Strategy",
+			"options": [
+				{
+					"name": "Explicit",
+					"value": "explicit"
+				},
+				{
+					"name": "Tags",
+					"value": "tags"
+				}
+			],
+			"type": "options"
+		},
+		"campaign.create.additionalFields.senders": {
+			"default": "",
+			"description": "Explicit-strategy mailbox pool.",
+			"displayName": "Senders",
+			"type": "json"
+		},
+		"campaign.create.additionalFields.sequences": {
+			"default": "",
+			"description": "Initial sequence steps in order.",
+			"displayName": "Sequences",
+			"type": "json"
+		},
+		"campaign.create.additionalFields.start_date": {
+			"default": "",
+			"displayName": "Start Date",
+			"type": "dateTime"
+		},
+		"campaign.create.additionalFields.start_time": {
+			"default": "",
+			"description": "Legacy daily start (HH:MM).",
+			"displayName": "Start Time",
+			"type": "string"
+		},
+		"campaign.create.additionalFields.stop_on_reply": {
+			"default": false,
+			"displayName": "Stop On Reply",
+			"type": "boolean"
+		},
+		"campaign.create.additionalFields.text_only": {
+			"default": false,
+			"displayName": "Text Only",
+			"type": "boolean"
+		},
+		"campaign.create.additionalFields.timezone": {
+			"default": "",
+			"displayName": "Timezone",
+			"type": "string"
+		},
+		"campaign.create.additionalFields.tracking_domain": {
+			"default": "",
+			"displayName": "Tracking Domain",
+			"type": "string"
+		},
+		"campaign.create.additionalFields.unsubscribe_header": {
+			"default": false,
+			"displayName": "Unsubscribe Header",
+			"type": "boolean"
+		},
+		"campaign.create.additionalFields.variants": {
+			"default": "",
+			"description": "A/B variants for the first step.",
+			"displayName": "Variants",
+			"type": "json"
+		},
+		"campaign.create.top.name": {
+			"default": "",
+			"displayName": "Name",
+			"required": true,
+			"type": "string"
+		},
+		"campaign.delete.additionalFields": {
+			"collection": true,
+			"displayName": "Additional Fields",
+			"placeholder": "Add Field"
+		},
+		"campaign.delete.additionalFields.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"campaign.delete.top.id": {
+			"default": "",
+			"displayName": "Campaign ID",
+			"required": true,
+			"type": "string"
+		},
+		"campaign.deleteAttachment.additionalFields": {
+			"collection": true,
+			"displayName": "Additional Fields",
+			"placeholder": "Add Field"
+		},
+		"campaign.deleteAttachment.additionalFields.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"campaign.deleteAttachment.top.attachmentId": {
+			"default": "",
+			"displayName": "Attachment ID",
+			"required": true,
+			"type": "string"
+		},
+		"campaign.deleteAttachment.top.id": {
+			"default": "",
+			"displayName": "Campaign ID",
+			"required": true,
+			"type": "string"
+		},
+		"campaign.generateWriting.additionalFields": {
+			"collection": true,
+			"displayName": "Additional Fields",
+			"placeholder": "Add Field"
+		},
+		"campaign.generateWriting.additionalFields.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"campaign.generateWriting.additionalFields.tone": {
+			"default": "",
+			"description": "Desired tone (e.g. friendly, direct).",
+			"displayName": "Tone",
+			"type": "string"
+		},
+		"campaign.generateWriting.top.prompt": {
+			"default": "",
+			"description": "The instruction to generate from.",
+			"displayName": "Prompt",
+			"required": true,
+			"type": "string"
+		},
+		"campaign.get.top.id": {
+			"default": "",
+			"displayName": "Campaign ID",
+			"required": true,
+			"type": "string"
+		},
+		"campaign.getAbAnalysis.top.id": {
+			"default": "",
+			"displayName": "Campaign ID",
+			"required": true,
+			"type": "string"
+		},
+		"campaign.getAdvanced.top.id": {
+			"default": "",
+			"displayName": "Campaign ID",
+			"required": true,
+			"type": "string"
+		},
+		"campaign.getAll.filters": {
+			"collection": true,
+			"displayName": "Filters",
+			"placeholder": "Add Field"
+		},
+		"campaign.getAll.filters.folder": {
+			"default": "",
+			"description": "Restrict to a single folder id.",
+			"displayName": "Folder",
+			"type": "string"
+		},
+		"campaign.getAll.filters.q": {
+			"default": "",
+			"description": "Free-text filter on campaign name.",
+			"displayName": "Q",
+			"type": "string"
+		},
+		"campaign.getAttachments.top.id": {
+			"default": "",
+			"displayName": "Campaign ID",
+			"required": true,
+			"type": "string"
+		},
+		"campaign.getLogs.top.id": {
+			"default": "",
+			"displayName": "Campaign ID",
+			"required": true,
+			"type": "string"
+		},
+		"campaign.getSenders.top.id": {
+			"default": "",
+			"displayName": "Campaign ID",
+			"required": true,
+			"type": "string"
+		},
+		"campaign.preflight.additionalFields": {
+			"collection": true,
+			"displayName": "Additional Fields",
+			"placeholder": "Add Field"
+		},
+		"campaign.preflight.additionalFields.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"campaign.preflight.top.id": {
+			"default": "",
+			"displayName": "Campaign ID",
+			"required": true,
+			"type": "string"
+		},
+		"campaign.previewTemplate.additionalFields": {
+			"collection": true,
+			"displayName": "Additional Fields",
+			"placeholder": "Add Field"
+		},
+		"campaign.previewTemplate.additionalFields.body_html": {
+			"default": "",
+			"displayName": "Body HTML",
+			"type": "string"
+		},
+		"campaign.previewTemplate.additionalFields.body_plain": {
+			"default": "",
+			"displayName": "Body Plain",
+			"type": "string"
+		},
+		"campaign.previewTemplate.additionalFields.contact": {
+			"default": "",
+			"description": "Override fields on the built-in sample contact.",
+			"displayName": "Contact",
+			"type": "json"
+		},
+		"campaign.previewTemplate.additionalFields.subject": {
+			"default": "",
+			"displayName": "Subject",
+			"type": "string"
+		},
+		"campaign.replaceSenders.filters": {
+			"collection": true,
+			"displayName": "Filters",
+			"placeholder": "Add Field"
+		},
+		"campaign.replaceSenders.filters.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"campaign.replaceSenders.top.id": {
+			"default": "",
+			"displayName": "Campaign ID",
+			"required": true,
+			"type": "string"
+		},
+		"campaign.replaceSenders.top.senders": {
+			"default": "",
+			"description": "The full new sender pool.",
+			"displayName": "Senders",
+			"required": true,
+			"type": "json"
+		},
+		"campaign.sendTestEmail.additionalFields": {
+			"collection": true,
+			"displayName": "Additional Fields",
+			"placeholder": "Add Field"
+		},
+		"campaign.sendTestEmail.additionalFields.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"campaign.sendTestEmail.additionalFields.step_id": {
+			"default": "",
+			"description": "Step to render and send; defaults to the first step.",
+			"displayName": "Step ID",
+			"type": "string"
+		},
+		"campaign.sendTestEmail.top.account_id": {
+			"default": "",
+			"description": "Sending mailbox id.",
+			"displayName": "Account ID",
+			"required": true,
+			"type": "string"
+		},
+		"campaign.sendTestEmail.top.id": {
+			"default": "",
+			"displayName": "Campaign ID",
+			"required": true,
+			"type": "string"
+		},
+		"campaign.sendTestEmail.top.recipient": {
+			"default": "",
+			"description": "Where to send the test.",
+			"displayName": "Recipient",
+			"required": true,
+			"type": "string"
+		},
+		"campaign.start.additionalFields": {
+			"collection": true,
+			"displayName": "Additional Fields",
+			"placeholder": "Add Field"
+		},
+		"campaign.start.additionalFields.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"campaign.start.top.id": {
+			"default": "",
+			"displayName": "Campaign ID",
+			"required": true,
+			"type": "string"
+		},
+		"campaign.stop.additionalFields": {
+			"collection": true,
+			"displayName": "Additional Fields",
+			"placeholder": "Add Field"
+		},
+		"campaign.stop.additionalFields.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"campaign.stop.top.id": {
+			"default": "",
+			"displayName": "Campaign ID",
+			"required": true,
+			"type": "string"
+		},
+		"campaign.update.top.id": {
+			"default": "",
+			"displayName": "Campaign ID",
+			"required": true,
+			"type": "string"
+		},
+		"campaign.update.updateFields": {
+			"collection": true,
+			"displayName": "Update Fields",
+			"placeholder": "Add Field"
+		},
+		"campaign.update.updateFields.bcc": {
+			"default": "",
+			"description": "Comma-separated list.",
+			"displayName": "BCC",
+			"type": "string"
+		},
+		"campaign.update.updateFields.cc": {
+			"default": "",
+			"description": "Comma-separated list.",
+			"displayName": "CC",
+			"type": "string"
+		},
+		"campaign.update.updateFields.contact_order_by": {
+			"default": "",
+			"displayName": "Contact Order By",
+			"type": "string"
+		},
+		"campaign.update.updateFields.contact_order_dir": {
+			"default": "asc",
+			"displayName": "Contact Order Dir",
+			"options": [
+				{
+					"name": "Asc",
+					"value": "asc"
+				},
+				{
+					"name": "Desc",
+					"value": "desc"
+				}
+			],
+			"type": "options"
+		},
+		"campaign.update.updateFields.contact_order_field": {
+			"default": "",
+			"displayName": "Contact Order Field",
+			"type": "string"
+		},
+		"campaign.update.updateFields.daily_limit": {
+			"default": 0,
+			"displayName": "Daily Limit",
+			"type": "number"
+		},
+		"campaign.update.updateFields.days": {
+			"default": 0,
+			"displayName": "Days",
+			"type": "number"
+		},
+		"campaign.update.updateFields.description": {
+			"default": "",
+			"displayName": "Description",
+			"type": "string"
+		},
+		"campaign.update.updateFields.email_tags": {
+			"default": "",
+			"description": "Comma-separated list.",
+			"displayName": "Email Tags",
+			"type": "string"
+		},
+		"campaign.update.updateFields.end_date": {
+			"default": "",
+			"displayName": "End Date",
+			"type": "dateTime"
+		},
+		"campaign.update.updateFields.end_time": {
+			"default": "",
+			"displayName": "End Time",
+			"type": "string"
+		},
+		"campaign.update.updateFields.esp_match_mode": {
+			"default": "off",
+			"displayName": "ESP Match Mode",
+			"options": [
+				{
+					"name": "Off",
+					"value": "off"
+				},
+				{
+					"name": "Prefer",
+					"value": "prefer"
+				},
+				{
+					"name": "Strict",
+					"value": "strict"
+				}
+			],
+			"type": "options"
+		},
+		"campaign.update.updateFields.folders": {
+			"default": "",
+			"description": "Comma-separated list.",
+			"displayName": "Folders",
+			"type": "string"
+		},
+		"campaign.update.updateFields.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"campaign.update.updateFields.link_tracking": {
+			"default": false,
+			"displayName": "Link Tracking",
+			"type": "boolean"
+		},
+		"campaign.update.updateFields.max_new_leads_per_day": {
+			"default": 0,
+			"displayName": "Max New Leads Per Day",
+			"type": "number"
+		},
+		"campaign.update.updateFields.name": {
+			"default": "",
+			"displayName": "Name",
+			"type": "string"
+		},
+		"campaign.update.updateFields.open_tracking": {
+			"default": false,
+			"displayName": "Open Tracking",
+			"type": "boolean"
+		},
+		"campaign.update.updateFields.prioritize_new_leads": {
+			"default": false,
+			"displayName": "Prioritize New Leads",
+			"type": "boolean"
+		},
+		"campaign.update.updateFields.ramp_ceiling": {
+			"default": 0,
+			"displayName": "Ramp Ceiling",
+			"type": "number"
+		},
+		"campaign.update.updateFields.ramp_enabled": {
+			"default": false,
+			"displayName": "Ramp Enabled",
+			"type": "boolean"
+		},
+		"campaign.update.updateFields.ramp_increment": {
+			"default": 0,
+			"displayName": "Ramp Increment",
+			"type": "number"
+		},
+		"campaign.update.updateFields.ramp_start": {
+			"default": 0,
+			"displayName": "Ramp Start",
+			"type": "number"
+		},
+		"campaign.update.updateFields.risky_emails": {
+			"default": false,
+			"displayName": "Risky Emails",
+			"type": "boolean"
+		},
+		"campaign.update.updateFields.rotation_mode": {
+			"default": "",
+			"displayName": "Rotation Mode",
+			"type": "string"
+		},
+		"campaign.update.updateFields.schedule_windows": {
+			"default": "",
+			"description": "Per-day sending schedule. 7-element array indexed by time.Weekday (Sunday = 0); each day is a list of {start, end} minute intervals. When non-empty it supersedes days/start_time/end_time.",
+			"displayName": "Schedule Windows",
+			"type": "json"
+		},
+		"campaign.update.updateFields.sender_strategy": {
+			"default": "tags",
+			"displayName": "Sender Strategy",
+			"options": [
+				{
+					"name": "Explicit",
+					"value": "explicit"
+				},
+				{
+					"name": "Tags",
+					"value": "tags"
+				}
+			],
+			"type": "options"
+		},
+		"campaign.update.updateFields.start_date": {
+			"default": "",
+			"displayName": "Start Date",
+			"type": "dateTime"
+		},
+		"campaign.update.updateFields.start_time": {
+			"default": "",
+			"displayName": "Start Time",
+			"type": "string"
+		},
+		"campaign.update.updateFields.status": {
+			"default": "draft",
+			"description": "Campaign lifecycle status.",
+			"displayName": "Status",
+			"options": [
+				{
+					"name": "Active",
+					"value": "active"
+				},
+				{
+					"name": "Completed",
+					"value": "completed"
+				},
+				{
+					"name": "Draft",
+					"value": "draft"
+				},
+				{
+					"name": "Paused",
+					"value": "paused"
+				},
+				{
+					"name": "Paused No Accounts",
+					"value": "paused_no_accounts"
+				},
+				{
+					"name": "Scheduled",
+					"value": "scheduled"
+				},
+				{
+					"name": "Stopped",
+					"value": "stopped"
+				}
+			],
+			"type": "options"
+		},
+		"campaign.update.updateFields.stop_on_reply": {
+			"default": false,
+			"displayName": "Stop On Reply",
+			"type": "boolean"
+		},
+		"campaign.update.updateFields.text_only": {
+			"default": false,
+			"displayName": "Text Only",
+			"type": "boolean"
+		},
+		"campaign.update.updateFields.timezone": {
+			"default": "",
+			"displayName": "Timezone",
+			"type": "string"
+		},
+		"campaign.update.updateFields.tracking_domain": {
+			"default": "",
+			"displayName": "Tracking Domain",
+			"type": "string"
+		},
+		"campaign.update.updateFields.unsubscribe_header": {
+			"default": false,
+			"displayName": "Unsubscribe Header",
+			"type": "boolean"
+		},
+		"campaign.updateAdvanced.top.id": {
+			"default": "",
+			"displayName": "Campaign ID",
+			"required": true,
+			"type": "string"
+		},
+		"campaign.updateAdvanced.top.settings": {
+			"default": "",
+			"description": "Advanced outreach overrides for a campaign.",
+			"displayName": "Settings",
+			"required": true,
+			"type": "json"
+		},
+		"campaign.updateAdvanced.updateFields": {
+			"collection": true,
+			"displayName": "Update Fields",
+			"placeholder": "Add Field"
+		},
+		"campaign.updateAdvanced.updateFields.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"campaign.uploadAttachment.additionalFields": {
+			"collection": true,
+			"displayName": "Additional Fields",
+			"placeholder": "Add Field"
+		},
+		"campaign.uploadAttachment.additionalFields.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"campaign.uploadAttachment.top.binaryPropertyName": {
+			"default": "data",
+			"description": "Name of the binary property that contains the file to upload.",
+			"displayName": "Input Binary Field",
+			"required": true,
+			"type": "string"
+		},
+		"campaign.uploadAttachment.top.id": {
+			"default": "",
+			"displayName": "Campaign ID",
+			"required": true,
+			"type": "string"
+		},
+		"campaign.uploadAttachment.top.step_id": {
+			"default": "",
+			"description": "Scope the attachment to one sequence step.",
+			"displayName": "Step ID",
+			"type": "string"
+		},
+		"campaign.verifyTrackingDomain.additionalFields": {
+			"collection": true,
+			"displayName": "Additional Fields",
+			"placeholder": "Add Field"
+		},
+		"campaign.verifyTrackingDomain.additionalFields.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"campaign.verifyTrackingDomain.top.id": {
+			"default": "",
+			"displayName": "Campaign ID",
+			"required": true,
+			"type": "string"
+		},
+		"campaignStep.create.additionalFields": {
+			"collection": true,
+			"displayName": "Additional Fields",
+			"placeholder": "Add Field"
+		},
+		"campaignStep.create.additionalFields.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"campaignStep.create.top.body": {
+			"default": "{}",
+			"description": "The sequence step to create, as a JSON object (for example {\"subject\": \"Hi {{first_name}}\", \"body_html\": \"...\", \"wait_days\": 2}).",
+			"displayName": "Step",
+			"required": true,
+			"type": "json"
+		},
+		"campaignStep.create.top.id": {
+			"default": "",
+			"displayName": "Campaign ID",
+			"required": true,
+			"type": "string"
+		},
+		"campaignStep.delete.additionalFields": {
+			"collection": true,
+			"displayName": "Additional Fields",
+			"placeholder": "Add Field"
+		},
+		"campaignStep.delete.additionalFields.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"campaignStep.delete.top.id": {
+			"default": "",
+			"displayName": "Campaign ID",
+			"required": true,
+			"type": "string"
+		},
+		"campaignStep.delete.top.sid": {
+			"default": "",
+			"displayName": "Step ID",
+			"required": true,
+			"type": "string"
+		},
+		"campaignStep.getAll.top.id": {
+			"default": "",
+			"displayName": "Campaign ID",
+			"required": true,
+			"type": "string"
+		},
+		"campaignStep.update.top.id": {
+			"default": "",
+			"displayName": "Campaign ID",
+			"required": true,
+			"type": "string"
+		},
+		"campaignStep.update.top.sid": {
+			"default": "",
+			"displayName": "Step ID",
+			"required": true,
+			"type": "string"
+		},
+		"campaignStep.update.updateFields": {
+			"collection": true,
+			"displayName": "Update Fields",
+			"placeholder": "Add Field"
+		},
+		"campaignStep.update.updateFields.action": {
+			"default": "",
+			"description": "Typed config for non-email nodes; type is the switch (wait, add_tag, remove_tag, unsubscribe, notify, create_task, create_deal, move_deal_stage, run_automation, end).",
+			"displayName": "Action",
+			"type": "json"
+		},
+		"campaignStep.update.updateFields.body_code": {
+			"default": false,
+			"displayName": "Body Code",
+			"type": "boolean"
+		},
+		"campaignStep.update.updateFields.body_html": {
+			"default": "",
+			"displayName": "Body HTML",
+			"type": "string"
+		},
+		"campaignStep.update.updateFields.body_plain": {
+			"default": "",
+			"displayName": "Body Plain",
+			"type": "string"
+		},
+		"campaignStep.update.updateFields.body_sync": {
+			"default": false,
+			"displayName": "Body Sync",
+			"type": "boolean"
+		},
+		"campaignStep.update.updateFields.conditions": {
+			"default": "",
+			"description": "Branching tree ({branches: [...]}). Send {} or empty branches to clear branching.",
+			"displayName": "Conditions",
+			"type": "json"
+		},
+		"campaignStep.update.updateFields.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"campaignStep.update.updateFields.kind": {
+			"default": "email",
+			"displayName": "Kind",
+			"options": [
+				{
+					"name": "Action",
+					"value": "action"
+				},
+				{
+					"name": "Email",
+					"value": "email"
+				},
+				{
+					"name": "Wait",
+					"value": "wait"
+				}
+			],
+			"type": "options"
+		},
+		"campaignStep.update.updateFields.name": {
+			"default": "",
+			"displayName": "Name",
+			"type": "string"
+		},
+		"campaignStep.update.updateFields.subject": {
+			"default": "",
+			"displayName": "Subject",
+			"type": "string"
+		},
+		"campaignStep.update.updateFields.wait_after": {
+			"default": 0,
+			"description": "Minutes to wait after this step (spacing model; no standalone wait node for email steps).",
+			"displayName": "Wait After",
+			"type": "number"
+		},
+		"campaignVariant.create.additionalFields": {
+			"collection": true,
+			"displayName": "Additional Fields",
+			"placeholder": "Add Field"
+		},
+		"campaignVariant.create.additionalFields.body_html": {
+			"default": "",
+			"displayName": "Body HTML",
+			"type": "string"
+		},
+		"campaignVariant.create.additionalFields.body_plain": {
+			"default": "",
+			"displayName": "Body Plain",
+			"type": "string"
+		},
+		"campaignVariant.create.additionalFields.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"campaignVariant.create.additionalFields.is_active": {
+			"default": false,
+			"displayName": "Is Active",
+			"type": "boolean"
+		},
+		"campaignVariant.create.additionalFields.is_control": {
+			"default": false,
+			"displayName": "Is Control",
+			"type": "boolean"
+		},
+		"campaignVariant.create.additionalFields.metadata": {
+			"default": "",
+			"description": "Provide as JSON.",
+			"displayName": "Metadata",
+			"type": "json"
+		},
+		"campaignVariant.create.additionalFields.step_id": {
+			"default": "",
+			"description": "Step to scope the variant to; omit for campaign-level.",
+			"displayName": "Step ID",
+			"type": "string"
+		},
+		"campaignVariant.create.additionalFields.subject": {
+			"default": "",
+			"displayName": "Subject",
+			"type": "string"
+		},
+		"campaignVariant.create.additionalFields.weight": {
+			"default": 0,
+			"displayName": "Weight",
+			"type": "number"
+		},
+		"campaignVariant.create.top.id": {
+			"default": "",
+			"displayName": "Campaign ID",
+			"required": true,
+			"type": "string"
+		},
+		"campaignVariant.create.top.name": {
+			"default": "",
+			"displayName": "Name",
+			"required": true,
+			"type": "string"
+		},
+		"campaignVariant.delete.additionalFields": {
+			"collection": true,
+			"displayName": "Additional Fields",
+			"placeholder": "Add Field"
+		},
+		"campaignVariant.delete.additionalFields.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"campaignVariant.delete.top.id": {
+			"default": "",
+			"displayName": "Campaign ID",
+			"required": true,
+			"type": "string"
+		},
+		"campaignVariant.delete.top.variantId": {
+			"default": "",
+			"displayName": "Variant ID",
+			"required": true,
+			"type": "string"
+		},
+		"campaignVariant.getAll.top.id": {
+			"default": "",
+			"displayName": "Campaign ID",
+			"required": true,
+			"type": "string"
+		},
+		"campaignVariant.update.top.id": {
+			"default": "",
+			"displayName": "Campaign ID",
+			"required": true,
+			"type": "string"
+		},
+		"campaignVariant.update.top.variantId": {
+			"default": "",
+			"displayName": "Variant ID",
+			"required": true,
+			"type": "string"
+		},
+		"campaignVariant.update.updateFields": {
+			"collection": true,
+			"displayName": "Update Fields",
+			"placeholder": "Add Field"
+		},
+		"campaignVariant.update.updateFields.body_html": {
+			"default": "",
+			"displayName": "Body HTML",
+			"type": "string"
+		},
+		"campaignVariant.update.updateFields.body_plain": {
+			"default": "",
+			"displayName": "Body Plain",
+			"type": "string"
+		},
+		"campaignVariant.update.updateFields.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"campaignVariant.update.updateFields.is_active": {
+			"default": false,
+			"displayName": "Is Active",
+			"type": "boolean"
+		},
+		"campaignVariant.update.updateFields.is_control": {
+			"default": false,
+			"displayName": "Is Control",
+			"type": "boolean"
+		},
+		"campaignVariant.update.updateFields.metadata": {
+			"default": "",
+			"description": "Provide as JSON.",
+			"displayName": "Metadata",
+			"type": "json"
+		},
+		"campaignVariant.update.updateFields.name": {
+			"default": "",
+			"displayName": "Name",
+			"type": "string"
+		},
+		"campaignVariant.update.updateFields.subject": {
+			"default": "",
+			"displayName": "Subject",
+			"type": "string"
+		},
+		"campaignVariant.update.updateFields.weight": {
+			"default": 0,
+			"displayName": "Weight",
+			"type": "number"
+		},
+		"contact.bulkDelete.additionalFields": {
+			"collection": true,
+			"displayName": "Additional Fields",
+			"placeholder": "Add Field"
+		},
+		"contact.bulkDelete.additionalFields.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"contact.bulkDelete.top.contact_ids": {
+			"default": "",
+			"description": "Comma-separated list of contact IDs to delete (1 to 1000).",
+			"displayName": "Contact IDs",
+			"required": true,
+			"type": "string"
+		},
+		"contact.bulkUpdate.filters": {
+			"collection": true,
+			"displayName": "Filters",
+			"placeholder": "Add Field"
+		},
+		"contact.bulkUpdate.filters.add_campaigns": {
+			"default": "",
+			"description": "Comma-separated list.",
+			"displayName": "Add Campaigns",
+			"type": "string"
+		},
+		"contact.bulkUpdate.filters.add_categories": {
+			"default": "",
+			"description": "Comma-separated list.",
+			"displayName": "Add Categories",
+			"type": "string"
+		},
+		"contact.bulkUpdate.filters.fields": {
+			"default": "",
+			"description": "Provide as JSON.",
+			"displayName": "Fields",
+			"type": "json"
+		},
+		"contact.bulkUpdate.filters.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"contact.bulkUpdate.filters.remove_campaigns": {
+			"default": "",
+			"description": "Comma-separated list.",
+			"displayName": "Remove Campaigns",
+			"type": "string"
+		},
+		"contact.bulkUpdate.filters.remove_categories": {
+			"default": "",
+			"description": "Comma-separated list.",
+			"displayName": "Remove Categories",
+			"type": "string"
+		},
+		"contact.bulkUpdate.filters.subscribe": {
+			"default": false,
+			"description": "Set subscription status for all listed contacts.",
+			"displayName": "Subscribe",
+			"type": "boolean"
+		},
+		"contact.bulkUpdate.top.contacts": {
+			"default": "",
+			"description": "Contact IDs to edit (1 to 1000). Comma-separated list.",
+			"displayName": "Contacts",
+			"required": true,
+			"type": "string"
+		},
+		"contact.create.filters": {
+			"collection": true,
+			"displayName": "Filters",
+			"placeholder": "Add Field"
+		},
+		"contact.create.filters.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"contact.create.top.contacts": {
+			"default": "[]",
+			"description": "Array of contact objects to create. Each object accepts: email (required), first_name, last_name, company, phone, custom_fields, campaigns, categories.",
+			"displayName": "Contacts",
+			"required": true,
+			"type": "json"
+		},
+		"contact.delete.additionalFields": {
+			"collection": true,
+			"displayName": "Additional Fields",
+			"placeholder": "Add Field"
+		},
+		"contact.delete.additionalFields.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"contact.delete.top.id": {
+			"default": "",
+			"displayName": "Contact ID",
+			"required": true,
+			"type": "string"
+		},
+		"contact.export.additionalFields": {
+			"collection": true,
+			"displayName": "Additional Fields",
+			"placeholder": "Add Field"
+		},
+		"contact.export.additionalFields.contact_ids": {
+			"default": "",
+			"description": "Contact IDs when scope is selected. Comma-separated list.",
+			"displayName": "Contact IDs",
+			"type": "string"
+		},
+		"contact.export.additionalFields.fields": {
+			"default": "",
+			"description": "Column identifiers in display order (built-ins like email, first_name, or custom:<key>). Empty uses defaults. Comma-separated list.",
+			"displayName": "Fields",
+			"type": "string"
+		},
+		"contact.export.additionalFields.filename": {
+			"default": "",
+			"description": "Filename without extension. Sanitized server-side; empty falls back to contacts-<YYYY-MM-DD>.",
+			"displayName": "Filename",
+			"type": "string"
+		},
+		"contact.export.additionalFields.filters": {
+			"default": "",
+			"description": "A search filter body when scope is filtered.",
+			"displayName": "Filters",
+			"type": "string"
+		},
+		"contact.export.top.format": {
+			"default": "csv",
+			"displayName": "Format",
+			"options": [
+				{
+					"name": "CSV",
+					"value": "csv"
+				},
+				{
+					"name": "JSON",
+					"value": "json"
+				},
+				{
+					"name": "Xlsx",
+					"value": "xlsx"
+				}
+			],
+			"required": true,
+			"type": "options"
+		},
+		"contact.export.top.scope": {
+			"default": "all",
+			"displayName": "Scope",
+			"options": [
+				{
+					"name": "All",
+					"value": "all"
+				},
+				{
+					"name": "Filtered",
+					"value": "filtered"
+				},
+				{
+					"name": "Selected",
+					"value": "selected"
+				}
+			],
+			"required": true,
+			"type": "options"
+		},
+		"contact.get.top.id": {
+			"default": "",
+			"displayName": "Contact ID",
+			"required": true,
+			"type": "string"
+		},
+		"contact.getActivities.top.id": {
+			"default": "",
+			"displayName": "Contact ID",
+			"required": true,
+			"type": "string"
+		},
+		"contact.getDeals.top.id": {
+			"default": "",
+			"displayName": "Contact ID",
+			"required": true,
+			"type": "string"
+		},
+		"contact.getEmails.filters": {
+			"collection": true,
+			"displayName": "Filters",
+			"placeholder": "Add Field"
+		},
+		"contact.getEmails.filters.before_at": {
+			"default": "",
+			"description": "created_at of the last row from the previous page (RFC 3339 nano).",
+			"displayName": "Before At",
+			"type": "dateTime"
+		},
+		"contact.getEmails.filters.before_id": {
+			"default": "",
+			"description": "task_id of the last row from the previous page.",
+			"displayName": "Before ID",
+			"type": "string"
+		},
+		"contact.getEmails.filters.limit": {
+			"default": 50,
+			"description": "Max number of results to return",
+			"displayName": "Limit",
+			"type": "number",
+			"typeOptions": {
+				"minValue": 1
+			}
+		},
+		"contact.getEmails.top.id": {
+			"default": "",
+			"displayName": "Contact ID",
+			"required": true,
+			"type": "string"
+		},
+		"contact.getTimeline.filters": {
+			"collection": true,
+			"displayName": "Filters",
+			"placeholder": "Add Field"
+		},
+		"contact.getTimeline.filters.before": {
+			"default": "",
+			"description": "The `at` timestamp of the oldest event from the previous page (RFC 3339 nano).",
+			"displayName": "Before",
+			"type": "dateTime"
+		},
+		"contact.getTimeline.filters.limit": {
+			"default": 50,
+			"description": "Max number of results to return",
+			"displayName": "Limit",
+			"type": "number",
+			"typeOptions": {
+				"minValue": 1
+			}
+		},
+		"contact.getTimeline.top.id": {
+			"default": "",
+			"displayName": "Contact ID",
+			"required": true,
+			"type": "string"
+		},
+		"contact.importCommit.additionalFields": {
+			"collection": true,
+			"displayName": "Additional Fields",
+			"placeholder": "Add Field"
+		},
+		"contact.importCommit.additionalFields.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"contact.importCommit.top.binaryPropertyName": {
+			"default": "data",
+			"description": "Name of the binary property that contains the file to upload.",
+			"displayName": "Input Binary Field",
+			"required": true,
+			"type": "string"
+		},
+		"contact.importCommit.top.options": {
+			"default": "",
+			"description": "JSON-encoded ContactImportCommitOptions as a string.",
+			"displayName": "Options",
+			"required": true,
+			"type": "string"
+		},
+		"contact.importPreview.top.binaryPropertyName": {
+			"default": "data",
+			"description": "Name of the binary property that contains the file to upload.",
+			"displayName": "Input Binary Field",
+			"required": true,
+			"type": "string"
+		},
+		"contact.lookup.top.email": {
+			"default": "",
+			"description": "The email address to resolve.",
+			"displayName": "Email",
+			"placeholder": "name@email.com",
+			"required": true,
+			"type": "string"
+		},
+		"contact.search.filters": {
+			"collection": true,
+			"displayName": "Filters",
+			"placeholder": "Add Field"
+		},
+		"contact.search.filters.campaign_ids": {
+			"default": "",
+			"description": "Contact must be in ALL of these campaigns. Comma-separated list.",
+			"displayName": "Campaign IDs",
+			"type": "string"
+		},
+		"contact.search.filters.category": {
+			"default": "",
+			"description": "Convenience filter for a single category ID.",
+			"displayName": "Category",
+			"type": "string"
+		},
+		"contact.search.filters.category_ids": {
+			"default": "",
+			"description": "Contact must have ALL of these categories. Comma-separated list.",
+			"displayName": "Category IDs",
+			"type": "string"
+		},
+		"contact.search.filters.created_after": {
+			"default": "",
+			"displayName": "Created After",
+			"type": "dateTime"
+		},
+		"contact.search.filters.created_before": {
+			"default": "",
+			"displayName": "Created Before",
+			"type": "dateTime"
+		},
+		"contact.search.filters.custom_field_filters": {
+			"default": "",
+			"description": "Provide as JSON.",
+			"displayName": "Custom Field Filters",
+			"type": "json"
+		},
+		"contact.search.filters.max_campaigns": {
+			"default": 0,
+			"description": "Maximum number of associated campaigns.",
+			"displayName": "Max Campaigns",
+			"type": "number"
+		},
+		"contact.search.filters.min_campaigns": {
+			"default": 0,
+			"description": "Minimum number of associated campaigns.",
+			"displayName": "Min Campaigns",
+			"type": "number"
+		},
+		"contact.search.filters.query": {
+			"default": "",
+			"description": "Text search across name, email, company.",
+			"displayName": "Query",
+			"type": "string"
+		},
+		"contact.search.filters.reverse": {
+			"default": false,
+			"description": "Descending when true.",
+			"displayName": "Reverse",
+			"type": "boolean"
+		},
+		"contact.search.filters.sort_by": {
+			"default": "",
+			"description": "Sort column, e.g. first_name, campaign_count.",
+			"displayName": "Sort By",
+			"type": "string"
+		},
+		"contact.search.filters.subscribed": {
+			"default": false,
+			"displayName": "Subscribed",
+			"type": "boolean"
+		},
+		"contact.search.filters.updated_after": {
+			"default": "",
+			"displayName": "Updated After",
+			"type": "dateTime"
+		},
+		"contact.search.filters.updated_before": {
+			"default": "",
+			"displayName": "Updated Before",
+			"type": "dateTime"
+		},
+		"contact.update.top.id": {
+			"default": "",
+			"displayName": "Contact ID",
+			"required": true,
+			"type": "string"
+		},
+		"contact.update.updateFields": {
+			"collection": true,
+			"displayName": "Update Fields",
+			"placeholder": "Add Field"
+		},
+		"contact.update.updateFields.add_categories": {
+			"default": "",
+			"description": "Diff-style add (ignored when categories is set). Comma-separated list.",
+			"displayName": "Add Categories",
+			"type": "string"
+		},
+		"contact.update.updateFields.campaigns": {
+			"default": "",
+			"description": "Set the full campaign membership (omit to leave as-is). Comma-separated list.",
+			"displayName": "Campaigns",
+			"type": "string"
+		},
+		"contact.update.updateFields.categories": {
+			"default": "",
+			"description": "Set the full category list (omit to leave as-is). Comma-separated list.",
+			"displayName": "Categories",
+			"type": "string"
+		},
+		"contact.update.updateFields.company": {
+			"default": "",
+			"displayName": "Company",
+			"type": "string"
+		},
+		"contact.update.updateFields.custom_fields": {
+			"default": "",
+			"description": "Replaces the custom-fields map.",
+			"displayName": "Custom Fields",
+			"type": "json"
+		},
+		"contact.update.updateFields.first_name": {
+			"default": "",
+			"displayName": "First Name",
+			"type": "string"
+		},
+		"contact.update.updateFields.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"contact.update.updateFields.last_name": {
+			"default": "",
+			"displayName": "Last Name",
+			"type": "string"
+		},
+		"contact.update.updateFields.phone": {
+			"default": "",
+			"displayName": "Phone",
+			"type": "string"
+		},
+		"contact.update.updateFields.remove_categories": {
+			"default": "",
+			"description": "Diff-style remove (ignored when categories is set). Comma-separated list.",
+			"displayName": "Remove Categories",
+			"type": "string"
+		},
+		"contact.update.updateFields.subscribed": {
+			"default": false,
+			"displayName": "Subscribed",
+			"type": "boolean"
+		},
+		"contactNote.create.additionalFields": {
+			"collection": true,
+			"displayName": "Additional Fields",
+			"placeholder": "Add Field"
+		},
+		"contactNote.create.additionalFields.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"contactNote.create.top.content": {
+			"default": "",
+			"description": "Note body (1 to 10,000 characters).",
+			"displayName": "Content",
+			"required": true,
+			"type": "string"
+		},
+		"contactNote.create.top.id": {
+			"default": "",
+			"displayName": "Contact ID",
+			"required": true,
+			"type": "string"
+		},
+		"contactNote.delete.additionalFields": {
+			"collection": true,
+			"displayName": "Additional Fields",
+			"placeholder": "Add Field"
+		},
+		"contactNote.delete.additionalFields.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"contactNote.delete.top.id": {
+			"default": "",
+			"displayName": "Contact ID",
+			"required": true,
+			"type": "string"
+		},
+		"contactNote.delete.top.noteId": {
+			"default": "",
+			"displayName": "Note ID",
+			"required": true,
+			"type": "string"
+		},
+		"contactNote.getAll.top.id": {
+			"default": "",
+			"displayName": "Contact ID",
+			"required": true,
+			"type": "string"
+		},
+		"contactNote.update.top.id": {
+			"default": "",
+			"displayName": "Contact ID",
+			"required": true,
+			"type": "string"
+		},
+		"contactNote.update.top.noteId": {
+			"default": "",
+			"displayName": "Note ID",
+			"required": true,
+			"type": "string"
+		},
+		"contactNote.update.updateFields": {
+			"collection": true,
+			"displayName": "Update Fields",
+			"placeholder": "Add Field"
+		},
+		"contactNote.update.updateFields.content": {
+			"default": "",
+			"description": "New note body.",
+			"displayName": "Content",
+			"type": "string"
+		},
+		"contactNote.update.updateFields.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"crmTask.create.additionalFields": {
+			"collection": true,
+			"displayName": "Additional Fields",
+			"placeholder": "Add Field"
+		},
+		"crmTask.create.additionalFields.assigned_team_id": {
+			"default": "",
+			"description": "Assignee team ID.",
+			"displayName": "Assigned Team ID",
+			"type": "string"
+		},
+		"crmTask.create.additionalFields.assigned_to": {
+			"default": "",
+			"description": "Assignee user ID.",
+			"displayName": "Assigned To",
+			"type": "string"
+		},
+		"crmTask.create.additionalFields.contact_id": {
+			"default": "",
+			"description": "Linked contact.",
+			"displayName": "Contact ID",
+			"type": "string"
+		},
+		"crmTask.create.additionalFields.deal_id": {
+			"default": "",
+			"description": "Linked deal.",
+			"displayName": "Deal ID",
+			"type": "string"
+		},
+		"crmTask.create.additionalFields.description": {
+			"default": "",
+			"description": "Free-text description.",
+			"displayName": "Description",
+			"type": "string"
+		},
+		"crmTask.create.additionalFields.due_date": {
+			"default": "",
+			"description": "Due date.",
+			"displayName": "Due Date",
+			"type": "dateTime"
+		},
+		"crmTask.create.additionalFields.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"crmTask.create.additionalFields.priority": {
+			"default": "low",
+			"displayName": "Priority",
+			"options": [
+				{
+					"name": "High",
+					"value": "high"
+				},
+				{
+					"name": "Low",
+					"value": "low"
+				},
+				{
+					"name": "Medium",
+					"value": "medium"
+				},
+				{
+					"name": "Urgent",
+					"value": "urgent"
+				}
+			],
+			"type": "options"
+		},
+		"crmTask.create.additionalFields.type": {
+			"default": "",
+			"description": "Task type name (matches a configured task type).",
+			"displayName": "Type",
+			"type": "string"
+		},
+		"crmTask.create.top.title": {
+			"default": "",
+			"description": "Task title.",
+			"displayName": "Title",
+			"required": true,
+			"type": "string"
+		},
+		"crmTask.delete.additionalFields": {
+			"collection": true,
+			"displayName": "Additional Fields",
+			"placeholder": "Add Field"
+		},
+		"crmTask.delete.additionalFields.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"crmTask.delete.top.id": {
+			"default": "",
+			"description": "Task ID.",
+			"displayName": "CRM Task ID",
+			"required": true,
+			"type": "string"
+		},
+		"crmTask.get.top.id": {
+			"default": "",
+			"description": "Task ID.",
+			"displayName": "CRM Task ID",
+			"required": true,
+			"type": "string"
+		},
+		"crmTask.getAll.filters": {
+			"collection": true,
+			"displayName": "Filters",
+			"placeholder": "Add Field"
+		},
+		"crmTask.getAll.filters.assigned_to": {
+			"default": "",
+			"description": "Restrict to tasks assigned to this user.",
+			"displayName": "Assigned To",
+			"type": "string"
+		},
+		"crmTask.getAll.filters.contact_id": {
+			"default": "",
+			"description": "Restrict to tasks linked to this contact.",
+			"displayName": "Contact ID",
+			"type": "string"
+		},
+		"crmTask.getAll.filters.deal_id": {
+			"default": "",
+			"description": "Restrict to tasks linked to this deal.",
+			"displayName": "Deal ID",
+			"type": "string"
+		},
+		"crmTask.getAll.filters.status": {
+			"default": "pending",
+			"description": "Restrict to a task status.",
+			"displayName": "Status",
+			"options": [
+				{
+					"name": "Cancelled",
+					"value": "cancelled"
+				},
+				{
+					"name": "Completed",
+					"value": "completed"
+				},
+				{
+					"name": "In Progress",
+					"value": "in_progress"
+				},
+				{
+					"name": "Pending",
+					"value": "pending"
+				}
+			],
+			"type": "options"
+		},
+		"crmTask.search.filters": {
+			"collection": true,
+			"displayName": "Filters",
+			"placeholder": "Add Field"
+		},
+		"crmTask.search.filters.assigned_to": {
+			"default": "",
+			"description": "Assignee user ID is any of these. Comma-separated list.",
+			"displayName": "Assigned To",
+			"type": "string"
+		},
+		"crmTask.search.filters.contact_id": {
+			"default": "",
+			"description": "Linked contact.",
+			"displayName": "Contact ID",
+			"type": "string"
+		},
+		"crmTask.search.filters.deal_id": {
+			"default": "",
+			"description": "Linked deal.",
+			"displayName": "Deal ID",
+			"type": "string"
+		},
+		"crmTask.search.filters.due_after": {
+			"default": "",
+			"description": "Due on or after.",
+			"displayName": "Due After",
+			"type": "dateTime"
+		},
+		"crmTask.search.filters.due_before": {
+			"default": "",
+			"description": "Due on or before.",
+			"displayName": "Due Before",
+			"type": "dateTime"
+		},
+		"crmTask.search.filters.overdue": {
+			"default": false,
+			"description": "Only tasks past due and not completed or cancelled.",
+			"displayName": "Overdue",
+			"type": "boolean"
+		},
+		"crmTask.search.filters.priorities": {
+			"default": "",
+			"description": "Comma-separated list.",
+			"displayName": "Priorities",
+			"type": "string"
+		},
+		"crmTask.search.filters.query": {
+			"default": "",
+			"description": "Case-insensitive match on task title.",
+			"displayName": "Query",
+			"type": "string"
+		},
+		"crmTask.search.filters.reverse": {
+			"default": false,
+			"description": "true sorts ascending, false (default) descending.",
+			"displayName": "Reverse",
+			"type": "boolean"
+		},
+		"crmTask.search.filters.sort_by": {
+			"default": "created_at",
+			"displayName": "Sort By",
+			"options": [
+				{
+					"name": "Created At",
+					"value": "created_at"
+				},
+				{
+					"name": "Due Date",
+					"value": "due_date"
+				},
+				{
+					"name": "Priority",
+					"value": "priority"
+				},
+				{
+					"name": "Title",
+					"value": "title"
+				},
+				{
+					"name": "Updated At",
+					"value": "updated_at"
+				}
+			],
+			"type": "options"
+		},
+		"crmTask.search.filters.statuses": {
+			"default": "",
+			"description": "Comma-separated list.",
+			"displayName": "Statuses",
+			"type": "string"
+		},
+		"crmTask.search.filters.team_ids": {
+			"default": "",
+			"description": "Task team is any of these, or the assignee belongs to one. Comma-separated list.",
+			"displayName": "Team IDs",
+			"type": "string"
+		},
+		"crmTask.search.filters.types": {
+			"default": "",
+			"description": "Task type name is any of these. Comma-separated list.",
+			"displayName": "Types",
+			"type": "string"
+		},
+		"crmTask.summary.additionalFields": {
+			"collection": true,
+			"displayName": "Additional Fields",
+			"placeholder": "Add Field"
+		},
+		"crmTask.summary.additionalFields.assigned_to": {
+			"default": "",
+			"description": "Assignee user ID is any of these. Comma-separated list.",
+			"displayName": "Assigned To",
+			"type": "string"
+		},
+		"crmTask.summary.additionalFields.contact_id": {
+			"default": "",
+			"description": "Linked contact.",
+			"displayName": "Contact ID",
+			"type": "string"
+		},
+		"crmTask.summary.additionalFields.deal_id": {
+			"default": "",
+			"description": "Linked deal.",
+			"displayName": "Deal ID",
+			"type": "string"
+		},
+		"crmTask.summary.additionalFields.due_after": {
+			"default": "",
+			"description": "Due on or after.",
+			"displayName": "Due After",
+			"type": "dateTime"
+		},
+		"crmTask.summary.additionalFields.due_before": {
+			"default": "",
+			"description": "Due on or before.",
+			"displayName": "Due Before",
+			"type": "dateTime"
+		},
+		"crmTask.summary.additionalFields.overdue": {
+			"default": false,
+			"description": "Only tasks past due and not completed or cancelled.",
+			"displayName": "Overdue",
+			"type": "boolean"
+		},
+		"crmTask.summary.additionalFields.priorities": {
+			"default": "",
+			"description": "Comma-separated list.",
+			"displayName": "Priorities",
+			"type": "string"
+		},
+		"crmTask.summary.additionalFields.query": {
+			"default": "",
+			"description": "Case-insensitive match on task title.",
+			"displayName": "Query",
+			"type": "string"
+		},
+		"crmTask.summary.additionalFields.reverse": {
+			"default": false,
+			"description": "true sorts ascending, false (default) descending.",
+			"displayName": "Reverse",
+			"type": "boolean"
+		},
+		"crmTask.summary.additionalFields.sort_by": {
+			"default": "created_at",
+			"displayName": "Sort By",
+			"options": [
+				{
+					"name": "Created At",
+					"value": "created_at"
+				},
+				{
+					"name": "Due Date",
+					"value": "due_date"
+				},
+				{
+					"name": "Priority",
+					"value": "priority"
+				},
+				{
+					"name": "Title",
+					"value": "title"
+				},
+				{
+					"name": "Updated At",
+					"value": "updated_at"
+				}
+			],
+			"type": "options"
+		},
+		"crmTask.summary.additionalFields.statuses": {
+			"default": "",
+			"description": "Comma-separated list.",
+			"displayName": "Statuses",
+			"type": "string"
+		},
+		"crmTask.summary.additionalFields.team_ids": {
+			"default": "",
+			"description": "Task team is any of these, or the assignee belongs to one. Comma-separated list.",
+			"displayName": "Team IDs",
+			"type": "string"
+		},
+		"crmTask.summary.additionalFields.types": {
+			"default": "",
+			"description": "Task type name is any of these. Comma-separated list.",
+			"displayName": "Types",
+			"type": "string"
+		},
+		"crmTask.update.top.id": {
+			"default": "",
+			"description": "Task ID.",
+			"displayName": "CRM Task ID",
+			"required": true,
+			"type": "string"
+		},
+		"crmTask.update.updateFields": {
+			"collection": true,
+			"displayName": "Update Fields",
+			"placeholder": "Add Field"
+		},
+		"crmTask.update.updateFields.assigned_team_id": {
+			"default": "",
+			"description": "Assignee team ID.",
+			"displayName": "Assigned Team ID",
+			"type": "string"
+		},
+		"crmTask.update.updateFields.assigned_to": {
+			"default": "",
+			"description": "Assignee user ID.",
+			"displayName": "Assigned To",
+			"type": "string"
+		},
+		"crmTask.update.updateFields.description": {
+			"default": "",
+			"description": "Free-text description.",
+			"displayName": "Description",
+			"type": "string"
+		},
+		"crmTask.update.updateFields.due_date": {
+			"default": "",
+			"description": "Due date.",
+			"displayName": "Due Date",
+			"type": "dateTime"
+		},
+		"crmTask.update.updateFields.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"crmTask.update.updateFields.priority": {
+			"default": "low",
+			"displayName": "Priority",
+			"options": [
+				{
+					"name": "High",
+					"value": "high"
+				},
+				{
+					"name": "Low",
+					"value": "low"
+				},
+				{
+					"name": "Medium",
+					"value": "medium"
+				},
+				{
+					"name": "Urgent",
+					"value": "urgent"
+				}
+			],
+			"type": "options"
+		},
+		"crmTask.update.updateFields.status": {
+			"default": "pending",
+			"displayName": "Status",
+			"options": [
+				{
+					"name": "Cancelled",
+					"value": "cancelled"
+				},
+				{
+					"name": "Completed",
+					"value": "completed"
+				},
+				{
+					"name": "In Progress",
+					"value": "in_progress"
+				},
+				{
+					"name": "Pending",
+					"value": "pending"
+				}
+			],
+			"type": "options"
+		},
+		"crmTask.update.updateFields.title": {
+			"default": "",
+			"description": "Task title.",
+			"displayName": "Title",
+			"type": "string"
+		},
+		"crmTask.update.updateFields.type": {
+			"default": "",
+			"description": "Task type name.",
+			"displayName": "Type",
+			"type": "string"
+		},
+		"crmTaskType.create.additionalFields": {
+			"collection": true,
+			"displayName": "Additional Fields",
+			"placeholder": "Add Field"
+		},
+		"crmTaskType.create.additionalFields.color": {
+			"default": "",
+			"description": "Type color (hex).",
+			"displayName": "Color",
+			"type": "color"
+		},
+		"crmTaskType.create.additionalFields.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"crmTaskType.create.top.name": {
+			"default": "",
+			"description": "Type name.",
+			"displayName": "Name",
+			"required": true,
+			"type": "string"
+		},
+		"crmTaskType.delete.additionalFields": {
+			"collection": true,
+			"displayName": "Additional Fields",
+			"placeholder": "Add Field"
+		},
+		"crmTaskType.delete.additionalFields.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"crmTaskType.delete.top.id": {
+			"default": "",
+			"description": "Task type ID.",
+			"displayName": "Task Type ID",
+			"required": true,
+			"type": "string"
+		},
+		"crmTaskType.update.top.id": {
+			"default": "",
+			"description": "Task type ID.",
+			"displayName": "Task Type ID",
+			"required": true,
+			"type": "string"
+		},
+		"crmTaskType.update.updateFields": {
+			"collection": true,
+			"displayName": "Update Fields",
+			"placeholder": "Add Field"
+		},
+		"crmTaskType.update.updateFields.color": {
+			"default": "",
+			"description": "New type color (hex).",
+			"displayName": "Color",
+			"type": "color"
+		},
+		"crmTaskType.update.updateFields.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"crmTaskType.update.updateFields.name": {
+			"default": "",
+			"description": "New type name.",
+			"displayName": "Name",
+			"type": "string"
+		},
+		"crmTaskType.update.updateFields.position": {
+			"default": 0,
+			"description": "New ordering position.",
+			"displayName": "Position",
+			"type": "number"
+		},
+		"deadLetter.getAll.filters": {
+			"collection": true,
+			"displayName": "Filters",
+			"placeholder": "Add Field"
+		},
+		"deadLetter.getAll.filters.limit": {
+			"default": 50,
+			"description": "Max number of results to return",
+			"displayName": "Limit",
+			"type": "number",
+			"typeOptions": {
+				"minValue": 1
+			}
+		},
+		"deadLetter.getAll.filters.status": {
+			"default": "",
+			"description": "Optional status filter (e.g. pending, replayed).",
+			"displayName": "Status",
+			"type": "string"
+		},
+		"deadLetter.replay.additionalFields": {
+			"collection": true,
+			"displayName": "Additional Fields",
+			"placeholder": "Add Field"
+		},
+		"deadLetter.replay.additionalFields.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"deadLetter.replay.top.id": {
+			"default": "",
+			"description": "The dead-letter record ID (the `id` field, not `task_id`).",
+			"displayName": "Dead Letter ID",
+			"required": true,
+			"type": "string"
+		},
+		"deal.create.additionalFields": {
+			"collection": true,
+			"displayName": "Additional Fields",
+			"placeholder": "Add Field"
+		},
+		"deal.create.additionalFields.assigned_to": {
+			"default": "",
+			"description": "Owner (org member user ID).",
+			"displayName": "Assigned To",
+			"type": "string"
+		},
+		"deal.create.additionalFields.campaign_id": {
+			"default": "",
+			"description": "Attributed campaign.",
+			"displayName": "Campaign ID",
+			"type": "string"
+		},
+		"deal.create.additionalFields.contact_id": {
+			"default": "",
+			"description": "Linked contact.",
+			"displayName": "Contact ID",
+			"type": "string"
+		},
+		"deal.create.additionalFields.currency": {
+			"default": "",
+			"description": "ISO currency code.",
+			"displayName": "Currency",
+			"type": "string"
+		},
+		"deal.create.additionalFields.expected_close_date": {
+			"default": "",
+			"description": "Expected close date.",
+			"displayName": "Expected Close Date",
+			"type": "dateTime"
+		},
+		"deal.create.additionalFields.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"deal.create.additionalFields.source_mailbox_id": {
+			"default": "",
+			"description": "Sending mailbox that produced the originating reply.",
+			"displayName": "Source Mailbox ID",
+			"type": "string"
+		},
+		"deal.create.additionalFields.value": {
+			"default": 0,
+			"description": "Monetary value.",
+			"displayName": "Value",
+			"type": "number"
+		},
+		"deal.create.top.name": {
+			"default": "",
+			"description": "Deal name.",
+			"displayName": "Name",
+			"required": true,
+			"type": "string"
+		},
+		"deal.create.top.pipeline_id": {
+			"default": "",
+			"description": "Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>",
+			"displayName": "Pipeline Name or ID",
+			"required": true,
+			"type": "options",
+			"typeOptions": {
+				"loadOptionsMethod": "getPipelines"
+			}
+		},
+		"deal.create.top.stage_id": {
+			"default": "",
+			"description": "Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>",
+			"displayName": "Stage Name or ID",
+			"required": true,
+			"type": "options",
+			"typeOptions": {
+				"loadOptionsDependsOn": [
+					"pipeline_id"
+				],
+				"loadOptionsMethod": "getPipelineStages"
+			}
+		},
+		"deal.delete.additionalFields": {
+			"collection": true,
+			"displayName": "Additional Fields",
+			"placeholder": "Add Field"
+		},
+		"deal.delete.additionalFields.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"deal.delete.top.id": {
+			"default": "",
+			"description": "Deal ID.",
+			"displayName": "Deal ID",
+			"required": true,
+			"type": "string"
+		},
+		"deal.get.top.id": {
+			"default": "",
+			"description": "Deal ID.",
+			"displayName": "Deal ID",
+			"required": true,
+			"type": "string"
+		},
+		"deal.getAll.filters": {
+			"collection": true,
+			"displayName": "Filters",
+			"placeholder": "Add Field"
+		},
+		"deal.getAll.filters.pipeline_id": {
+			"default": "",
+			"description": "Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>",
+			"displayName": "Pipeline Name or ID",
+			"type": "options",
+			"typeOptions": {
+				"loadOptionsMethod": "getPipelines"
+			}
+		},
+		"deal.getAll.filters.stage_id": {
+			"default": "",
+			"description": "Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>",
+			"displayName": "Stage Name or ID",
+			"type": "options",
+			"typeOptions": {
+				"loadOptionsDependsOn": [
+					"pipeline_id"
+				],
+				"loadOptionsMethod": "getPipelineStages"
+			}
+		},
+		"deal.getAll.filters.status": {
+			"default": "open",
+			"description": "Restrict to a deal status.",
+			"displayName": "Status",
+			"options": [
+				{
+					"name": "Lost",
+					"value": "lost"
+				},
+				{
+					"name": "Open",
+					"value": "open"
+				},
+				{
+					"name": "Won",
+					"value": "won"
+				}
+			],
+			"type": "options"
+		},
+		"deal.search.filters": {
+			"collection": true,
+			"displayName": "Filters",
+			"placeholder": "Add Field"
+		},
+		"deal.search.filters.assigned_to": {
+			"default": "",
+			"description": "Owner is any of these user IDs. Comma-separated list.",
+			"displayName": "Assigned To",
+			"type": "string"
+		},
+		"deal.search.filters.campaign_ids": {
+			"default": "",
+			"description": "Comma-separated list.",
+			"displayName": "Campaign IDs",
+			"type": "string"
+		},
+		"deal.search.filters.close_after": {
+			"default": "",
+			"description": "Expected close date on or after.",
+			"displayName": "Close After",
+			"type": "dateTime"
+		},
+		"deal.search.filters.close_before": {
+			"default": "",
+			"description": "Expected close date on or before.",
+			"displayName": "Close Before",
+			"type": "dateTime"
+		},
+		"deal.search.filters.created_after": {
+			"default": "",
+			"displayName": "Created After",
+			"type": "dateTime"
+		},
+		"deal.search.filters.created_before": {
+			"default": "",
+			"displayName": "Created Before",
+			"type": "dateTime"
+		},
+		"deal.search.filters.max_value": {
+			"default": 0,
+			"description": "Value less than or equal to.",
+			"displayName": "Max Value",
+			"type": "number"
+		},
+		"deal.search.filters.min_value": {
+			"default": 0,
+			"description": "Value greater than or equal to.",
+			"displayName": "Min Value",
+			"type": "number"
+		},
+		"deal.search.filters.pipeline_ids": {
+			"default": "",
+			"description": "Comma-separated list.",
+			"displayName": "Pipeline IDs",
+			"type": "string"
+		},
+		"deal.search.filters.query": {
+			"default": "",
+			"description": "Case-insensitive match on deal name.",
+			"displayName": "Query",
+			"type": "string"
+		},
+		"deal.search.filters.reverse": {
+			"default": false,
+			"description": "true sorts ascending, false (default) descending.",
+			"displayName": "Reverse",
+			"type": "boolean"
+		},
+		"deal.search.filters.sort_by": {
+			"default": "created_at",
+			"displayName": "Sort By",
+			"options": [
+				{
+					"name": "Created At",
+					"value": "created_at"
+				},
+				{
+					"name": "Expected Close Date",
+					"value": "expected_close_date"
+				},
+				{
+					"name": "Name",
+					"value": "name"
+				},
+				{
+					"name": "Updated At",
+					"value": "updated_at"
+				},
+				{
+					"name": "Value",
+					"value": "value"
+				}
+			],
+			"type": "options"
+		},
+		"deal.search.filters.stage_ids": {
+			"default": "",
+			"description": "Comma-separated list.",
+			"displayName": "Stage IDs",
+			"type": "string"
+		},
+		"deal.search.filters.statuses": {
+			"default": "",
+			"description": "Comma-separated list.",
+			"displayName": "Statuses",
+			"type": "string"
+		},
+		"deal.summary.additionalFields": {
+			"collection": true,
+			"displayName": "Additional Fields",
+			"placeholder": "Add Field"
+		},
+		"deal.summary.additionalFields.assigned_to": {
+			"default": "",
+			"description": "Owner is any of these user IDs. Comma-separated list.",
+			"displayName": "Assigned To",
+			"type": "string"
+		},
+		"deal.summary.additionalFields.campaign_ids": {
+			"default": "",
+			"description": "Comma-separated list.",
+			"displayName": "Campaign IDs",
+			"type": "string"
+		},
+		"deal.summary.additionalFields.close_after": {
+			"default": "",
+			"description": "Expected close date on or after.",
+			"displayName": "Close After",
+			"type": "dateTime"
+		},
+		"deal.summary.additionalFields.close_before": {
+			"default": "",
+			"description": "Expected close date on or before.",
+			"displayName": "Close Before",
+			"type": "dateTime"
+		},
+		"deal.summary.additionalFields.created_after": {
+			"default": "",
+			"displayName": "Created After",
+			"type": "dateTime"
+		},
+		"deal.summary.additionalFields.created_before": {
+			"default": "",
+			"displayName": "Created Before",
+			"type": "dateTime"
+		},
+		"deal.summary.additionalFields.max_value": {
+			"default": 0,
+			"description": "Value less than or equal to.",
+			"displayName": "Max Value",
+			"type": "number"
+		},
+		"deal.summary.additionalFields.min_value": {
+			"default": 0,
+			"description": "Value greater than or equal to.",
+			"displayName": "Min Value",
+			"type": "number"
+		},
+		"deal.summary.additionalFields.pipeline_ids": {
+			"default": "",
+			"description": "Comma-separated list.",
+			"displayName": "Pipeline IDs",
+			"type": "string"
+		},
+		"deal.summary.additionalFields.query": {
+			"default": "",
+			"description": "Case-insensitive match on deal name.",
+			"displayName": "Query",
+			"type": "string"
+		},
+		"deal.summary.additionalFields.reverse": {
+			"default": false,
+			"description": "true sorts ascending, false (default) descending.",
+			"displayName": "Reverse",
+			"type": "boolean"
+		},
+		"deal.summary.additionalFields.sort_by": {
+			"default": "created_at",
+			"displayName": "Sort By",
+			"options": [
+				{
+					"name": "Created At",
+					"value": "created_at"
+				},
+				{
+					"name": "Expected Close Date",
+					"value": "expected_close_date"
+				},
+				{
+					"name": "Name",
+					"value": "name"
+				},
+				{
+					"name": "Updated At",
+					"value": "updated_at"
+				},
+				{
+					"name": "Value",
+					"value": "value"
+				}
+			],
+			"type": "options"
+		},
+		"deal.summary.additionalFields.stage_ids": {
+			"default": "",
+			"description": "Comma-separated list.",
+			"displayName": "Stage IDs",
+			"type": "string"
+		},
+		"deal.summary.additionalFields.statuses": {
+			"default": "",
+			"description": "Comma-separated list.",
+			"displayName": "Statuses",
+			"type": "string"
+		},
+		"deal.update.top.id": {
+			"default": "",
+			"description": "Deal ID.",
+			"displayName": "Deal ID",
+			"required": true,
+			"type": "string"
+		},
+		"deal.update.updateFields": {
+			"collection": true,
+			"displayName": "Update Fields",
+			"placeholder": "Add Field"
+		},
+		"deal.update.updateFields.assigned_to": {
+			"default": "",
+			"description": "Owner (org member user ID).",
+			"displayName": "Assigned To",
+			"type": "string"
+		},
+		"deal.update.updateFields.contact_id": {
+			"default": "",
+			"description": "Linked contact.",
+			"displayName": "Contact ID",
+			"type": "string"
+		},
+		"deal.update.updateFields.currency": {
+			"default": "",
+			"description": "ISO currency code.",
+			"displayName": "Currency",
+			"type": "string"
+		},
+		"deal.update.updateFields.expected_close_date": {
+			"default": "",
+			"displayName": "Expected Close Date",
+			"type": "dateTime"
+		},
+		"deal.update.updateFields.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"deal.update.updateFields.lost_reason": {
+			"default": "",
+			"description": "Reason recorded when marking lost.",
+			"displayName": "Lost Reason",
+			"type": "string"
+		},
+		"deal.update.updateFields.name": {
+			"default": "",
+			"description": "Deal name.",
+			"displayName": "Name",
+			"type": "string"
+		},
+		"deal.update.updateFields.stage_id": {
+			"default": "",
+			"description": "Choose from the list, or specify an ID using an <a href=\"https://docs.n8n.io/code/expressions/\">expression</a>",
+			"displayName": "Stage Name or ID",
+			"type": "options",
+			"typeOptions": {
+				"loadOptionsDependsOn": [
+					"pipeline_id"
+				],
+				"loadOptionsMethod": "getPipelineStages"
+			}
+		},
+		"deal.update.updateFields.status": {
+			"default": "open",
+			"displayName": "Status",
+			"options": [
+				{
+					"name": "Lost",
+					"value": "lost"
+				},
+				{
+					"name": "Open",
+					"value": "open"
+				},
+				{
+					"name": "Won",
+					"value": "won"
+				}
+			],
+			"type": "options"
+		},
+		"deal.update.updateFields.value": {
+			"default": 0,
+			"description": "Monetary value.",
+			"displayName": "Value",
+			"type": "number"
+		},
+		"deliverability.ingestEvent.additionalFields": {
+			"collection": true,
+			"displayName": "Additional Fields",
+			"placeholder": "Add Field"
+		},
+		"deliverability.ingestEvent.additionalFields.campaign_id": {
+			"default": "",
+			"description": "Campaign the event is attributed to.",
+			"displayName": "Campaign ID",
+			"type": "string"
+		},
+		"deliverability.ingestEvent.additionalFields.contact_id": {
+			"default": "",
+			"description": "Contact the event is attributed to.",
+			"displayName": "Contact ID",
+			"type": "string"
+		},
+		"deliverability.ingestEvent.additionalFields.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"deliverability.ingestEvent.additionalFields.idempotency_key": {
+			"default": "",
+			"description": "De-duplicates retried events.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"deliverability.ingestEvent.additionalFields.metadata": {
+			"default": "",
+			"description": "Free-form JSON attached to the event.",
+			"displayName": "Metadata",
+			"type": "json"
+		},
+		"deliverability.ingestEvent.additionalFields.provider": {
+			"default": "",
+			"description": "Source provider label (e.g. ses, postmark).",
+			"displayName": "Provider",
+			"type": "string"
+		},
+		"deliverability.ingestEvent.additionalFields.reason": {
+			"default": "",
+			"description": "Human-readable reason or diagnostic text.",
+			"displayName": "Reason",
+			"type": "string"
+		},
+		"deliverability.ingestEvent.additionalFields.task_id": {
+			"default": "",
+			"description": "Send task the event is attributed to.",
+			"displayName": "Task ID",
+			"type": "string"
+		},
+		"deliverability.ingestEvent.top.event_type": {
+			"default": "bounce",
+			"description": "The deliverability signal type.",
+			"displayName": "Event Type",
+			"options": [
+				{
+					"name": "Bounce",
+					"value": "bounce"
+				},
+				{
+					"name": "Click",
+					"value": "click"
+				},
+				{
+					"name": "Complaint",
+					"value": "complaint"
+				},
+				{
+					"name": "Open",
+					"value": "open"
+				},
+				{
+					"name": "Reply",
+					"value": "reply"
+				},
+				{
+					"name": "Unsubscribe",
+					"value": "unsubscribe"
+				}
+			],
+			"required": true,
+			"type": "options"
+		},
+		"deliverability.ingestEvent.top.recipient_email": {
+			"default": "",
+			"description": "The recipient address the event is about.",
+			"displayName": "Recipient Email",
+			"placeholder": "name@email.com",
+			"required": true,
+			"type": "string"
+		},
+		"integration.create.additionalFields": {
+			"collection": true,
+			"displayName": "Additional Fields",
+			"placeholder": "Add Field"
+		},
+		"integration.create.additionalFields.config": {
+			"default": "",
+			"description": "Provider-specific config (e.g. the pasted API key or webhook URL).",
+			"displayName": "Config",
+			"type": "json"
+		},
+		"integration.create.additionalFields.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"integration.create.additionalFields.label": {
+			"default": "",
+			"description": "Friendly name shown on the connection card.",
+			"displayName": "Label",
+			"type": "string"
+		},
+		"integration.create.top.provider": {
+			"default": "",
+			"description": "A valid api_key/webhook provider id (e.g. close, discord). OAuth providers are rejected.",
+			"displayName": "Provider",
+			"required": true,
+			"type": "string"
+		},
+		"integration.createEventSubscription.additionalFields": {
+			"collection": true,
+			"displayName": "Additional Fields",
+			"placeholder": "Add Field"
+		},
+		"integration.createEventSubscription.additionalFields.config": {
+			"default": "",
+			"description": "Action config (e.g. a Slack channel or message template).",
+			"displayName": "Config",
+			"type": "json"
+		},
+		"integration.createEventSubscription.additionalFields.enabled": {
+			"default": false,
+			"description": "Defaults to true when omitted.",
+			"displayName": "Enabled",
+			"type": "boolean"
+		},
+		"integration.createEventSubscription.additionalFields.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"integration.createEventSubscription.top.action": {
+			"default": "",
+			"description": "Provider action id (e.g. slack.notify, hubspot.upsert_contact).",
+			"displayName": "Action",
+			"required": true,
+			"type": "string"
+		},
+		"integration.createEventSubscription.top.event_type": {
+			"default": "",
+			"description": "The Warmbly event to react to (e.g. email.replied).",
+			"displayName": "Event Type",
+			"required": true,
+			"type": "string"
+		},
+		"integration.createEventSubscription.top.id": {
+			"default": "",
+			"description": "Connection id.",
+			"displayName": "Connection ID",
+			"required": true,
+			"type": "string"
+		},
+		"integration.delete.additionalFields": {
+			"collection": true,
+			"displayName": "Additional Fields",
+			"placeholder": "Add Field"
+		},
+		"integration.delete.additionalFields.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"integration.delete.top.id": {
+			"default": "",
+			"description": "Connection id.",
+			"displayName": "Connection ID",
+			"required": true,
+			"type": "string"
+		},
+		"integration.deleteEventSubscription.additionalFields": {
+			"collection": true,
+			"displayName": "Additional Fields",
+			"placeholder": "Add Field"
+		},
+		"integration.deleteEventSubscription.additionalFields.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"integration.deleteEventSubscription.top.eventId": {
+			"default": "",
+			"description": "Event subscription id.",
+			"displayName": "Event ID",
+			"required": true,
+			"type": "string"
+		},
+		"integration.deleteEventSubscription.top.id": {
+			"default": "",
+			"description": "Connection id.",
+			"displayName": "Connection ID",
+			"required": true,
+			"type": "string"
+		},
+		"integration.get.top.id": {
+			"default": "",
+			"description": "Connection id.",
+			"displayName": "Connection ID",
+			"required": true,
+			"type": "string"
+		},
+		"integration.getEventSubscriptions.top.id": {
+			"default": "",
+			"description": "Connection id.",
+			"displayName": "Connection ID",
+			"required": true,
+			"type": "string"
+		},
+		"integration.getFieldMappings.top.id": {
+			"default": "",
+			"description": "Connection id.",
+			"displayName": "Connection ID",
+			"required": true,
+			"type": "string"
+		},
+		"integration.getSyncRuns.top.id": {
+			"default": "",
+			"description": "Connection id.",
+			"displayName": "Connection ID",
+			"required": true,
+			"type": "string"
+		},
+		"integration.getWebhookSecret.top.id": {
+			"default": "",
+			"description": "Connection id.",
+			"displayName": "Connection ID",
+			"required": true,
+			"type": "string"
+		},
+		"integration.push.top.contact_ids": {
+			"default": "",
+			"description": "Contact ids to push. Deduplicated server-side. At least 1, at most 500. Comma-separated list.",
+			"displayName": "Contact IDs",
+			"required": true,
+			"type": "string"
+		},
+		"integration.push.top.id": {
+			"default": "",
+			"description": "Connection id.",
+			"displayName": "Connection ID",
+			"required": true,
+			"type": "string"
+		},
+		"integration.replaceFieldMappings.additionalFields": {
+			"collection": true,
+			"displayName": "Additional Fields",
+			"placeholder": "Add Field"
+		},
+		"integration.replaceFieldMappings.additionalFields.object": {
+			"default": "",
+			"description": "The provider object the mappings apply to (e.g. contact).",
+			"displayName": "Object",
+			"type": "string"
+		},
+		"integration.replaceFieldMappings.top.id": {
+			"default": "",
+			"description": "Connection id.",
+			"displayName": "Connection ID",
+			"required": true,
+			"type": "string"
+		},
+		"integration.replaceFieldMappings.top.mappings": {
+			"default": "",
+			"description": "The full set of mappings to store (replaces any existing).",
+			"displayName": "Mappings",
+			"required": true,
+			"type": "json"
+		},
+		"integration.test.additionalFields": {
+			"collection": true,
+			"displayName": "Additional Fields",
+			"placeholder": "Add Field"
+		},
+		"integration.test.additionalFields.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"integration.test.top.id": {
+			"default": "",
+			"description": "Connection id.",
+			"displayName": "Connection ID",
+			"required": true,
+			"type": "string"
+		},
+		"integration.updateConfig.top.id": {
+			"default": "",
+			"description": "Connection id.",
+			"displayName": "Connection ID",
+			"required": true,
+			"type": "string"
+		},
+		"integration.updateConfig.updateFields": {
+			"collection": true,
+			"displayName": "Update Fields",
+			"placeholder": "Add Field"
+		},
+		"integration.updateConfig.updateFields.config_capabilities": {
+			"default": "",
+			"description": "Per-connection capability snapshot (picker selections, enabled use-cases).",
+			"displayName": "Config Capabilities",
+			"type": "json"
+		},
+		"integration.updateConfig.updateFields.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"integration.updateConfig.updateFields.sync_direction": {
+			"default": "push",
+			"displayName": "Sync Direction",
+			"options": [
+				{
+					"name": "Both",
+					"value": "both"
+				},
+				{
+					"name": "Pull",
+					"value": "pull"
+				},
+				{
+					"name": "Push",
+					"value": "push"
+				}
+			],
+			"type": "options"
+		},
+		"mailbox.authCheck.top.id": {
+			"default": "",
+			"description": "The mailbox id. The domain is derived from the mailbox address.",
+			"displayName": "Mailbox ID",
+			"required": true,
+			"type": "string"
+		},
+		"mailbox.delete.additionalFields": {
+			"collection": true,
+			"displayName": "Additional Fields",
+			"placeholder": "Add Field"
+		},
+		"mailbox.delete.additionalFields.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"mailbox.delete.top.id": {
+			"default": "",
+			"description": "The mailbox id.",
+			"displayName": "Mailbox ID",
+			"required": true,
+			"type": "string"
+		},
+		"mailbox.get.top.id": {
+			"default": "",
+			"description": "The mailbox (email account) id.",
+			"displayName": "Mailbox ID",
+			"required": true,
+			"type": "string"
+		},
+		"mailbox.getAll.filters": {
+			"collection": true,
+			"displayName": "Filters",
+			"placeholder": "Add Field"
+		},
+		"mailbox.getAll.filters.q": {
+			"default": "",
+			"description": "Free-text search over mailbox address and name.",
+			"displayName": "Q",
+			"type": "string"
+		},
+		"mailbox.getAll.filters.tag": {
+			"default": "",
+			"description": "Tag id to filter by.",
+			"displayName": "Tag",
+			"type": "string"
+		},
+		"mailbox.send.additionalFields": {
+			"collection": true,
+			"displayName": "Additional Fields",
+			"placeholder": "Add Field"
+		},
+		"mailbox.send.additionalFields.bcc": {
+			"default": "",
+			"description": "Comma-separated list.",
+			"displayName": "BCC",
+			"type": "string"
+		},
+		"mailbox.send.additionalFields.body_html": {
+			"default": "",
+			"displayName": "Body HTML",
+			"type": "string"
+		},
+		"mailbox.send.additionalFields.body_plain": {
+			"default": "",
+			"displayName": "Body Plain",
+			"type": "string"
+		},
+		"mailbox.send.additionalFields.cc": {
+			"default": "",
+			"description": "Comma-separated list.",
+			"displayName": "CC",
+			"type": "string"
+		},
+		"mailbox.send.additionalFields.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"mailbox.send.additionalFields.in_reply_to": {
+			"default": "",
+			"description": "Message ids this email replies to. Comma-separated list.",
+			"displayName": "In Reply To",
+			"type": "string"
+		},
+		"mailbox.send.additionalFields.scheduled_at": {
+			"default": "",
+			"description": "Required when send_mode is scheduled. Must be in the future.",
+			"displayName": "Scheduled At",
+			"type": "dateTime"
+		},
+		"mailbox.send.additionalFields.send_mode": {
+			"default": "instant",
+			"description": "instant (default), smart (next per-mailbox scheduler gap), or scheduled (use scheduled_at).",
+			"displayName": "Send Mode",
+			"options": [
+				{
+					"name": "Instant",
+					"value": "instant"
+				},
+				{
+					"name": "Scheduled",
+					"value": "scheduled"
+				},
+				{
+					"name": "Smart",
+					"value": "smart"
+				}
+			],
+			"type": "options"
+		},
+		"mailbox.send.additionalFields.thread_id": {
+			"default": "",
+			"description": "Thread id to attach the message to.",
+			"displayName": "Thread ID",
+			"type": "string"
+		},
+		"mailbox.send.top.id": {
+			"default": "",
+			"description": "The sending mailbox id.",
+			"displayName": "Mailbox ID",
+			"required": true,
+			"type": "string"
+		},
+		"mailbox.send.top.subject": {
+			"default": "",
+			"displayName": "Subject",
+			"required": true,
+			"type": "string"
+		},
+		"mailbox.send.top.to": {
+			"default": "",
+			"description": "Recipient addresses. Comma-separated list.",
+			"displayName": "To",
+			"required": true,
+			"type": "string"
+		},
+		"mailbox.update.top.id": {
+			"default": "",
+			"description": "The mailbox id.",
+			"displayName": "Mailbox ID",
+			"required": true,
+			"type": "string"
+		},
+		"mailbox.update.updateFields": {
+			"collection": true,
+			"displayName": "Update Fields",
+			"placeholder": "Add Field"
+		},
+		"mailbox.update.updateFields.campaign_limit": {
+			"default": 0,
+			"description": "Daily cold-campaign cap (validated up to 100).",
+			"displayName": "Campaign Limit",
+			"type": "number"
+		},
+		"mailbox.update.updateFields.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"mailbox.update.updateFields.min_wait_time": {
+			"default": 0,
+			"description": "Minimum seconds between sends.",
+			"displayName": "Min Wait Time",
+			"type": "number"
+		},
+		"mailbox.update.updateFields.name": {
+			"default": "",
+			"description": "Display name on outgoing mail.",
+			"displayName": "Name",
+			"type": "string"
+		},
+		"mailbox.update.updateFields.reply_to": {
+			"default": "",
+			"displayName": "Reply To",
+			"type": "string"
+		},
+		"mailbox.update.updateFields.signature_code": {
+			"default": false,
+			"description": "Treat the HTML signature as raw code.",
+			"displayName": "Signature Code",
+			"type": "boolean"
+		},
+		"mailbox.update.updateFields.signature_html": {
+			"default": "",
+			"displayName": "Signature HTML",
+			"type": "string"
+		},
+		"mailbox.update.updateFields.signature_plain": {
+			"default": "",
+			"displayName": "Signature Plain",
+			"type": "string"
+		},
+		"mailbox.update.updateFields.signature_sync": {
+			"default": false,
+			"displayName": "Signature Sync",
+			"type": "boolean"
+		},
+		"mailbox.update.updateFields.status": {
+			"default": "active",
+			"displayName": "Status",
+			"options": [
+				{
+					"name": "Active",
+					"value": "active"
+				},
+				{
+					"name": "Inactive",
+					"value": "inactive"
+				},
+				{
+					"name": "Revoked",
+					"value": "revoked"
+				}
+			],
+			"type": "options"
+		},
+		"mailbox.update.updateFields.tags": {
+			"default": "",
+			"description": "Tag ids assigned to the mailbox. Comma-separated list.",
+			"displayName": "Tags",
+			"type": "string"
+		},
+		"mailbox.update.updateFields.warmup": {
+			"default": false,
+			"description": "Enable or disable warmup.",
+			"displayName": "Warmup",
+			"type": "boolean"
+		},
+		"mailbox.update.updateFields.warmup_base": {
+			"default": 0,
+			"description": "Warmup starting volume per day.",
+			"displayName": "Warmup Base",
+			"type": "number"
+		},
+		"mailbox.update.updateFields.warmup_days": {
+			"default": 0,
+			"displayName": "Warmup Days",
+			"type": "number"
+		},
+		"mailbox.update.updateFields.warmup_end_time": {
+			"default": "",
+			"description": "Daily warmup window end, HH:MM.",
+			"displayName": "Warmup End Time",
+			"type": "string"
+		},
+		"mailbox.update.updateFields.warmup_increase": {
+			"default": 0,
+			"description": "Per-day warmup ramp increment.",
+			"displayName": "Warmup Increase",
+			"type": "number"
+		},
+		"mailbox.update.updateFields.warmup_max": {
+			"default": 0,
+			"description": "Warmup daily ceiling.",
+			"displayName": "Warmup Max",
+			"type": "number"
+		},
+		"mailbox.update.updateFields.warmup_reply_rate": {
+			"default": 0,
+			"description": "Percentage of warmup threads to reply to.",
+			"displayName": "Warmup Reply Rate",
+			"type": "number"
+		},
+		"mailbox.update.updateFields.warmup_start_time": {
+			"default": "",
+			"description": "Daily warmup window start, HH:MM.",
+			"displayName": "Warmup Start Time",
+			"type": "string"
+		},
+		"mailbox.update.updateFields.warmup_tag": {
+			"default": "",
+			"displayName": "Warmup Tag",
+			"type": "string"
+		},
+		"mailbox.updateTrackingDomain.top.id": {
+			"default": "",
+			"description": "The mailbox id.",
+			"displayName": "Mailbox ID",
+			"required": true,
+			"type": "string"
+		},
+		"mailbox.updateTrackingDomain.updateFields": {
+			"collection": true,
+			"displayName": "Update Fields",
+			"placeholder": "Add Field"
+		},
+		"mailbox.updateTrackingDomain.updateFields.domain": {
+			"default": "",
+			"description": "The custom tracking subdomain (for example t.acme.com). Empty clears it.",
+			"displayName": "Domain",
+			"type": "string"
+		},
+		"mailbox.updateTrackingDomain.updateFields.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"mailbox.verify.additionalFields": {
+			"collection": true,
+			"displayName": "Additional Fields",
+			"placeholder": "Add Field"
+		},
+		"mailbox.verify.additionalFields.email": {
+			"default": "",
+			"description": "The address to verify.",
+			"displayName": "Email",
+			"placeholder": "name@email.com",
+			"type": "string"
+		},
+		"mailbox.verify.additionalFields.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"mailbox.warmupAppeal.additionalFields": {
+			"collection": true,
+			"displayName": "Additional Fields",
+			"placeholder": "Add Field"
+		},
+		"mailbox.warmupAppeal.additionalFields.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"mailbox.warmupAppeal.additionalFields.reason": {
+			"default": "",
+			"description": "The owner's explanation for the appeal.",
+			"displayName": "Reason",
+			"type": "string"
+		},
+		"mailbox.warmupAppeal.top.id": {
+			"default": "",
+			"description": "The mailbox id.",
+			"displayName": "Mailbox ID",
+			"required": true,
+			"type": "string"
+		},
+		"mailbox.warmupBanStatus.top.id": {
+			"default": "",
+			"description": "The mailbox id.",
+			"displayName": "Mailbox ID",
+			"required": true,
+			"type": "string"
+		},
+		"mailbox.warmupPause.additionalFields": {
+			"collection": true,
+			"displayName": "Additional Fields",
+			"placeholder": "Add Field"
+		},
+		"mailbox.warmupPause.additionalFields.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"mailbox.warmupPause.top.id": {
+			"default": "",
+			"description": "The mailbox id.",
+			"displayName": "Mailbox ID",
+			"required": true,
+			"type": "string"
+		},
+		"mailbox.warmupResume.additionalFields": {
+			"collection": true,
+			"displayName": "Additional Fields",
+			"placeholder": "Add Field"
+		},
+		"mailbox.warmupResume.additionalFields.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"mailbox.warmupResume.top.id": {
+			"default": "",
+			"description": "The mailbox id.",
+			"displayName": "Mailbox ID",
+			"required": true,
+			"type": "string"
+		},
+		"mailbox.warmupStart.additionalFields": {
+			"collection": true,
+			"displayName": "Additional Fields",
+			"placeholder": "Add Field"
+		},
+		"mailbox.warmupStart.additionalFields.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"mailbox.warmupStart.top.id": {
+			"default": "",
+			"description": "The mailbox id.",
+			"displayName": "Mailbox ID",
+			"required": true,
+			"type": "string"
+		},
+		"mailbox.warmupStop.additionalFields": {
+			"collection": true,
+			"displayName": "Additional Fields",
+			"placeholder": "Add Field"
+		},
+		"mailbox.warmupStop.additionalFields.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"mailbox.warmupStop.top.id": {
+			"default": "",
+			"description": "The mailbox id.",
+			"displayName": "Mailbox ID",
+			"required": true,
+			"type": "string"
+		},
+		"outreach.update.top.settings": {
+			"default": "",
+			"description": "Advanced outreach overrides for a campaign.",
+			"displayName": "Settings",
+			"required": true,
+			"type": "json"
+		},
+		"outreach.update.updateFields": {
+			"collection": true,
+			"displayName": "Update Fields",
+			"placeholder": "Add Field"
+		},
+		"outreach.update.updateFields.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"pipeline.create.additionalFields": {
+			"collection": true,
+			"displayName": "Additional Fields",
+			"placeholder": "Add Field"
+		},
+		"pipeline.create.additionalFields.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"pipeline.create.additionalFields.stages": {
+			"default": "",
+			"description": "Stages to create with the pipeline, in order.",
+			"displayName": "Stages",
+			"type": "json"
+		},
+		"pipeline.create.top.name": {
+			"default": "",
+			"description": "Pipeline name.",
+			"displayName": "Name",
+			"required": true,
+			"type": "string"
+		},
+		"pipeline.createStage.additionalFields": {
+			"collection": true,
+			"displayName": "Additional Fields",
+			"placeholder": "Add Field"
+		},
+		"pipeline.createStage.additionalFields.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"pipeline.createStage.top.color": {
+			"default": "",
+			"description": "Stage color (hex).",
+			"displayName": "Color",
+			"required": true,
+			"type": "color"
+		},
+		"pipeline.createStage.top.id": {
+			"default": "",
+			"description": "Pipeline ID.",
+			"displayName": "Pipeline ID",
+			"required": true,
+			"type": "string"
+		},
+		"pipeline.createStage.top.name": {
+			"default": "",
+			"description": "Stage name.",
+			"displayName": "Name",
+			"required": true,
+			"type": "string"
+		},
+		"pipeline.delete.additionalFields": {
+			"collection": true,
+			"displayName": "Additional Fields",
+			"placeholder": "Add Field"
+		},
+		"pipeline.delete.additionalFields.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"pipeline.delete.top.id": {
+			"default": "",
+			"description": "Pipeline ID.",
+			"displayName": "Pipeline ID",
+			"required": true,
+			"type": "string"
+		},
+		"pipeline.deleteStage.additionalFields": {
+			"collection": true,
+			"displayName": "Additional Fields",
+			"placeholder": "Add Field"
+		},
+		"pipeline.deleteStage.additionalFields.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"pipeline.deleteStage.top.id": {
+			"default": "",
+			"description": "Pipeline ID.",
+			"displayName": "Pipeline ID",
+			"required": true,
+			"type": "string"
+		},
+		"pipeline.deleteStage.top.stageId": {
+			"default": "",
+			"description": "Stage ID.",
+			"displayName": "Stage ID",
+			"required": true,
+			"type": "string"
+		},
+		"pipeline.get.top.id": {
+			"default": "",
+			"description": "Pipeline ID.",
+			"displayName": "Pipeline ID",
+			"required": true,
+			"type": "string"
+		},
+		"pipeline.update.top.id": {
+			"default": "",
+			"description": "Pipeline ID.",
+			"displayName": "Pipeline ID",
+			"required": true,
+			"type": "string"
+		},
+		"pipeline.update.updateFields": {
+			"collection": true,
+			"displayName": "Update Fields",
+			"placeholder": "Add Field"
+		},
+		"pipeline.update.updateFields.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"pipeline.update.updateFields.name": {
+			"default": "",
+			"description": "New pipeline name.",
+			"displayName": "Name",
+			"type": "string"
+		},
+		"pipeline.updateStage.top.id": {
+			"default": "",
+			"description": "Pipeline ID.",
+			"displayName": "Pipeline ID",
+			"required": true,
+			"type": "string"
+		},
+		"pipeline.updateStage.top.stageId": {
+			"default": "",
+			"description": "Stage ID.",
+			"displayName": "Stage ID",
+			"required": true,
+			"type": "string"
+		},
+		"pipeline.updateStage.updateFields": {
+			"collection": true,
+			"displayName": "Update Fields",
+			"placeholder": "Add Field"
+		},
+		"pipeline.updateStage.updateFields.color": {
+			"default": "",
+			"description": "New stage color (hex).",
+			"displayName": "Color",
+			"type": "color"
+		},
+		"pipeline.updateStage.updateFields.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"pipeline.updateStage.updateFields.name": {
+			"default": "",
+			"description": "New stage name.",
+			"displayName": "Name",
+			"type": "string"
+		},
+		"team.addMember.additionalFields": {
+			"collection": true,
+			"displayName": "Additional Fields",
+			"placeholder": "Add Field"
+		},
+		"team.addMember.additionalFields.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"team.addMember.top.id": {
+			"default": "",
+			"description": "The team id.",
+			"displayName": "Team ID",
+			"required": true,
+			"type": "string"
+		},
+		"team.addMember.top.user_id": {
+			"default": "",
+			"description": "The member's user id (must already belong to the organization).",
+			"displayName": "User ID",
+			"required": true,
+			"type": "string"
+		},
+		"team.create.additionalFields": {
+			"collection": true,
+			"displayName": "Additional Fields",
+			"placeholder": "Add Field"
+		},
+		"team.create.additionalFields.color": {
+			"default": "",
+			"description": "Hex color (defaults to #94a3b8).",
+			"displayName": "Color",
+			"type": "color"
+		},
+		"team.create.additionalFields.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"team.create.top.name": {
+			"default": "",
+			"displayName": "Name",
+			"required": true,
+			"type": "string"
+		},
+		"team.delete.additionalFields": {
+			"collection": true,
+			"displayName": "Additional Fields",
+			"placeholder": "Add Field"
+		},
+		"team.delete.additionalFields.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"team.delete.top.id": {
+			"default": "",
+			"description": "The team id.",
+			"displayName": "Team ID",
+			"required": true,
+			"type": "string"
+		},
+		"team.get.top.id": {
+			"default": "",
+			"description": "The team id.",
+			"displayName": "Team ID",
+			"required": true,
+			"type": "string"
+		},
+		"team.removeMember.additionalFields": {
+			"collection": true,
+			"displayName": "Additional Fields",
+			"placeholder": "Add Field"
+		},
+		"team.removeMember.additionalFields.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"team.removeMember.top.id": {
+			"default": "",
+			"description": "The team id.",
+			"displayName": "Team ID",
+			"required": true,
+			"type": "string"
+		},
+		"team.removeMember.top.userId": {
+			"default": "",
+			"description": "The member's user id.",
+			"displayName": "User ID",
+			"required": true,
+			"type": "string"
+		},
+		"team.update.top.id": {
+			"default": "",
+			"description": "The team id.",
+			"displayName": "Team ID",
+			"required": true,
+			"type": "string"
+		},
+		"team.update.updateFields": {
+			"collection": true,
+			"displayName": "Update Fields",
+			"placeholder": "Add Field"
+		},
+		"team.update.updateFields.color": {
+			"default": "",
+			"description": "Hex color.",
+			"displayName": "Color",
+			"type": "color"
+		},
+		"team.update.updateFields.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"team.update.updateFields.name": {
+			"default": "",
+			"displayName": "Name",
+			"type": "string"
+		},
+		"template.create.additionalFields": {
+			"collection": true,
+			"displayName": "Additional Fields",
+			"placeholder": "Add Field"
+		},
+		"template.create.additionalFields.body_html": {
+			"default": "",
+			"displayName": "Body HTML",
+			"type": "string"
+		},
+		"template.create.additionalFields.body_plain": {
+			"default": "",
+			"displayName": "Body Plain",
+			"type": "string"
+		},
+		"template.create.additionalFields.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"template.create.additionalFields.subject": {
+			"default": "",
+			"description": "Subject line (may contain {{.Key}} placeholders).",
+			"displayName": "Subject",
+			"type": "string"
+		},
+		"template.create.top.name": {
+			"default": "",
+			"description": "Template name.",
+			"displayName": "Name",
+			"required": true,
+			"type": "string"
+		},
+		"template.delete.additionalFields": {
+			"collection": true,
+			"displayName": "Additional Fields",
+			"placeholder": "Add Field"
+		},
+		"template.delete.additionalFields.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"template.delete.top.id": {
+			"default": "",
+			"description": "The template ID.",
+			"displayName": "Template ID",
+			"required": true,
+			"type": "string"
+		},
+		"template.duplicate.additionalFields": {
+			"collection": true,
+			"displayName": "Additional Fields",
+			"placeholder": "Add Field"
+		},
+		"template.duplicate.additionalFields.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"template.duplicate.top.id": {
+			"default": "",
+			"description": "The source template ID.",
+			"displayName": "Template ID",
+			"required": true,
+			"type": "string"
+		},
+		"template.get.top.id": {
+			"default": "",
+			"description": "The template ID.",
+			"displayName": "Template ID",
+			"required": true,
+			"type": "string"
+		},
+		"template.getAll.filters": {
+			"collection": true,
+			"displayName": "Filters",
+			"placeholder": "Add Field"
+		},
+		"template.getAll.filters.q": {
+			"default": "",
+			"description": "Optional case-insensitive search over name and subject.",
+			"displayName": "Q",
+			"type": "string"
+		},
+		"template.render.additionalFields": {
+			"collection": true,
+			"displayName": "Additional Fields",
+			"placeholder": "Add Field"
+		},
+		"template.render.additionalFields.variables": {
+			"default": "",
+			"description": "Values substituted into {{.Key}} placeholders.",
+			"displayName": "Variables",
+			"type": "json"
+		},
+		"template.render.top.id": {
+			"default": "",
+			"description": "The template ID.",
+			"displayName": "Template ID",
+			"required": true,
+			"type": "string"
+		},
+		"template.reorder.filters": {
+			"collection": true,
+			"displayName": "Filters",
+			"placeholder": "Add Field"
+		},
+		"template.reorder.filters.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"template.reorder.top.ids": {
+			"default": "",
+			"description": "Template IDs in their new order (1-indexed). IDs omitted are left untouched. Comma-separated list.",
+			"displayName": "IDs",
+			"required": true,
+			"type": "string"
+		},
+		"template.score.additionalFields": {
+			"collection": true,
+			"displayName": "Additional Fields",
+			"placeholder": "Add Field"
+		},
+		"template.score.additionalFields.body_html": {
+			"default": "",
+			"description": "Used when body_plain is empty.",
+			"displayName": "Body HTML",
+			"type": "string"
+		},
+		"template.score.additionalFields.body_plain": {
+			"default": "",
+			"description": "Preferred over HTML when present.",
+			"displayName": "Body Plain",
+			"type": "string"
+		},
+		"template.score.additionalFields.subject": {
+			"default": "",
+			"displayName": "Subject",
+			"type": "string"
+		},
+		"template.update.top.id": {
+			"default": "",
+			"description": "The template ID.",
+			"displayName": "Template ID",
+			"required": true,
+			"type": "string"
+		},
+		"template.update.updateFields": {
+			"collection": true,
+			"displayName": "Update Fields",
+			"placeholder": "Add Field"
+		},
+		"template.update.updateFields.body_html": {
+			"default": "",
+			"displayName": "Body HTML",
+			"type": "string"
+		},
+		"template.update.updateFields.body_plain": {
+			"default": "",
+			"displayName": "Body Plain",
+			"type": "string"
+		},
+		"template.update.updateFields.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"template.update.updateFields.name": {
+			"default": "",
+			"displayName": "Name",
+			"type": "string"
+		},
+		"template.update.updateFields.subject": {
+			"default": "",
+			"displayName": "Subject",
+			"type": "string"
+		},
+		"unibox.cancelScheduled.additionalFields": {
+			"collection": true,
+			"displayName": "Additional Fields",
+			"placeholder": "Add Field"
+		},
+		"unibox.cancelScheduled.additionalFields.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"unibox.cancelScheduled.top.task_id": {
+			"default": "",
+			"description": "UUID of the scheduled task to cancel.",
+			"displayName": "Scheduled Task ID",
+			"required": true,
+			"type": "string"
+		},
+		"unibox.get.top.id": {
+			"default": "",
+			"description": "UUID of the message.",
+			"displayName": "Message ID",
+			"required": true,
+			"type": "string"
+		},
+		"unibox.getAll.filters": {
+			"collection": true,
+			"displayName": "Filters",
+			"placeholder": "Add Field"
+		},
+		"unibox.getAll.filters.awaiting_reply": {
+			"default": false,
+			"description": "`true` returns only threads whose latest message was sent by you.",
+			"displayName": "Awaiting Reply",
+			"type": "boolean"
+		},
+		"unibox.getAll.filters.category_ids": {
+			"default": "",
+			"description": "Comma-separated conversation-label UUIDs. A thread matches if it carries any of them.",
+			"displayName": "Category IDs",
+			"type": "string"
+		},
+		"unibox.getAll.filters.email_id": {
+			"default": "",
+			"description": "Restrict to a single mailbox by UUID.",
+			"displayName": "Email ID",
+			"placeholder": "name@email.com",
+			"type": "string"
+		},
+		"unibox.getAll.filters.email_ids": {
+			"default": "",
+			"description": "Comma-separated mailbox UUIDs. A thread matches if it landed in any of them.",
+			"displayName": "Email IDs",
+			"placeholder": "name@email.com",
+			"type": "string"
+		},
+		"unibox.getAll.filters.from": {
+			"default": "",
+			"description": "Filter by sender address (substring).",
+			"displayName": "From",
+			"type": "string"
+		},
+		"unibox.getAll.filters.since": {
+			"default": "",
+			"description": "Lower bound on date, `YYYY-MM-DD`.",
+			"displayName": "Since",
+			"type": "string"
+		},
+		"unibox.getAll.filters.snoozed": {
+			"default": "",
+			"description": "`true` returns only snoozed threads. Omit to exclude snoozed threads.",
+			"displayName": "Snoozed",
+			"type": "string"
+		},
+		"unibox.getAll.filters.subject": {
+			"default": "",
+			"description": "Filter by subject (substring).",
+			"displayName": "Subject",
+			"type": "string"
+		},
+		"unibox.getAll.filters.unseen": {
+			"default": false,
+			"description": "`true` returns only threads with unread messages.",
+			"displayName": "Unseen",
+			"type": "boolean"
+		},
+		"unibox.getAll.filters.until": {
+			"default": "",
+			"description": "Upper bound on date, `YYYY-MM-DD`.",
+			"displayName": "Until",
+			"type": "string"
+		},
+		"unibox.getCount.additionalFields": {
+			"collection": true,
+			"displayName": "Additional Fields",
+			"placeholder": "Add Field"
+		},
+		"unibox.getCount.additionalFields.email_id": {
+			"default": "",
+			"description": "Optional mailbox UUID to count unread for a single mailbox.",
+			"displayName": "Email ID",
+			"placeholder": "name@email.com",
+			"type": "string"
+		},
+		"unibox.getScheduled.filters": {
+			"collection": true,
+			"displayName": "Filters",
+			"placeholder": "Add Field"
+		},
+		"unibox.getScheduled.filters.thread_id": {
+			"default": "",
+			"description": "Restrict to scheduled sends queued into one thread.",
+			"displayName": "Thread ID",
+			"type": "string"
+		},
+		"unibox.getThread.filters": {
+			"collection": true,
+			"displayName": "Filters",
+			"placeholder": "Add Field"
+		},
+		"unibox.getThread.filters.email_id": {
+			"default": "",
+			"description": "Optional mailbox UUID to scope the thread to one mailbox. Also accepted as `email`.",
+			"displayName": "Email ID",
+			"placeholder": "name@email.com",
+			"type": "string"
+		},
+		"unibox.getThread.top.thread_id": {
+			"default": "",
+			"description": "The thread to read. Also accepted as `id`.",
+			"displayName": "Thread ID",
+			"required": true,
+			"type": "string"
+		},
+		"unibox.getThreadLabels.top.thread_id": {
+			"default": "",
+			"description": "The thread to read labels for. Also accepted as `id`.",
+			"displayName": "Thread ID",
+			"required": true,
+			"type": "string"
+		},
+		"unibox.markSeen.additionalFields": {
+			"collection": true,
+			"displayName": "Additional Fields",
+			"placeholder": "Add Field"
+		},
+		"unibox.markSeen.additionalFields.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"unibox.markSeen.additionalFields.seen": {
+			"default": false,
+			"description": "`true` marks as read, `false` marks as unread.",
+			"displayName": "Seen",
+			"type": "boolean"
+		},
+		"unibox.markSeen.top.email_ids": {
+			"default": "",
+			"description": "Message UUIDs to update (max 500). Comma-separated list.",
+			"displayName": "Email IDs",
+			"required": true,
+			"type": "string"
+		},
+		"unibox.reply.additionalFields": {
+			"collection": true,
+			"displayName": "Additional Fields",
+			"placeholder": "Add Field"
+		},
+		"unibox.reply.additionalFields.bcc": {
+			"default": "",
+			"description": "Comma-separated list.",
+			"displayName": "BCC",
+			"type": "string"
+		},
+		"unibox.reply.additionalFields.body_html": {
+			"default": "",
+			"displayName": "Body HTML",
+			"type": "string"
+		},
+		"unibox.reply.additionalFields.body_plain": {
+			"default": "",
+			"displayName": "Body Plain",
+			"type": "string"
+		},
+		"unibox.reply.additionalFields.cc": {
+			"default": "",
+			"description": "Comma-separated list.",
+			"displayName": "CC",
+			"type": "string"
+		},
+		"unibox.reply.additionalFields.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"unibox.reply.additionalFields.in_reply_to": {
+			"default": "",
+			"description": "Message-ID(s) this reply threads under. Comma-separated list.",
+			"displayName": "In Reply To",
+			"type": "string"
+		},
+		"unibox.reply.additionalFields.scheduled_at": {
+			"default": "",
+			"description": "Required when `send_mode` is `scheduled`; must be in the future.",
+			"displayName": "Scheduled At",
+			"type": "dateTime"
+		},
+		"unibox.reply.additionalFields.send_mode": {
+			"default": "instant",
+			"description": "`instant`, `smart` (next mailbox gap), or `scheduled`.",
+			"displayName": "Send Mode",
+			"options": [
+				{
+					"name": "Instant",
+					"value": "instant"
+				},
+				{
+					"name": "Scheduled",
+					"value": "scheduled"
+				},
+				{
+					"name": "Smart",
+					"value": "smart"
+				}
+			],
+			"type": "options"
+		},
+		"unibox.reply.additionalFields.thread_id": {
+			"default": "",
+			"displayName": "Thread ID",
+			"type": "string"
+		},
+		"unibox.reply.top.email_account_id": {
+			"default": "",
+			"description": "UUID of the sending mailbox.",
+			"displayName": "Email Account ID",
+			"placeholder": "name@email.com",
+			"required": true,
+			"type": "string"
+		},
+		"unibox.reply.top.subject": {
+			"default": "",
+			"displayName": "Subject",
+			"required": true,
+			"type": "string"
+		},
+		"unibox.reply.top.to": {
+			"default": "",
+			"description": "Recipient addresses (at least one). Comma-separated list.",
+			"displayName": "To",
+			"required": true,
+			"type": "string"
+		},
+		"unibox.setThreadLabels.filters": {
+			"collection": true,
+			"displayName": "Filters",
+			"placeholder": "Add Field"
+		},
+		"unibox.setThreadLabels.filters.category_ids": {
+			"default": "",
+			"description": "Full desired set of category UUIDs. An empty array clears all labels. Comma-separated list.",
+			"displayName": "Category IDs",
+			"type": "string"
+		},
+		"unibox.setThreadLabels.filters.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"unibox.setThreadLabels.top.thread_id": {
+			"default": "",
+			"description": "The thread to label.",
+			"displayName": "Thread ID",
+			"required": true,
+			"type": "string"
+		},
+		"unibox.snooze.additionalFields": {
+			"collection": true,
+			"displayName": "Additional Fields",
+			"placeholder": "Add Field"
+		},
+		"unibox.snooze.additionalFields.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"unibox.snooze.top.snoozed_until": {
+			"default": "",
+			"description": "RFC 3339 timestamp to un-hide the thread.",
+			"displayName": "Snoozed Until",
+			"required": true,
+			"type": "dateTime"
+		},
+		"unibox.snooze.top.thread_id": {
+			"default": "",
+			"description": "The thread to snooze.",
+			"displayName": "Thread ID",
+			"required": true,
+			"type": "string"
+		},
+		"unibox.unsnooze.additionalFields": {
+			"collection": true,
+			"displayName": "Additional Fields",
+			"placeholder": "Add Field"
+		},
+		"unibox.unsnooze.additionalFields.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"unibox.unsnooze.top.thread_id": {
+			"default": "",
+			"description": "The thread to un-snooze.",
+			"displayName": "Thread ID",
+			"required": true,
+			"type": "string"
+		},
+		"warmupRouting.create.additionalFields": {
+			"collection": true,
+			"displayName": "Additional Fields",
+			"placeholder": "Add Field"
+		},
+		"warmupRouting.create.additionalFields.enabled": {
+			"default": false,
+			"description": "Whether the rule is active.",
+			"displayName": "Enabled",
+			"type": "boolean"
+		},
+		"warmupRouting.create.additionalFields.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"warmupRouting.create.additionalFields.priority": {
+			"default": 0,
+			"description": "Evaluation order, ascending. Lower runs first.",
+			"displayName": "Priority",
+			"type": "number"
+		},
+		"warmupRouting.create.additionalFields.recipient_match_value": {
+			"default": "",
+			"description": "Required unless recipient_match_type is any. Same value forms as the sender side.",
+			"displayName": "Recipient Match Value",
+			"type": "string"
+		},
+		"warmupRouting.create.additionalFields.sender_match_value": {
+			"default": "",
+			"description": "Required unless sender_match_type is any. Domain (acme.com), TLD (com), or provider bucket (google, microsoft, yahoo, apple, proton, zoho, custom).",
+			"displayName": "Sender Match Value",
+			"type": "string"
+		},
+		"warmupRouting.create.additionalFields.weight": {
+			"default": 0,
+			"description": "Selection weight, must be >= 0.",
+			"displayName": "Weight",
+			"type": "number"
+		},
+		"warmupRouting.create.top.name": {
+			"default": "",
+			"description": "Display name for the rule.",
+			"displayName": "Name",
+			"required": true,
+			"type": "string"
+		},
+		"warmupRouting.create.top.recipient_match_type": {
+			"default": "any",
+			"displayName": "Recipient Match Type",
+			"options": [
+				{
+					"name": "Any",
+					"value": "any"
+				},
+				{
+					"name": "Domain",
+					"value": "domain"
+				},
+				{
+					"name": "Provider",
+					"value": "provider"
+				},
+				{
+					"name": "Tld",
+					"value": "tld"
+				}
+			],
+			"required": true,
+			"type": "options"
+		},
+		"warmupRouting.create.top.sender_match_type": {
+			"default": "any",
+			"displayName": "Sender Match Type",
+			"options": [
+				{
+					"name": "Any",
+					"value": "any"
+				},
+				{
+					"name": "Domain",
+					"value": "domain"
+				},
+				{
+					"name": "Provider",
+					"value": "provider"
+				},
+				{
+					"name": "Tld",
+					"value": "tld"
+				}
+			],
+			"required": true,
+			"type": "options"
+		},
+		"warmupRouting.delete.additionalFields": {
+			"collection": true,
+			"displayName": "Additional Fields",
+			"placeholder": "Add Field"
+		},
+		"warmupRouting.delete.additionalFields.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"warmupRouting.delete.top.id": {
+			"default": "",
+			"description": "The rule ID.",
+			"displayName": "Routing Rule ID",
+			"required": true,
+			"type": "string"
+		},
+		"warmupRouting.update.top.id": {
+			"default": "",
+			"description": "The rule ID.",
+			"displayName": "Routing Rule ID",
+			"required": true,
+			"type": "string"
+		},
+		"warmupRouting.update.top.name": {
+			"default": "",
+			"description": "Display name for the rule.",
+			"displayName": "Name",
+			"required": true,
+			"type": "string"
+		},
+		"warmupRouting.update.top.recipient_match_type": {
+			"default": "any",
+			"displayName": "Recipient Match Type",
+			"options": [
+				{
+					"name": "Any",
+					"value": "any"
+				},
+				{
+					"name": "Domain",
+					"value": "domain"
+				},
+				{
+					"name": "Provider",
+					"value": "provider"
+				},
+				{
+					"name": "Tld",
+					"value": "tld"
+				}
+			],
+			"required": true,
+			"type": "options"
+		},
+		"warmupRouting.update.top.sender_match_type": {
+			"default": "any",
+			"displayName": "Sender Match Type",
+			"options": [
+				{
+					"name": "Any",
+					"value": "any"
+				},
+				{
+					"name": "Domain",
+					"value": "domain"
+				},
+				{
+					"name": "Provider",
+					"value": "provider"
+				},
+				{
+					"name": "Tld",
+					"value": "tld"
+				}
+			],
+			"required": true,
+			"type": "options"
+		},
+		"warmupRouting.update.updateFields": {
+			"collection": true,
+			"displayName": "Update Fields",
+			"placeholder": "Add Field"
+		},
+		"warmupRouting.update.updateFields.enabled": {
+			"default": false,
+			"description": "Whether the rule is active.",
+			"displayName": "Enabled",
+			"type": "boolean"
+		},
+		"warmupRouting.update.updateFields.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"warmupRouting.update.updateFields.priority": {
+			"default": 0,
+			"description": "Evaluation order, ascending. Lower runs first.",
+			"displayName": "Priority",
+			"type": "number"
+		},
+		"warmupRouting.update.updateFields.recipient_match_value": {
+			"default": "",
+			"description": "Required unless recipient_match_type is any. Same value forms as the sender side.",
+			"displayName": "Recipient Match Value",
+			"type": "string"
+		},
+		"warmupRouting.update.updateFields.sender_match_value": {
+			"default": "",
+			"description": "Required unless sender_match_type is any. Domain (acme.com), TLD (com), or provider bucket (google, microsoft, yahoo, apple, proton, zoho, custom).",
+			"displayName": "Sender Match Value",
+			"type": "string"
+		},
+		"warmupRouting.update.updateFields.weight": {
+			"default": 0,
+			"description": "Selection weight, must be >= 0.",
+			"displayName": "Weight",
+			"type": "number"
+		},
+		"webhook.create.additionalFields": {
+			"collection": true,
+			"displayName": "Additional Fields",
+			"placeholder": "Add Field"
+		},
+		"webhook.create.additionalFields.description": {
+			"default": "",
+			"description": "Free-text label for your own reference.",
+			"displayName": "Description",
+			"type": "string"
+		},
+		"webhook.create.additionalFields.enabled": {
+			"default": true,
+			"description": "Whether the endpoint is active. Defaults to true.",
+			"displayName": "Enabled",
+			"type": "boolean"
+		},
+		"webhook.create.additionalFields.event_types": {
+			"default": "",
+			"description": "Event names to subscribe to. Each must be a known type. An empty or omitted array subscribes to all events. On update this overwrites the existing filter (not merged).",
+			"displayName": "Event Types",
+			"type": "json"
+		},
+		"webhook.create.additionalFields.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"webhook.create.top.url": {
+			"default": "",
+			"description": "HTTPS URL that will receive POST callbacks. Must be publicly routable.",
+			"displayName": "URL",
+			"required": true,
+			"type": "string"
+		},
+		"webhook.delete.additionalFields": {
+			"collection": true,
+			"displayName": "Additional Fields",
+			"placeholder": "Add Field"
+		},
+		"webhook.delete.additionalFields.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"webhook.delete.top.id": {
+			"default": "",
+			"description": "The endpoint id to delete.",
+			"displayName": "Webhook ID",
+			"required": true,
+			"type": "string"
+		},
+		"webhook.getDeliveries.filters": {
+			"collection": true,
+			"displayName": "Filters",
+			"placeholder": "Add Field"
+		},
+		"webhook.getDeliveries.filters.limit": {
+			"default": 50,
+			"description": "Max number of results to return",
+			"displayName": "Limit",
+			"type": "number",
+			"typeOptions": {
+				"minValue": 1
+			}
+		},
+		"webhook.getDeliveries.top.id": {
+			"default": "",
+			"description": "The endpoint id whose deliveries to list.",
+			"displayName": "Webhook ID",
+			"required": true,
+			"type": "string"
+		},
+		"webhook.rotateSecret.additionalFields": {
+			"collection": true,
+			"displayName": "Additional Fields",
+			"placeholder": "Add Field"
+		},
+		"webhook.rotateSecret.additionalFields.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"webhook.rotateSecret.top.id": {
+			"default": "",
+			"description": "The endpoint id to rotate.",
+			"displayName": "Webhook ID",
+			"required": true,
+			"type": "string"
+		},
+		"webhook.update.top.id": {
+			"default": "",
+			"description": "The endpoint id to update.",
+			"displayName": "Webhook ID",
+			"required": true,
+			"type": "string"
+		},
+		"webhook.update.top.url": {
+			"default": "",
+			"description": "HTTPS URL that will receive POST callbacks. Must be publicly routable.",
+			"displayName": "URL",
+			"required": true,
+			"type": "string"
+		},
+		"webhook.update.updateFields": {
+			"collection": true,
+			"displayName": "Update Fields",
+			"placeholder": "Add Field"
+		},
+		"webhook.update.updateFields.description": {
+			"default": "",
+			"description": "Free-text label for your own reference.",
+			"displayName": "Description",
+			"type": "string"
+		},
+		"webhook.update.updateFields.enabled": {
+			"default": true,
+			"description": "Whether the endpoint is active. Defaults to true.",
+			"displayName": "Enabled",
+			"type": "boolean"
+		},
+		"webhook.update.updateFields.event_types": {
+			"default": "",
+			"description": "Event names to subscribe to. Each must be a known type. An empty or omitted array subscribes to all events. On update this overwrites the existing filter (not merged).",
+			"displayName": "Event Types",
+			"type": "json"
+		},
+		"webhook.update.updateFields.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		}
+	},
+	"operations": {
+		"advisor.apply": {
+			"action": "Apply an advisor finding",
+			"description": "Apply an advisor finding",
+			"name": "Apply Finding"
+		},
+		"advisor.dismiss": {
+			"action": "Dismiss an advisor finding",
+			"description": "Dismiss an advisor finding",
+			"name": "Dismiss Finding"
+		},
+		"advisor.getSettings": {
+			"action": "Get advisor settings",
+			"description": "Get advisor settings",
+			"name": "Get Settings"
+		},
+		"advisor.getSummary": {
+			"action": "Get the advisor summary",
+			"description": "Get the advisor summary",
+			"name": "Get Summary"
+		},
+		"advisor.refresh": {
+			"action": "Refresh advisor findings",
+			"description": "Refresh advisor findings",
+			"name": "Refresh"
+		},
+		"advisor.snooze": {
+			"action": "Snooze an advisor finding",
+			"description": "Snooze an advisor finding",
+			"name": "Snooze Finding"
+		},
+		"advisor.submitFeedback": {
+			"action": "Submit feedback on an advisor finding",
+			"description": "Submit feedback on an advisor finding",
+			"name": "Submit Feedback"
+		},
+		"advisor.undo": {
+			"action": "Undo an applied advisor finding",
+			"description": "Undo an applied advisor finding",
+			"name": "Undo Finding"
+		},
+		"agentTool.call": {
+			"action": "Call an agent tool",
+			"bodyField": "arguments",
+			"description": "Call an agent tool",
+			"name": "Call"
+		},
+		"analytics.compareCampaigns": {
+			"action": "Compare campaigns",
+			"name": "Compare Campaigns"
+		},
+		"analytics.getAccount": {
+			"action": "Get account status",
+			"description": "Get account status",
+			"name": "Get Account"
+		},
+		"analytics.getAccounts": {
+			"action": "List account statuses",
+			"description": "List account statuses",
+			"name": "Get Accounts"
+		},
+		"analytics.getCampaign": {
+			"action": "Get campaign analytics",
+			"description": "Get campaign analytics",
+			"name": "Get Campaign"
+		},
+		"analytics.getCampaignDaily": {
+			"action": "Get campaign daily stats",
+			"name": "Get Campaign Daily Stats"
+		},
+		"analytics.getCampaignHourly": {
+			"action": "Get campaign hourly stats",
+			"name": "Get Campaign Hourly Stats"
+		},
+		"analytics.getDashboard": {
+			"action": "Get dashboard analytics",
+			"description": "Get dashboard analytics",
+			"name": "Get Dashboard"
+		},
+		"analytics.getDeliverability": {
+			"action": "Get deliverability dashboard",
+			"description": "Get deliverability dashboard",
+			"name": "Get Deliverability"
+		},
+		"analytics.getUsage": {
+			"action": "Get usage overview",
+			"description": "Get usage overview",
+			"name": "Get Usage"
+		},
+		"analytics.getWarmup": {
+			"action": "Get warmup analytics",
+			"description": "Get warmup analytics",
+			"name": "Get Warmup"
+		},
+		"apiKey.create": {
+			"action": "Create an API key",
+			"description": "Create an API key",
+			"name": "Create"
+		},
+		"apiKey.get": {
+			"action": "Get an API key",
+			"description": "Get an API key",
+			"name": "Get"
+		},
+		"apiKey.getAll": {
+			"action": "Get many API keys",
+			"description": "Get many API keys",
+			"name": "Get Many"
+		},
+		"apiKey.getAnalytics": {
+			"action": "Per key usage analytics",
+			"description": "Per-key usage analytics",
+			"name": "Get Analytics"
+		},
+		"apiKey.getLogs": {
+			"action": "List per key usage logs",
+			"description": "List per-key usage logs",
+			"name": "Get Logs"
+		},
+		"apiKey.getPermissions": {
+			"action": "List available permissions",
+			"description": "List available permissions",
+			"name": "Get Permissions"
+		},
+		"apiKey.getUsageAnalytics": {
+			"action": "Org wide usage analytics",
+			"description": "Org-wide usage analytics",
+			"name": "Get Usage Analytics"
+		},
+		"apiKey.getUsageSummary": {
+			"action": "Usage summary",
+			"description": "Usage summary",
+			"name": "Get Usage Summary"
+		},
+		"apiKey.revoke": {
+			"action": "Revoke an API key",
+			"description": "Revoke an API key",
+			"name": "Revoke"
+		},
+		"apiKey.revokeSelf": {
+			"action": "Revoke the calling API key",
+			"description": "Revoke the calling API key",
+			"name": "Revoke Own Key"
+		},
+		"apiKey.update": {
+			"action": "Update an API key",
+			"description": "Update an API key",
+			"name": "Update"
+		},
+		"auditLog.getAll": {
+			"action": "Get many audit logs",
+			"description": "Get many audit logs",
+			"name": "Get Many"
+		},
+		"automation.create": {
+			"action": "Create an automation",
+			"description": "Create an automation",
+			"name": "Create"
+		},
+		"automation.delete": {
+			"action": "Delete an automation",
+			"description": "Delete an automation",
+			"name": "Delete"
+		},
+		"automation.get": {
+			"action": "Get an automation",
+			"description": "Get an automation",
+			"name": "Get"
+		},
+		"automation.getAll": {
+			"action": "Get many automations",
+			"description": "Get many automations",
+			"name": "Get Many"
+		},
+		"automation.getRuns": {
+			"action": "List automation runs",
+			"description": "List automation runs",
+			"name": "Get Runs"
+		},
+		"automation.test": {
+			"action": "Test an automation",
+			"description": "Test an automation",
+			"name": "Test"
+		},
+		"automation.update": {
+			"action": "Update an automation",
+			"description": "Update an automation",
+			"name": "Update"
+		},
+		"automation.updateLayout": {
+			"action": "Update the automation layout",
+			"description": "Update the automation layout",
+			"name": "Update Layout"
+		},
+		"campaign.create": {
+			"action": "Create a campaign",
+			"description": "Create a campaign",
+			"name": "Create"
+		},
+		"campaign.delete": {
+			"action": "Delete a campaign",
+			"description": "Delete a campaign",
+			"name": "Delete"
+		},
+		"campaign.deleteAttachment": {
+			"action": "Delete an attachment",
+			"description": "Delete an attachment",
+			"name": "Delete Attachment"
+		},
+		"campaign.duplicate": {
+			"action": "Duplicate a campaign",
+			"description": "Duplicate a campaign",
+			"name": "Duplicate"
+		},
+		"campaign.estimate": {
+			"action": "Estimate campaign reach",
+			"description": "Estimate campaign reach",
+			"name": "Estimate"
+		},
+		"campaign.generateEdit": {
+			"action": "Rewrite copy with AI",
+			"description": "Rewrite copy with AI",
+			"name": "Generate Edit"
+		},
+		"campaign.generateVariable": {
+			"action": "Generate an AI variable",
+			"description": "Generate an AI variable",
+			"name": "Generate AI Variable"
+		},
+		"campaign.generateWriting": {
+			"action": "Generate copy with the writing assistant",
+			"description": "Generate copy with the writing assistant",
+			"name": "Generate Writing"
+		},
+		"campaign.get": {
+			"action": "Get a campaign",
+			"description": "Get a campaign",
+			"name": "Get"
+		},
+		"campaign.getAbAnalysis": {
+			"action": "Get A/B analysis",
+			"name": "Get A/B Analysis"
+		},
+		"campaign.getAdvanced": {
+			"action": "Get advanced settings",
+			"name": "Get Advanced Settings"
+		},
+		"campaign.getAll": {
+			"action": "Get many campaigns",
+			"description": "Get many campaigns",
+			"name": "Get Many"
+		},
+		"campaign.getAttachments": {
+			"action": "List attachments",
+			"description": "List attachments",
+			"name": "Get Attachments"
+		},
+		"campaign.getForms": {
+			"action": "Get the forms feeding a campaign",
+			"description": "Get the forms feeding a campaign",
+			"name": "Get Forms"
+		},
+		"campaign.getLogs": {
+			"action": "Get campaign logs",
+			"description": "Get campaign logs",
+			"name": "Get Logs"
+		},
+		"campaign.getOverview": {
+			"action": "Get the campaigns overview",
+			"description": "Get the campaigns overview",
+			"name": "Get Overview"
+		},
+		"campaign.getSegments": {
+			"action": "Get campaign segments",
+			"description": "Get campaign segments",
+			"name": "Get Segments"
+		},
+		"campaign.getSenders": {
+			"action": "List campaign senders",
+			"description": "List campaign senders",
+			"name": "Get Senders"
+		},
+		"campaign.preflight": {
+			"action": "Run preflight",
+			"name": "Run Preflight"
+		},
+		"campaign.previewTemplate": {
+			"action": "Preview a template",
+			"description": "Preview a template",
+			"name": "Preview Template"
+		},
+		"campaign.replaceSegments": {
+			"action": "Replace campaign segments",
+			"description": "Replace campaign segments",
+			"name": "Replace Segments"
+		},
+		"campaign.replaceSenders": {
+			"action": "Replace senders",
+			"name": "Replace Senders"
+		},
+		"campaign.sendTestEmail": {
+			"action": "Send a test email",
+			"description": "Send a test email",
+			"name": "Send Test Email"
+		},
+		"campaign.start": {
+			"action": "Start a campaign",
+			"description": "Start a campaign",
+			"name": "Start"
+		},
+		"campaign.stop": {
+			"action": "Stop a campaign",
+			"description": "Stop a campaign",
+			"name": "Stop"
+		},
+		"campaign.update": {
+			"action": "Update a campaign",
+			"description": "Update a campaign",
+			"name": "Update"
+		},
+		"campaign.updateAdvanced": {
+			"action": "Update advanced settings",
+			"name": "Update Advanced Settings"
+		},
+		"campaign.updateStepLayout": {
+			"action": "Update the sequence layout",
+			"description": "Update the sequence layout",
+			"name": "Update Step Layout"
+		},
+		"campaign.uploadAttachment": {
+			"action": "Upload an attachment",
+			"description": "Upload an attachment",
+			"name": "Upload Attachment"
+		},
+		"campaign.verifyTrackingDomain": {
+			"action": "Verify campaign tracking domain",
+			"description": "Verify campaign tracking domain",
+			"name": "Verify Tracking Domain"
+		},
+		"campaignStep.create": {
+			"action": "Create a step",
+			"description": "Create a step",
+			"name": "Create"
+		},
+		"campaignStep.delete": {
+			"action": "Delete a step",
+			"description": "Delete a step",
+			"name": "Delete"
+		},
+		"campaignStep.getAll": {
+			"action": "Get many campaign steps",
+			"description": "Get many campaign steps",
+			"name": "Get Many"
+		},
+		"campaignStep.update": {
+			"action": "Update a step",
+			"description": "Update a step",
+			"name": "Update"
+		},
+		"campaignVariant.create": {
+			"action": "Create an A/B variant",
+			"description": "Create an A/B variant",
+			"name": "Create"
+		},
+		"campaignVariant.delete": {
+			"action": "Delete an A/B variant",
+			"description": "Delete an A/B variant",
+			"name": "Delete"
+		},
+		"campaignVariant.getAll": {
+			"action": "Get many campaign A/B variants",
+			"description": "Get many campaign A/B variants",
+			"name": "Get Many"
+		},
+		"campaignVariant.update": {
+			"action": "Update an A/B variant",
+			"description": "Update an A/B variant",
+			"name": "Update"
+		},
+		"contact.bulkDelete": {
+			"action": "Bulk delete contacts",
+			"bodyField": "contact_ids",
+			"description": "Bulk delete contacts",
+			"name": "Bulk Delete"
+		},
+		"contact.bulkUpdate": {
+			"action": "Bulk update contacts",
+			"description": "Bulk update contacts",
+			"name": "Bulk Update"
+		},
+		"contact.create": {
+			"action": "Create contacts",
+			"bodyField": "contacts",
+			"description": "Create contacts",
+			"name": "Create"
+		},
+		"contact.delete": {
+			"action": "Delete a contact",
+			"description": "Delete a contact",
+			"name": "Delete"
+		},
+		"contact.export": {
+			"action": "Export contacts",
+			"description": "Export contacts",
+			"name": "Export"
+		},
+		"contact.get": {
+			"action": "Get a contact",
+			"description": "Get a contact",
+			"name": "Get"
+		},
+		"contact.getActivities": {
+			"action": "List a contact s activities",
+			"description": "List a contact's activities",
+			"name": "Get Activities"
+		},
+		"contact.getCampaigns": {
+			"action": "Get campaign states for a contact",
+			"description": "Get campaign states for a contact",
+			"name": "Get Campaigns"
+		},
+		"contact.getCustomFields": {
+			"action": "Get contact custom fields",
+			"description": "Get contact custom fields",
+			"name": "Get Custom Fields"
+		},
+		"contact.getDeals": {
+			"action": "List a contact s deals",
+			"description": "List a contact's deals",
+			"name": "Get Deals"
+		},
+		"contact.getEmails": {
+			"action": "List emails sent to a contact",
+			"description": "List emails sent to a contact",
+			"name": "Get Emails"
+		},
+		"contact.getResearch": {
+			"action": "Get contact research",
+			"description": "Get contact research",
+			"name": "Get Research"
+		},
+		"contact.getSegments": {
+			"action": "Get the segments a contact is in",
+			"description": "Get the segments a contact is in",
+			"name": "Get Segments"
+		},
+		"contact.getTimeline": {
+			"action": "List a contact s timeline",
+			"description": "List a contact's timeline",
+			"name": "Get Timeline"
+		},
+		"contact.getVerification": {
+			"action": "Get email verification status",
+			"description": "Get email verification status",
+			"name": "Get Verification"
+		},
+		"contact.importCommit": {
+			"action": "Commit an import",
+			"description": "Commit an import",
+			"name": "Commit Import"
+		},
+		"contact.importPreview": {
+			"action": "Preview an import",
+			"description": "Preview an import",
+			"name": "Preview Import"
+		},
+		"contact.lookup": {
+			"action": "Look up a contact by email",
+			"description": "Look up a contact by email",
+			"name": "Look Up by Email"
+		},
+		"contact.requestVerification": {
+			"action": "Request contact verification",
+			"description": "Request contact verification",
+			"name": "Request Verification"
+		},
+		"contact.research": {
+			"action": "Research a contact",
+			"description": "Research a contact",
+			"name": "Research"
+		},
+		"contact.researchMany": {
+			"action": "Research many contacts",
+			"description": "Research many contacts",
+			"name": "Research Many"
+		},
+		"contact.search": {
+			"action": "Search contacts",
+			"description": "Search contacts",
+			"name": "Search"
+		},
+		"contact.update": {
+			"action": "Update a contact",
+			"description": "Update a contact",
+			"name": "Update"
+		},
+		"contactCategory.move": {
+			"action": "Move a contact category",
+			"description": "Move a contact category",
+			"name": "Move"
+		},
+		"contactNote.create": {
+			"action": "Create a contact note",
+			"description": "Create a contact note",
+			"name": "Create"
+		},
+		"contactNote.delete": {
+			"action": "Delete a contact note",
+			"description": "Delete a contact note",
+			"name": "Delete"
+		},
+		"contactNote.getAll": {
+			"action": "Get many contact notes",
+			"description": "Get many contact notes",
+			"name": "Get Many"
+		},
+		"contactNote.update": {
+			"action": "Update a contact note",
+			"description": "Update a contact note",
+			"name": "Update"
+		},
+		"crmTask.create": {
+			"action": "Create task",
+			"description": "Create task",
+			"name": "Create"
+		},
+		"crmTask.delete": {
+			"action": "Delete task",
+			"description": "Delete task",
+			"name": "Delete"
+		},
+		"crmTask.get": {
+			"action": "Get task",
+			"description": "Get task",
+			"name": "Get"
+		},
+		"crmTask.getAll": {
+			"action": "Get many CRM tasks",
+			"description": "Get many CRM tasks",
+			"name": "Get Many"
+		},
+		"crmTask.search": {
+			"action": "Search tasks",
+			"description": "Search tasks",
+			"name": "Search"
+		},
+		"crmTask.summary": {
+			"action": "Tasks summary",
+			"description": "Tasks summary",
+			"name": "Get Summary"
+		},
+		"crmTask.update": {
+			"action": "Update task",
+			"description": "Update task",
+			"name": "Update"
+		},
+		"crmTaskType.create": {
+			"action": "Create task type",
+			"description": "Create task type",
+			"name": "Create"
+		},
+		"crmTaskType.delete": {
+			"action": "Delete task type",
+			"description": "Delete task type",
+			"name": "Delete"
+		},
+		"crmTaskType.getAll": {
+			"action": "Get many CRM task types",
+			"description": "Get many CRM task types",
+			"name": "Get Many"
+		},
+		"crmTaskType.update": {
+			"action": "Update task type",
+			"description": "Update task type",
+			"name": "Update"
+		},
+		"deadLetter.getAll": {
+			"action": "Get many dead letters",
+			"description": "Get many dead letters",
+			"name": "Get Many"
+		},
+		"deadLetter.replay": {
+			"action": "Replay a task dead letter",
+			"description": "Replay a task dead letter",
+			"name": "Replay"
+		},
+		"deal.create": {
+			"action": "Create deal",
+			"description": "Create deal",
+			"name": "Create"
+		},
+		"deal.delete": {
+			"action": "Delete deal",
+			"description": "Delete deal",
+			"name": "Delete"
+		},
+		"deal.get": {
+			"action": "Get deal",
+			"description": "Get deal",
+			"name": "Get"
+		},
+		"deal.getAll": {
+			"action": "Get many deals",
+			"description": "Get many deals",
+			"name": "Get Many"
+		},
+		"deal.search": {
+			"action": "Search deals",
+			"description": "Search deals",
+			"name": "Search"
+		},
+		"deal.summary": {
+			"action": "Deals summary",
+			"description": "Deals summary",
+			"name": "Get Summary"
+		},
+		"deal.update": {
+			"action": "Update deal",
+			"description": "Update deal",
+			"name": "Update"
+		},
+		"deliverability.ingestEvent": {
+			"action": "Ingest a deliverability event",
+			"description": "Ingest a deliverability event",
+			"name": "Ingest Event"
+		},
+		"folder.move": {
+			"action": "Move a campaign folder",
+			"description": "Move a campaign folder",
+			"name": "Move"
+		},
+		"form.deleteAsset": {
+			"action": "Delete a form asset",
+			"description": "Delete a form asset",
+			"name": "Delete Asset"
+		},
+		"form.deleteSubmission": {
+			"action": "Delete a form submission",
+			"description": "Delete a form submission",
+			"name": "Delete Submission"
+		},
+		"form.getConfig": {
+			"action": "Get the forms configuration",
+			"description": "Get the forms configuration",
+			"name": "Get Config"
+		},
+		"form.getDomain": {
+			"action": "Get the forms domain",
+			"description": "Get the forms domain",
+			"name": "Get Domain"
+		},
+		"form.getLink": {
+			"action": "Mint a prefilled form link",
+			"description": "Mint a prefilled form link",
+			"name": "Get Prefilled Link"
+		},
+		"form.getStats": {
+			"action": "Get form statistics",
+			"description": "Get form statistics",
+			"name": "Get Stats"
+		},
+		"form.getSubmissions": {
+			"action": "Get many form submissions",
+			"description": "Get many form submissions",
+			"name": "Get Submissions"
+		},
+		"form.setDomain": {
+			"action": "Set the forms domain",
+			"description": "Set the forms domain",
+			"name": "Set Domain"
+		},
+		"form.uploadAsset": {
+			"action": "Upload a form asset",
+			"description": "Upload a form asset",
+			"name": "Upload Asset"
+		},
+		"form.verifyDomain": {
+			"action": "Verify the forms domain",
+			"description": "Verify the forms domain",
+			"name": "Verify Domain"
+		},
+		"integration.create": {
+			"action": "Create a connection",
+			"description": "Create a connection",
+			"name": "Create"
+		},
+		"integration.createEventSubscription": {
+			"action": "Create an event subscription",
+			"description": "Create an event subscription",
+			"name": "Create Event Subscription"
+		},
+		"integration.delete": {
+			"action": "Disconnect",
+			"description": "Disconnect",
+			"name": "Delete"
+		},
+		"integration.deleteEventSubscription": {
+			"action": "Delete an event subscription",
+			"description": "Delete an event subscription",
+			"name": "Delete Event Subscription"
+		},
+		"integration.get": {
+			"action": "Get a connection",
+			"description": "Get a connection",
+			"name": "Get"
+		},
+		"integration.getAll": {
+			"action": "Get many integration connections",
+			"description": "Get many integration connections",
+			"name": "Get Many"
+		},
+		"integration.getBookings": {
+			"action": "List meeting bookings integrations view",
+			"description": "List meeting bookings (integrations view)",
+			"name": "Get Bookings"
+		},
+		"integration.getCatalog": {
+			"action": "List the integration catalog",
+			"description": "List the integration catalog",
+			"name": "Get Catalog"
+		},
+		"integration.getEventSubscriptions": {
+			"action": "List event subscriptions",
+			"description": "List event subscriptions",
+			"name": "Get Event Subscriptions"
+		},
+		"integration.getFieldMappings": {
+			"action": "List field mappings",
+			"description": "List field mappings",
+			"name": "Get Field Mappings"
+		},
+		"integration.getSyncRuns": {
+			"action": "List sync runs",
+			"description": "List sync runs",
+			"name": "Get Sync Runs"
+		},
+		"integration.getWebhookSecret": {
+			"action": "Get the connection webhook secret",
+			"description": "Get the connection webhook secret",
+			"name": "Get Webhook Secret"
+		},
+		"integration.push": {
+			"action": "Push contacts to a CRM",
+			"description": "Push contacts to a CRM",
+			"name": "Push Contacts"
+		},
+		"integration.replaceFieldMappings": {
+			"action": "Replace field mappings",
+			"name": "Replace Field Mappings"
+		},
+		"integration.test": {
+			"action": "Test a connection",
+			"description": "Test a connection",
+			"name": "Test Connection"
+		},
+		"integration.updateConfig": {
+			"action": "Update connection config",
+			"description": "Update connection config",
+			"name": "Update Config"
+		},
+		"leadSync.getGoogleConnection": {
+			"action": "Get the Google Sheets connection",
+			"description": "Get the Google Sheets connection",
+			"name": "Get Google Connection"
+		},
+		"leadSync.getGoogleSpreadsheet": {
+			"action": "Get a Google spreadsheet",
+			"description": "Get a Google spreadsheet",
+			"name": "Get Google Spreadsheet"
+		},
+		"leadSync.previewGoogleSheet": {
+			"action": "Preview a Google Sheet import",
+			"description": "Preview a Google Sheet import",
+			"name": "Preview Google Sheet"
+		},
+		"leadSync.sync": {
+			"action": "Sync a lead source now",
+			"description": "Sync a lead source now",
+			"name": "Sync Now"
+		},
+		"mailbox.authCheck": {
+			"action": "Check domain authentication",
+			"name": "Check Domain Authentication"
+		},
+		"mailbox.bulkTag": {
+			"action": "Tag many mailboxes",
+			"description": "Tag many mailboxes",
+			"name": "Bulk Tag"
+		},
+		"mailbox.delete": {
+			"action": "Delete a mailbox",
+			"description": "Delete a mailbox",
+			"name": "Delete"
+		},
+		"mailbox.get": {
+			"action": "Get a mailbox",
+			"description": "Get a mailbox",
+			"name": "Get"
+		},
+		"mailbox.getAll": {
+			"action": "Get many mailboxes",
+			"description": "Get many mailboxes",
+			"name": "Get Many"
+		},
+		"mailbox.getAllowance": {
+			"action": "Get the mailbox allowance",
+			"description": "Get the mailbox allowance",
+			"name": "Get Allowance"
+		},
+		"mailbox.getBehavior": {
+			"action": "Get sending behavior",
+			"description": "Get sending behavior",
+			"name": "Get Behavior"
+		},
+		"mailbox.getBehaviorPlan": {
+			"action": "Get the sending behavior plan",
+			"description": "Get the sending behavior plan",
+			"name": "Get Behavior Plan"
+		},
+		"mailbox.getSyncStatus": {
+			"action": "Get mailbox sync status",
+			"description": "Get mailbox sync status",
+			"name": "Get Sync Status"
+		},
+		"mailbox.getTrackingDomain": {
+			"action": "Get the tracking domain",
+			"description": "Get the tracking domain",
+			"name": "Get Tracking Domain"
+		},
+		"mailbox.hold": {
+			"action": "Hold sending from a mailbox",
+			"description": "Hold sending from a mailbox",
+			"name": "Hold Sending"
+		},
+		"mailbox.refreshAuthCheck": {
+			"action": "Refresh the domain auth check",
+			"description": "Refresh the domain auth check",
+			"name": "Refresh Auth Check"
+		},
+		"mailbox.release": {
+			"action": "Release a held mailbox",
+			"description": "Release a held mailbox",
+			"name": "Release Sending"
+		},
+		"mailbox.send": {
+			"action": "Send from a mailbox",
+			"description": "Send from a mailbox",
+			"name": "Send Email"
+		},
+		"mailbox.update": {
+			"action": "Update a mailbox",
+			"description": "Update a mailbox",
+			"name": "Update"
+		},
+		"mailbox.updateBehavior": {
+			"action": "Update sending behavior",
+			"description": "Update sending behavior",
+			"name": "Update Behavior"
+		},
+		"mailbox.updateTrackingDomain": {
+			"action": "Update the tracking domain",
+			"description": "Update the tracking domain",
+			"name": "Update Tracking Domain"
+		},
+		"mailbox.verify": {
+			"action": "Verify an email address",
+			"description": "Verify an email address",
+			"name": "Verify Address"
+		},
+		"mailbox.verifyTrackingDomain": {
+			"action": "Verify the tracking domain",
+			"description": "Verify the tracking domain",
+			"name": "Verify Tracking Domain"
+		},
+		"mailbox.warmupAppeal": {
+			"action": "Submit a warmup appeal",
+			"description": "Submit a warmup appeal",
+			"name": "Submit Warmup Appeal"
+		},
+		"mailbox.warmupBanStatus": {
+			"action": "Get warmup ban status",
+			"name": "Get Warmup Ban Status"
+		},
+		"mailbox.warmupPause": {
+			"action": "Pause warmup",
+			"name": "Pause Warmup"
+		},
+		"mailbox.warmupResume": {
+			"action": "Resume warmup",
+			"name": "Resume Warmup"
+		},
+		"mailbox.warmupStart": {
+			"action": "Start warmup",
+			"name": "Start Warmup"
+		},
+		"mailbox.warmupStop": {
+			"action": "Stop warmup",
+			"name": "Stop Warmup"
+		},
+		"mailboxTag.move": {
+			"action": "Move a mailbox tag",
+			"description": "Move a mailbox tag",
+			"name": "Move"
+		},
+		"meeting.getSummary": {
+			"action": "Get the meetings summary",
+			"description": "Get the meetings summary",
+			"name": "Get Summary"
+		},
+		"oauthApp.getWebhookDeliveries": {
+			"action": "Get many webhook deliveries",
+			"description": "Get many webhook deliveries",
+			"name": "Get Webhook Deliveries"
+		},
+		"oauthApp.getWebhookEndpoints": {
+			"action": "Get many webhook endpoints",
+			"description": "Get many webhook endpoints",
+			"name": "Get Webhook Endpoints"
+		},
+		"oauthApp.getWebhookSecret": {
+			"action": "Get the webhook signing secret",
+			"description": "Get the webhook signing secret",
+			"name": "Get Webhook Secret"
+		},
+		"oauthApp.rotateSecret": {
+			"action": "Rotate the client secret",
+			"description": "Rotate the client secret",
+			"name": "Rotate Secret"
+		},
+		"oauthApp.rotateWebhookSecret": {
+			"action": "Rotate the webhook signing secret",
+			"description": "Rotate the webhook signing secret",
+			"name": "Rotate Webhook Secret"
+		},
+		"oauthApp.uploadLogo": {
+			"action": "Upload an application logo",
+			"description": "Upload an application logo",
+			"name": "Upload Logo"
+		},
+		"outreach.get": {
+			"action": "Get outreach settings",
+			"description": "Get outreach settings",
+			"name": "Get Settings"
+		},
+		"outreach.update": {
+			"action": "Update outreach settings",
+			"description": "Update outreach settings",
+			"name": "Update Settings"
+		},
+		"pipeline.create": {
+			"action": "Create pipeline",
+			"description": "Create pipeline",
+			"name": "Create"
+		},
+		"pipeline.createStage": {
+			"action": "Create stage",
+			"name": "Create Stage"
+		},
+		"pipeline.delete": {
+			"action": "Delete pipeline",
+			"description": "Delete pipeline",
+			"name": "Delete"
+		},
+		"pipeline.deleteStage": {
+			"action": "Delete stage",
+			"name": "Delete Stage"
+		},
+		"pipeline.get": {
+			"action": "Get pipeline",
+			"description": "Get pipeline",
+			"name": "Get"
+		},
+		"pipeline.getAll": {
+			"action": "Get many pipelines",
+			"description": "Get many pipelines",
+			"name": "Get Many"
+		},
+		"pipeline.update": {
+			"action": "Update pipeline",
+			"description": "Update pipeline",
+			"name": "Update"
+		},
+		"pipeline.updateStage": {
+			"action": "Update stage",
+			"name": "Update Stage"
+		},
+		"segment.addToCampaign": {
+			"action": "Add a segment to a campaign",
+			"description": "Add a segment to a campaign",
+			"name": "Add to Campaign"
+		},
+		"segment.getFields": {
+			"action": "Get the segment condition fields",
+			"description": "Get the segment condition fields",
+			"name": "Get Fields"
+		},
+		"segment.getOverrides": {
+			"action": "Get manual membership overrides",
+			"description": "Get manual membership overrides",
+			"name": "Get Overrides"
+		},
+		"segment.lookupMembers": {
+			"action": "Look up membership modes",
+			"description": "Look up membership modes",
+			"name": "Look Up Members"
+		},
+		"segment.preview": {
+			"action": "Preview an unsaved segment",
+			"description": "Preview an unsaved segment",
+			"name": "Preview"
+		},
+		"segment.setMembers": {
+			"action": "Set manual segment members",
+			"description": "Set manual segment members",
+			"name": "Set Members"
+		},
+		"suppression.add": {
+			"action": "Add suppression entries",
+			"description": "Add suppression entries",
+			"name": "Add"
+		},
+		"suppression.remove": {
+			"action": "Remove a suppression entry",
+			"description": "Remove a suppression entry",
+			"name": "Remove"
+		},
+		"team.addMember": {
+			"action": "Add a team member",
+			"description": "Add a team member",
+			"name": "Add Member"
+		},
+		"team.create": {
+			"action": "Create a team",
+			"description": "Create a team",
+			"name": "Create"
+		},
+		"team.delete": {
+			"action": "Delete a team",
+			"description": "Delete a team",
+			"name": "Delete"
+		},
+		"team.get": {
+			"action": "Get a team",
+			"description": "Get a team",
+			"name": "Get"
+		},
+		"team.getAll": {
+			"action": "Get many teams",
+			"description": "Get many teams",
+			"name": "Get Many"
+		},
+		"team.removeMember": {
+			"action": "Remove a team member",
+			"description": "Remove a team member",
+			"name": "Remove Member"
+		},
+		"team.update": {
+			"action": "Update a team",
+			"description": "Update a team",
+			"name": "Update"
+		},
+		"template.create": {
+			"action": "Create a reply template",
+			"description": "Create a reply template",
+			"name": "Create"
+		},
+		"template.delete": {
+			"action": "Delete a reply template",
+			"description": "Delete a reply template",
+			"name": "Delete"
+		},
+		"template.duplicate": {
+			"action": "Duplicate a reply template",
+			"description": "Duplicate a reply template",
+			"name": "Duplicate"
+		},
+		"template.get": {
+			"action": "Get a reply template",
+			"description": "Get a reply template",
+			"name": "Get"
+		},
+		"template.getAll": {
+			"action": "Get many reply templates",
+			"description": "Get many reply templates",
+			"name": "Get Many"
+		},
+		"template.render": {
+			"action": "Render a reply template",
+			"description": "Render a reply template",
+			"name": "Render"
+		},
+		"template.reorder": {
+			"action": "Reorder reply templates",
+			"description": "Reorder reply templates",
+			"name": "Reorder"
+		},
+		"template.score": {
+			"action": "Score template content",
+			"description": "Score template content",
+			"name": "Score Content"
+		},
+		"template.update": {
+			"action": "Update a reply template",
+			"description": "Update a reply template",
+			"name": "Update"
+		},
+		"unibox.approveAgentDraft": {
+			"action": "Approve an agent draft",
+			"description": "Approve an agent draft",
+			"name": "Approve Agent Draft"
+		},
+		"unibox.cancelScheduled": {
+			"action": "Cancel a scheduled send",
+			"description": "Cancel a scheduled send",
+			"name": "Cancel Scheduled Send"
+		},
+		"unibox.compose": {
+			"action": "Compose a new message",
+			"description": "Compose a new message",
+			"name": "Compose"
+		},
+		"unibox.deleteDraft": {
+			"action": "Delete a draft",
+			"description": "Delete a draft",
+			"name": "Delete Draft"
+		},
+		"unibox.discardAgentDraft": {
+			"action": "Discard an agent draft",
+			"description": "Discard an agent draft",
+			"name": "Discard Agent Draft"
+		},
+		"unibox.draftCompose": {
+			"action": "Draft a new message with AI",
+			"description": "Draft a new message with AI",
+			"name": "Draft Compose"
+		},
+		"unibox.draftReply": {
+			"action": "Draft a reply with AI",
+			"description": "Draft a reply with AI",
+			"name": "Draft Reply"
+		},
+		"unibox.get": {
+			"action": "Get a message by id",
+			"description": "Get a message by id",
+			"name": "Get Message"
+		},
+		"unibox.getAgentDrafts": {
+			"action": "Get many agent drafts",
+			"description": "Get many agent drafts",
+			"name": "Get Agent Drafts"
+		},
+		"unibox.getAll": {
+			"action": "Get many threads",
+			"description": "Get many threads",
+			"name": "Get Many"
+		},
+		"unibox.getComposeCandidates": {
+			"action": "Get compose recipients",
+			"description": "Get compose recipients",
+			"name": "Get Compose Candidates"
+		},
+		"unibox.getCount": {
+			"action": "Get unread count",
+			"description": "Get unread count",
+			"name": "Get Unseen Count"
+		},
+		"unibox.getDrafts": {
+			"action": "Get many saved drafts",
+			"description": "Get many saved drafts",
+			"name": "Get Drafts"
+		},
+		"unibox.getOverview": {
+			"action": "Get inbox overview",
+			"description": "Get inbox overview",
+			"name": "Get Overview"
+		},
+		"unibox.getScheduled": {
+			"action": "List scheduled sends",
+			"description": "List scheduled sends",
+			"name": "Get Scheduled Sends"
+		},
+		"unibox.getSnoozes": {
+			"action": "List active snoozes",
+			"description": "List active snoozes",
+			"name": "Get Snoozes"
+		},
+		"unibox.getThread": {
+			"action": "Get a thread",
+			"description": "Get a thread",
+			"name": "Get Thread"
+		},
+		"unibox.getThreadLabels": {
+			"action": "Get thread labels",
+			"name": "Get Thread Labels"
+		},
+		"unibox.markSeen": {
+			"action": "Mark messages seen",
+			"description": "Mark messages seen",
+			"name": "Mark Seen"
+		},
+		"unibox.reply": {
+			"action": "Reply from the inbox",
+			"description": "Reply from the inbox",
+			"name": "Reply"
+		},
+		"unibox.saveDraft": {
+			"action": "Save a draft",
+			"description": "Save a draft",
+			"name": "Save Draft"
+		},
+		"unibox.setThreadLabels": {
+			"action": "Set thread labels",
+			"name": "Set Thread Labels"
+		},
+		"unibox.snooze": {
+			"action": "Snooze a thread",
+			"description": "Snooze a thread",
+			"name": "Snooze"
+		},
+		"unibox.unsnooze": {
+			"action": "Unsnooze a thread",
+			"description": "Unsnooze a thread",
+			"name": "Unsnooze"
+		},
+		"warmupRouting.create": {
+			"action": "Create a warmup routing rule",
+			"description": "Create a warmup routing rule",
+			"name": "Create"
+		},
+		"warmupRouting.delete": {
+			"action": "Delete a warmup routing rule",
+			"description": "Delete a warmup routing rule",
+			"name": "Delete"
+		},
+		"warmupRouting.getAll": {
+			"action": "Get many warmup routing rules",
+			"description": "Get many warmup routing rules",
+			"name": "Get Many"
+		},
+		"warmupRouting.update": {
+			"action": "Update a warmup routing rule",
+			"description": "Update a warmup routing rule",
+			"name": "Update"
+		},
+		"webhook.create": {
+			"action": "Create a webhook endpoint",
+			"description": "Create a webhook endpoint",
+			"name": "Create"
+		},
+		"webhook.delete": {
+			"action": "Delete a webhook endpoint",
+			"description": "Delete a webhook endpoint",
+			"name": "Delete"
+		},
+		"webhook.getAll": {
+			"action": "Get many webhook endpoints",
+			"description": "Get many webhook endpoints",
+			"name": "Get Many"
+		},
+		"webhook.getAllDeliveries": {
+			"action": "Get deliveries across endpoints",
+			"description": "Get deliveries across endpoints",
+			"name": "Get All Deliveries"
+		},
+		"webhook.getDeliveries": {
+			"action": "List delivery attempts",
+			"description": "List delivery attempts",
+			"name": "Get Deliveries"
+		},
+		"webhook.getEventTypes": {
+			"action": "Get the event catalog",
+			"description": "Get the event catalog",
+			"name": "Get Event Types"
+		},
+		"webhook.getThrottleDrops": {
+			"action": "Get throttled deliveries",
+			"description": "Get throttled deliveries",
+			"name": "Get Throttle Drops"
+		},
+		"webhook.redeliver": {
+			"action": "Redeliver a webhook delivery",
+			"description": "Redeliver a webhook delivery",
+			"name": "Redeliver"
+		},
+		"webhook.rotateSecret": {
+			"action": "Rotate the signing secret",
+			"description": "Rotate the signing secret",
+			"name": "Rotate Secret"
+		},
+		"webhook.update": {
+			"action": "Update a webhook endpoint",
+			"description": "Update a webhook endpoint",
+			"name": "Update"
+		},
+		"webhook.verify": {
+			"action": "Verify a webhook endpoint",
+			"description": "Verify a webhook endpoint",
+			"name": "Verify Endpoint"
+		},
+		"workspace.getIdentity": {
+			"action": "Get the caller identity",
+			"description": "Get the caller identity",
+			"name": "Get Identity"
+		},
+		"workspace.getPlans": {
+			"action": "List plans",
+			"description": "List plans",
+			"name": "Get Plans"
+		},
+		"workspace.getTimezones": {
+			"action": "List timezones",
+			"description": "List timezones",
+			"name": "Get Timezones"
+		}
+	},
+	"resources": {
+		"advisor": {
+			"defaultOperation": "getAll",
+			"displayName": "Advisor",
+			"noun": "advisor finding"
+		},
+		"agentTool": {
+			"defaultOperation": "getAll",
+			"displayName": "Agent Tool",
+			"noun": "agent tool"
+		},
+		"aiSkill": {
+			"defaultOperation": "getAll",
+			"displayName": "AI Skill",
+			"noun": "AI skill"
+		},
+		"analytics": {
+			"defaultOperation": "compareCampaigns",
+			"displayName": "Analytics",
+			"noun": "analytics"
+		},
+		"apiKey": {
+			"defaultOperation": "getAll",
+			"displayName": "API Key",
+			"noun": "API key"
+		},
+		"auditLog": {
+			"defaultOperation": "getAll",
+			"displayName": "Audit Log",
+			"noun": "audit log"
+		},
+		"automation": {
+			"defaultOperation": "getAll",
+			"displayName": "Automation",
+			"noun": "automation"
+		},
+		"campaign": {
+			"defaultOperation": "getAll",
+			"displayName": "Campaign",
+			"noun": "campaign"
+		},
+		"campaignStep": {
+			"defaultOperation": "getAll",
+			"displayName": "Campaign Step",
+			"noun": "campaign step"
+		},
+		"campaignVariant": {
+			"defaultOperation": "getAll",
+			"displayName": "Campaign A/B Variant",
+			"noun": "A/B variant"
+		},
+		"contact": {
+			"defaultOperation": "bulkDelete",
+			"displayName": "Contact",
+			"noun": "contact"
+		},
+		"contactCategory": {
+			"defaultOperation": "create",
+			"displayName": "Contact Category",
+			"noun": "contact category"
+		},
+		"contactNote": {
+			"defaultOperation": "getAll",
+			"displayName": "Contact Note",
+			"noun": "contact note"
+		},
+		"crmTask": {
+			"defaultOperation": "getAll",
+			"displayName": "CRM Task",
+			"noun": "CRM task"
+		},
+		"crmTaskType": {
+			"defaultOperation": "getAll",
+			"displayName": "CRM Task Type",
+			"noun": "CRM task type"
+		},
+		"deadLetter": {
+			"defaultOperation": "getAll",
+			"displayName": "Dead Letter",
+			"noun": "dead-letter task"
+		},
+		"deal": {
+			"defaultOperation": "getAll",
+			"displayName": "Deal",
+			"noun": "deal"
+		},
+		"deliverability": {
+			"defaultOperation": "ingestEvent",
+			"displayName": "Deliverability",
+			"noun": "deliverability event"
+		},
+		"folder": {
+			"defaultOperation": "create",
+			"displayName": "Campaign Folder",
+			"noun": "campaign folder"
+		},
+		"form": {
+			"defaultOperation": "getAll",
+			"displayName": "Form",
+			"noun": "form"
+		},
+		"integration": {
+			"defaultOperation": "getAll",
+			"displayName": "Integration",
+			"noun": "integration"
+		},
+		"leadSync": {
+			"defaultOperation": "getAll",
+			"displayName": "Lead Sync Source",
+			"noun": "lead sync source"
+		},
+		"mailbox": {
+			"defaultOperation": "getAll",
+			"displayName": "Mailbox",
+			"noun": "mailbox"
+		},
+		"mailboxTag": {
+			"defaultOperation": "create",
+			"displayName": "Mailbox Tag",
+			"noun": "mailbox tag"
+		},
+		"meeting": {
+			"defaultOperation": "getAll",
+			"displayName": "Meeting",
+			"noun": "meeting"
+		},
+		"oauthApp": {
+			"defaultOperation": "getAll",
+			"displayName": "OAuth Application",
+			"noun": "OAuth application"
+		},
+		"outreach": {
+			"defaultOperation": "get",
+			"displayName": "Outreach Settings",
+			"noun": "outreach setting"
+		},
+		"pipeline": {
+			"defaultOperation": "getAll",
+			"displayName": "Pipeline",
+			"noun": "pipeline"
+		},
+		"segment": {
+			"defaultOperation": "getAll",
+			"displayName": "Segment",
+			"noun": "segment"
+		},
+		"suppression": {
+			"defaultOperation": "getAll",
+			"displayName": "Suppression",
+			"noun": "suppression entry"
+		},
+		"team": {
+			"defaultOperation": "getAll",
+			"displayName": "Team",
+			"noun": "team"
+		},
+		"template": {
+			"defaultOperation": "getAll",
+			"displayName": "Reply Template",
+			"noun": "reply template"
+		},
+		"unibox": {
+			"defaultOperation": "getAll",
+			"displayName": "Unibox",
+			"noun": "inbox message"
+		},
+		"warmupRouting": {
+			"defaultOperation": "getAll",
+			"displayName": "Warmup Routing Rule",
+			"noun": "warmup routing rule"
+		},
+		"webhook": {
+			"defaultOperation": "getAll",
+			"displayName": "Webhook",
+			"noun": "webhook endpoint"
+		},
+		"workspace": {
+			"defaultOperation": "getPlans",
+			"displayName": "Workspace",
+			"noun": "workspace"
+		}
+	}
+}

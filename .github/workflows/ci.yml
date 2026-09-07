@@ -17,6 +17,13 @@ jobs:
       # n8n-workflow pulls a native transitive dependency that is not needed to
       # build or lint the node (it is provided by the n8n host at runtime).
       - run: npm install --ignore-scripts
+      # The node is generated from the recorded API surface in spec/. If the
+      # two have drifted, the committed sources are stale: re-run
+      # `npm run api:sync` (needs a Warmbly checkout) and `npm run generate`.
+      - run: npm run generate
+      # Scoped to the generated sources: an incidental lockfile touch from
+      # `npm install` is not node drift.
+      - run: git diff --exit-code -- nodes spec
       - run: npm run lint
       - run: npm run build
       # Unit tests only; the e2e suite (npm run test:e2e) needs a running

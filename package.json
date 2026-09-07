@@ -1,6 +1,6 @@
 {
   "name": "n8n-nodes-warmbly",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "n8n community node for Warmbly: cold email, mailbox warmup, unibox, CRM, deliverability and webhooks. Self-hostable.",
   "keywords": [
     "n8n-community-node-package",
@@ -40,6 +40,8 @@
     "test": "jest --selectProjects unit",
     "test:e2e": "jest --selectProjects e2e --runInBand",
     "test:all": "jest --runInBand",
+    "api:sync": "node scripts/api-surface.mjs && node scripts/events-surface.mjs",
+    "generate": "node scripts/generate-node.mjs",
     "prepublishOnly": "npm run build && eslint -c .eslintrc.prepublish.js nodes credentials package.json"
   },
   "files": [

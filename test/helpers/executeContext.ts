@@ -27,14 +27,14 @@ export const setRuntimeApiKey = (key: string): void => {
 };
 export const getRuntimeApiKey = (): string => runtimeApiKey;
 
-interface BinaryFixture {
+export interface BinaryFixture {
 	property: string;
 	fileName: string;
 	mimeType: string;
 	buffer: Buffer;
 }
 
-interface ContextOptions {
+export interface ContextOptions {
 	apiKey?: string;
 	baseUrl?: string;
 	binary?: BinaryFixture;
