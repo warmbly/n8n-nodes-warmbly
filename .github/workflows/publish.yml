@@ -27,10 +27,13 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          # The publish job only needs a Node new enough for current npm, which
+          # is not the same as the Node the package supports (>=20.15, and the
+          # CI workflow builds on 20). npm 12 dropped Node 20 outright, so
+          # pinning 20 here broke the upgrade step below.
+          node-version: lts/*
           registry-url: 'https://registry.npmjs.org'
-      # Trusted publishing requires npm >= 11.5.1 (newer than the one bundled
-      # with Node 20).
+      # Trusted publishing requires npm >= 11.5.1 (newer than the bundled one).
       - run: npm install -g npm@latest
       # The native transitive dep of n8n-workflow isn't needed to build/lint.
       - run: npm install --ignore-scripts
