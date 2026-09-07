@@ -9,7 +9,7 @@
  *      against the live API and asserted to return a clean array.
  *   2. WRITE LIFECYCLES: create → read → update → delete round-trips that prove
  *      the write/update/delete path for many resources.
- *   3. COVERAGE: asserts every one of the 179 operations is accounted for
+ *   3. COVERAGE: asserts every operation in the registry is accounted for
  *      (executed or skipped-with-reason) and writes a report.
  *
  * Resilience: the request layer retries transient 429/5xx, but if the API still
@@ -28,6 +28,7 @@ import {
 	record,
 	writeReport,
 } from '../helpers/coverage';
+import type { ContextOptions } from '../helpers/executeContext';
 import { httpStatusOf, runOperation, setRuntimeApiKey } from '../helpers/executeContext';
 import { mintRunnerKey } from '../helpers/runnerKey';
 
@@ -35,8 +36,9 @@ import { mintRunnerKey } from '../helpers/runnerKey';
 jest.setTimeout(120_000);
 
 /** Read statuses that mean "not applicable to the data we have": skipped, not
- * a node bug. 429 = throttled/quota during the run. */
-const READ_NOT_APPLICABLE = new Set([400, 403, 404, 405, 422, 429]);
+ * a node bug. 429 = throttled/quota during the run; 503 = a feature this
+ * instance has no provider for (contact research, say). */
+const READ_NOT_APPLICABLE = new Set([400, 403, 404, 405, 422, 429, 503]);
 
 const unique = `e2e-${process.pid}-${Math.floor(process.hrtime()[1] / 1000)}`;
 
@@ -71,9 +73,10 @@ async function step(
 	resource: string,
 	operation: string,
 	params: Record<string, unknown> = {},
+	opts: ContextOptions = {},
 ): Promise<Record<string, unknown> | null> {
 	try {
-		const items = await runOperation(resource, operation, params);
+		const items = await runOperation(resource, operation, params, opts);
 		record(resource, operation, 'passed', `2xx · ${items.length} item(s)`);
 		return firstOf(items) ?? {};
 	} catch (error) {
@@ -133,6 +136,10 @@ async function createPipelineWithStage(
 // keeping us well under the 20/day creation cap. Created in beforeAll, deleted at
 // the very end.
 let sharedCampaignId: string | null = null;
+// The segment lifecycle attaches its segment to the shared campaign, so both
+// it and the contact it holds are torn down after the campaign is gone.
+let sharedSegmentId: string | null = null;
+let sharedSegmentContactId: string | null = null;
 
 beforeAll(async () => {
 	const origin = new URL(E2E_BASE_URL).origin;
@@ -587,6 +594,10 @@ describe('write lifecycle: automation (create → get → update → runs → de
 			updateFields: { enabled: true },
 		});
 	});
+	test('updateLayout', async () => {
+		if (!id) return;
+		await step('automation', 'updateLayout', { id, updateFields: {} });
+	});
 	test('getRuns', async () => {
 		if (!id) return;
 		await execRead('automation', 'getRuns', { id, additionalFields: {} });
@@ -742,10 +753,702 @@ describe('analytics: id-scoped reads (on the shared campaign)', () => {
 	// empty-data edge, not a node issue), so it's left to the skip accounting.
 });
 
+describe('write lifecycle: segment (create → get → update → members → campaign → delete)', () => {
+	let segmentId: string | null = null;
+	let memberId: string | null = null;
+
+	test('create', async () => {
+		const created = await step('segment', 'create', {
+			additionalFields: {
+				name: `${unique}-segment`,
+				description: 'e2e segment',
+				match: 'all',
+			},
+		});
+		segmentId = created ? (idOf(created) ?? null) : null;
+		if (created) expect(segmentId).toBeTruthy();
+	});
+	test('get', async () => {
+		if (!segmentId) return;
+		const fetched = await step('segment', 'get', { id: segmentId });
+		if (fetched) expect(idOf(fetched)).toBe(segmentId);
+	});
+	test('update', async () => {
+		if (!segmentId) return;
+		await step('segment', 'update', {
+			id: segmentId,
+			updateFields: { name: `${unique}-segment-renamed`, match: 'any' },
+		});
+	});
+	test('preview', async () => {
+		await step('segment', 'preview', { additionalFields: { match: 'all' } });
+	});
+	test('members: set → look up → overrides', async () => {
+		if (!segmentId) return;
+		const contact = await step('contact', 'create', {
+			contacts: [{ email: `${unique}-seg@example.com`, first_name: 'Segment' }],
+		});
+		memberId = contact ? (idOf(contact) ?? null) : null;
+		if (!memberId) return;
+		await step('segment', 'setMembers', {
+			id: segmentId,
+			additionalFields: { contacts: memberId, mode: 'include' },
+		});
+		await step('segment', 'lookupMembers', {
+			id: segmentId,
+			additionalFields: { contacts: memberId },
+		});
+		await execRead('segment', 'getOverrides', { id: segmentId });
+	});
+	test('addToCampaign', async () => {
+		if (!segmentId || !sharedCampaignId) return;
+		await step('segment', 'addToCampaign', {
+			id: segmentId,
+			additionalFields: { campaign_id: sharedCampaignId },
+		});
+	});
+	test('campaign segment reads and replacement', async () => {
+		if (!segmentId || !sharedCampaignId) return;
+		await execRead('campaign', 'getSegments', { id: sharedCampaignId });
+		await step('campaign', 'replaceSegments', {
+			id: sharedCampaignId,
+			updateFields: { segment_ids: segmentId },
+		});
+	});
+	test('contact segment reads', async () => {
+		if (!memberId) return;
+		await execRead('contact', 'getSegments', { id: memberId });
+		await execRead('contact', 'getCampaigns', { id: memberId });
+	});
+	test('hand the ids to the cleanup block', () => {
+		// Deleting a segment a campaign still points at answers 409, so the
+		// delete runs after the shared campaign is torn down.
+		sharedSegmentId = segmentId;
+		sharedSegmentContactId = memberId;
+	});
+});
+
+describe('write lifecycle: suppression (add → find → remove)', () => {
+	const address = `${unique}-suppressed@example.com`;
+	let entryId: string | null = null;
+
+	test('add', async () => {
+		await step('suppression', 'add', {
+			entries: [{ value: address }],
+			additionalFields: { reason: 'e2e' },
+		});
+	});
+	test('getAll finds it', async () => {
+		const rows = await execRead('suppression', 'getAll', {
+			filters: { q: address },
+			returnAll: false,
+			limit: 10,
+		});
+		entryId = rows.length ? (idOf(rows[0]) ?? null) : null;
+	});
+	test('remove', async () => {
+		if (!entryId) return;
+		await step('suppression', 'remove', { id: entryId, additionalFields: {} });
+	});
+});
+
+describe('write lifecycle: groups (campaign folder, mailbox tag, contact category)', () => {
+	for (const resource of ['folder', 'mailboxTag', 'contactCategory'] as const) {
+		describe(resource, () => {
+			let id: string | null = null;
+
+			test('create', async () => {
+				const created = await step(resource, 'create', {
+					additionalFields: { title: `${unique}-${resource}`, color: '#0ea5e9' },
+				});
+				id = created ? (idOf(created) ?? null) : null;
+				if (created) expect(id).toBeTruthy();
+			});
+			test('update', async () => {
+				if (!id) return;
+				await step(resource, 'update', {
+					gid: id,
+					updateFields: { title: `${unique}-${resource}-renamed` },
+				});
+			});
+			test('move', async () => {
+				if (!id) return;
+				await step(resource, 'move', { gid: id, updateFields: { position: 1 } });
+			});
+			test('delete', async () => {
+				if (!id) return;
+				await step(resource, 'delete', { gid: id, additionalFields: {} });
+			});
+		});
+	}
+});
+
+describe('write lifecycle: meeting (create → list → delete)', () => {
+	let meetingId: string | null = null;
+
+	test('create', async () => {
+		const created = await step('meeting', 'create', {
+			additionalFields: {
+				title: `${unique}-meeting`,
+				invitee_name: 'E2E Invitee',
+				invitee_email: `${unique}-invitee@example.com`,
+				scheduled_for: new Date(Date.now() + 86_400_000).toISOString(),
+				duration_minutes: 30,
+			},
+		});
+		meetingId = created ? (idOf(created) ?? null) : null;
+		if (created) expect(meetingId).toBeTruthy();
+	});
+	test('getAll', async () => {
+		await execRead('meeting', 'getAll', { filters: {}, returnAll: false, limit: 10 });
+	});
+	test('delete', async () => {
+		if (!meetingId) return;
+		await step('meeting', 'delete', { id: meetingId, additionalFields: {} });
+	});
+});
+
+describe('write lifecycle: AI skill (create → update → delete)', () => {
+	let skillId: string | null = null;
+
+	test('create', async () => {
+		const created = await step('aiSkill', 'create', {
+			name: `${unique}-skill`,
+			additionalFields: {
+				description: 'e2e skill',
+				content: 'Answer briefly.',
+				enabled: false,
+			},
+		});
+		skillId = created ? (idOf(created) ?? null) : null;
+		if (created) expect(skillId).toBeTruthy();
+	});
+	test('update', async () => {
+		if (!skillId) return;
+		await step('aiSkill', 'update', {
+			id: skillId,
+			updateFields: { description: 'e2e skill updated' },
+		});
+	});
+	test('delete', async () => {
+		if (!skillId) return;
+		await step('aiSkill', 'delete', { id: skillId, additionalFields: {} });
+	});
+});
+
+describe('write lifecycle: OAuth application (create → reads → rotate → delete)', () => {
+	let appId: string | null = null;
+
+	test('create', async () => {
+		const created = await step('oauthApp', 'create', {
+			additionalFields: {
+				name: `${unique}-oauth-app`,
+				redirect_uris: 'https://example.com/callback',
+				// Scopes are a permission bitmask; 1 is the lowest read scope.
+				scopes: 1,
+			},
+		});
+		appId = created ? (idOf(created) ?? null) : null;
+		if (created) expect(appId).toBeTruthy();
+	});
+	test('get', async () => {
+		if (!appId) return;
+		const fetched = await step('oauthApp', 'get', { id: appId });
+		if (fetched) expect(idOf(fetched)).toBe(appId);
+	});
+	test('update', async () => {
+		if (!appId) return;
+		await step('oauthApp', 'update', {
+			id: appId,
+			// The update replaces the record: name, scopes and redirect URIs
+			// have to ride along with the edited field or the API rejects it.
+			updateFields: {
+				description: 'e2e updated',
+				name: `${unique}-oauth-app`,
+				scopes: 1,
+				redirect_uris: 'https://example.com/callback',
+			},
+		});
+	});
+	test('webhook reads', async () => {
+		if (!appId) return;
+		await execRead('oauthApp', 'getWebhookEndpoints', { id: appId });
+		await execRead('oauthApp', 'getWebhookDeliveries', {
+			id: appId,
+			filters: {},
+			returnAll: false,
+			limit: 10,
+		});
+		await execRead('oauthApp', 'getWebhookSecret', { id: appId });
+	});
+	test('rotate secrets', async () => {
+		if (!appId) return;
+		await step('oauthApp', 'rotateSecret', { id: appId, additionalFields: {} });
+		await step('oauthApp', 'rotateWebhookSecret', { id: appId, additionalFields: {} });
+	});
+	test('delete', async () => {
+		if (!appId) return;
+		await step('oauthApp', 'delete', { id: appId, additionalFields: {} });
+	});
+});
+
+describe('write lifecycle: compose draft (save → list → delete)', () => {
+	// The draft id is the client's to choose: the endpoint upserts.
+	const draftId = '5b6f4a4e-0000-4000-8000-000000000001';
+
+	test('save', async () => {
+		await step('unibox', 'saveDraft', {
+			id: draftId,
+			updateFields: { subject: `${unique} draft`, body: 'Draft body' },
+		});
+	});
+	test('getDrafts', async () => {
+		await execRead('unibox', 'getDrafts', {});
+	});
+	test('delete', async () => {
+		await step('unibox', 'deleteDraft', { id: draftId, additionalFields: {} });
+	});
+});
+
+describe('mailbox detail endpoints (behavior + tracking domain)', () => {
+	let mailboxId: string | null = null;
+
+	test('pick a seeded mailbox', async () => {
+		const mailboxes = await runOperation('mailbox', 'getAll', { returnAll: false, limit: 1 });
+		mailboxId = mailboxes.length ? (idOf(firstOf(mailboxes)) ?? null) : null;
+	});
+	test('behavior get → update', async () => {
+		if (!mailboxId) return;
+		const behavior = await execRead('mailbox', 'getBehavior', { id: mailboxId });
+		await execRead('mailbox', 'getBehaviorPlan', { id: mailboxId });
+		if (behavior.length === 0) return;
+		await step('mailbox', 'updateBehavior', {
+			id: mailboxId,
+			updateFields: { enabled: false },
+		});
+	});
+	test('tracking domain + sync reads', async () => {
+		if (!mailboxId) return;
+		await execRead('mailbox', 'getTrackingDomain', { id: mailboxId });
+		await execRead('mailbox', 'getSyncStatus', { id: mailboxId });
+	});
+});
+
+describe('campaign extras (on the shared campaign)', () => {
+	test('estimate', async () => {
+		await step('campaign', 'estimate', { additionalFields: {} });
+	});
+	test('getForms', async () => {
+		if (!sharedCampaignId) return;
+		await execRead('campaign', 'getForms', { id: sharedCampaignId });
+	});
+	test('updateStepLayout', async () => {
+		if (!sharedCampaignId) return;
+		await execRead('campaign', 'updateStepLayout', {
+			id: sharedCampaignId,
+			updateFields: {},
+		});
+	});
+	test('updateAdvanced', async () => {
+		if (!sharedCampaignId) return;
+		// An empty override set is a valid "leave the defaults alone" write.
+		await step('campaign', 'updateAdvanced', {
+			id: sharedCampaignId,
+			settings: {},
+			updateFields: {},
+		});
+	});
+	test('duplicate then delete the copy', async () => {
+		if (!sharedCampaignId) return;
+		const copy = await step('campaign', 'duplicate', {
+			id: sharedCampaignId,
+			additionalFields: { name: `${unique}-campaign-copy` },
+		});
+		const copyId = copy ? (idOf(copy) ?? null) : null;
+		if (copyId) {
+			await step('campaign', 'delete', { id: copyId, additionalFields: {} });
+		}
+	});
+});
+
+describe('multipart uploads (real binary payloads)', () => {
+	// A one-pixel PNG, so the logo upload gets a file the server can decode.
+	const pngPixel = Buffer.from(
+		'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==',
+		'base64',
+	);
+	const csv = Buffer.from(
+		`email,first_name,last_name\n${unique}-import@example.com,Imported,Contact\n`,
+		'utf8',
+	);
+	let attachmentId: string | null = null;
+	let importedContactId: string | null = null;
+
+	test('campaign attachment: upload → list → delete', async () => {
+		if (!sharedCampaignId) return;
+		const uploaded = await step(
+			'campaign',
+			'uploadAttachment',
+			{ id: sharedCampaignId, binaryPropertyName: 'data', additionalFields: {} },
+			{
+				binary: {
+					property: 'data',
+					fileName: 'e2e-attachment.txt',
+					mimeType: 'text/plain',
+					buffer: Buffer.from('Warmbly e2e attachment', 'utf8'),
+				},
+			},
+		);
+		attachmentId = uploaded ? (idOf(uploaded) ?? null) : null;
+		await execRead('campaign', 'getAttachments', { id: sharedCampaignId });
+		if (attachmentId) {
+			await step('campaign', 'deleteAttachment', {
+				id: sharedCampaignId,
+				attachmentId,
+				additionalFields: {},
+			});
+		}
+	});
+
+	test('contact import: preview → commit → look up → delete', async () => {
+		const binary = {
+			property: 'data',
+			fileName: 'contacts.csv',
+			mimeType: 'text/csv',
+			buffer: csv,
+		};
+		const preview = await step(
+			'contact',
+			'importPreview',
+			{ binaryPropertyName: 'data', additionalFields: {} },
+			{ binary },
+		);
+		if (!preview) return;
+		// The commit takes the mapping the preview suggested, which is exactly
+		// what a user would confirm in the UI.
+		await step(
+			'contact',
+			'importCommit',
+			{
+				binaryPropertyName: 'data',
+				options: JSON.stringify({
+					mapping: preview.suggested_mapping ?? [],
+					has_header: preview.has_header ?? true,
+					dedup: 'update',
+				}),
+				additionalFields: {},
+			},
+			{ binary },
+		);
+		const found = await execRead('contact', 'lookup', {
+			email: `${unique}-import@example.com`,
+		});
+		importedContactId = found.length ? (idOf(firstOf(found)) ?? null) : null;
+		if (importedContactId) {
+			await execRead('contact', 'getResearch', { id: importedContactId, filters: {} });
+			await step('contact', 'delete', { id: importedContactId, additionalFields: {} });
+		}
+	});
+
+	test('OAuth application logo upload', async () => {
+		await step(
+			'oauthApp',
+			'uploadLogo',
+			{ binaryPropertyName: 'data', additionalFields: {} },
+			{
+				binary: {
+					property: 'data',
+					fileName: 'logo.png',
+					mimeType: 'image/png',
+					buffer: pngPixel,
+				},
+			},
+		);
+	});
+});
+
+describe('bulk contact operations (create → bulk update → bulk delete)', () => {
+	const emails = [`${unique}-bulk1@example.com`, `${unique}-bulk2@example.com`];
+	let ids: string[] = [];
+
+	test('create two contacts', async () => {
+		const created = await runOperation('contact', 'create', {
+			contacts: emails.map((email) => ({ email, first_name: 'Bulk' })),
+		});
+		ids = created.map((item) => idOf(item)).filter((id): id is string => Boolean(id));
+		record('contact', 'create', 'passed', `${ids.length} created`);
+	});
+	test('bulkUpdate', async () => {
+		if (ids.length === 0) return;
+		await step('contact', 'bulkUpdate', {
+			contacts: ids.join(','),
+			filters: { fields: [{ type: 'set', key: 'last_name', value: 'Updated' }] },
+		});
+	});
+	test('bulkDelete', async () => {
+		if (ids.length === 0) return;
+		await step('contact', 'bulkDelete', {
+			contact_ids: ids,
+			additionalFields: {},
+		});
+	});
+});
+
+describe('CRM summaries (read-shaped POSTs)', () => {
+	test('deal.summary', async () => {
+		await step('deal', 'summary', { additionalFields: {} });
+	});
+	test('crmTask.summary', async () => {
+		await step('crmTask', 'summary', { additionalFields: {} });
+	});
+});
+
+describe('inbox message actions (on a seeded message)', () => {
+	let messageId: string | null = null;
+	let threadId: string | null = null;
+
+	test('pick a seeded message', async () => {
+		const messages = await runOperation('unibox', 'getAll', { returnAll: false, limit: 1 });
+		const message = messages.length ? firstOf(messages) : null;
+		messageId = message ? (idOf(message) ?? null) : null;
+		threadId = (message?.thread_id as string | undefined) ?? null;
+	});
+	test('get + thread reads', async () => {
+		if (!messageId) return;
+		await execRead('unibox', 'get', { id: messageId });
+		if (!threadId) return;
+		await execRead('unibox', 'getThread', {
+			thread_id: threadId,
+			filters: {},
+			returnAll: false,
+			limit: 10,
+		});
+		await execRead('unibox', 'getThreadLabels', { thread_id: threadId, filters: {} });
+	});
+	test('mark seen', async () => {
+		if (!messageId) return;
+		await step('unibox', 'markSeen', {
+			email_ids: messageId,
+			updateFields: {},
+			additionalFields: { seen: true },
+		});
+	});
+	test('snooze → unsnooze', async () => {
+		if (!threadId) return;
+		const snoozed = await step('unibox', 'snooze', {
+			thread_id: threadId,
+			snoozed_until: new Date(Date.now() + 3_600_000).toISOString(),
+			additionalFields: {},
+		});
+		if (snoozed) {
+			await step('unibox', 'unsnooze', { thread_id: threadId, additionalFields: {} });
+		}
+	});
+	test('set thread labels', async () => {
+		if (!threadId) return;
+		// An empty category list is a valid "clear the labels" request.
+		await step('unibox', 'setThreadLabels', { thread_id: threadId, filters: {} });
+	});
+});
+
+describe('mailbox actions (hold → release, bulk tag, account analytics)', () => {
+	let mailboxId: string | null = null;
+
+	test('pick a seeded mailbox', async () => {
+		const mailboxes = await runOperation('mailbox', 'getAll', { returnAll: false, limit: 1 });
+		mailboxId = mailboxes.length ? (idOf(firstOf(mailboxes)) ?? null) : null;
+	});
+	test('hold then release', async () => {
+		if (!mailboxId) return;
+		const held = await step('mailbox', 'hold', { id: mailboxId, additionalFields: {} });
+		if (held) {
+			await step('mailbox', 'release', { id: mailboxId, additionalFields: {} });
+		}
+	});
+	test('bulk tag on and off again', async () => {
+		if (!mailboxId) return;
+		// The endpoint takes tag ids, not names, so the test mints a tag first.
+		const tag = await step('mailboxTag', 'create', {
+			additionalFields: { title: `${unique}-bulk-tag`, color: '#6366f1' },
+		});
+		const tagId = tag ? (idOf(tag) ?? null) : null;
+		if (!tagId) return;
+		const tagged = await step('mailbox', 'bulkTag', {
+			email_ids: mailboxId,
+			updateFields: { add_tags: tagId },
+		});
+		if (tagged) {
+			await step('mailbox', 'bulkTag', {
+				email_ids: mailboxId,
+				updateFields: { remove_tags: tagId },
+			});
+		}
+		await step('mailboxTag', 'delete', { gid: tagId, additionalFields: {} });
+	});
+	test('analytics.getAccount', async () => {
+		if (!mailboxId) return;
+		await execRead('analytics', 'getAccount', { id: mailboxId, filters: {} });
+	});
+});
+
+describe('agent tools (list → call a read-only tool)', () => {
+	test('call the first read-only tool', async () => {
+		const tools = await runOperation('agentTool', 'getAll', { filters: {} });
+		record('agentTool', 'getAll', 'passed', `${tools.length} tool(s)`);
+		// Search-shaped tools read and never send, so calling one is safe.
+		const tool = tools.find((t) => /search|list|get/.test(String(t.name ?? '')));
+		if (!tool) return;
+		await step('agentTool', 'call', {
+			name: tool.name as string,
+			arguments: { query: 'e2e' },
+			additionalFields: {},
+		});
+	});
+});
+
+describe('advisor (refresh then act on a finding, if any)', () => {
+	let findingId: string | null = null;
+
+	test('refresh', async () => {
+		await step('advisor', 'refresh', { additionalFields: {} });
+	});
+	test('pick a finding', async () => {
+		const findings = await runOperation('advisor', 'getAll', {
+			filters: {},
+			returnAll: false,
+			limit: 5,
+		});
+		findingId = findings.length ? (idOf(firstOf(findings)) ?? null) : null;
+		record('advisor', 'getAll', 'passed', `${findings.length} finding(s)`);
+	});
+	test('snooze → dismiss → undo → feedback', async () => {
+		if (!findingId) return;
+		await step('advisor', 'snooze', { id: findingId, additionalFields: { days: 1 } });
+		await step('advisor', 'dismiss', { id: findingId, additionalFields: {} });
+		await step('advisor', 'undo', { id: findingId, additionalFields: {} });
+		await step('advisor', 'submitFeedback', {
+			id: findingId,
+			additionalFields: { helpful: true },
+		});
+	});
+});
+
+describe('forms domain (get → set → restore)', () => {
+	test('set then put the previous value back', async () => {
+		const [current] = await runOperation('form', 'getDomain');
+		record('form', 'getDomain', 'passed', 'read the current domain');
+		const previous = (current?.forms_domain as string | undefined) ?? '';
+		const set = await step('form', 'setDomain', {
+			updateFields: { forms_domain: 'forms.e2e.example.com' },
+		});
+		if (!set) return;
+		await step('form', 'setDomain', { updateFields: { forms_domain: previous } });
+	});
+});
+
+describe('operations a bare instance cannot reach (recorded with the reason)', () => {
+	// Each of these needs something this workspace does not have — a connected
+	// third party, a finding an analysis produced, a delivery that already
+	// happened — or would break the run itself. Naming the reason keeps the
+	// coverage report honest instead of parking them in a generic bucket.
+	const unreachable: Array<[string, string[], string]> = [
+		[
+			'integration',
+			[
+				'create',
+				'delete',
+				'updateConfig',
+				'createEventSubscription',
+				'deleteEventSubscription',
+				'replaceFieldMappings',
+			],
+			'needs a connected third-party integration (OAuth to HubSpot, Slack, …)',
+		],
+		[
+			'leadSync',
+			['create', 'update', 'delete', 'sync', 'getGoogleSpreadsheet'],
+			'needs a connected Google Sheets account',
+		],
+		[
+			'advisor',
+			['apply', 'dismiss', 'snooze', 'undo', 'submitFeedback'],
+			'needs an advisor finding; this workspace has none to act on',
+		],
+		[
+			'unibox',
+			['approveAgentDraft', 'discardAgentDraft'],
+			'needs an AI agent draft waiting for approval',
+		],
+		['unibox', ['cancelScheduled'], 'needs a scheduled send, which means sending mail'],
+		['unibox', ['compose'], 'sends real mail from a connected mailbox'],
+		['unibox', ['draftCompose'], 'needs an AI provider to write the draft'],
+		['webhook', ['redeliver'], 'needs a past delivery attempt to replay'],
+		[
+			'team',
+			['addMember', 'removeMember'],
+			'needs a second user in the workspace to add and remove',
+		],
+		['apiKey', ['revokeSelf'], 'would revoke the key this suite is running under'],
+		['mailbox', ['delete'], 'would destroy a seeded mailbox the rest of the suite reads'],
+		[
+			'mailbox',
+			['updateTrackingDomain', 'refreshAuthCheck'],
+			'changes DNS-backed state and re-runs live DNS lookups',
+		],
+		['contact', ['requestVerification', 'research', 'researchMany'], 'needs an external provider'],
+		['form', ['deleteAsset', 'uploadAsset'], 'needs a form, and form creation 500s (Warmbly bug)'],
+	];
+
+	test('recorded', () => {
+		for (const [resource, operations, reason] of unreachable) {
+			for (const operation of operations) {
+				record(resource, operation, 'skipped', reason);
+			}
+		}
+	});
+});
+
+describe('known server-side failures (recorded, not masked)', () => {
+	// POST /forms 500s on every payload: the form service builds its record
+	// without `allowed_domains`, and the column is NOT NULL, so the insert
+	// fails before the node is involved. Reproducible with plain curl. Every
+	// form operation that needs a form to exist is blocked behind it.
+	test('form.create and its dependants', () => {
+		record(
+			'form',
+			'create',
+			'skipped',
+			'server 500: forms.allowed_domains is NOT NULL and the create path sends NULL (Warmbly bug)',
+		);
+		for (const operation of [
+			'get',
+			'update',
+			'delete',
+			'getStats',
+			'getSubmissions',
+			'deleteSubmission',
+			'getLink',
+		]) {
+			record('form', operation, 'skipped', 'needs a form, and form creation 500s (Warmbly bug)');
+		}
+	});
+});
+
 describe('shared campaign cleanup', () => {
 	test('delete the shared campaign', async () => {
 		if (!sharedCampaignId) return;
 		await step('campaign', 'delete', { id: sharedCampaignId, additionalFields: {} });
+	});
+	test('delete the segment and its member', async () => {
+		if (sharedSegmentId) {
+			await step('segment', 'delete', { id: sharedSegmentId, additionalFields: {} });
+		}
+		if (sharedSegmentContactId) {
+			await step('contact', 'delete', {
+				id: sharedSegmentContactId,
+				additionalFields: {},
+			});
+		}
 	});
 });
 

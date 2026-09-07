@@ -166,7 +166,14 @@ export class Warmbly implements INodeType {
 						endpoint,
 						formData,
 					);
-					responseItems = extractArray(uploadResponse);
+					// Same rule as the JSON path: only unwrap when the endpoint
+					// answers with a list. An import preview is a single object
+					// that happens to hold arrays (columns, sample rows), and
+					// unwrapping it would hand on the first of those instead of
+					// the preview itself.
+					responseItems = meta.returnsList
+						? extractArray(uploadResponse)
+						: [uploadResponse as IDataObject];
 				} else {
 					// Single-field bodies: array of objects / strings, or a raw JSON object.
 					let requestBody: IDataObject | IDataObject[] | string = body;

@@ -1,0 +1,1832 @@
+{
+	"DELETE /ai/skills/{}": {
+		"resource": "aiSkill",
+		"operation": "delete",
+		"route": "DELETE /ai/skills/{}",
+		"handler": "DeleteSkill"
+	},
+	"DELETE /api-keys/self": {
+		"resource": "apiKey",
+		"operation": "revokeSelf",
+		"route": "DELETE /api-keys/self",
+		"handler": "RevokeOwnAPIKey"
+	},
+	"DELETE /api-keys/{}": {
+		"resource": "apiKey",
+		"operation": "revoke",
+		"route": "DELETE /api-keys/{}",
+		"handler": "RevokeAPIKey"
+	},
+	"DELETE /automations/{}": {
+		"resource": "automation",
+		"operation": "delete",
+		"route": "DELETE /automations/{}",
+		"handler": "DeleteAutomation"
+	},
+	"DELETE /campaigns/{}": {
+		"resource": "campaign",
+		"operation": "delete",
+		"route": "DELETE /campaigns/{}",
+		"handler": "DeleteCampaign"
+	},
+	"DELETE /campaigns/{}/ab-variants/{}": {
+		"resource": "campaignVariant",
+		"operation": "delete",
+		"route": "DELETE /campaigns/{}/ab-variants/{}",
+		"handler": "DeleteCampaignABVariant"
+	},
+	"DELETE /campaigns/{}/attachments/{}": {
+		"resource": "campaign",
+		"operation": "deleteAttachment",
+		"route": "DELETE /campaigns/{}/attachments/{}",
+		"handler": "DeleteCampaignAttachment"
+	},
+	"DELETE /campaigns/{}/steps/{}": {
+		"resource": "campaignStep",
+		"operation": "delete",
+		"route": "DELETE /campaigns/{}/steps/{}",
+		"handler": "DeleteSequence"
+	},
+	"DELETE /categories/{}": {
+		"resource": "contactCategory",
+		"operation": "delete",
+		"route": "DELETE /categories/{}",
+		"handler": "grouph.Delete"
+	},
+	"DELETE /contacts": {
+		"resource": "contact",
+		"operation": "bulkDelete",
+		"route": "DELETE /contacts",
+		"handler": "DeleteContactBulk"
+	},
+	"DELETE /contacts/{}": {
+		"resource": "contact",
+		"operation": "delete",
+		"route": "DELETE /contacts/{}",
+		"handler": "DeleteContact"
+	},
+	"DELETE /contacts/{}/notes/{}": {
+		"resource": "contactNote",
+		"operation": "delete",
+		"route": "DELETE /contacts/{}/notes/{}",
+		"handler": "DeleteContactNote"
+	},
+	"DELETE /crm/deals/{}": {
+		"resource": "deal",
+		"operation": "delete",
+		"route": "DELETE /crm/deals/{}",
+		"handler": "DeleteDeal"
+	},
+	"DELETE /crm/pipelines/{}": {
+		"resource": "pipeline",
+		"operation": "delete",
+		"route": "DELETE /crm/pipelines/{}",
+		"handler": "DeletePipeline"
+	},
+	"DELETE /crm/pipelines/{}/stages/{}": {
+		"resource": "pipeline",
+		"operation": "deleteStage",
+		"route": "DELETE /crm/pipelines/{}/stages/{}",
+		"handler": "DeleteStage"
+	},
+	"DELETE /crm/task-types/{}": {
+		"resource": "crmTaskType",
+		"operation": "delete",
+		"route": "DELETE /crm/task-types/{}",
+		"handler": "DeleteTaskType"
+	},
+	"DELETE /crm/tasks/{}": {
+		"resource": "crmTask",
+		"operation": "delete",
+		"route": "DELETE /crm/tasks/{}",
+		"handler": "DeleteCRMTask"
+	},
+	"DELETE /emails/{}": {
+		"resource": "mailbox",
+		"operation": "delete",
+		"route": "DELETE /emails/{}",
+		"handler": "DeleteEmail"
+	},
+	"DELETE /folders/{}": {
+		"resource": "folder",
+		"operation": "delete",
+		"route": "DELETE /folders/{}",
+		"handler": "grouph.Delete"
+	},
+	"DELETE /forms/{}": {
+		"resource": "form",
+		"operation": "delete",
+		"route": "DELETE /forms/{}",
+		"handler": "DeleteForm"
+	},
+	"DELETE /forms/{}/assets/{}": {
+		"resource": "form",
+		"operation": "deleteAsset",
+		"route": "DELETE /forms/{}/assets/{}",
+		"handler": "DeleteFormAsset"
+	},
+	"DELETE /forms/{}/submissions/{}": {
+		"resource": "form",
+		"operation": "deleteSubmission",
+		"route": "DELETE /forms/{}/submissions/{}",
+		"handler": "DeleteFormSubmission"
+	},
+	"DELETE /integrations/connections/{}": {
+		"resource": "integration",
+		"operation": "delete",
+		"route": "DELETE /integrations/connections/{}",
+		"handler": "DisconnectIntegration"
+	},
+	"DELETE /integrations/connections/{}/events/{}": {
+		"resource": "integration",
+		"operation": "deleteEventSubscription",
+		"route": "DELETE /integrations/connections/{}/events/{}",
+		"handler": "DeleteConnectionEventSubscription"
+	},
+	"DELETE /lead-sync/sources/{}": {
+		"resource": "leadSync",
+		"operation": "delete",
+		"route": "DELETE /lead-sync/sources/{}",
+		"handler": "DeleteLeadSyncSource"
+	},
+	"DELETE /meetings/{}": {
+		"resource": "meeting",
+		"operation": "delete",
+		"route": "DELETE /meetings/{}",
+		"handler": "DeleteMeeting"
+	},
+	"DELETE /oauth/applications/{}": {
+		"resource": "oauthApp",
+		"operation": "delete",
+		"route": "DELETE /oauth/applications/{}",
+		"handler": "DeleteOAuthApplication"
+	},
+	"DELETE /segments/{}": {
+		"resource": "segment",
+		"operation": "delete",
+		"route": "DELETE /segments/{}",
+		"handler": "DeleteSegment"
+	},
+	"DELETE /suppressions/{}": {
+		"resource": "suppression",
+		"operation": "remove",
+		"route": "DELETE /suppressions/{}",
+		"handler": "RemoveSuppression"
+	},
+	"DELETE /tags/{}": {
+		"resource": "mailboxTag",
+		"operation": "delete",
+		"route": "DELETE /tags/{}",
+		"handler": "grouph.Delete"
+	},
+	"DELETE /teams/{}": {
+		"resource": "team",
+		"operation": "delete",
+		"route": "DELETE /teams/{}",
+		"handler": "DeleteTeam"
+	},
+	"DELETE /teams/{}/members/{}": {
+		"resource": "team",
+		"operation": "removeMember",
+		"route": "DELETE /teams/{}/members/{}",
+		"handler": "RemoveTeamMember"
+	},
+	"DELETE /templates/{}": {
+		"resource": "template",
+		"operation": "delete",
+		"route": "DELETE /templates/{}",
+		"handler": "DeleteTemplate"
+	},
+	"DELETE /unibox/drafts/{}": {
+		"resource": "unibox",
+		"operation": "deleteDraft",
+		"route": "DELETE /unibox/drafts/{}",
+		"handler": "DeleteComposeDraft"
+	},
+	"DELETE /unibox/scheduled/{}": {
+		"resource": "unibox",
+		"operation": "cancelScheduled",
+		"route": "DELETE /unibox/scheduled/{}",
+		"handler": "CancelUniboxScheduled"
+	},
+	"DELETE /unibox/snooze": {
+		"resource": "unibox",
+		"operation": "unsnooze",
+		"route": "DELETE /unibox/snooze",
+		"handler": "DeleteUniboxSnooze"
+	},
+	"DELETE /warmup/routing/{}": {
+		"resource": "warmupRouting",
+		"operation": "delete",
+		"route": "DELETE /warmup/routing/{}",
+		"handler": "DeleteWarmupRoutingRule"
+	},
+	"DELETE /webhooks/{}": {
+		"resource": "webhook",
+		"operation": "delete",
+		"route": "DELETE /webhooks/{}",
+		"handler": "DeleteWebhookEndpoint"
+	},
+	"GET /advisor/recommendations": {
+		"resource": "advisor",
+		"operation": "getAll",
+		"route": "GET /advisor/recommendations",
+		"handler": "ListAdvisorFindings"
+	},
+	"GET /advisor/settings": {
+		"resource": "advisor",
+		"operation": "getSettings",
+		"route": "GET /advisor/settings",
+		"handler": "GetAdvisorSettings"
+	},
+	"GET /advisor/summary": {
+		"resource": "advisor",
+		"operation": "getSummary",
+		"route": "GET /advisor/summary",
+		"handler": "GetAdvisorSummary"
+	},
+	"GET /ai/skills": {
+		"resource": "aiSkill",
+		"operation": "getAll",
+		"route": "GET /ai/skills",
+		"handler": "ListSkills"
+	},
+	"GET /ai/tools": {
+		"resource": "agentTool",
+		"operation": "getAll",
+		"route": "GET /ai/tools",
+		"handler": "ListAgentTools"
+	},
+	"GET /analytics/accounts": {
+		"resource": "analytics",
+		"operation": "getAccounts",
+		"route": "GET /analytics/accounts",
+		"handler": "GetAllAccountStatuses"
+	},
+	"GET /analytics/accounts/{}": {
+		"resource": "analytics",
+		"operation": "getAccount",
+		"route": "GET /analytics/accounts/{}",
+		"handler": "GetAccountStatus"
+	},
+	"GET /analytics/campaigns/compare": {
+		"resource": "analytics",
+		"operation": "compareCampaigns",
+		"route": "GET /analytics/campaigns/compare",
+		"handler": "CompareCampaigns"
+	},
+	"GET /analytics/campaigns/{}": {
+		"resource": "analytics",
+		"operation": "getCampaign",
+		"route": "GET /analytics/campaigns/{}",
+		"handler": "GetCampaignAnalytics"
+	},
+	"GET /analytics/campaigns/{}/daily": {
+		"resource": "analytics",
+		"operation": "getCampaignDaily",
+		"route": "GET /analytics/campaigns/{}/daily",
+		"handler": "GetCampaignDailyStats"
+	},
+	"GET /analytics/campaigns/{}/hourly": {
+		"resource": "analytics",
+		"operation": "getCampaignHourly",
+		"route": "GET /analytics/campaigns/{}/hourly",
+		"handler": "GetCampaignHourlyStats"
+	},
+	"GET /analytics/dashboard": {
+		"resource": "analytics",
+		"operation": "getDashboard",
+		"route": "GET /analytics/dashboard",
+		"handler": "GetDashboardAnalytics"
+	},
+	"GET /analytics/deliverability": {
+		"resource": "analytics",
+		"operation": "getDeliverability",
+		"route": "GET /analytics/deliverability",
+		"handler": "GetDeliverabilityDashboard"
+	},
+	"GET /analytics/usage": {
+		"resource": "analytics",
+		"operation": "getUsage",
+		"route": "GET /analytics/usage",
+		"handler": "GetUsageOverview"
+	},
+	"GET /analytics/warmup": {
+		"resource": "analytics",
+		"operation": "getWarmup",
+		"route": "GET /analytics/warmup",
+		"handler": "GetWarmupAnalytics"
+	},
+	"GET /api-keys": {
+		"resource": "apiKey",
+		"operation": "getAll",
+		"route": "GET /api-keys",
+		"handler": "ListAPIKeys"
+	},
+	"GET /api-keys/permissions": {
+		"resource": "apiKey",
+		"operation": "getPermissions",
+		"route": "GET /api-keys/permissions",
+		"handler": "ListAPIPermissions"
+	},
+	"GET /api-keys/usage/analytics": {
+		"resource": "apiKey",
+		"operation": "getUsageAnalytics",
+		"route": "GET /api-keys/usage/analytics",
+		"handler": "GetAPIKeyAnalytics"
+	},
+	"GET /api-keys/usage/summary": {
+		"resource": "apiKey",
+		"operation": "getUsageSummary",
+		"route": "GET /api-keys/usage/summary",
+		"handler": "GetAPIKeyUsageSummary"
+	},
+	"GET /api-keys/{}": {
+		"resource": "apiKey",
+		"operation": "get",
+		"route": "GET /api-keys/{}",
+		"handler": "GetAPIKey"
+	},
+	"GET /api-keys/{}/analytics": {
+		"resource": "apiKey",
+		"operation": "getAnalytics",
+		"route": "GET /api-keys/{}/analytics",
+		"handler": "GetAPIKeyAnalytics"
+	},
+	"GET /api-keys/{}/logs": {
+		"resource": "apiKey",
+		"operation": "getLogs",
+		"route": "GET /api-keys/{}/logs",
+		"handler": "ListAPIKeyUsageLogs"
+	},
+	"GET /audit-logs": {
+		"resource": "auditLog",
+		"operation": "getAll",
+		"route": "GET /audit-logs",
+		"handler": "GetAuditLogs"
+	},
+	"GET /automations": {
+		"resource": "automation",
+		"operation": "getAll",
+		"route": "GET /automations",
+		"handler": "ListAutomations"
+	},
+	"GET /automations/{}": {
+		"resource": "automation",
+		"operation": "get",
+		"route": "GET /automations/{}",
+		"handler": "GetAutomation"
+	},
+	"GET /automations/{}/runs": {
+		"resource": "automation",
+		"operation": "getRuns",
+		"route": "GET /automations/{}/runs",
+		"handler": "ListAutomationRuns"
+	},
+	"GET /campaigns": {
+		"resource": "campaign",
+		"operation": "getAll",
+		"route": "GET /campaigns",
+		"handler": "SearchCampaigns"
+	},
+	"GET /campaigns-overview": {
+		"resource": "campaign",
+		"operation": "getOverview",
+		"route": "GET /campaigns-overview",
+		"handler": "GetCampaignsOverview"
+	},
+	"GET /campaigns/{}": {
+		"resource": "campaign",
+		"operation": "get",
+		"route": "GET /campaigns/{}",
+		"handler": "GetCampaign"
+	},
+	"GET /campaigns/{}/ab-analysis": {
+		"resource": "campaign",
+		"operation": "getAbAnalysis",
+		"route": "GET /campaigns/{}/ab-analysis",
+		"handler": "GetCampaignABAnalysis"
+	},
+	"GET /campaigns/{}/ab-variants": {
+		"resource": "campaignVariant",
+		"operation": "getAll",
+		"route": "GET /campaigns/{}/ab-variants",
+		"handler": "ListCampaignABVariants"
+	},
+	"GET /campaigns/{}/advanced": {
+		"resource": "campaign",
+		"operation": "getAdvanced",
+		"route": "GET /campaigns/{}/advanced",
+		"handler": "GetCampaignAdvancedSettings"
+	},
+	"GET /campaigns/{}/attachments": {
+		"resource": "campaign",
+		"operation": "getAttachments",
+		"route": "GET /campaigns/{}/attachments",
+		"handler": "ListCampaignAttachments"
+	},
+	"GET /campaigns/{}/forms": {
+		"resource": "campaign",
+		"operation": "getForms",
+		"route": "GET /campaigns/{}/forms",
+		"handler": "GetCampaignForms"
+	},
+	"GET /campaigns/{}/logs": {
+		"resource": "campaign",
+		"operation": "getLogs",
+		"route": "GET /campaigns/{}/logs",
+		"handler": "GetCampaignLogs"
+	},
+	"GET /campaigns/{}/segments": {
+		"resource": "campaign",
+		"operation": "getSegments",
+		"route": "GET /campaigns/{}/segments",
+		"handler": "ListCampaignSegments"
+	},
+	"GET /campaigns/{}/senders": {
+		"resource": "campaign",
+		"operation": "getSenders",
+		"route": "GET /campaigns/{}/senders",
+		"handler": "ListCampaignSenders"
+	},
+	"GET /campaigns/{}/steps": {
+		"resource": "campaignStep",
+		"operation": "getAll",
+		"route": "GET /campaigns/{}/steps",
+		"handler": "GetSequences"
+	},
+	"GET /contacts/custom-fields": {
+		"resource": "contact",
+		"operation": "getCustomFields",
+		"route": "GET /contacts/custom-fields",
+		"handler": "ListContactCustomFields"
+	},
+	"GET /contacts/lookup": {
+		"resource": "contact",
+		"operation": "lookup",
+		"route": "GET /contacts/lookup",
+		"handler": "LookupContactByEmail"
+	},
+	"GET /contacts/verification": {
+		"resource": "contact",
+		"operation": "getVerification",
+		"route": "GET /contacts/verification",
+		"handler": "GetContactVerification"
+	},
+	"GET /contacts/{}": {
+		"resource": "contact",
+		"operation": "get",
+		"route": "GET /contacts/{}",
+		"handler": "GetContact"
+	},
+	"GET /contacts/{}/activities": {
+		"resource": "contact",
+		"operation": "getActivities",
+		"route": "GET /contacts/{}/activities",
+		"handler": "ListContactActivities"
+	},
+	"GET /contacts/{}/campaigns": {
+		"resource": "contact",
+		"operation": "getCampaigns",
+		"route": "GET /contacts/{}/campaigns",
+		"handler": "ListContactCampaignStates"
+	},
+	"GET /contacts/{}/deals": {
+		"resource": "contact",
+		"operation": "getDeals",
+		"route": "GET /contacts/{}/deals",
+		"handler": "GetDealsByContact"
+	},
+	"GET /contacts/{}/emails": {
+		"resource": "contact",
+		"operation": "getEmails",
+		"route": "GET /contacts/{}/emails",
+		"handler": "ListContactEmails"
+	},
+	"GET /contacts/{}/notes": {
+		"resource": "contactNote",
+		"operation": "getAll",
+		"route": "GET /contacts/{}/notes",
+		"handler": "ListContactNotes"
+	},
+	"GET /contacts/{}/research": {
+		"resource": "contact",
+		"operation": "getResearch",
+		"route": "GET /contacts/{}/research",
+		"handler": "ListContactResearch"
+	},
+	"GET /contacts/{}/segments": {
+		"resource": "contact",
+		"operation": "getSegments",
+		"route": "GET /contacts/{}/segments",
+		"handler": "ListContactSegments"
+	},
+	"GET /contacts/{}/timeline": {
+		"resource": "contact",
+		"operation": "getTimeline",
+		"route": "GET /contacts/{}/timeline",
+		"handler": "ListContactTimeline"
+	},
+	"GET /crm/deals": {
+		"resource": "deal",
+		"operation": "getAll",
+		"route": "GET /crm/deals",
+		"handler": "ListDeals"
+	},
+	"GET /crm/deals/{}": {
+		"resource": "deal",
+		"operation": "get",
+		"route": "GET /crm/deals/{}",
+		"handler": "GetDeal"
+	},
+	"GET /crm/pipelines": {
+		"resource": "pipeline",
+		"operation": "getAll",
+		"route": "GET /crm/pipelines",
+		"handler": "ListPipelines"
+	},
+	"GET /crm/pipelines/{}": {
+		"resource": "pipeline",
+		"operation": "get",
+		"route": "GET /crm/pipelines/{}",
+		"handler": "GetPipeline"
+	},
+	"GET /crm/task-types": {
+		"resource": "crmTaskType",
+		"operation": "getAll",
+		"route": "GET /crm/task-types",
+		"handler": "ListTaskTypes"
+	},
+	"GET /crm/tasks": {
+		"resource": "crmTask",
+		"operation": "getAll",
+		"route": "GET /crm/tasks",
+		"handler": "ListCRMTasks"
+	},
+	"GET /crm/tasks/{}": {
+		"resource": "crmTask",
+		"operation": "get",
+		"route": "GET /crm/tasks/{}",
+		"handler": "GetCRMTask"
+	},
+	"GET /emails": {
+		"resource": "mailbox",
+		"operation": "getAll",
+		"route": "GET /emails",
+		"handler": "EmailsSearch"
+	},
+	"GET /emails/allowance": {
+		"resource": "mailbox",
+		"operation": "getAllowance",
+		"route": "GET /emails/allowance",
+		"handler": "GetMailboxAllowance"
+	},
+	"GET /emails/{}": {
+		"resource": "mailbox",
+		"operation": "get",
+		"route": "GET /emails/{}",
+		"handler": "GetEmail"
+	},
+	"GET /emails/{}/auth-check": {
+		"resource": "mailbox",
+		"operation": "authCheck",
+		"route": "GET /emails/{}/auth-check",
+		"handler": "GetEmailAuthCheck"
+	},
+	"GET /emails/{}/behavior": {
+		"resource": "mailbox",
+		"operation": "getBehavior",
+		"route": "GET /emails/{}/behavior",
+		"handler": "GetEmailBehavior"
+	},
+	"GET /emails/{}/behavior/plan": {
+		"resource": "mailbox",
+		"operation": "getBehaviorPlan",
+		"route": "GET /emails/{}/behavior/plan",
+		"handler": "GetEmailBehaviorPlan"
+	},
+	"GET /emails/{}/sync": {
+		"resource": "mailbox",
+		"operation": "getSyncStatus",
+		"route": "GET /emails/{}/sync",
+		"handler": "GetEmailSync"
+	},
+	"GET /emails/{}/track": {
+		"resource": "mailbox",
+		"operation": "getTrackingDomain",
+		"route": "GET /emails/{}/track",
+		"handler": "GetEmailTrackingDomain"
+	},
+	"GET /emails/{}/warmup/ban-status": {
+		"resource": "mailbox",
+		"operation": "warmupBanStatus",
+		"route": "GET /emails/{}/warmup/ban-status",
+		"handler": "GetWarmupBanStatus"
+	},
+	"GET /forms": {
+		"resource": "form",
+		"operation": "getAll",
+		"route": "GET /forms",
+		"handler": "ListForms"
+	},
+	"GET /forms/config": {
+		"resource": "form",
+		"operation": "getConfig",
+		"route": "GET /forms/config",
+		"handler": "GetFormsConfig"
+	},
+	"GET /forms/domain": {
+		"resource": "form",
+		"operation": "getDomain",
+		"route": "GET /forms/domain",
+		"handler": "GetFormsDomain"
+	},
+	"GET /forms/{}": {
+		"resource": "form",
+		"operation": "get",
+		"route": "GET /forms/{}",
+		"handler": "GetForm"
+	},
+	"GET /forms/{}/links/{}": {
+		"resource": "form",
+		"operation": "getLink",
+		"route": "GET /forms/{}/links/{}",
+		"handler": "MintFormLink"
+	},
+	"GET /forms/{}/stats": {
+		"resource": "form",
+		"operation": "getStats",
+		"route": "GET /forms/{}/stats",
+		"handler": "GetFormStats"
+	},
+	"GET /forms/{}/submissions": {
+		"resource": "form",
+		"operation": "getSubmissions",
+		"route": "GET /forms/{}/submissions",
+		"handler": "ListFormSubmissions"
+	},
+	"GET /integrations/bookings": {
+		"resource": "integration",
+		"operation": "getBookings",
+		"route": "GET /integrations/bookings",
+		"handler": "ListMeetingBookings"
+	},
+	"GET /integrations/catalog": {
+		"resource": "integration",
+		"operation": "getCatalog",
+		"route": "GET /integrations/catalog",
+		"handler": "ListIntegrationCatalog"
+	},
+	"GET /integrations/connections": {
+		"resource": "integration",
+		"operation": "getAll",
+		"route": "GET /integrations/connections",
+		"handler": "ListIntegrationConnections"
+	},
+	"GET /integrations/connections/{}": {
+		"resource": "integration",
+		"operation": "get",
+		"route": "GET /integrations/connections/{}",
+		"handler": "GetIntegrationConnection"
+	},
+	"GET /integrations/connections/{}/events": {
+		"resource": "integration",
+		"operation": "getEventSubscriptions",
+		"route": "GET /integrations/connections/{}/events",
+		"handler": "ListConnectionEventSubscriptions"
+	},
+	"GET /integrations/connections/{}/field-mappings": {
+		"resource": "integration",
+		"operation": "getFieldMappings",
+		"route": "GET /integrations/connections/{}/field-mappings",
+		"handler": "ListConnectionFieldMappings"
+	},
+	"GET /integrations/connections/{}/runs": {
+		"resource": "integration",
+		"operation": "getSyncRuns",
+		"route": "GET /integrations/connections/{}/runs",
+		"handler": "ListConnectionSyncRuns"
+	},
+	"GET /integrations/connections/{}/webhook-secret": {
+		"resource": "integration",
+		"operation": "getWebhookSecret",
+		"route": "GET /integrations/connections/{}/webhook-secret",
+		"handler": "GetConnectionWebhookSecret"
+	},
+	"GET /lead-sync/google/connection": {
+		"resource": "leadSync",
+		"operation": "getGoogleConnection",
+		"route": "GET /lead-sync/google/connection",
+		"handler": "GetLeadSyncGoogleConnection"
+	},
+	"GET /lead-sync/sources": {
+		"resource": "leadSync",
+		"operation": "getAll",
+		"route": "GET /lead-sync/sources",
+		"handler": "ListLeadSyncSources"
+	},
+	"GET /lead-sync/sources/{}": {
+		"resource": "leadSync",
+		"operation": "get",
+		"route": "GET /lead-sync/sources/{}",
+		"handler": "GetLeadSyncSource"
+	},
+	"GET /me": {
+		"resource": "workspace",
+		"operation": "getIdentity",
+		"route": "GET /me",
+		"handler": "GetIdentity"
+	},
+	"GET /meetings": {
+		"resource": "meeting",
+		"operation": "getAll",
+		"route": "GET /meetings",
+		"handler": "SearchMeetings"
+	},
+	"GET /meetings/summary": {
+		"resource": "meeting",
+		"operation": "getSummary",
+		"route": "GET /meetings/summary",
+		"handler": "MeetingsSummary"
+	},
+	"GET /oauth/applications": {
+		"resource": "oauthApp",
+		"operation": "getAll",
+		"route": "GET /oauth/applications",
+		"handler": "ListOAuthApplications"
+	},
+	"GET /oauth/applications/{}": {
+		"resource": "oauthApp",
+		"operation": "get",
+		"route": "GET /oauth/applications/{}",
+		"handler": "GetOAuthApplication"
+	},
+	"GET /oauth/applications/{}/webhook-deliveries": {
+		"resource": "oauthApp",
+		"operation": "getWebhookDeliveries",
+		"route": "GET /oauth/applications/{}/webhook-deliveries",
+		"handler": "ListOAuthAppWebhookDeliveries"
+	},
+	"GET /oauth/applications/{}/webhook-endpoints": {
+		"resource": "oauthApp",
+		"operation": "getWebhookEndpoints",
+		"route": "GET /oauth/applications/{}/webhook-endpoints",
+		"handler": "ListOAuthAppWebhookEndpoints"
+	},
+	"GET /oauth/applications/{}/webhook-secret": {
+		"resource": "oauthApp",
+		"operation": "getWebhookSecret",
+		"route": "GET /oauth/applications/{}/webhook-secret",
+		"handler": "GetOAuthAppWebhookSecret"
+	},
+	"GET /outreach/settings": {
+		"resource": "outreach",
+		"operation": "get",
+		"route": "GET /outreach/settings",
+		"handler": "GetOutreachSettings"
+	},
+	"GET /plans": {
+		"resource": "workspace",
+		"operation": "getPlans",
+		"route": "GET /plans",
+		"handler": "ListPlans"
+	},
+	"GET /segments": {
+		"resource": "segment",
+		"operation": "getAll",
+		"route": "GET /segments",
+		"handler": "ListSegments"
+	},
+	"GET /segments/fields": {
+		"resource": "segment",
+		"operation": "getFields",
+		"route": "GET /segments/fields",
+		"handler": "ListSegmentFields"
+	},
+	"GET /segments/{}": {
+		"resource": "segment",
+		"operation": "get",
+		"route": "GET /segments/{}",
+		"handler": "GetSegment"
+	},
+	"GET /segments/{}/overrides": {
+		"resource": "segment",
+		"operation": "getOverrides",
+		"route": "GET /segments/{}/overrides",
+		"handler": "ListSegmentOverrides"
+	},
+	"GET /suppressions": {
+		"resource": "suppression",
+		"operation": "getAll",
+		"route": "GET /suppressions",
+		"handler": "ListSuppressions"
+	},
+	"GET /tasks/dlq": {
+		"resource": "deadLetter",
+		"operation": "getAll",
+		"route": "GET /tasks/dlq",
+		"handler": "ListTaskDeadLetters"
+	},
+	"GET /teams": {
+		"resource": "team",
+		"operation": "getAll",
+		"route": "GET /teams",
+		"handler": "ListTeams"
+	},
+	"GET /teams/{}": {
+		"resource": "team",
+		"operation": "get",
+		"route": "GET /teams/{}",
+		"handler": "GetTeam"
+	},
+	"GET /templates": {
+		"resource": "template",
+		"operation": "getAll",
+		"route": "GET /templates",
+		"handler": "ListTemplates"
+	},
+	"GET /templates/{}": {
+		"resource": "template",
+		"operation": "get",
+		"route": "GET /templates/{}",
+		"handler": "GetTemplate"
+	},
+	"GET /timezones": {
+		"resource": "workspace",
+		"operation": "getTimezones",
+		"route": "GET /timezones",
+		"handler": "GetTimezones"
+	},
+	"GET /unibox": {
+		"resource": "unibox",
+		"operation": "getAll",
+		"route": "GET /unibox",
+		"handler": "GetUniboxIncoming"
+	},
+	"GET /unibox/agent-drafts": {
+		"resource": "unibox",
+		"operation": "getAgentDrafts",
+		"route": "GET /unibox/agent-drafts",
+		"handler": "ListAgentDrafts"
+	},
+	"GET /unibox/compose/candidates": {
+		"resource": "unibox",
+		"operation": "getComposeCandidates",
+		"route": "GET /unibox/compose/candidates",
+		"handler": "GetComposeCandidates"
+	},
+	"GET /unibox/count": {
+		"resource": "unibox",
+		"operation": "getCount",
+		"route": "GET /unibox/count",
+		"handler": "GetUnseenCount"
+	},
+	"GET /unibox/drafts": {
+		"resource": "unibox",
+		"operation": "getDrafts",
+		"route": "GET /unibox/drafts",
+		"handler": "ListComposeDrafts"
+	},
+	"GET /unibox/overview": {
+		"resource": "unibox",
+		"operation": "getOverview",
+		"route": "GET /unibox/overview",
+		"handler": "GetUniboxOverview"
+	},
+	"GET /unibox/scheduled": {
+		"resource": "unibox",
+		"operation": "getScheduled",
+		"route": "GET /unibox/scheduled",
+		"handler": "ListUniboxScheduled"
+	},
+	"GET /unibox/snoozes": {
+		"resource": "unibox",
+		"operation": "getSnoozes",
+		"route": "GET /unibox/snoozes",
+		"handler": "ListUniboxSnoozes"
+	},
+	"GET /unibox/thread": {
+		"resource": "unibox",
+		"operation": "getThread",
+		"route": "GET /unibox/thread",
+		"handler": "GetUniboxThread"
+	},
+	"GET /unibox/thread/labels": {
+		"resource": "unibox",
+		"operation": "getThreadLabels",
+		"route": "GET /unibox/thread/labels",
+		"handler": "GetUniboxThreadLabels"
+	},
+	"GET /unibox/{}": {
+		"resource": "unibox",
+		"operation": "get",
+		"route": "GET /unibox/{}",
+		"handler": "GetUniboxEmail"
+	},
+	"GET /warmup/routing": {
+		"resource": "warmupRouting",
+		"operation": "getAll",
+		"route": "GET /warmup/routing",
+		"handler": "ListWarmupRoutingRules"
+	},
+	"GET /webhooks": {
+		"resource": "webhook",
+		"operation": "getAll",
+		"route": "GET /webhooks",
+		"handler": "ListWebhookEndpoints"
+	},
+	"GET /webhooks/deliveries": {
+		"resource": "webhook",
+		"operation": "getAllDeliveries",
+		"route": "GET /webhooks/deliveries",
+		"handler": "ListWebhookDeliveries"
+	},
+	"GET /webhooks/event-types": {
+		"resource": "webhook",
+		"operation": "getEventTypes",
+		"route": "GET /webhooks/event-types",
+		"handler": "ListWebhookEventCatalog"
+	},
+	"GET /webhooks/throttle-drops": {
+		"resource": "webhook",
+		"operation": "getThrottleDrops",
+		"route": "GET /webhooks/throttle-drops",
+		"handler": "ListWebhookDrops"
+	},
+	"GET /webhooks/{}/deliveries": {
+		"resource": "webhook",
+		"operation": "getDeliveries",
+		"route": "GET /webhooks/{}/deliveries",
+		"handler": "ListWebhookDeliveries"
+	},
+	"PATCH /ai/skills/{}": {
+		"resource": "aiSkill",
+		"operation": "update",
+		"route": "PATCH /ai/skills/{}",
+		"handler": "UpdateSkill"
+	},
+	"PATCH /api-keys/{}": {
+		"resource": "apiKey",
+		"operation": "update",
+		"route": "PATCH /api-keys/{}",
+		"handler": "UpdateAPIKey"
+	},
+	"PATCH /automations/{}": {
+		"resource": "automation",
+		"operation": "update",
+		"route": "PATCH /automations/{}",
+		"handler": "UpdateAutomation"
+	},
+	"PATCH /automations/{}/layout": {
+		"resource": "automation",
+		"operation": "updateLayout",
+		"route": "PATCH /automations/{}/layout",
+		"handler": "PatchAutomationLayout"
+	},
+	"PATCH /campaigns/{}": {
+		"resource": "campaign",
+		"operation": "update",
+		"route": "PATCH /campaigns/{}",
+		"handler": "UpdateCampaign"
+	},
+	"PATCH /campaigns/{}/ab-variants/{}": {
+		"resource": "campaignVariant",
+		"operation": "update",
+		"route": "PATCH /campaigns/{}/ab-variants/{}",
+		"handler": "UpdateCampaignABVariant"
+	},
+	"PATCH /campaigns/{}/advanced": {
+		"resource": "campaign",
+		"operation": "updateAdvanced",
+		"route": "PATCH /campaigns/{}/advanced",
+		"handler": "UpdateCampaignAdvancedSettings"
+	},
+	"PATCH /campaigns/{}/step-layout": {
+		"resource": "campaign",
+		"operation": "updateStepLayout",
+		"route": "PATCH /campaigns/{}/step-layout",
+		"handler": "PatchSequenceLayout"
+	},
+	"PATCH /campaigns/{}/steps/{}": {
+		"resource": "campaignStep",
+		"operation": "update",
+		"route": "PATCH /campaigns/{}/steps/{}",
+		"handler": "UpdateSequence"
+	},
+	"PATCH /categories/{}": {
+		"resource": "contactCategory",
+		"operation": "update",
+		"route": "PATCH /categories/{}",
+		"handler": "grouph.Update"
+	},
+	"PATCH /categories/{}/move": {
+		"resource": "contactCategory",
+		"operation": "move",
+		"route": "PATCH /categories/{}/move",
+		"handler": "grouph.Move"
+	},
+	"PATCH /contacts": {
+		"resource": "contact",
+		"operation": "bulkUpdate",
+		"route": "PATCH /contacts",
+		"handler": "UpdateContactBulk"
+	},
+	"PATCH /contacts/{}": {
+		"resource": "contact",
+		"operation": "update",
+		"route": "PATCH /contacts/{}",
+		"handler": "UpdateContact"
+	},
+	"PATCH /contacts/{}/notes/{}": {
+		"resource": "contactNote",
+		"operation": "update",
+		"route": "PATCH /contacts/{}/notes/{}",
+		"handler": "UpdateContactNote"
+	},
+	"PATCH /crm/deals/{}": {
+		"resource": "deal",
+		"operation": "update",
+		"route": "PATCH /crm/deals/{}",
+		"handler": "UpdateDeal"
+	},
+	"PATCH /crm/pipelines/{}": {
+		"resource": "pipeline",
+		"operation": "update",
+		"route": "PATCH /crm/pipelines/{}",
+		"handler": "UpdatePipeline"
+	},
+	"PATCH /crm/pipelines/{}/stages/{}": {
+		"resource": "pipeline",
+		"operation": "updateStage",
+		"route": "PATCH /crm/pipelines/{}/stages/{}",
+		"handler": "UpdateStage"
+	},
+	"PATCH /crm/task-types/{}": {
+		"resource": "crmTaskType",
+		"operation": "update",
+		"route": "PATCH /crm/task-types/{}",
+		"handler": "UpdateTaskType"
+	},
+	"PATCH /crm/tasks/{}": {
+		"resource": "crmTask",
+		"operation": "update",
+		"route": "PATCH /crm/tasks/{}",
+		"handler": "UpdateCRMTask"
+	},
+	"PATCH /emails/tags": {
+		"resource": "mailbox",
+		"operation": "bulkTag",
+		"route": "PATCH /emails/tags",
+		"handler": "BulkTagEmails"
+	},
+	"PATCH /emails/{}": {
+		"resource": "mailbox",
+		"operation": "update",
+		"route": "PATCH /emails/{}",
+		"handler": "UpdateEmail"
+	},
+	"PATCH /emails/{}/track": {
+		"resource": "mailbox",
+		"operation": "updateTrackingDomain",
+		"route": "PATCH /emails/{}/track",
+		"handler": "UpdateEmailTrackingDomain"
+	},
+	"PATCH /folders/{}": {
+		"resource": "folder",
+		"operation": "update",
+		"route": "PATCH /folders/{}",
+		"handler": "grouph.Update"
+	},
+	"PATCH /folders/{}/move": {
+		"resource": "folder",
+		"operation": "move",
+		"route": "PATCH /folders/{}/move",
+		"handler": "grouph.Move"
+	},
+	"PATCH /forms/{}": {
+		"resource": "form",
+		"operation": "update",
+		"route": "PATCH /forms/{}",
+		"handler": "UpdateForm"
+	},
+	"PATCH /integrations/connections/{}/config": {
+		"resource": "integration",
+		"operation": "updateConfig",
+		"route": "PATCH /integrations/connections/{}/config",
+		"handler": "UpdateConnectionConfig"
+	},
+	"PATCH /lead-sync/sources/{}": {
+		"resource": "leadSync",
+		"operation": "update",
+		"route": "PATCH /lead-sync/sources/{}",
+		"handler": "UpdateLeadSyncSource"
+	},
+	"PATCH /oauth/applications/{}": {
+		"resource": "oauthApp",
+		"operation": "update",
+		"route": "PATCH /oauth/applications/{}",
+		"handler": "UpdateOAuthApplication"
+	},
+	"PATCH /outreach/settings": {
+		"resource": "outreach",
+		"operation": "update",
+		"route": "PATCH /outreach/settings",
+		"handler": "UpdateOutreachSettings"
+	},
+	"PATCH /segments/{}": {
+		"resource": "segment",
+		"operation": "update",
+		"route": "PATCH /segments/{}",
+		"handler": "UpdateSegment"
+	},
+	"PATCH /tags/{}": {
+		"resource": "mailboxTag",
+		"operation": "update",
+		"route": "PATCH /tags/{}",
+		"handler": "grouph.Update"
+	},
+	"PATCH /tags/{}/move": {
+		"resource": "mailboxTag",
+		"operation": "move",
+		"route": "PATCH /tags/{}/move",
+		"handler": "grouph.Move"
+	},
+	"PATCH /teams/{}": {
+		"resource": "team",
+		"operation": "update",
+		"route": "PATCH /teams/{}",
+		"handler": "UpdateTeam"
+	},
+	"PATCH /templates/reorder": {
+		"resource": "template",
+		"operation": "reorder",
+		"route": "PATCH /templates/reorder",
+		"handler": "ReorderTemplates"
+	},
+	"PATCH /templates/{}": {
+		"resource": "template",
+		"operation": "update",
+		"route": "PATCH /templates/{}",
+		"handler": "UpdateTemplate"
+	},
+	"PATCH /unibox/seen": {
+		"resource": "unibox",
+		"operation": "markSeen",
+		"route": "PATCH /unibox/seen",
+		"handler": "UniboxMarkSeen"
+	},
+	"PATCH /warmup/routing/{}": {
+		"resource": "warmupRouting",
+		"operation": "update",
+		"route": "PATCH /warmup/routing/{}",
+		"handler": "UpdateWarmupRoutingRule"
+	},
+	"PATCH /webhooks/{}": {
+		"resource": "webhook",
+		"operation": "update",
+		"route": "PATCH /webhooks/{}",
+		"handler": "UpdateWebhookEndpoint"
+	},
+	"POST /advisor/recommendations/{}/apply": {
+		"resource": "advisor",
+		"operation": "apply",
+		"route": "POST /advisor/recommendations/{}/apply",
+		"handler": "ApplyAdvisorFinding"
+	},
+	"POST /advisor/recommendations/{}/dismiss": {
+		"resource": "advisor",
+		"operation": "dismiss",
+		"route": "POST /advisor/recommendations/{}/dismiss",
+		"handler": "DismissAdvisorFinding"
+	},
+	"POST /advisor/recommendations/{}/feedback": {
+		"resource": "advisor",
+		"operation": "submitFeedback",
+		"route": "POST /advisor/recommendations/{}/feedback",
+		"handler": "SubmitAdvisorFeedback"
+	},
+	"POST /advisor/recommendations/{}/snooze": {
+		"resource": "advisor",
+		"operation": "snooze",
+		"route": "POST /advisor/recommendations/{}/snooze",
+		"handler": "SnoozeAdvisorFinding"
+	},
+	"POST /advisor/recommendations/{}/undo": {
+		"resource": "advisor",
+		"operation": "undo",
+		"route": "POST /advisor/recommendations/{}/undo",
+		"handler": "UndoAdvisorFinding"
+	},
+	"POST /advisor/refresh": {
+		"resource": "advisor",
+		"operation": "refresh",
+		"route": "POST /advisor/refresh",
+		"handler": "RefreshAdvisor"
+	},
+	"POST /ai/skills": {
+		"resource": "aiSkill",
+		"operation": "create",
+		"route": "POST /ai/skills",
+		"handler": "CreateSkill"
+	},
+	"POST /ai/tools/{}/call": {
+		"resource": "agentTool",
+		"operation": "call",
+		"route": "POST /ai/tools/{}/call",
+		"handler": "CallAgentTool"
+	},
+	"POST /api-keys": {
+		"resource": "apiKey",
+		"operation": "create",
+		"route": "POST /api-keys",
+		"handler": "CreateAPIKey"
+	},
+	"POST /automations": {
+		"resource": "automation",
+		"operation": "create",
+		"route": "POST /automations",
+		"handler": "CreateAutomation"
+	},
+	"POST /automations/{}/test": {
+		"resource": "automation",
+		"operation": "test",
+		"route": "POST /automations/{}/test",
+		"handler": "TestAutomation"
+	},
+	"POST /campaign-template-preview": {
+		"resource": "campaign",
+		"operation": "previewTemplate",
+		"route": "POST /campaign-template-preview",
+		"handler": "PreviewCampaignTemplate"
+	},
+	"POST /campaigns": {
+		"resource": "campaign",
+		"operation": "create",
+		"route": "POST /campaigns",
+		"handler": "CreateCampaign"
+	},
+	"POST /campaigns-estimate": {
+		"resource": "campaign",
+		"operation": "estimate",
+		"route": "POST /campaigns-estimate",
+		"handler": "EstimateCampaign"
+	},
+	"POST /campaigns/{}/ab-variants": {
+		"resource": "campaignVariant",
+		"operation": "create",
+		"route": "POST /campaigns/{}/ab-variants",
+		"handler": "CreateCampaignABVariant"
+	},
+	"POST /campaigns/{}/attachments": {
+		"resource": "campaign",
+		"operation": "uploadAttachment",
+		"route": "POST /campaigns/{}/attachments",
+		"handler": "UploadCampaignAttachment"
+	},
+	"POST /campaigns/{}/duplicate": {
+		"resource": "campaign",
+		"operation": "duplicate",
+		"route": "POST /campaigns/{}/duplicate",
+		"handler": "DuplicateCampaign"
+	},
+	"POST /campaigns/{}/preflight": {
+		"resource": "campaign",
+		"operation": "preflight",
+		"route": "POST /campaigns/{}/preflight",
+		"handler": "RunCampaignPreflight"
+	},
+	"POST /campaigns/{}/start": {
+		"resource": "campaign",
+		"operation": "start",
+		"route": "POST /campaigns/{}/start",
+		"handler": "StartCampaign"
+	},
+	"POST /campaigns/{}/steps": {
+		"resource": "campaignStep",
+		"operation": "create",
+		"route": "POST /campaigns/{}/steps",
+		"handler": "CreateSequence"
+	},
+	"POST /campaigns/{}/stop": {
+		"resource": "campaign",
+		"operation": "stop",
+		"route": "POST /campaigns/{}/stop",
+		"handler": "StopCampaign"
+	},
+	"POST /campaigns/{}/test-email": {
+		"resource": "campaign",
+		"operation": "sendTestEmail",
+		"route": "POST /campaigns/{}/test-email",
+		"handler": "SendTestEmail"
+	},
+	"POST /campaigns/{}/tracking-domain/verify": {
+		"resource": "campaign",
+		"operation": "verifyTrackingDomain",
+		"route": "POST /campaigns/{}/tracking-domain/verify",
+		"handler": "VerifyCampaignTrackingDomain"
+	},
+	"POST /categories": {
+		"resource": "contactCategory",
+		"operation": "create",
+		"route": "POST /categories",
+		"handler": "grouph.Create"
+	},
+	"POST /contacts": {
+		"resource": "contact",
+		"operation": "create",
+		"route": "POST /contacts",
+		"handler": "AddContacts"
+	},
+	"POST /contacts/export": {
+		"resource": "contact",
+		"operation": "export",
+		"route": "POST /contacts/export",
+		"handler": "ExportContacts"
+	},
+	"POST /contacts/import/commit": {
+		"resource": "contact",
+		"operation": "importCommit",
+		"route": "POST /contacts/import/commit",
+		"handler": "ImportCommitContacts"
+	},
+	"POST /contacts/import/preview": {
+		"resource": "contact",
+		"operation": "importPreview",
+		"route": "POST /contacts/import/preview",
+		"handler": "ImportPreviewContacts"
+	},
+	"POST /contacts/research/batch": {
+		"resource": "contact",
+		"operation": "researchMany",
+		"route": "POST /contacts/research/batch",
+		"handler": "BatchResearch"
+	},
+	"POST /contacts/search": {
+		"resource": "contact",
+		"operation": "search",
+		"route": "POST /contacts/search",
+		"handler": "SearchContacts"
+	},
+	"POST /contacts/verification": {
+		"resource": "contact",
+		"operation": "requestVerification",
+		"route": "POST /contacts/verification",
+		"handler": "RequestContactVerification"
+	},
+	"POST /contacts/{}/notes": {
+		"resource": "contactNote",
+		"operation": "create",
+		"route": "POST /contacts/{}/notes",
+		"handler": "CreateContactNote"
+	},
+	"POST /contacts/{}/research": {
+		"resource": "contact",
+		"operation": "research",
+		"route": "POST /contacts/{}/research",
+		"handler": "ResearchContact"
+	},
+	"POST /crm/deals": {
+		"resource": "deal",
+		"operation": "create",
+		"route": "POST /crm/deals",
+		"handler": "CreateDeal"
+	},
+	"POST /crm/deals/search": {
+		"resource": "deal",
+		"operation": "search",
+		"route": "POST /crm/deals/search",
+		"handler": "SearchDeals"
+	},
+	"POST /crm/deals/summary": {
+		"resource": "deal",
+		"operation": "summary",
+		"route": "POST /crm/deals/summary",
+		"handler": "DealsSummary"
+	},
+	"POST /crm/pipelines": {
+		"resource": "pipeline",
+		"operation": "create",
+		"route": "POST /crm/pipelines",
+		"handler": "CreatePipeline"
+	},
+	"POST /crm/pipelines/{}/stages": {
+		"resource": "pipeline",
+		"operation": "createStage",
+		"route": "POST /crm/pipelines/{}/stages",
+		"handler": "CreateStage"
+	},
+	"POST /crm/task-types": {
+		"resource": "crmTaskType",
+		"operation": "create",
+		"route": "POST /crm/task-types",
+		"handler": "CreateTaskType"
+	},
+	"POST /crm/tasks": {
+		"resource": "crmTask",
+		"operation": "create",
+		"route": "POST /crm/tasks",
+		"handler": "CreateCRMTask"
+	},
+	"POST /crm/tasks/search": {
+		"resource": "crmTask",
+		"operation": "search",
+		"route": "POST /crm/tasks/search",
+		"handler": "SearchCRMTasks"
+	},
+	"POST /crm/tasks/summary": {
+		"resource": "crmTask",
+		"operation": "summary",
+		"route": "POST /crm/tasks/summary",
+		"handler": "TasksSummary"
+	},
+	"POST /deliverability/events": {
+		"resource": "deliverability",
+		"operation": "ingestEvent",
+		"route": "POST /deliverability/events",
+		"handler": "IngestDeliverabilityEvent"
+	},
+	"POST /emails/verify": {
+		"resource": "mailbox",
+		"operation": "verify",
+		"route": "POST /emails/verify",
+		"handler": "VerifyEmail"
+	},
+	"POST /emails/{}/auth-check": {
+		"resource": "mailbox",
+		"operation": "refreshAuthCheck",
+		"route": "POST /emails/{}/auth-check",
+		"handler": "RefreshEmailAuthCheck"
+	},
+	"POST /emails/{}/hold": {
+		"resource": "mailbox",
+		"operation": "hold",
+		"route": "POST /emails/{}/hold",
+		"handler": "HoldEmail"
+	},
+	"POST /emails/{}/release": {
+		"resource": "mailbox",
+		"operation": "release",
+		"route": "POST /emails/{}/release",
+		"handler": "ReleaseEmail"
+	},
+	"POST /emails/{}/send": {
+		"resource": "mailbox",
+		"operation": "send",
+		"route": "POST /emails/{}/send",
+		"handler": "SendEmailFromAccount"
+	},
+	"POST /emails/{}/track/verify": {
+		"resource": "mailbox",
+		"operation": "verifyTrackingDomain",
+		"route": "POST /emails/{}/track/verify",
+		"handler": "VerifyEmailTrackingDomain"
+	},
+	"POST /emails/{}/warmup/appeal": {
+		"resource": "mailbox",
+		"operation": "warmupAppeal",
+		"route": "POST /emails/{}/warmup/appeal",
+		"handler": "SubmitWarmupAppeal"
+	},
+	"POST /emails/{}/warmup/pause": {
+		"resource": "mailbox",
+		"operation": "warmupPause",
+		"route": "POST /emails/{}/warmup/pause",
+		"handler": "PauseWarmup"
+	},
+	"POST /emails/{}/warmup/resume": {
+		"resource": "mailbox",
+		"operation": "warmupResume",
+		"route": "POST /emails/{}/warmup/resume",
+		"handler": "ResumeWarmup"
+	},
+	"POST /emails/{}/warmup/start": {
+		"resource": "mailbox",
+		"operation": "warmupStart",
+		"route": "POST /emails/{}/warmup/start",
+		"handler": "StartWarmup"
+	},
+	"POST /emails/{}/warmup/stop": {
+		"resource": "mailbox",
+		"operation": "warmupStop",
+		"route": "POST /emails/{}/warmup/stop",
+		"handler": "StopWarmup"
+	},
+	"POST /folders": {
+		"resource": "folder",
+		"operation": "create",
+		"route": "POST /folders",
+		"handler": "grouph.Create"
+	},
+	"POST /forms": {
+		"resource": "form",
+		"operation": "create",
+		"route": "POST /forms",
+		"handler": "CreateForm"
+	},
+	"POST /forms/domain/verify": {
+		"resource": "form",
+		"operation": "verifyDomain",
+		"route": "POST /forms/domain/verify",
+		"handler": "VerifyFormsDomain"
+	},
+	"POST /forms/{}/assets/{}": {
+		"resource": "form",
+		"operation": "uploadAsset",
+		"route": "POST /forms/{}/assets/{}",
+		"handler": "UploadFormAsset"
+	},
+	"POST /generation/ai-variable": {
+		"resource": "campaign",
+		"operation": "generateVariable",
+		"route": "POST /generation/ai-variable",
+		"handler": "GenerateAIVariable"
+	},
+	"POST /generation/edit": {
+		"resource": "campaign",
+		"operation": "generateEdit",
+		"route": "POST /generation/edit",
+		"handler": "GenerateEdit"
+	},
+	"POST /generation/write": {
+		"resource": "campaign",
+		"operation": "generateWriting",
+		"route": "POST /generation/write",
+		"handler": "GenerateWriting"
+	},
+	"POST /integrations/connections": {
+		"resource": "integration",
+		"operation": "create",
+		"route": "POST /integrations/connections",
+		"handler": "ConnectIntegration"
+	},
+	"POST /integrations/connections/{}/events": {
+		"resource": "integration",
+		"operation": "createEventSubscription",
+		"route": "POST /integrations/connections/{}/events",
+		"handler": "CreateConnectionEventSubscription"
+	},
+	"POST /integrations/connections/{}/push": {
+		"resource": "integration",
+		"operation": "push",
+		"route": "POST /integrations/connections/{}/push",
+		"handler": "PushContactsToIntegration"
+	},
+	"POST /integrations/connections/{}/test": {
+		"resource": "integration",
+		"operation": "test",
+		"route": "POST /integrations/connections/{}/test",
+		"handler": "TestConnection"
+	},
+	"POST /lead-sync/google/preview": {
+		"resource": "leadSync",
+		"operation": "previewGoogleSheet",
+		"route": "POST /lead-sync/google/preview",
+		"handler": "PreviewLeadSync"
+	},
+	"POST /lead-sync/google/spreadsheet": {
+		"resource": "leadSync",
+		"operation": "getGoogleSpreadsheet",
+		"route": "POST /lead-sync/google/spreadsheet",
+		"handler": "GetLeadSyncSpreadsheet"
+	},
+	"POST /lead-sync/sources": {
+		"resource": "leadSync",
+		"operation": "create",
+		"route": "POST /lead-sync/sources",
+		"handler": "CreateLeadSyncSource"
+	},
+	"POST /lead-sync/sources/{}/sync": {
+		"resource": "leadSync",
+		"operation": "sync",
+		"route": "POST /lead-sync/sources/{}/sync",
+		"handler": "SyncLeadSyncSourceNow"
+	},
+	"POST /meetings": {
+		"resource": "meeting",
+		"operation": "create",
+		"route": "POST /meetings",
+		"handler": "CreateMeeting"
+	},
+	"POST /oauth/application-logo": {
+		"resource": "oauthApp",
+		"operation": "uploadLogo",
+		"route": "POST /oauth/application-logo",
+		"handler": "UploadOAuthAppLogo"
+	},
+	"POST /oauth/applications": {
+		"resource": "oauthApp",
+		"operation": "create",
+		"route": "POST /oauth/applications",
+		"handler": "CreateOAuthApplication"
+	},
+	"POST /oauth/applications/{}/rotate-secret": {
+		"resource": "oauthApp",
+		"operation": "rotateSecret",
+		"route": "POST /oauth/applications/{}/rotate-secret",
+		"handler": "RotateOAuthApplicationSecret"
+	},
+	"POST /oauth/applications/{}/webhook-secret/rotate": {
+		"resource": "oauthApp",
+		"operation": "rotateWebhookSecret",
+		"route": "POST /oauth/applications/{}/webhook-secret/rotate",
+		"handler": "RotateOAuthAppWebhookSecret"
+	},
+	"POST /segments": {
+		"resource": "segment",
+		"operation": "create",
+		"route": "POST /segments",
+		"handler": "CreateSegment"
+	},
+	"POST /segments/preview": {
+		"resource": "segment",
+		"operation": "preview",
+		"route": "POST /segments/preview",
+		"handler": "PreviewSegment"
+	},
+	"POST /segments/{}/add-to-campaign": {
+		"resource": "segment",
+		"operation": "addToCampaign",
+		"route": "POST /segments/{}/add-to-campaign",
+		"handler": "AddSegmentToCampaign"
+	},
+	"POST /segments/{}/members": {
+		"resource": "segment",
+		"operation": "setMembers",
+		"route": "POST /segments/{}/members",
+		"handler": "SetSegmentMembers"
+	},
+	"POST /segments/{}/members/lookup": {
+		"resource": "segment",
+		"operation": "lookupMembers",
+		"route": "POST /segments/{}/members/lookup",
+		"handler": "GetSegmentMemberModes"
+	},
+	"POST /suppressions": {
+		"resource": "suppression",
+		"operation": "add",
+		"route": "POST /suppressions",
+		"handler": "AddSuppressions"
+	},
+	"POST /tags": {
+		"resource": "mailboxTag",
+		"operation": "create",
+		"route": "POST /tags",
+		"handler": "grouph.Create"
+	},
+	"POST /tasks/dlq/{}/replay": {
+		"resource": "deadLetter",
+		"operation": "replay",
+		"route": "POST /tasks/dlq/{}/replay",
+		"handler": "ReplayTaskDeadLetter"
+	},
+	"POST /teams": {
+		"resource": "team",
+		"operation": "create",
+		"route": "POST /teams",
+		"handler": "CreateTeam"
+	},
+	"POST /teams/{}/members": {
+		"resource": "team",
+		"operation": "addMember",
+		"route": "POST /teams/{}/members",
+		"handler": "AddTeamMember"
+	},
+	"POST /templates": {
+		"resource": "template",
+		"operation": "create",
+		"route": "POST /templates",
+		"handler": "CreateTemplate"
+	},
+	"POST /templates/score": {
+		"resource": "template",
+		"operation": "score",
+		"route": "POST /templates/score",
+		"handler": "ScoreTemplateContent"
+	},
+	"POST /templates/{}/duplicate": {
+		"resource": "template",
+		"operation": "duplicate",
+		"route": "POST /templates/{}/duplicate",
+		"handler": "DuplicateTemplate"
+	},
+	"POST /templates/{}/render": {
+		"resource": "template",
+		"operation": "render",
+		"route": "POST /templates/{}/render",
+		"handler": "RenderTemplate"
+	},
+	"POST /unibox/agent-drafts/{}/approve": {
+		"resource": "unibox",
+		"operation": "approveAgentDraft",
+		"route": "POST /unibox/agent-drafts/{}/approve",
+		"handler": "ApproveAgentDraft"
+	},
+	"POST /unibox/agent-drafts/{}/discard": {
+		"resource": "unibox",
+		"operation": "discardAgentDraft",
+		"route": "POST /unibox/agent-drafts/{}/discard",
+		"handler": "DiscardAgentDraft"
+	},
+	"POST /unibox/compose": {
+		"resource": "unibox",
+		"operation": "compose",
+		"route": "POST /unibox/compose",
+		"handler": "UniboxCompose"
+	},
+	"POST /unibox/compose/draft": {
+		"resource": "unibox",
+		"operation": "draftCompose",
+		"route": "POST /unibox/compose/draft",
+		"handler": "DraftCompose"
+	},
+	"POST /unibox/reply": {
+		"resource": "unibox",
+		"operation": "reply",
+		"route": "POST /unibox/reply",
+		"handler": "UniboxReply"
+	},
+	"POST /unibox/reply/draft": {
+		"resource": "unibox",
+		"operation": "draftReply",
+		"route": "POST /unibox/reply/draft",
+		"handler": "DraftReply"
+	},
+	"POST /unibox/snooze": {
+		"resource": "unibox",
+		"operation": "snooze",
+		"route": "POST /unibox/snooze",
+		"handler": "CreateUniboxSnooze"
+	},
+	"POST /warmup/routing": {
+		"resource": "warmupRouting",
+		"operation": "create",
+		"route": "POST /warmup/routing",
+		"handler": "CreateWarmupRoutingRule"
+	},
+	"POST /webhooks": {
+		"resource": "webhook",
+		"operation": "create",
+		"route": "POST /webhooks",
+		"handler": "CreateWebhookEndpoint"
+	},
+	"POST /webhooks/deliveries/{}/redeliver": {
+		"resource": "webhook",
+		"operation": "redeliver",
+		"route": "POST /webhooks/deliveries/{}/redeliver",
+		"handler": "RedeliverWebhookDelivery"
+	},
+	"POST /webhooks/{}/rotate-secret": {
+		"resource": "webhook",
+		"operation": "rotateSecret",
+		"route": "POST /webhooks/{}/rotate-secret",
+		"handler": "RotateWebhookSecret"
+	},
+	"POST /webhooks/{}/verify": {
+		"resource": "webhook",
+		"operation": "verify",
+		"route": "POST /webhooks/{}/verify",
+		"handler": "VerifyWebhookEndpoint"
+	},
+	"PUT /campaigns/{}/segments": {
+		"resource": "campaign",
+		"operation": "replaceSegments",
+		"route": "PUT /campaigns/{}/segments",
+		"handler": "SetCampaignSegments"
+	},
+	"PUT /campaigns/{}/senders": {
+		"resource": "campaign",
+		"operation": "replaceSenders",
+		"route": "PUT /campaigns/{}/senders",
+		"handler": "ReplaceCampaignSenders"
+	},
+	"PUT /emails/{}/behavior": {
+		"resource": "mailbox",
+		"operation": "updateBehavior",
+		"route": "PUT /emails/{}/behavior",
+		"handler": "UpdateEmailBehavior"
+	},
+	"PUT /forms/domain": {
+		"resource": "form",
+		"operation": "setDomain",
+		"route": "PUT /forms/domain",
+		"handler": "SetFormsDomain"
+	},
+	"PUT /integrations/connections/{}/field-mappings": {
+		"resource": "integration",
+		"operation": "replaceFieldMappings",
+		"route": "PUT /integrations/connections/{}/field-mappings",
+		"handler": "ReplaceConnectionFieldMappings"
+	},
+	"PUT /unibox/drafts/{}": {
+		"resource": "unibox",
+		"operation": "saveDraft",
+		"route": "PUT /unibox/drafts/{}",
+		"handler": "UpsertComposeDraft"
+	},
+	"PUT /unibox/thread/labels": {
+		"resource": "unibox",
+		"operation": "setThreadLabels",
+		"route": "PUT /unibox/thread/labels",
+		"handler": "SetUniboxThreadLabels"
+	}
+}

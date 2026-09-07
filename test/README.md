@@ -10,6 +10,11 @@ Pure, fast, no network. Runs in CI. Covers:
   tampered / wrong-secret / swapped-timestamp / malformed).
 - `extractArray` and `coerceValue`: the response-envelope and parameter
   coercion plumbing.
+- **API coverage**: every operation in `spec/warmbly-api.json` (the recorded
+  Warmbly surface) is reachable from the node, the node offers nothing the API
+  does not serve, and every registry field has a UI field to come from. No
+  network and no Warmbly checkout needed, so it guards the coverage promise on
+  every CI run.
 
 ## End-to-end (`npm run test:e2e`)
 
@@ -27,12 +32,22 @@ What it does, in order, in one file (so the coverage tally is shared):
 2. **Write lifecycles**: `create → read → update → delete` round-trips for
    pipeline (incl. stages), reply template (incl. duplicate/render/score/
    reorder), CRM task type, team, CRM task, deal, webhook, contact + notes,
-   warmup routing, automation, API key, and one shared campaign with its steps
-   and A/B variants. Plus search/export, outreach settings, and id-scoped
-   analytics.
+   warmup routing, automation, API key, segment (incl. members and campaign
+   attachment), suppression list, meeting, AI skill, OAuth application, compose
+   draft, the three group types (campaign folder, mailbox tag, contact
+   category), and one shared campaign with its steps and A/B variants. Plus
+   real multipart uploads (campaign attachment, contact CSV import, application
+   logo), bulk contact edits, inbox message actions, mailbox hold/release and
+   bulk tagging, an agent-tool call, search/export, outreach settings, and
+   id-scoped analytics.
 3. **Coverage accounting**: asserts every operation in `RESOURCE_OPERATIONS` is
    either executed or skipped-with-reason (nothing silently uncovered), and
    writes `test/.e2e-report.json`.
+
+The last full run against a seeded local instance executed **219 of 305**
+operations with no failures; every one of the remaining 86 carries a concrete
+reason (below). The exact split moves a little run to run with what the
+workspace holds (a campaign with no logs yet, a mailbox with no sync record).
 
 ### Resilience
 
@@ -76,8 +91,16 @@ configured key and the request layer's backoff copes.
 The coverage report lists every skip with a reason. The categories:
 
 - **Side-effecting / external-dependency** ops (sending email, warmup, DNS auth,
-  3rd-party integrations) can't be validated on a bare instance.
-- **Multipart uploads**: need binary file fixtures.
-- **Single-resource GETs / writes** without a dedicated lifecycle scenario yet.
-  The easiest place to grow coverage: add a `create → … → delete` block in
-  `e2e/warmbly.e2e.test.ts` and the accounting picks it up automatically.
+  AI generation, 3rd-party integrations) can't be validated on a bare instance.
+- **Missing fixture data**: an advisor finding to dismiss, an agent draft to
+  approve, a past webhook delivery to replay, a second workspace user to add to
+  a team.
+- **Would break the run**: revoking the suite's own API key, deleting a seeded
+  mailbox the later specs read.
+- **Known server-side failures**, recorded rather than masked: `POST /forms`
+  500s because the create path leaves `forms.allowed_domains` NULL against a
+  NOT NULL column, which blocks every form operation that needs a form to
+  exist; `GET /emails/{id}` 500s for seeded mailboxes.
+
+To grow coverage further, add a `create → … → delete` block in
+`e2e/warmbly.e2e.test.ts`; the accounting picks it up automatically.

@@ -95,7 +95,11 @@ export async function warmblyApiRequest(
 	}
 	const isEmptyObjectBody =
 		!Array.isArray(body) && typeof body === 'object' && Object.keys(body).length === 0;
-	if (method === 'GET' || isEmptyObjectBody) {
+	// A GET or DELETE carries no body. A POST/PUT/PATCH keeps its `{}`: several
+	// Warmbly endpoints take an all-optional body and reject a request with no
+	// body at all (the JSON decoder sees EOF), so dropping it would break
+	// "start this with the defaults" calls such as the campaign estimate.
+	if (method === 'GET' || method === 'HEAD' || (isEmptyObjectBody && method === 'DELETE')) {
 		delete options.body;
 	}
 
