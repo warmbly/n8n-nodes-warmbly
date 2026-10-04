@@ -3,6 +3,47 @@
 All notable changes to `n8n-nodes-warmbly` are documented here. This project
 adheres to [Semantic Versioning](https://semver.org/).
 
+## [0.3.0] - 2026-10-04
+
+Catches the node up with the current Warmbly API (305 -> 354 operations).
+
+### Changed
+
+- **Breaking:** the campaign `Kind` filter on Get Many and the `Kind` field on
+  Create are gone, because the API no longer takes them. Remove them from saved
+  workflows.
+- Contact Look Up by Email now also accepts a thread ID and a mailbox ID, and
+  the email is optional when a thread ID is given.
+- New parameters on existing operations: campaign entry delay, step kind,
+  action and thread reply, estimate window, mailbox send-as address and warmup
+  placement, contact selection by filter for verification, bulk edit and segment
+  membership, unibox forward, thread-ID snooze and mark seen, archived and
+  automated inbox filters, analytics date range and mailbox filter, lead sync
+  segment filter, form triage, and more.
+
+### Added
+
+- **49 new operations (305 -> 354) across 5 new resources**:
+  - Contact Import: create from a file, analyze, start, save draft, cancel, get,
+    get many and download failed rows.
+  - Placement Test, Placement Batch and Placement Seed: run and follow inbox
+    placement tests, preview and run batches, and choose seed mailboxes.
+  - Email Image: upload, list and delete.
+  - Campaign: per-lead hold (pause, resume, get), per-lead CC contacts, placement
+    monitor, and today's send plan.
+  - Mailbox: send identity (get, refresh), direct-mail tracking and sync
+    folders. Analytics: direct mail, inbox tagging review and warmup placement.
+  - CRM Task bulk update and delete, API key permanent delete, integration
+    inbound URL rotation and signing key, template content analysis, and unibox
+    move folder.
+- No new trigger events (62 event types).
+
+### Fixed
+
+- The API extractor handles route registrations that span several lines,
+  request bodies seeded with defaults, and handlers that accept either a list or
+  a selection object.
+
 ## [0.2.0] - 2026-09-07
 
 Full coverage of the current Warmbly API, and the node is now generated from
