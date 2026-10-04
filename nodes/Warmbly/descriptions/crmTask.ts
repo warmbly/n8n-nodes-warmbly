@@ -16,6 +16,18 @@ export const crmTaskOperations: INodeProperties[] = [
 		},
 		options: [
 			{
+				name: 'Bulk Delete',
+				value: 'bulkDelete',
+				action: 'Delete many CRM tasks',
+				description: 'Delete many CRM tasks',
+			},
+			{
+				name: 'Bulk Update',
+				value: 'bulkUpdate',
+				action: 'Update many CRM tasks',
+				description: 'Update many CRM tasks',
+			},
+			{
 				name: 'Create',
 				value: 'create',
 				action: 'Create task',
@@ -63,6 +75,154 @@ export const crmTaskOperations: INodeProperties[] = [
 ];
 
 export const crmTaskFields: INodeProperties[] = [
+	{
+		displayName: 'Body',
+		name: 'body',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'Comma-separated list.',
+		displayOptions: {
+			show: {
+				resource: [
+					'crmTask',
+				],
+				operation: [
+					'bulkDelete',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Additional Fields',
+		name: 'additionalFields',
+		type: 'collection',
+		placeholder: 'Add Field',
+		default: {},
+		displayOptions: {
+			show: {
+				resource: [
+					'crmTask',
+				],
+				operation: [
+					'bulkDelete',
+				],
+			},
+		},
+		options: [
+			{
+				displayName: 'Idempotency Key',
+				name: 'idempotencyKey',
+				type: 'string',
+				default: '',
+				description: 'Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.',
+			},
+		],
+	},
+	{
+		displayName: 'Update Fields',
+		name: 'updateFields',
+		type: 'collection',
+		placeholder: 'Add Field',
+		default: {},
+		displayOptions: {
+			show: {
+				resource: [
+					'crmTask',
+				],
+				operation: [
+					'bulkUpdate',
+				],
+			},
+		},
+		options: [
+			{
+				displayName: 'All',
+				name: 'all',
+				type: 'boolean',
+				default: false,
+				description: 'All switches the selection from the id list to Filters.',
+			},
+			{
+				displayName: 'Exclude',
+				name: 'exclude',
+				type: 'string',
+				default: '',
+				description: 'Exclude drops ids from the resolved set: the rows unticked after a select-all. Ignored unless All is set. Comma-separated list.',
+			},
+			{
+				displayName: 'Filters',
+				name: 'filters',
+				type: 'json',
+				default: '',
+				description: 'Filters is the same search body /crm/tasks/search takes, so the set resolved here is exactly the set the list was showing. Provide as JSON.',
+			},
+			{
+				displayName: 'Idempotency Key',
+				name: 'idempotencyKey',
+				type: 'string',
+				default: '',
+				description: 'Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.',
+			},
+			{
+				displayName: 'Priority',
+				name: 'priority',
+				type: 'options',
+				options: [
+					{
+						name: 'High',
+						value: 'high',
+					},
+					{
+						name: 'Low',
+						value: 'low',
+					},
+					{
+						name: 'Medium',
+						value: 'medium',
+					},
+					{
+						name: 'Urgent',
+						value: 'urgent',
+					},
+				],
+				default: 'low',
+				description: 'Priority to set.',
+			},
+			{
+				displayName: 'Status',
+				name: 'status',
+				type: 'options',
+				options: [
+					{
+						name: 'Cancelled',
+						value: 'cancelled',
+					},
+					{
+						name: 'Completed',
+						value: 'completed',
+					},
+					{
+						name: 'In Progress',
+						value: 'in_progress',
+					},
+					{
+						name: 'Pending',
+						value: 'pending',
+					},
+				],
+				default: 'pending',
+				description: 'Status to set. completed stamps completed_at and records the completion on each linked contact\'s timeline.',
+			},
+			{
+				displayName: 'Tasks',
+				name: 'tasks',
+				type: 'string',
+				default: '',
+				description: 'Comma-separated list.',
+			},
+		],
+	},
 	{
 		displayName: 'Title',
 		name: 'title',

@@ -13,12 +13,14 @@ import { folderOperations, folderFields } from './folder';
 import { campaignStepOperations, campaignStepFields } from './campaignStep';
 import { contactOperations, contactFields } from './contact';
 import { contactCategoryOperations, contactCategoryFields } from './contactCategory';
+import { contactImportOperations, contactImportFields } from './contactImport';
 import { contactNoteOperations, contactNoteFields } from './contactNote';
 import { crmTaskOperations, crmTaskFields } from './crmTask';
 import { crmTaskTypeOperations, crmTaskTypeFields } from './crmTaskType';
 import { deadLetterOperations, deadLetterFields } from './deadLetter';
 import { dealOperations, dealFields } from './deal';
 import { deliverabilityOperations, deliverabilityFields } from './deliverability';
+import { emailImageOperations, emailImageFields } from './emailImage';
 import { formOperations, formFields } from './form';
 import { integrationOperations, integrationFields } from './integration';
 import { leadSyncOperations, leadSyncFields } from './leadSync';
@@ -28,6 +30,9 @@ import { meetingOperations, meetingFields } from './meeting';
 import { oauthAppOperations, oauthAppFields } from './oauthApp';
 import { outreachOperations, outreachFields } from './outreach';
 import { pipelineOperations, pipelineFields } from './pipeline';
+import { placementBatchOperations, placementBatchFields } from './placementBatch';
+import { placementSeedOperations, placementSeedFields } from './placementSeed';
+import { placementTestOperations, placementTestFields } from './placementTest';
 import { templateOperations, templateFields } from './template';
 import { segmentOperations, segmentFields } from './segment';
 import { suppressionOperations, suppressionFields } from './suppression';
@@ -97,6 +102,10 @@ export const resourceProperty: INodeProperties = {
 			value: 'contactCategory',
 		},
 		{
+			name: 'Contact Import',
+			value: 'contactImport',
+		},
+		{
 			name: 'Contact Note',
 			value: 'contactNote',
 		},
@@ -119,6 +128,10 @@ export const resourceProperty: INodeProperties = {
 		{
 			name: 'Deliverability',
 			value: 'deliverability',
+		},
+		{
+			name: 'Email Image',
+			value: 'emailImage',
 		},
 		{
 			name: 'Form',
@@ -155,6 +168,18 @@ export const resourceProperty: INodeProperties = {
 		{
 			name: 'Pipeline',
 			value: 'pipeline',
+		},
+		{
+			name: 'Placement Batch',
+			value: 'placementBatch',
+		},
+		{
+			name: 'Placement Seed',
+			value: 'placementSeed',
+		},
+		{
+			name: 'Placement Test',
+			value: 'placementTest',
 		},
 		{
 			name: 'Reply Template',
@@ -206,12 +231,14 @@ export const operationProperties: INodeProperties[] = [
 	...campaignStepOperations,
 	...contactOperations,
 	...contactCategoryOperations,
+	...contactImportOperations,
 	...contactNoteOperations,
 	...crmTaskOperations,
 	...crmTaskTypeOperations,
 	...deadLetterOperations,
 	...dealOperations,
 	...deliverabilityOperations,
+	...emailImageOperations,
 	...formOperations,
 	...integrationOperations,
 	...leadSyncOperations,
@@ -221,6 +248,9 @@ export const operationProperties: INodeProperties[] = [
 	...oauthAppOperations,
 	...outreachOperations,
 	...pipelineOperations,
+	...placementBatchOperations,
+	...placementSeedOperations,
+	...placementTestOperations,
 	...templateOperations,
 	...segmentOperations,
 	...suppressionOperations,
@@ -245,12 +275,14 @@ export const fieldProperties: INodeProperties[] = [
 	...campaignStepFields,
 	...contactFields,
 	...contactCategoryFields,
+	...contactImportFields,
 	...contactNoteFields,
 	...crmTaskFields,
 	...crmTaskTypeFields,
 	...deadLetterFields,
 	...dealFields,
 	...deliverabilityFields,
+	...emailImageFields,
 	...formFields,
 	...integrationFields,
 	...leadSyncFields,
@@ -260,6 +292,9 @@ export const fieldProperties: INodeProperties[] = [
 	...oauthAppFields,
 	...outreachFields,
 	...pipelineFields,
+	...placementBatchFields,
+	...placementSeedFields,
+	...placementTestFields,
 	...templateFields,
 	...segmentFields,
 	...suppressionFields,

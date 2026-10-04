@@ -34,6 +34,12 @@ export const campaignOperations: INodeProperties[] = [
 				description: 'Delete an attachment',
 			},
 			{
+				name: 'Delete Placement Monitor',
+				value: 'deletePlacementMonitor',
+				action: 'Delete a campaign placement monitor',
+				description: 'Delete a campaign placement monitor',
+			},
+			{
 				name: 'Duplicate',
 				value: 'duplicate',
 				action: 'Duplicate a campaign',
@@ -92,6 +98,18 @@ export const campaignOperations: INodeProperties[] = [
 				description: 'Get the forms feeding a campaign',
 			},
 			{
+				name: 'Get Lead CC',
+				value: 'getLeadCc',
+				action: 'Get CC contacts of a campaign lead',
+				description: 'Get CC contacts of a campaign lead',
+			},
+			{
+				name: 'Get Lead Hold',
+				value: 'getLeadHold',
+				action: 'Get the hold on a campaign lead',
+				description: 'Get the hold on a campaign lead',
+			},
+			{
 				name: 'Get Logs',
 				value: 'getLogs',
 				action: 'Get campaign logs',
@@ -110,16 +128,34 @@ export const campaignOperations: INodeProperties[] = [
 				description: 'Get the campaigns overview',
 			},
 			{
+				name: 'Get Placement Monitor',
+				value: 'getPlacementMonitor',
+				action: 'Get a campaign placement monitor',
+				description: 'Get a campaign placement monitor',
+			},
+			{
 				name: 'Get Segments',
 				value: 'getSegments',
 				action: 'Get campaign segments',
 				description: 'Get campaign segments',
 			},
 			{
+				name: 'Get Send Plan',
+				value: 'getSendPlan',
+				action: 'Get the sending plan of a campaign',
+				description: 'Get the sending plan of a campaign',
+			},
+			{
 				name: 'Get Senders',
 				value: 'getSenders',
 				action: 'List campaign senders',
 				description: 'List campaign senders',
+			},
+			{
+				name: 'Pause Lead',
+				value: 'pauseLead',
+				action: 'Pause a lead in a campaign',
+				description: 'Pause a lead in a campaign',
 			},
 			{
 				name: 'Preview Template',
@@ -139,6 +175,12 @@ export const campaignOperations: INodeProperties[] = [
 				action: 'Replace senders',
 			},
 			{
+				name: 'Resume Lead',
+				value: 'resumeLead',
+				action: 'Resume a lead in a campaign',
+				description: 'Resume a lead in a campaign',
+			},
+			{
 				name: 'Run Preflight',
 				value: 'preflight',
 				action: 'Run preflight',
@@ -148,6 +190,18 @@ export const campaignOperations: INodeProperties[] = [
 				value: 'sendTestEmail',
 				action: 'Send a test email',
 				description: 'Send a test email',
+			},
+			{
+				name: 'Set Lead CC',
+				value: 'setLeadCc',
+				action: 'Set CC contacts of a campaign lead',
+				description: 'Set CC contacts of a campaign lead',
+			},
+			{
+				name: 'Set Placement Monitor',
+				value: 'setPlacementMonitor',
+				action: 'Set a campaign placement monitor',
+				description: 'Set a campaign placement monitor',
 			},
 			{
 				name: 'Start',
@@ -160,6 +214,12 @@ export const campaignOperations: INodeProperties[] = [
 				value: 'stop',
 				action: 'Stop a campaign',
 				description: 'Stop a campaign',
+			},
+			{
+				name: 'Suggest Lead CC',
+				value: 'suggestLeadCc',
+				action: 'Suggest CC contacts for a campaign lead',
+				description: 'Suggest CC contacts for a campaign lead',
 			},
 			{
 				name: 'Update',
@@ -297,6 +357,12 @@ export const campaignFields: INodeProperties[] = [
 				description: 'Legacy daily end (HH:MM).',
 			},
 			{
+				displayName: 'Entry Delay Minutes',
+				name: 'entry_delay_minutes',
+				type: 'number',
+				default: 0,
+			},
+			{
 				displayName: 'ESP Match Mode',
 				name: 'esp_match_mode',
 				type: 'options',
@@ -329,13 +395,6 @@ export const campaignFields: INodeProperties[] = [
 				type: 'string',
 				default: '',
 				description: 'Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.',
-			},
-			{
-				displayName: 'Kind',
-				name: 'kind',
-				type: 'string',
-				default: '',
-				description: 'Kind defaults to "sequence". A "one_time" campaign accepts a single email step here and refuses further ones later.',
 			},
 			{
 				displayName: 'Link Tracking',
@@ -627,6 +686,50 @@ export const campaignFields: INodeProperties[] = [
 		type: 'string',
 		default: '',
 		required: true,
+		description: 'Campaign id.',
+		displayOptions: {
+			show: {
+				resource: [
+					'campaign',
+				],
+				operation: [
+					'deletePlacementMonitor',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Additional Fields',
+		name: 'additionalFields',
+		type: 'collection',
+		placeholder: 'Add Field',
+		default: {},
+		displayOptions: {
+			show: {
+				resource: [
+					'campaign',
+				],
+				operation: [
+					'deletePlacementMonitor',
+				],
+			},
+		},
+		options: [
+			{
+				displayName: 'Idempotency Key',
+				name: 'idempotencyKey',
+				type: 'string',
+				default: '',
+				description: 'Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.',
+			},
+		],
+	},
+	{
+		displayName: 'ID',
+		name: 'id',
+		type: 'string',
+		default: '',
+		required: true,
 		description: 'The campaign to copy',
 		displayOptions: {
 			show: {
@@ -689,6 +792,13 @@ export const campaignFields: INodeProperties[] = [
 		},
 		options: [
 			{
+				displayName: 'Campaign ID',
+				name: 'campaign_id',
+				type: 'string',
+				default: '',
+				description: 'CampaignID projects a saved campaign, filling anything not sent from it.',
+			},
+			{
 				displayName: 'Daily Limit',
 				name: 'daily_limit',
 				type: 'number',
@@ -706,6 +816,12 @@ export const campaignFields: INodeProperties[] = [
 				type: 'string',
 				default: '',
 				description: 'Comma-separated list.',
+			},
+			{
+				displayName: 'End Time',
+				name: 'end_time',
+				type: 'string',
+				default: '',
 			},
 			{
 				displayName: 'Idempotency Key',
@@ -726,6 +842,20 @@ export const campaignFields: INodeProperties[] = [
 				name: 'start_date',
 				type: 'dateTime',
 				default: '',
+			},
+			{
+				displayName: 'Start Time',
+				name: 'start_time',
+				type: 'string',
+				default: '',
+				description: 'StartTime and EndTime are the daily sending window ("HH:MM"); absent means the scheduler\'s default window.',
+			},
+			{
+				displayName: 'Step Waits',
+				name: 'step_waits',
+				type: 'json',
+				default: '',
+				description: 'StepWaits is each follow-up\'s wait_after in days, in order. Empty is a single email. Provide as JSON.',
 			},
 			{
 				displayName: 'Timezone',
@@ -993,6 +1123,78 @@ export const campaignFields: INodeProperties[] = [
 		},
 	},
 	{
+		displayName: 'ID',
+		name: 'id',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'The campaign\'s id',
+		displayOptions: {
+			show: {
+				resource: [
+					'campaign',
+				],
+				operation: [
+					'getLeadCc',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Contact ID',
+		name: 'contactId',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'ID of the contact (lead) in this campaign.',
+		displayOptions: {
+			show: {
+				resource: [
+					'campaign',
+				],
+				operation: [
+					'getLeadCc',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'ID',
+		name: 'id',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'The campaign\'s id',
+		displayOptions: {
+			show: {
+				resource: [
+					'campaign',
+				],
+				operation: [
+					'getLeadHold',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Contact ID',
+		name: 'contactId',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'ID of the contact (lead) in this campaign.',
+		displayOptions: {
+			show: {
+				resource: [
+					'campaign',
+				],
+				operation: [
+					'getLeadHold',
+				],
+			},
+		},
+	},
+	{
 		displayName: 'Return All',
 		name: 'returnAll',
 		type: 'boolean',
@@ -1114,12 +1316,6 @@ export const campaignFields: INodeProperties[] = [
 				description: 'Restrict to a single folder id.',
 			},
 			{
-				displayName: 'Kind',
-				name: 'kind',
-				type: 'string',
-				default: '',
-			},
-			{
 				displayName: 'Q',
 				name: 'q',
 				type: 'string',
@@ -1141,6 +1337,24 @@ export const campaignFields: INodeProperties[] = [
 		type: 'string',
 		default: '',
 		required: true,
+		description: 'Campaign id.',
+		displayOptions: {
+			show: {
+				resource: [
+					'campaign',
+				],
+				operation: [
+					'getPlacementMonitor',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'ID',
+		name: 'id',
+		type: 'string',
+		default: '',
+		required: true,
 		description: 'The campaign\'s id',
 		displayOptions: {
 			show: {
@@ -1149,6 +1363,24 @@ export const campaignFields: INodeProperties[] = [
 				],
 				operation: [
 					'getSegments',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'ID',
+		name: 'id',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'The campaign\'s id',
+		displayOptions: {
+			show: {
+				resource: [
+					'campaign',
+				],
+				operation: [
+					'getSendPlan',
 				],
 			},
 		},
@@ -1169,6 +1401,82 @@ export const campaignFields: INodeProperties[] = [
 				],
 			},
 		},
+	},
+	{
+		displayName: 'ID',
+		name: 'id',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'The campaign\'s id',
+		displayOptions: {
+			show: {
+				resource: [
+					'campaign',
+				],
+				operation: [
+					'pauseLead',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Contact ID',
+		name: 'contactId',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'ID of the contact (lead) in this campaign.',
+		displayOptions: {
+			show: {
+				resource: [
+					'campaign',
+				],
+				operation: [
+					'pauseLead',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Additional Fields',
+		name: 'additionalFields',
+		type: 'collection',
+		placeholder: 'Add Field',
+		default: {},
+		displayOptions: {
+			show: {
+				resource: [
+					'campaign',
+				],
+				operation: [
+					'pauseLead',
+				],
+			},
+		},
+		options: [
+			{
+				displayName: 'Idempotency Key',
+				name: 'idempotencyKey',
+				type: 'string',
+				default: '',
+				description: 'Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.',
+			},
+			{
+				displayName: 'Reason',
+				name: 'reason',
+				type: 'string',
+				default: '',
+				description: 'Optional note shown next to the hold.',
+			},
+			{
+				displayName: 'Until',
+				name: 'until',
+				type: 'dateTime',
+				default: '',
+				description: 'When the hold lifts. Must be in the future and within a year. Omit or null for a hold with no end.',
+			},
+		],
 	},
 	{
 		displayName: 'Additional Fields',
@@ -1362,6 +1670,68 @@ export const campaignFields: INodeProperties[] = [
 		],
 	},
 	{
+		displayName: 'ID',
+		name: 'id',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'The campaign\'s id',
+		displayOptions: {
+			show: {
+				resource: [
+					'campaign',
+				],
+				operation: [
+					'resumeLead',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Contact ID',
+		name: 'contactId',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'ID of the contact (lead) in this campaign.',
+		displayOptions: {
+			show: {
+				resource: [
+					'campaign',
+				],
+				operation: [
+					'resumeLead',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Additional Fields',
+		name: 'additionalFields',
+		type: 'collection',
+		placeholder: 'Add Field',
+		default: {},
+		displayOptions: {
+			show: {
+				resource: [
+					'campaign',
+				],
+				operation: [
+					'resumeLead',
+				],
+			},
+		},
+		options: [
+			{
+				displayName: 'Idempotency Key',
+				name: 'idempotencyKey',
+				type: 'string',
+				default: '',
+				description: 'Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.',
+			},
+		],
+	},
+	{
 		displayName: 'Campaign ID',
 		name: 'id',
 		type: 'string',
@@ -1498,6 +1868,179 @@ export const campaignFields: INodeProperties[] = [
 		],
 	},
 	{
+		displayName: 'ID',
+		name: 'id',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'The campaign\'s id',
+		displayOptions: {
+			show: {
+				resource: [
+					'campaign',
+				],
+				operation: [
+					'setLeadCc',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Contact ID',
+		name: 'contactId',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'ID of the contact (lead) in this campaign.',
+		displayOptions: {
+			show: {
+				resource: [
+					'campaign',
+				],
+				operation: [
+					'setLeadCc',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Contact IDs',
+		name: 'contact_ids',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'Contacts of the workspace to copy, at most 2. Duplicates are ignored; an empty list removes every copy. Comma-separated list.',
+		displayOptions: {
+			show: {
+				resource: [
+					'campaign',
+				],
+				operation: [
+					'setLeadCc',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Update Fields',
+		name: 'updateFields',
+		type: 'collection',
+		placeholder: 'Add Field',
+		default: {},
+		displayOptions: {
+			show: {
+				resource: [
+					'campaign',
+				],
+				operation: [
+					'setLeadCc',
+				],
+			},
+		},
+		options: [
+			{
+				displayName: 'Idempotency Key',
+				name: 'idempotencyKey',
+				type: 'string',
+				default: '',
+				description: 'Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.',
+			},
+		],
+	},
+	{
+		displayName: 'ID',
+		name: 'id',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'Campaign id.',
+		displayOptions: {
+			show: {
+				resource: [
+					'campaign',
+				],
+				operation: [
+					'setPlacementMonitor',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Update Fields',
+		name: 'updateFields',
+		type: 'collection',
+		placeholder: 'Add Field',
+		default: {},
+		displayOptions: {
+			show: {
+				resource: [
+					'campaign',
+				],
+				operation: [
+					'setPlacementMonitor',
+				],
+			},
+		},
+		options: [
+			{
+				displayName: 'Alert Below',
+				name: 'alert_below',
+				type: 'number',
+				default: 0,
+				description: 'Alert when the inbox rate falls below this percent',
+			},
+			{
+				displayName: 'Enabled',
+				name: 'enabled',
+				type: 'boolean',
+				default: false,
+				description: 'Run the scheduled test',
+			},
+			{
+				displayName: 'Idempotency Key',
+				name: 'idempotencyKey',
+				type: 'string',
+				default: '',
+				description: 'Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.',
+			},
+			{
+				displayName: 'Interval Days',
+				name: 'interval_days',
+				type: 'number',
+				default: 0,
+				description: 'Days between tests, 1 to 30',
+			},
+			{
+				displayName: 'Panel',
+				name: 'panel',
+				type: 'options',
+				options: [
+					{
+						name: 'Cloud',
+						value: 'cloud',
+					},
+					{
+						name: 'Instance',
+						value: 'instance',
+					},
+					{
+						name: 'Workspace',
+						value: 'workspace',
+					},
+				],
+				default: 'instance',
+				description: 'instance, workspace or cloud',
+			},
+			{
+				displayName: 'Pause On Alert',
+				name: 'pause_on_alert',
+				type: 'boolean',
+				default: false,
+				description: 'Also pause the campaign (paused_guardrail) when a run alerts.',
+			},
+		],
+	},
+	{
 		displayName: 'Campaign ID',
 		name: 'id',
 		type: 'string',
@@ -1589,6 +2132,42 @@ export const campaignFields: INodeProperties[] = [
 				description: 'Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.',
 			},
 		],
+	},
+	{
+		displayName: 'ID',
+		name: 'id',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'The campaign\'s id',
+		displayOptions: {
+			show: {
+				resource: [
+					'campaign',
+				],
+				operation: [
+					'suggestLeadCc',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Contact ID',
+		name: 'contactId',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'ID of the contact (lead) in this campaign.',
+		displayOptions: {
+			show: {
+				resource: [
+					'campaign',
+				],
+				operation: [
+					'suggestLeadCc',
+				],
+			},
+		},
 	},
 	{
 		displayName: 'Campaign ID',
@@ -1708,6 +2287,12 @@ export const campaignFields: INodeProperties[] = [
 				name: 'end_time',
 				type: 'string',
 				default: '',
+			},
+			{
+				displayName: 'Entry Delay Minutes',
+				name: 'entry_delay_minutes',
+				type: 'number',
+				default: 0,
 			},
 			{
 				displayName: 'ESP Match Mode',
