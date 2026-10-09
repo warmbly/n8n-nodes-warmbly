@@ -927,6 +927,20 @@
 			"required": true,
 			"type": "string"
 		},
+		"campaign.getLeadCc.top.contactId": {
+			"default": "",
+			"description": "ID of the contact (lead) in this campaign.",
+			"displayName": "Contact ID",
+			"required": true,
+			"type": "string"
+		},
+		"campaign.getLeadHold.top.contactId": {
+			"default": "",
+			"description": "ID of the contact (lead) in this campaign.",
+			"displayName": "Contact ID",
+			"required": true,
+			"type": "string"
+		},
 		"campaign.getLogs.top.id": {
 			"default": "",
 			"displayName": "Campaign ID",
@@ -936,6 +950,13 @@
 		"campaign.getSenders.top.id": {
 			"default": "",
 			"displayName": "Campaign ID",
+			"required": true,
+			"type": "string"
+		},
+		"campaign.pauseLead.top.contactId": {
+			"default": "",
+			"description": "ID of the contact (lead) in this campaign.",
+			"displayName": "Contact ID",
 			"required": true,
 			"type": "string"
 		},
@@ -1006,6 +1027,13 @@
 			"required": true,
 			"type": "json"
 		},
+		"campaign.resumeLead.top.contactId": {
+			"default": "",
+			"description": "ID of the contact (lead) in this campaign.",
+			"displayName": "Contact ID",
+			"required": true,
+			"type": "string"
+		},
 		"campaign.sendTestEmail.additionalFields": {
 			"collection": true,
 			"displayName": "Additional Fields",
@@ -1043,6 +1071,13 @@
 			"required": true,
 			"type": "string"
 		},
+		"campaign.setLeadCc.top.contactId": {
+			"default": "",
+			"description": "ID of the contact (lead) in this campaign.",
+			"displayName": "Contact ID",
+			"required": true,
+			"type": "string"
+		},
 		"campaign.start.additionalFields": {
 			"collection": true,
 			"displayName": "Additional Fields",
@@ -1074,6 +1109,13 @@
 		"campaign.stop.top.id": {
 			"default": "",
 			"displayName": "Campaign ID",
+			"required": true,
+			"type": "string"
+		},
+		"campaign.suggestLeadCc.top.contactId": {
+			"default": "",
+			"description": "ID of the contact (lead) in this campaign.",
+			"displayName": "Contact ID",
 			"required": true,
 			"type": "string"
 		},
@@ -2152,6 +2194,69 @@
 		"contact.update.updateFields.subscribed": {
 			"default": false,
 			"displayName": "Subscribed",
+			"type": "boolean"
+		},
+		"contactImport.analyze.top.has_header": {
+			"default": true,
+			"description": "Whether the first row of the file holds column names.",
+			"displayName": "Has Header",
+			"required": true,
+			"type": "boolean"
+		},
+		"contactImport.saveDraft.top.dedup": {
+			"default": "skip",
+			"description": "What to do with a row whose contact already exists: skip it, update the existing contact, or create a duplicate.",
+			"displayName": "Duplicates",
+			"options": [
+				{
+					"name": "Create Duplicate",
+					"value": "create_duplicate"
+				},
+				{
+					"name": "Skip",
+					"value": "skip"
+				},
+				{
+					"name": "Update",
+					"value": "update"
+				}
+			],
+			"required": true,
+			"type": "options"
+		},
+		"contactImport.saveDraft.top.has_header": {
+			"default": true,
+			"description": "Whether the first row of the file holds column names.",
+			"displayName": "Has Header",
+			"required": true,
+			"type": "boolean"
+		},
+		"contactImport.start.top.dedup": {
+			"default": "skip",
+			"description": "What to do with a row whose contact already exists: skip it, update the existing contact, or create a duplicate.",
+			"displayName": "Duplicates",
+			"options": [
+				{
+					"name": "Create Duplicate",
+					"value": "create_duplicate"
+				},
+				{
+					"name": "Skip",
+					"value": "skip"
+				},
+				{
+					"name": "Update",
+					"value": "update"
+				}
+			],
+			"required": true,
+			"type": "options"
+		},
+		"contactImport.start.top.has_header": {
+			"default": true,
+			"description": "Whether the first row of the file holds column names.",
+			"displayName": "Has Header",
+			"required": true,
 			"type": "boolean"
 		},
 		"contactNote.create.additionalFields": {
@@ -3369,6 +3474,13 @@
 			"required": true,
 			"type": "string"
 		},
+		"emailImage.delete.top.id": {
+			"default": "",
+			"description": "ID of the email image.",
+			"displayName": "Image ID",
+			"required": true,
+			"type": "string"
+		},
 		"integration.create.additionalFields": {
 			"collection": true,
 			"displayName": "Additional Fields",
@@ -3898,6 +4010,20 @@
 		"mailbox.update.updateFields.warmup_tag": {
 			"default": "",
 			"displayName": "Warmup Tag",
+			"type": "string"
+		},
+		"mailbox.updateDirectTracking.top.enabled": {
+			"default": false,
+			"description": "Whether open and click tracking is on for hand-written emails sent from this mailbox in the unibox.",
+			"displayName": "Enabled",
+			"required": true,
+			"type": "boolean"
+		},
+		"mailbox.updateDirectTracking.top.id": {
+			"default": "",
+			"description": "ID of the mailbox.",
+			"displayName": "Mailbox ID",
+			"required": true,
 			"type": "string"
 		},
 		"mailbox.updateTrackingDomain.top.id": {
@@ -5302,6 +5428,16 @@
 			"description": "Get deliverability dashboard",
 			"name": "Get Deliverability"
 		},
+		"analytics.getDirectMail": {
+			"action": "Get direct mail analytics",
+			"description": "Get direct mail analytics",
+			"name": "Get Direct Mail"
+		},
+		"analytics.getInboxTagging": {
+			"action": "Get inbox tagging review",
+			"description": "Get inbox tagging review",
+			"name": "Get Inbox Tagging Review"
+		},
 		"analytics.getUsage": {
 			"action": "Get usage overview",
 			"description": "Get usage overview",
@@ -5312,10 +5448,20 @@
 			"description": "Get warmup analytics",
 			"name": "Get Warmup"
 		},
+		"analytics.getWarmupPlacement": {
+			"action": "Get warmup placement",
+			"description": "Get warmup placement",
+			"name": "Get Warmup Placement"
+		},
 		"apiKey.create": {
 			"action": "Create an API key",
 			"description": "Create an API key",
 			"name": "Create"
+		},
+		"apiKey.deletePermanently": {
+			"action": "Permanently delete an API key",
+			"description": "Permanently delete an API key",
+			"name": "Delete Permanently"
 		},
 		"apiKey.get": {
 			"action": "Get an API key",
@@ -5427,6 +5573,11 @@
 			"description": "Delete an attachment",
 			"name": "Delete Attachment"
 		},
+		"campaign.deletePlacementMonitor": {
+			"action": "Delete a campaign placement monitor",
+			"description": "Delete a campaign placement monitor",
+			"name": "Delete Placement Monitor"
+		},
 		"campaign.duplicate": {
 			"action": "Duplicate a campaign",
 			"description": "Duplicate a campaign",
@@ -5480,6 +5631,16 @@
 			"description": "Get the forms feeding a campaign",
 			"name": "Get Forms"
 		},
+		"campaign.getLeadCc": {
+			"action": "Get CC contacts of a campaign lead",
+			"description": "Get CC contacts of a campaign lead",
+			"name": "Get Lead CC"
+		},
+		"campaign.getLeadHold": {
+			"action": "Get the hold on a campaign lead",
+			"description": "Get the hold on a campaign lead",
+			"name": "Get Lead Hold"
+		},
 		"campaign.getLogs": {
 			"action": "Get campaign logs",
 			"description": "Get campaign logs",
@@ -5490,15 +5651,30 @@
 			"description": "Get the campaigns overview",
 			"name": "Get Overview"
 		},
+		"campaign.getPlacementMonitor": {
+			"action": "Get a campaign placement monitor",
+			"description": "Get a campaign placement monitor",
+			"name": "Get Placement Monitor"
+		},
 		"campaign.getSegments": {
 			"action": "Get campaign segments",
 			"description": "Get campaign segments",
 			"name": "Get Segments"
 		},
+		"campaign.getSendPlan": {
+			"action": "Get the sending plan of a campaign",
+			"description": "Get the sending plan of a campaign",
+			"name": "Get Send Plan"
+		},
 		"campaign.getSenders": {
 			"action": "List campaign senders",
 			"description": "List campaign senders",
 			"name": "Get Senders"
+		},
+		"campaign.pauseLead": {
+			"action": "Pause a lead in a campaign",
+			"description": "Pause a lead in a campaign",
+			"name": "Pause Lead"
 		},
 		"campaign.preflight": {
 			"action": "Run preflight",
@@ -5518,10 +5694,25 @@
 			"action": "Replace senders",
 			"name": "Replace Senders"
 		},
+		"campaign.resumeLead": {
+			"action": "Resume a lead in a campaign",
+			"description": "Resume a lead in a campaign",
+			"name": "Resume Lead"
+		},
 		"campaign.sendTestEmail": {
 			"action": "Send a test email",
 			"description": "Send a test email",
 			"name": "Send Test Email"
+		},
+		"campaign.setLeadCc": {
+			"action": "Set CC contacts of a campaign lead",
+			"description": "Set CC contacts of a campaign lead",
+			"name": "Set Lead CC"
+		},
+		"campaign.setPlacementMonitor": {
+			"action": "Set a campaign placement monitor",
+			"description": "Set a campaign placement monitor",
+			"name": "Set Placement Monitor"
 		},
 		"campaign.start": {
 			"action": "Start a campaign",
@@ -5532,6 +5723,11 @@
 			"action": "Stop a campaign",
 			"description": "Stop a campaign",
 			"name": "Stop"
+		},
+		"campaign.suggestLeadCc": {
+			"action": "Suggest CC contacts for a campaign lead",
+			"description": "Suggest CC contacts for a campaign lead",
+			"name": "Suggest Lead CC"
 		},
 		"campaign.update": {
 			"action": "Update a campaign",
@@ -5719,6 +5915,36 @@
 			"description": "Move a contact category",
 			"name": "Move"
 		},
+		"contactImport.analyze": {
+			"action": "Analyze a contact import",
+			"description": "Analyze a contact import",
+			"name": "Analyze"
+		},
+		"contactImport.cancel": {
+			"action": "Cancel a contact import",
+			"description": "Cancel a contact import",
+			"name": "Cancel"
+		},
+		"contactImport.create": {
+			"action": "Create a contact import from a file",
+			"description": "Create a contact import from a file",
+			"name": "Create"
+		},
+		"contactImport.downloadFailures": {
+			"action": "Download failed rows of a contact import",
+			"description": "Download failed rows of a contact import",
+			"name": "Download Failures"
+		},
+		"contactImport.saveDraft": {
+			"action": "Save a contact import draft",
+			"description": "Save a contact import draft",
+			"name": "Save Draft"
+		},
+		"contactImport.start": {
+			"action": "Start a contact import",
+			"description": "Start a contact import",
+			"name": "Start"
+		},
 		"contactNote.create": {
 			"action": "Create a contact note",
 			"description": "Create a contact note",
@@ -5738,6 +5964,16 @@
 			"action": "Update a contact note",
 			"description": "Update a contact note",
 			"name": "Update"
+		},
+		"crmTask.bulkDelete": {
+			"action": "Delete many CRM tasks",
+			"description": "Delete many CRM tasks",
+			"name": "Bulk Delete"
+		},
+		"crmTask.bulkUpdate": {
+			"action": "Update many CRM tasks",
+			"description": "Update many CRM tasks",
+			"name": "Bulk Update"
 		},
 		"crmTask.create": {
 			"action": "Create task",
@@ -5843,6 +6079,11 @@
 			"action": "Ingest a deliverability event",
 			"description": "Ingest a deliverability event",
 			"name": "Ingest Event"
+		},
+		"emailImage.upload": {
+			"action": "Upload an email image",
+			"description": "Upload an email image",
+			"name": "Upload"
 		},
 		"folder.move": {
 			"action": "Move a campaign folder",
@@ -5968,6 +6209,16 @@
 			"action": "Replace field mappings",
 			"name": "Replace Field Mappings"
 		},
+		"integration.rotateInboundUrl": {
+			"action": "Rotate the inbound URL of an integration",
+			"description": "Rotate the inbound URL of an integration",
+			"name": "Rotate Inbound URL"
+		},
+		"integration.setSigningKey": {
+			"action": "Set the signing key of an integration",
+			"description": "Set the signing key of an integration",
+			"name": "Set Signing Key"
+		},
 		"integration.test": {
 			"action": "Test a connection",
 			"description": "Test a connection",
@@ -6037,6 +6288,11 @@
 			"description": "Get the sending behavior plan",
 			"name": "Get Behavior Plan"
 		},
+		"mailbox.getSendIdentity": {
+			"action": "Get send identity of a mailbox",
+			"description": "Get send identity of a mailbox",
+			"name": "Get Send Identity"
+		},
 		"mailbox.getSyncStatus": {
 			"action": "Get mailbox sync status",
 			"description": "Get mailbox sync status",
@@ -6057,6 +6313,11 @@
 			"description": "Refresh the domain auth check",
 			"name": "Refresh Auth Check"
 		},
+		"mailbox.refreshSendIdentity": {
+			"action": "Refresh send identity of a mailbox",
+			"description": "Refresh send identity of a mailbox",
+			"name": "Refresh Send Identity"
+		},
 		"mailbox.release": {
 			"action": "Release a held mailbox",
 			"description": "Release a held mailbox",
@@ -6076,6 +6337,16 @@
 			"action": "Update sending behavior",
 			"description": "Update sending behavior",
 			"name": "Update Behavior"
+		},
+		"mailbox.updateDirectTracking": {
+			"action": "Update direct tracking of a mailbox",
+			"description": "Update direct tracking of a mailbox",
+			"name": "Update Direct Tracking"
+		},
+		"mailbox.updateSync": {
+			"action": "Update sync settings of a mailbox",
+			"description": "Update sync settings of a mailbox",
+			"name": "Update Sync"
 		},
 		"mailbox.updateTrackingDomain": {
 			"action": "Update the tracking domain",
@@ -6204,6 +6475,41 @@
 			"action": "Update stage",
 			"name": "Update Stage"
 		},
+		"placementBatch.cancel": {
+			"action": "Cancel a placement batch",
+			"description": "Cancel a placement batch",
+			"name": "Cancel"
+		},
+		"placementBatch.getSenders": {
+			"action": "Get senders of a placement batch",
+			"description": "Get senders of a placement batch",
+			"name": "Get Senders"
+		},
+		"placementBatch.preview": {
+			"action": "Preview a placement batch",
+			"description": "Preview a placement batch",
+			"name": "Preview"
+		},
+		"placementSeed.set": {
+			"action": "Set a mailbox as a placement seed",
+			"description": "Set a mailbox as a placement seed",
+			"name": "Set"
+		},
+		"placementTest.cancel": {
+			"action": "Cancel a placement test",
+			"description": "Cancel a placement test",
+			"name": "Cancel"
+		},
+		"placementTest.getCoverage": {
+			"action": "Get placement test coverage",
+			"description": "Get placement test coverage",
+			"name": "Get Coverage"
+		},
+		"placementTest.getOverview": {
+			"action": "Get placement overview",
+			"description": "Get placement overview",
+			"name": "Get Overview"
+		},
 		"segment.addToCampaign": {
 			"action": "Add a segment to a campaign",
 			"description": "Add a segment to a campaign",
@@ -6278,6 +6584,11 @@
 			"action": "Update a team",
 			"description": "Update a team",
 			"name": "Update"
+		},
+		"template.analyze": {
+			"action": "Analyze template content",
+			"description": "Analyze template content",
+			"name": "Analyze Content"
 		},
 		"template.create": {
 			"action": "Create a reply template",
@@ -6417,6 +6728,11 @@
 			"action": "Mark messages seen",
 			"description": "Mark messages seen",
 			"name": "Mark Seen"
+		},
+		"unibox.moveFolder": {
+			"action": "Move messages to a folder",
+			"description": "Move messages to a folder",
+			"name": "Move Folder"
 		},
 		"unibox.reply": {
 			"action": "Reply from the inbox",
@@ -6594,6 +6910,11 @@
 			"displayName": "Contact Category",
 			"noun": "contact category"
 		},
+		"contactImport": {
+			"defaultOperation": "getAll",
+			"displayName": "Contact Import",
+			"noun": "contact import"
+		},
 		"contactNote": {
 			"defaultOperation": "getAll",
 			"displayName": "Contact Note",
@@ -6623,6 +6944,11 @@
 			"defaultOperation": "ingestEvent",
 			"displayName": "Deliverability",
 			"noun": "deliverability event"
+		},
+		"emailImage": {
+			"defaultOperation": "getAll",
+			"displayName": "Email Image",
+			"noun": "email image"
 		},
 		"folder": {
 			"defaultOperation": "create",
@@ -6673,6 +6999,21 @@
 			"defaultOperation": "getAll",
 			"displayName": "Pipeline",
 			"noun": "pipeline"
+		},
+		"placementBatch": {
+			"defaultOperation": "getAll",
+			"displayName": "Placement Batch",
+			"noun": "placement batch"
+		},
+		"placementSeed": {
+			"defaultOperation": "getAll",
+			"displayName": "Placement Seed",
+			"noun": "placement seed"
+		},
+		"placementTest": {
+			"defaultOperation": "getAll",
+			"displayName": "Placement Test",
+			"noun": "placement test"
 		},
 		"segment": {
 			"defaultOperation": "getAll",

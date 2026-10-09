@@ -149,6 +149,7 @@ export const oauthAppFields: INodeProperties[] = [
 				name: 'scopes',
 				type: 'number',
 				default: 0,
+				description: 'API permission bitmask the app may request (required; see the permissions reference)',
 			},
 			{
 				displayName: 'Webhook Events',

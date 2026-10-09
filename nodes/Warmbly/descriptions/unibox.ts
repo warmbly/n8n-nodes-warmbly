@@ -129,6 +129,12 @@ export const uniboxOperations: INodeProperties[] = [
 				description: 'Mark messages seen',
 			},
 			{
+				name: 'Move Folder',
+				value: 'moveFolder',
+				action: 'Move messages to a folder',
+				description: 'Move messages to a folder',
+			},
+			{
 				name: 'Reply',
 				value: 'reply',
 				action: 'Reply from the inbox',
@@ -649,6 +655,13 @@ export const uniboxFields: INodeProperties[] = [
 				default: '',
 			},
 			{
+				displayName: 'Automated',
+				name: 'automated',
+				type: 'boolean',
+				default: false,
+				description: '`true` returns only conversations no person wrote in (security alerts, notifications, bounces, auto-replies), as judged by automatic inbox tagging. `false` leaves them out, which is how the dashboard\'s Inbox reads. Omit for both.',
+			},
+			{
 				displayName: 'Awaiting Reply',
 				name: 'awaiting_reply',
 				type: 'boolean',
@@ -716,7 +729,7 @@ export const uniboxFields: INodeProperties[] = [
 					},
 				],
 				default: 'inbox',
-				description: 'Canonical folder scope. Omit for every folder except `spam` and `trash`.',
+				description: 'Canonical folder scope. Omit for every working folder: `spam`, `trash` and `archive` stay out.',
 			},
 			{
 				displayName: 'From',
@@ -724,6 +737,13 @@ export const uniboxFields: INodeProperties[] = [
 				type: 'string',
 				default: '',
 				description: 'Filter by sender address (substring).',
+			},
+			{
+				displayName: 'Include Archived',
+				name: 'include_archived',
+				type: 'boolean',
+				default: false,
+				description: '`true` puts archived conversations back into the result, which is what the All mail view does. Ignored when `folder` is set.',
 			},
 			{
 				displayName: 'Since',
@@ -1048,6 +1068,13 @@ export const uniboxFields: INodeProperties[] = [
 				default: 'inbox',
 				description: 'Folder, when set, marks every unread message in that folder for the whole workspace instead of the explicit id list.',
 			},
+			{
+				displayName: 'Thread IDs',
+				name: 'thread_ids',
+				type: 'string',
+				default: '',
+				description: 'ThreadIDs marks whole conversations, so a caller holding a list row does not have to fetch the thread to learn its message ids. Each entry is a thread id, or a message id for mail that never got one. Comma-separated list.',
+			},
 		],
 	},
 	{
@@ -1080,6 +1107,78 @@ export const uniboxFields: INodeProperties[] = [
 				type: 'boolean',
 				default: false,
 				description: '`true` marks as read, `false` marks as unread.',
+			},
+		],
+	},
+	{
+		displayName: 'Folder',
+		name: 'folder',
+		type: 'options',
+		options: [
+			{
+				name: 'Archive',
+				value: 'archive',
+			},
+			{
+				name: 'Inbox',
+				value: 'inbox',
+			},
+			{
+				name: 'Trash',
+				value: 'trash',
+			},
+		],
+		default: 'inbox',
+		required: true,
+		description: 'Destination folder. Anything else is a `400`.',
+		displayOptions: {
+			show: {
+				resource: [
+					'unibox',
+				],
+				operation: [
+					'moveFolder',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Update Fields',
+		name: 'updateFields',
+		type: 'collection',
+		placeholder: 'Add Field',
+		default: {},
+		displayOptions: {
+			show: {
+				resource: [
+					'unibox',
+				],
+				operation: [
+					'moveFolder',
+				],
+			},
+		},
+		options: [
+			{
+				displayName: 'Email IDs',
+				name: 'email_ids',
+				type: 'string',
+				default: '',
+				description: 'Message UUIDs to move (max 500). Comma-separated list.',
+			},
+			{
+				displayName: 'Idempotency Key',
+				name: 'idempotencyKey',
+				type: 'string',
+				default: '',
+				description: 'Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.',
+			},
+			{
+				displayName: 'Thread IDs',
+				name: 'thread_ids',
+				type: 'string',
+				default: '',
+				description: 'ThreadIDs files whole conversations. A row in the list knows its thread but not the ids inside it, and filing half a conversation leaves it in the view it was filed out of. Each entry is a thread id, or a message id for mail that never got one. Comma-separated list.',
 			},
 		],
 	},
@@ -1181,6 +1280,13 @@ export const uniboxFields: INodeProperties[] = [
 				description: 'Comma-separated list.',
 			},
 			{
+				displayName: 'Forward Message ID',
+				name: 'forward_message_id',
+				type: 'string',
+				default: '',
+				description: 'ForwardMessageID makes the send a forward of that stored message, which goes out under the body and signature.',
+			},
+			{
 				displayName: 'Idempotency Key',
 				name: 'idempotencyKey',
 				type: 'string',
@@ -1274,6 +1380,12 @@ export const uniboxFields: INodeProperties[] = [
 			{
 				displayName: 'Body',
 				name: 'body',
+				type: 'string',
+				default: '',
+			},
+			{
+				displayName: 'Body HTML',
+				name: 'body_html',
 				type: 'string',
 				default: '',
 			},
@@ -1422,6 +1534,13 @@ export const uniboxFields: INodeProperties[] = [
 				type: 'string',
 				default: '',
 				description: 'Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.',
+			},
+			{
+				displayName: 'Thread IDs',
+				name: 'thread_ids',
+				type: 'string',
+				default: '',
+				description: 'ThreadIDs snoozes a whole selection in one call. Either field will do; naming both snoozes the union. Comma-separated list.',
 			},
 		],
 	},

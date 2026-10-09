@@ -1,10 +1,10 @@
 {
 	"source": {
 		"repo": "warmbly/warmbly",
-		"commit": "b32a2877",
+		"commit": "2032b0492",
 		"routes": "internal/api/routes.go"
 	},
-	"operationCount": 305,
+	"operationCount": 354,
 	"operations": [
 		{
 			"method": "POST",
@@ -26,7 +26,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": false,
-			"source": "internal/api/routes.go:598"
+			"source": "internal/api/routes.go:806"
 		},
 		{
 			"method": "POST",
@@ -61,7 +61,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": false,
-			"source": "internal/api/routes.go:601"
+			"source": "internal/api/routes.go:809"
 		},
 		{
 			"method": "POST",
@@ -104,7 +104,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": false,
-			"source": "internal/api/routes.go:602"
+			"source": "internal/api/routes.go:810"
 		},
 		{
 			"method": "POST",
@@ -139,7 +139,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": false,
-			"source": "internal/api/routes.go:600"
+			"source": "internal/api/routes.go:808"
 		},
 		{
 			"method": "POST",
@@ -161,7 +161,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": false,
-			"source": "internal/api/routes.go:599"
+			"source": "internal/api/routes.go:807"
 		},
 		{
 			"method": "GET",
@@ -220,7 +220,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": false,
-			"source": "internal/api/routes.go:590"
+			"source": "internal/api/routes.go:798"
 		},
 		{
 			"method": "POST",
@@ -236,7 +236,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": false,
-			"source": "internal/api/routes.go:597"
+			"source": "internal/api/routes.go:805"
 		},
 		{
 			"method": "GET",
@@ -252,7 +252,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": false,
-			"source": "internal/api/routes.go:592"
+			"source": "internal/api/routes.go:800"
 		},
 		{
 			"method": "GET",
@@ -268,7 +268,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": false,
-			"source": "internal/api/routes.go:591"
+			"source": "internal/api/routes.go:799"
 		},
 		{
 			"method": "DELETE",
@@ -292,7 +292,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": false,
-			"source": "internal/api/routes.go:567"
+			"source": "internal/api/routes.go:775"
 		},
 		{
 			"method": "PATCH",
@@ -351,7 +351,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": false,
-			"source": "internal/api/routes.go:566"
+			"source": "internal/api/routes.go:774"
 		},
 		{
 			"method": "GET",
@@ -367,7 +367,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": false,
-			"source": "internal/api/routes.go:564"
+			"source": "internal/api/routes.go:772"
 		},
 		{
 			"method": "POST",
@@ -419,7 +419,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": false,
-			"source": "internal/api/routes.go:565"
+			"source": "internal/api/routes.go:773"
 		},
 		{
 			"method": "POST",
@@ -443,7 +443,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:579"
+			"source": "internal/api/routes.go:787"
 		},
 		{
 			"method": "GET",
@@ -471,7 +471,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:578"
+			"source": "internal/api/routes.go:786"
 		},
 		{
 			"method": "GET",
@@ -493,21 +493,43 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:802"
+			"source": "internal/api/routes.go:1034"
 		},
 		{
 			"method": "GET",
 			"path": "/analytics/accounts",
 			"handler": "GetAllAccountStatuses",
-			"doc": "GetAllAccountStatuses gets status of all email accounts GET /analytics/accounts",
+			"doc": "GetAllAccountStatuses lists email account statuses, one bounded page at a time. A page view asks only for the mailbox ids it shows (email_ids); otherwise the opaque cursor walks the whole inventory. The per-mailbox reads are batched across the page, so a page's cost does not grow with the total inventory, and the overflow beyond the old 1000-row cap is reachable through next_cursor instead of being silently dropped. GET /analytics/accounts",
 			"apiPerms": [],
-			"params": [],
+			"params": [
+				{
+					"in": "query",
+					"name": "email_ids",
+					"type": "string",
+					"required": false,
+					"description": "Comma-separated mailbox UUIDs to return the status of (up to 200). Use this to ask only for the mailboxes a page shows. A foreign-workspace id matches nothing. Invalid or over-limit returns 400."
+				},
+				{
+					"in": "query",
+					"name": "limit",
+					"type": "number",
+					"required": false,
+					"description": "Page size when walking the whole inventory. Invalid returns 400."
+				},
+				{
+					"in": "query",
+					"name": "cursor",
+					"type": "string",
+					"required": false,
+					"description": "Opaque keyset cursor from a previous response's pagination.next_cursor. Invalid returns 400."
+				}
+			],
 			"body": null,
 			"multipart": false,
-			"paginated": false,
+			"paginated": true,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:801"
+			"source": "internal/api/routes.go:1033"
 		},
 		{
 			"method": "GET",
@@ -528,14 +550,14 @@
 					"name": "from",
 					"type": "string",
 					"required": true,
-					"description": "Range start (YYYY-MM-DD)."
+					"description": "First day (YYYY-MM-DD, UTC)."
 				},
 				{
 					"in": "query",
 					"name": "to",
 					"type": "string",
 					"required": true,
-					"description": "Range end (YYYY-MM-DD)."
+					"description": "Last day (YYYY-MM-DD, UTC), included."
 				}
 			],
 			"body": null,
@@ -543,7 +565,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:799"
+			"source": "internal/api/routes.go:1031"
 		},
 		{
 			"method": "GET",
@@ -572,13 +594,13 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:800"
+			"source": "internal/api/routes.go:1032"
 		},
 		{
 			"method": "GET",
 			"path": "/analytics/campaigns/{id}",
 			"handler": "GetCampaignAnalytics",
-			"doc": "GetCampaignAnalytics gets analytics for a specific campaign GET /analytics/campaigns/:id",
+			"doc": "GetCampaignAnalytics gets analytics for a specific campaign GET /analytics/campaigns/:id[?from=YYYY-MM-DD&to=YYYY-MM-DD]",
 			"apiPerms": [],
 			"params": [
 				{
@@ -587,6 +609,20 @@
 					"type": "string",
 					"required": true,
 					"description": "Campaign id."
+				},
+				{
+					"in": "query",
+					"name": "from",
+					"type": "string",
+					"required": false,
+					"description": "First day of the period (YYYY-MM-DD, UTC). Requires to; omit both for all time."
+				},
+				{
+					"in": "query",
+					"name": "to",
+					"type": "string",
+					"required": false,
+					"description": "Last day of the period (YYYY-MM-DD, UTC), included. Requires from."
 				}
 			],
 			"body": null,
@@ -594,7 +630,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:798"
+			"source": "internal/api/routes.go:1030"
 		},
 		{
 			"method": "GET",
@@ -615,14 +651,14 @@
 					"name": "from",
 					"type": "string",
 					"required": true,
-					"description": "Range start (YYYY-MM-DD)."
+					"description": "First day (YYYY-MM-DD, UTC)."
 				},
 				{
 					"in": "query",
 					"name": "to",
 					"type": "string",
 					"required": true,
-					"description": "Range end (YYYY-MM-DD)."
+					"description": "Last day (YYYY-MM-DD, UTC), included."
 				}
 			],
 			"body": null,
@@ -630,7 +666,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:797"
+			"source": "internal/api/routes.go:1029"
 		},
 		{
 			"method": "GET",
@@ -657,7 +693,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:794"
+			"source": "internal/api/routes.go:1022"
 		},
 		{
 			"method": "GET",
@@ -686,13 +722,71 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:795"
+			"source": "internal/api/routes.go:1026"
+		},
+		{
+			"method": "GET",
+			"path": "/analytics/direct",
+			"handler": "GetDirectMailAnalytics",
+			"doc": "GetDirectMailAnalytics returns the hand-written-mail overview: volume and replies from the synced mailbox, plus opens and clicks for the mailboxes that opted into tracking them. GET /analytics/direct?period=7d",
+			"apiPerms": [],
+			"params": [
+				{
+					"in": "query",
+					"name": "period",
+					"type": "string",
+					"required": false,
+					"description": ""
+				}
+			],
+			"body": null,
+			"multipart": false,
+			"paginated": false,
+			"returnsList": false,
+			"openapi": false,
+			"source": "internal/api/routes.go:1023"
+		},
+		{
+			"method": "GET",
+			"path": "/analytics/inbox-tagging",
+			"handler": "GetInboxTaggingReview",
+			"doc": "Automatic inbox tagging: the phase-1 review surface (read-only).",
+			"apiPerms": [],
+			"params": [
+				{
+					"in": "query",
+					"name": "cursor",
+					"type": "string",
+					"required": false,
+					"description": ""
+				},
+				{
+					"in": "query",
+					"name": "limit",
+					"type": "string",
+					"required": false,
+					"description": ""
+				},
+				{
+					"in": "query",
+					"name": "needs_review",
+					"type": "string",
+					"required": false,
+					"description": ""
+				}
+			],
+			"body": null,
+			"multipart": false,
+			"paginated": true,
+			"returnsList": true,
+			"openapi": false,
+			"source": "internal/api/routes.go:1025"
 		},
 		{
 			"method": "GET",
 			"path": "/analytics/usage",
 			"handler": "GetUsageOverview",
-			"doc": "GetUsageOverview gets usage overview for the user GET /analytics/usage",
+			"doc": "GetUsageOverview gets usage overview for the selected organization. GET /analytics/usage",
 			"apiPerms": [],
 			"params": [
 				{
@@ -713,13 +807,49 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:803"
+			"source": "internal/api/routes.go:1035"
+		},
+		{
+			"method": "GET",
+			"path": "/analytics/warmup/placement",
+			"handler": "GetWarmupPlacement",
+			"doc": "GetWarmupPlacement reports where warmup mail landed (inbox, category tabs, spam) per day and per recipient provider, for one mailbox or the workspace. GET /analytics/warmup/placement",
+			"apiPerms": [],
+			"params": [
+				{
+					"in": "query",
+					"name": "email_id",
+					"type": "string",
+					"required": false,
+					"description": "Limit to one email account in the workspace. Omit for the workspace report."
+				},
+				{
+					"in": "query",
+					"name": "to",
+					"type": "string",
+					"required": false,
+					"description": "Range end (YYYY-MM-DD). Defaults to today (UTC)."
+				},
+				{
+					"in": "query",
+					"name": "from",
+					"type": "string",
+					"required": false,
+					"description": "Range start (YYYY-MM-DD). Defaults to 29 days before to."
+				}
+			],
+			"body": null,
+			"multipart": false,
+			"paginated": false,
+			"returnsList": false,
+			"openapi": true,
+			"source": "internal/api/routes.go:1028"
 		},
 		{
 			"method": "GET",
 			"path": "/analytics/warmup",
 			"handler": "GetWarmupAnalytics",
-			"doc": "GetWarmupAnalytics gets warmup statistics for the user GET /analytics/warmup",
+			"doc": "GetWarmupAnalytics gets warmup statistics for the selected organization. GET /analytics/warmup",
 			"apiPerms": [],
 			"params": [
 				{
@@ -749,7 +879,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:796"
+			"source": "internal/api/routes.go:1027"
 		},
 		{
 			"method": "GET",
@@ -797,7 +927,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:786"
+			"source": "internal/api/routes.go:1014"
 		},
 		{
 			"method": "GET",
@@ -833,7 +963,29 @@
 			"paginated": true,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:787"
+			"source": "internal/api/routes.go:1015"
+		},
+		{
+			"method": "DELETE",
+			"path": "/api-keys/{id}/permanent",
+			"handler": "DeleteAPIKey",
+			"doc": "Revoking ends a key; deleting removes the row and its usage logs. Separate paths so neither can be reached by accident.",
+			"apiPerms": [],
+			"params": [
+				{
+					"in": "path",
+					"name": "id",
+					"type": "string",
+					"required": true,
+					"description": "The key's id"
+				}
+			],
+			"body": null,
+			"multipart": false,
+			"paginated": false,
+			"returnsList": false,
+			"openapi": true,
+			"source": "internal/api/routes.go:1013"
 		},
 		{
 			"method": "DELETE",
@@ -862,7 +1014,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:785"
+			"source": "internal/api/routes.go:1010"
 		},
 		{
 			"method": "GET",
@@ -884,7 +1036,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:783"
+			"source": "internal/api/routes.go:1008"
 		},
 		{
 			"method": "PATCH",
@@ -957,7 +1109,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:784"
+			"source": "internal/api/routes.go:1009"
 		},
 		{
 			"method": "GET",
@@ -971,7 +1123,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:780"
+			"source": "internal/api/routes.go:1005"
 		},
 		{
 			"method": "DELETE",
@@ -993,7 +1145,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": false,
-			"source": "internal/api/routes.go:772"
+			"source": "internal/api/routes.go:993"
 		},
 		{
 			"method": "GET",
@@ -1034,7 +1186,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:782"
+			"source": "internal/api/routes.go:1007"
 		},
 		{
 			"method": "GET",
@@ -1048,7 +1200,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:781"
+			"source": "internal/api/routes.go:1006"
 		},
 		{
 			"method": "GET",
@@ -1077,13 +1229,13 @@
 			"paginated": true,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:778"
+			"source": "internal/api/routes.go:999"
 		},
 		{
 			"method": "POST",
 			"path": "/api-keys",
 			"handler": "CreateAPIKey",
-			"doc": "CreateAPIKey creates a new API key for the organization POST /api-keys",
+			"doc": "A new key is a durable credential that outlives the session that made it, so a session caller confirms first. A key or OAuth caller has no session to confirm and passes through to the permission gate.",
 			"apiPerms": [],
 			"params": [
 				{
@@ -1151,7 +1303,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:779"
+			"source": "internal/api/routes.go:1004"
 		},
 		{
 			"method": "GET",
@@ -1229,7 +1381,7 @@
 			"paginated": true,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:810"
+			"source": "internal/api/routes.go:1065"
 		},
 		{
 			"method": "PATCH",
@@ -1262,7 +1414,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": false,
-			"source": "internal/api/routes.go:935"
+			"source": "internal/api/routes.go:1192"
 		},
 		{
 			"method": "GET",
@@ -1291,7 +1443,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:938"
+			"source": "internal/api/routes.go:1195"
 		},
 		{
 			"method": "POST",
@@ -1332,7 +1484,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:937"
+			"source": "internal/api/routes.go:1194"
 		},
 		{
 			"method": "DELETE",
@@ -1354,7 +1506,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:936"
+			"source": "internal/api/routes.go:1193"
 		},
 		{
 			"method": "GET",
@@ -1376,7 +1528,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:932"
+			"source": "internal/api/routes.go:1189"
 		},
 		{
 			"method": "PATCH",
@@ -1441,7 +1593,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:933"
+			"source": "internal/api/routes.go:1190"
 		},
 		{
 			"method": "GET",
@@ -1455,7 +1607,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:930"
+			"source": "internal/api/routes.go:1187"
 		},
 		{
 			"method": "POST",
@@ -1513,7 +1665,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:931"
+			"source": "internal/api/routes.go:1188"
 		},
 		{
 			"method": "POST",
@@ -1597,7 +1749,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:478"
+			"source": "internal/api/routes.go:661"
 		},
 		{
 			"method": "POST",
@@ -1655,6 +1807,38 @@
 					"goType": "*time.Time",
 					"required": false,
 					"description": ""
+				},
+				{
+					"in": "body",
+					"name": "start_time",
+					"type": "string",
+					"goType": "*string",
+					"required": false,
+					"description": "StartTime and EndTime are the daily sending window (\"HH:MM\"); absent means the scheduler's default window."
+				},
+				{
+					"in": "body",
+					"name": "end_time",
+					"type": "string",
+					"goType": "*string",
+					"required": false,
+					"description": ""
+				},
+				{
+					"in": "body",
+					"name": "step_waits",
+					"type": "json",
+					"goType": "[]int",
+					"required": false,
+					"description": "StepWaits is each follow-up's wait_after in days, in order. Empty is a single email."
+				},
+				{
+					"in": "body",
+					"name": "campaign_id",
+					"type": "string",
+					"goType": "*string",
+					"required": false,
+					"description": "CampaignID projects a saved campaign, filling anything not sent from it."
 				}
 			],
 			"body": {
@@ -1665,7 +1849,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": false,
-			"source": "internal/api/routes.go:487"
+			"source": "internal/api/routes.go:670"
 		},
 		{
 			"method": "GET",
@@ -1681,7 +1865,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": false,
-			"source": "internal/api/routes.go:483"
+			"source": "internal/api/routes.go:666"
 		},
 		{
 			"method": "GET",
@@ -1705,7 +1889,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:510"
+			"source": "internal/api/routes.go:693"
 		},
 		{
 			"method": "DELETE",
@@ -1736,7 +1920,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:505"
+			"source": "internal/api/routes.go:688"
 		},
 		{
 			"method": "PATCH",
@@ -1834,7 +2018,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:504"
+			"source": "internal/api/routes.go:687"
 		},
 		{
 			"method": "GET",
@@ -1858,7 +2042,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:502"
+			"source": "internal/api/routes.go:685"
 		},
 		{
 			"method": "POST",
@@ -1957,7 +2141,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:503"
+			"source": "internal/api/routes.go:686"
 		},
 		{
 			"method": "GET",
@@ -1981,7 +2165,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:500"
+			"source": "internal/api/routes.go:683"
 		},
 		{
 			"method": "PATCH",
@@ -2016,7 +2200,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:501"
+			"source": "internal/api/routes.go:684"
 		},
 		{
 			"method": "DELETE",
@@ -2047,7 +2231,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:508"
+			"source": "internal/api/routes.go:691"
 		},
 		{
 			"method": "GET",
@@ -2071,7 +2255,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:506"
+			"source": "internal/api/routes.go:689"
 		},
 		{
 			"method": "POST",
@@ -2102,7 +2286,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:507"
+			"source": "internal/api/routes.go:690"
 		},
 		{
 			"method": "POST",
@@ -2137,7 +2321,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": false,
-			"source": "internal/api/routes.go:497"
+			"source": "internal/api/routes.go:680"
 		},
 		{
 			"method": "GET",
@@ -2161,7 +2345,226 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": false,
-			"source": "internal/api/routes.go:519"
+			"source": "internal/api/routes.go:710"
+		},
+		{
+			"method": "GET",
+			"path": "/campaigns/{id}/leads/{contactId}/cc/suggestions",
+			"handler": "SuggestCampaignLeadCC",
+			"doc": "SuggestCampaignLeadCC offers the lead's likely colleagues to copy.  GET /campaigns/:id/leads/:contactId/cc/suggestions",
+			"apiPerms": [
+				"APIPermReadCampaigns",
+				"APIPermReadContacts"
+			],
+			"params": [
+				{
+					"in": "path",
+					"name": "id",
+					"type": "string",
+					"required": true,
+					"description": "The campaign's id"
+				},
+				{
+					"in": "path",
+					"name": "contactId",
+					"type": "string",
+					"required": true,
+					"description": ""
+				}
+			],
+			"body": null,
+			"multipart": false,
+			"paginated": false,
+			"returnsList": true,
+			"openapi": true,
+			"source": "internal/api/routes.go:740"
+		},
+		{
+			"method": "GET",
+			"path": "/campaigns/{id}/leads/{contactId}/cc",
+			"handler": "GetCampaignLeadCC",
+			"doc": "Contacts copied on every email to one lead, so colleagues share one thread. The answers carry contact details, hence the contacts gate too. PUT replaces the list, so retries are safe.",
+			"apiPerms": [
+				"APIPermReadCampaigns",
+				"APIPermReadContacts"
+			],
+			"params": [
+				{
+					"in": "path",
+					"name": "id",
+					"type": "string",
+					"required": true,
+					"description": "The campaign's id"
+				},
+				{
+					"in": "path",
+					"name": "contactId",
+					"type": "string",
+					"required": true,
+					"description": ""
+				}
+			],
+			"body": null,
+			"multipart": false,
+			"paginated": false,
+			"returnsList": false,
+			"openapi": true,
+			"source": "internal/api/routes.go:738"
+		},
+		{
+			"method": "PUT",
+			"path": "/campaigns/{id}/leads/{contactId}/cc",
+			"handler": "SetCampaignLeadCC",
+			"doc": "SetCampaignLeadCC replaces the contacts copied on one lead.  No Idempotency-Key: the body is the whole list, so a retry lands on the same state.  PUT /campaigns/:id/leads/:contactId/cc",
+			"apiPerms": [
+				"APIPermWriteCampaigns",
+				"APIPermReadContacts"
+			],
+			"params": [
+				{
+					"in": "path",
+					"name": "id",
+					"type": "string",
+					"required": true,
+					"description": "The campaign's id"
+				},
+				{
+					"in": "path",
+					"name": "contactId",
+					"type": "string",
+					"required": true,
+					"description": ""
+				},
+				{
+					"in": "body",
+					"name": "contact_ids",
+					"type": "stringArray",
+					"goType": "[]string",
+					"required": true,
+					"description": "Contacts of the workspace to copy, at most 2. Duplicates are ignored; an empty list removes every copy."
+				}
+			],
+			"body": {
+				"kind": "object",
+				"type": "models.SetCampaignLeadCC"
+			},
+			"multipart": false,
+			"paginated": false,
+			"returnsList": false,
+			"openapi": true,
+			"source": "internal/api/routes.go:739"
+		},
+		{
+			"method": "GET",
+			"path": "/campaigns/{id}/leads/{contactId}/hold",
+			"handler": "GetCampaignLeadHold",
+			"doc": "Per-lead hold: park ONE contact's flow in THIS campaign until a date (or until someone lifts it) without unsubscribing them or removing them from the campaign. Both writes state an absolute hold rather than a delta, so a retry lands on the same state and needs no Idempotency-Key.",
+			"apiPerms": [
+				"APIPermReadCampaigns"
+			],
+			"params": [
+				{
+					"in": "path",
+					"name": "id",
+					"type": "string",
+					"required": true,
+					"description": "The campaign's id"
+				},
+				{
+					"in": "path",
+					"name": "contactId",
+					"type": "string",
+					"required": true,
+					"description": ""
+				}
+			],
+			"body": null,
+			"multipart": false,
+			"paginated": false,
+			"returnsList": false,
+			"openapi": true,
+			"source": "internal/api/routes.go:730"
+		},
+		{
+			"method": "POST",
+			"path": "/campaigns/{id}/leads/{contactId}/pause",
+			"handler": "PauseCampaignLead",
+			"doc": "PauseCampaignLead parks one contact's flow inside one campaign until a date, or with no end. The contact stays subscribed and stays a lead of the campaign: this is not an unsubscribe and not a suppression.  No Idempotency-Key: the request states an absolute hold, and replacing a live hold keeps its start, so a retry lands on exactly the same row.  POST /campaigns/:id/leads/:contactId/pause",
+			"apiPerms": [
+				"APIPermWriteCampaigns"
+			],
+			"params": [
+				{
+					"in": "path",
+					"name": "id",
+					"type": "string",
+					"required": true,
+					"description": "The campaign's id"
+				},
+				{
+					"in": "path",
+					"name": "contactId",
+					"type": "string",
+					"required": true,
+					"description": ""
+				},
+				{
+					"in": "body",
+					"name": "until",
+					"type": "dateTime",
+					"goType": "*time.Time",
+					"required": false,
+					"description": "When the hold lifts. Must be in the future and within a year. Omit or null for a hold with no end."
+				},
+				{
+					"in": "body",
+					"name": "reason",
+					"type": "string",
+					"goType": "string",
+					"required": false,
+					"description": "Optional note shown next to the hold."
+				}
+			],
+			"body": {
+				"kind": "object",
+				"type": "pauseLeadRequest"
+			},
+			"multipart": false,
+			"paginated": false,
+			"returnsList": false,
+			"openapi": true,
+			"source": "internal/api/routes.go:731"
+		},
+		{
+			"method": "POST",
+			"path": "/campaigns/{id}/leads/{contactId}/resume",
+			"handler": "ResumeCampaignLead",
+			"doc": "ResumeCampaignLead lifts the hold now. Resuming a lead that is not held is a success, not a 404: the caller asked for \"not held\" and that is the state. A contact that is not a lead of the campaign is still a 404, as it is for pause.  POST /campaigns/:id/leads/:contactId/resume",
+			"apiPerms": [
+				"APIPermWriteCampaigns"
+			],
+			"params": [
+				{
+					"in": "path",
+					"name": "id",
+					"type": "string",
+					"required": true,
+					"description": "The campaign's id"
+				},
+				{
+					"in": "path",
+					"name": "contactId",
+					"type": "string",
+					"required": true,
+					"description": ""
+				}
+			],
+			"body": null,
+			"multipart": false,
+			"paginated": false,
+			"returnsList": false,
+			"openapi": true,
+			"source": "internal/api/routes.go:732"
 		},
 		{
 			"method": "GET",
@@ -2199,7 +2602,127 @@
 			"paginated": true,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:516"
+			"source": "internal/api/routes.go:704"
+		},
+		{
+			"method": "DELETE",
+			"path": "/campaigns/{id}/placement-monitor",
+			"handler": "DeletePlacementMonitor",
+			"doc": "DeletePlacementMonitor removes a campaign's scheduled test.",
+			"apiPerms": [
+				"APIPermSendCampaigns"
+			],
+			"params": [
+				{
+					"in": "path",
+					"name": "id",
+					"type": "string",
+					"required": true,
+					"description": "Campaign id."
+				}
+			],
+			"body": null,
+			"multipart": false,
+			"paginated": false,
+			"returnsList": false,
+			"openapi": true,
+			"source": "internal/api/routes.go:699"
+		},
+		{
+			"method": "GET",
+			"path": "/campaigns/{id}/placement-monitor",
+			"handler": "GetPlacementMonitor",
+			"doc": "The campaign's scheduled placement test. PUT is a full-state write, so a retry lands on the same monitor.",
+			"apiPerms": [
+				"APIPermReadCampaigns"
+			],
+			"params": [
+				{
+					"in": "path",
+					"name": "id",
+					"type": "string",
+					"required": true,
+					"description": "Campaign id."
+				}
+			],
+			"body": null,
+			"multipart": false,
+			"paginated": false,
+			"returnsList": true,
+			"openapi": true,
+			"source": "internal/api/routes.go:697"
+		},
+		{
+			"method": "PUT",
+			"path": "/campaigns/{id}/placement-monitor",
+			"handler": "PutPlacementMonitor",
+			"doc": "PutPlacementMonitor creates or updates a campaign's scheduled test. A PUT of the same body lands on the same state, so it needs no Idempotency-Key.",
+			"apiPerms": [
+				"APIPermSendCampaigns"
+			],
+			"params": [
+				{
+					"in": "path",
+					"name": "id",
+					"type": "string",
+					"required": true,
+					"description": "Campaign id."
+				},
+				{
+					"in": "body",
+					"name": "enabled",
+					"type": "boolean",
+					"goType": "*bool",
+					"required": false,
+					"description": "Run the scheduled test"
+				},
+				{
+					"in": "body",
+					"name": "interval_days",
+					"type": "number",
+					"goType": "*int",
+					"required": false,
+					"description": "Days between tests, 1 to 30"
+				},
+				{
+					"in": "body",
+					"name": "panel",
+					"type": "options",
+					"goType": "*string",
+					"required": false,
+					"description": "instance, workspace or cloud",
+					"enum": [
+						"instance",
+						"workspace",
+						"cloud"
+					]
+				},
+				{
+					"in": "body",
+					"name": "alert_below",
+					"type": "number",
+					"goType": "*int",
+					"required": false,
+					"description": "Alert when the inbox rate falls below this percent"
+				},
+				{
+					"in": "body",
+					"name": "pause_on_alert",
+					"type": "boolean",
+					"goType": "*bool",
+					"required": false,
+					"description": "Also pause the campaign (paused_guardrail) when a run alerts."
+				}
+			],
+			"body": {
+				"kind": "object",
+				"type": "placement.MonitorInput"
+			},
+			"multipart": false,
+			"paginated": false,
+			"returnsList": true,
+			"openapi": true,
+			"source": "internal/api/routes.go:698"
 		},
 		{
 			"method": "POST",
@@ -2223,7 +2746,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:509"
+			"source": "internal/api/routes.go:692"
 		},
 		{
 			"method": "GET",
@@ -2247,13 +2770,13 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": false,
-			"source": "internal/api/routes.go:528"
+			"source": "internal/api/routes.go:719"
 		},
 		{
 			"method": "PUT",
 			"path": "/campaigns/{id}/segments",
 			"handler": "SetCampaignSegments",
-			"doc": "SetCampaignSegments replaces a campaign's linked segments. Members of the linked segments are enrolled as leads immediately and kept current.",
+			"doc": "SetCampaignSegments replaces a campaign's linked segments. Members of the linked segments are enrolled as leads immediately and kept current; a detached segment's leads are withdrawn again unless the campaign has already written to them or somebody added them by hand.",
 			"apiPerms": [
 				"APIPermWriteCampaigns"
 			],
@@ -2282,7 +2805,31 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": false,
-			"source": "internal/api/routes.go:529"
+			"source": "internal/api/routes.go:720"
+		},
+		{
+			"method": "GET",
+			"path": "/campaigns/{id}/send-plan",
+			"handler": "GetCampaignSendPlan",
+			"doc": "Today's sending plan: derived through the scheduler's gates on every read, never stored.",
+			"apiPerms": [
+				"APIPermReadCampaigns"
+			],
+			"params": [
+				{
+					"in": "path",
+					"name": "id",
+					"type": "string",
+					"required": true,
+					"description": "The campaign's id"
+				}
+			],
+			"body": null,
+			"multipart": false,
+			"paginated": false,
+			"returnsList": false,
+			"openapi": true,
+			"source": "internal/api/routes.go:707"
 		},
 		{
 			"method": "GET",
@@ -2306,7 +2853,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:522"
+			"source": "internal/api/routes.go:713"
 		},
 		{
 			"method": "PUT",
@@ -2341,7 +2888,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:523"
+			"source": "internal/api/routes.go:714"
 		},
 		{
 			"method": "POST",
@@ -2376,7 +2923,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:514"
+			"source": "internal/api/routes.go:702"
 		},
 		{
 			"method": "PATCH",
@@ -2411,7 +2958,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": false,
-			"source": "internal/api/routes.go:544"
+			"source": "internal/api/routes.go:752"
 		},
 		{
 			"method": "DELETE",
@@ -2442,7 +2989,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:539"
+			"source": "internal/api/routes.go:747"
 		},
 		{
 			"method": "PATCH",
@@ -2525,6 +3072,14 @@
 				},
 				{
 					"in": "body",
+					"name": "thread_reply",
+					"type": "boolean",
+					"goType": "*bool",
+					"required": false,
+					"description": "ThreadReply toggles reply-in-thread for this step."
+				},
+				{
+					"in": "body",
 					"name": "conditions",
 					"type": "json",
 					"goType": "*BranchConditions",
@@ -2561,7 +3116,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:538"
+			"source": "internal/api/routes.go:746"
 		},
 		{
 			"method": "GET",
@@ -2585,7 +3140,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:536"
+			"source": "internal/api/routes.go:744"
 		},
 		{
 			"method": "POST",
@@ -2602,14 +3157,110 @@
 					"type": "string",
 					"required": true,
 					"description": "The campaign's id"
+				},
+				{
+					"in": "body",
+					"name": "name",
+					"type": "string",
+					"goType": "*string",
+					"required": false,
+					"description": ""
+				},
+				{
+					"in": "body",
+					"name": "subject",
+					"type": "string",
+					"goType": "*string",
+					"required": false,
+					"description": "Subject line"
+				},
+				{
+					"in": "body",
+					"name": "body_plain",
+					"type": "string",
+					"goType": "*string",
+					"required": false,
+					"description": "Plain text body"
+				},
+				{
+					"in": "body",
+					"name": "body_html",
+					"type": "string",
+					"goType": "*string",
+					"required": false,
+					"description": "HTML body"
+				},
+				{
+					"in": "body",
+					"name": "body_sync",
+					"type": "boolean",
+					"goType": "*bool",
+					"required": false,
+					"description": ""
+				},
+				{
+					"in": "body",
+					"name": "body_code",
+					"type": "boolean",
+					"goType": "*bool",
+					"required": false,
+					"description": ""
+				},
+				{
+					"in": "body",
+					"name": "wait_after",
+					"type": "number",
+					"goType": "*int",
+					"required": false,
+					"description": "Days to wait before this step, counted from the contact's previous step (0 to 60). Spacing belongs to the target step; there is no standalone wait node for email steps."
+				},
+				{
+					"in": "body",
+					"name": "thread_reply",
+					"type": "boolean",
+					"goType": "*bool",
+					"required": false,
+					"description": "ThreadReply toggles reply-in-thread for this step."
+				},
+				{
+					"in": "body",
+					"name": "conditions",
+					"type": "json",
+					"goType": "*BranchConditions",
+					"required": false,
+					"description": "Conditions, when non-nil, replaces the step's branching tree. Send `{}` (or an object with an empty `branches` array) to clear branching and fall back to linear progression."
+				},
+				{
+					"in": "body",
+					"name": "kind",
+					"type": "options",
+					"goType": "*string",
+					"required": false,
+					"description": "Kind / Action, when non-nil, switch the node between email and action/wait.",
+					"enum": [
+						"email",
+						"action",
+						"wait"
+					]
+				},
+				{
+					"in": "body",
+					"name": "action",
+					"type": "json",
+					"goType": "*ActionConfig",
+					"required": false,
+					"description": "Typed config for non-email nodes; type is the switch (wait, add_tag, remove_tag, unsubscribe, notify, create_task, create_deal, move_deal_stage, run_automation, end)."
 				}
 			],
-			"body": null,
+			"body": {
+				"kind": "object",
+				"type": "models.UpdateSequence"
+			},
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:537"
+			"source": "internal/api/routes.go:745"
 		},
 		{
 			"method": "POST",
@@ -2633,7 +3284,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:515"
+			"source": "internal/api/routes.go:703"
 		},
 		{
 			"method": "POST",
@@ -2692,7 +3343,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:511"
+			"source": "internal/api/routes.go:694"
 		},
 		{
 			"method": "POST",
@@ -2716,7 +3367,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:532"
+			"source": "internal/api/routes.go:723"
 		},
 		{
 			"method": "DELETE",
@@ -2740,7 +3391,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:496"
+			"source": "internal/api/routes.go:679"
 		},
 		{
 			"method": "GET",
@@ -2764,7 +3415,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:494"
+			"source": "internal/api/routes.go:677"
 		},
 		{
 			"method": "PATCH",
@@ -3078,6 +3729,14 @@
 				},
 				{
 					"in": "body",
+					"name": "entry_delay_minutes",
+					"type": "number",
+					"goType": "*int",
+					"required": false,
+					"description": ""
+				},
+				{
+					"in": "body",
 					"name": "continuous",
 					"type": "boolean",
 					"goType": "*bool",
@@ -3181,7 +3840,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:495"
+			"source": "internal/api/routes.go:678"
 		},
 		{
 			"method": "GET",
@@ -3222,13 +3881,6 @@
 				},
 				{
 					"in": "query",
-					"name": "kind",
-					"type": "string",
-					"required": false,
-					"description": ""
-				},
-				{
-					"in": "query",
 					"name": "limit",
 					"type": "number",
 					"required": false,
@@ -3240,7 +3892,7 @@
 			"paginated": true,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:492"
+			"source": "internal/api/routes.go:675"
 		},
 		{
 			"method": "POST",
@@ -3266,14 +3918,6 @@
 					"goType": "string",
 					"required": false,
 					"description": "What the campaign is for"
-				},
-				{
-					"in": "body",
-					"name": "kind",
-					"type": "string",
-					"goType": "*string",
-					"required": false,
-					"description": "Kind defaults to \"sequence\". A \"one_time\" campaign accepts a single email step here and refuses further ones later."
 				},
 				{
 					"in": "body",
@@ -3518,6 +4162,14 @@
 				},
 				{
 					"in": "body",
+					"name": "entry_delay_minutes",
+					"type": "number",
+					"goType": "*int",
+					"required": false,
+					"description": ""
+				},
+				{
+					"in": "body",
 					"name": "continuous",
 					"type": "boolean",
 					"goType": "*bool",
@@ -3597,7 +4249,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:493"
+			"source": "internal/api/routes.go:676"
 		},
 		{
 			"method": "PATCH",
@@ -3618,8 +4270,8 @@
 					"name": "position",
 					"type": "number",
 					"goType": "int32",
-					"required": false,
-					"description": ""
+					"required": true,
+					"description": "New 0-based position within the registry."
 				}
 			],
 			"body": {
@@ -3629,8 +4281,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": true,
-			"openapi": false,
-			"source": "internal/api/routes.go:707"
+			"openapi": true,
+			"source": "internal/api/routes.go:927"
 		},
 		{
 			"method": "DELETE",
@@ -3651,8 +4303,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:707"
+			"openapi": true,
+			"source": "internal/api/routes.go:927"
 		},
 		{
 			"method": "PATCH",
@@ -3674,7 +4326,7 @@
 					"type": "string",
 					"goType": "*string",
 					"required": false,
-					"description": ""
+					"description": "1 to 50 characters."
 				},
 				{
 					"in": "body",
@@ -3682,7 +4334,7 @@
 					"type": "string",
 					"goType": "*string",
 					"required": false,
-					"description": ""
+					"description": "Hex colour, `#rrggbb`."
 				}
 			],
 			"body": {
@@ -3692,8 +4344,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:707"
+			"openapi": true,
+			"source": "internal/api/routes.go:927"
 		},
 		{
 			"method": "POST",
@@ -3707,8 +4359,8 @@
 					"name": "title",
 					"type": "string",
 					"goType": "string",
-					"required": false,
-					"description": ""
+					"required": true,
+					"description": "1 to 50 characters."
 				},
 				{
 					"in": "body",
@@ -3716,7 +4368,7 @@
 					"type": "string",
 					"goType": "string",
 					"required": false,
-					"description": ""
+					"description": "Hex colour, `#rrggbb`. Omit to let the server pick from its palette."
 				}
 			],
 			"body": {
@@ -3726,8 +4378,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:707"
+			"openapi": true,
+			"source": "internal/api/routes.go:927"
 		},
 		{
 			"method": "GET",
@@ -3765,7 +4417,7 @@
 			"paginated": true,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:655"
+			"source": "internal/api/routes.go:875"
 		},
 		{
 			"method": "GET",
@@ -3789,7 +4441,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": false,
-			"source": "internal/api/routes.go:640"
+			"source": "internal/api/routes.go:860"
 		},
 		{
 			"method": "GET",
@@ -3813,7 +4465,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:656"
+			"source": "internal/api/routes.go:876"
 		},
 		{
 			"method": "GET",
@@ -3858,7 +4510,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:638"
+			"source": "internal/api/routes.go:858"
 		},
 		{
 			"method": "DELETE",
@@ -3889,7 +4541,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:654"
+			"source": "internal/api/routes.go:874"
 		},
 		{
 			"method": "PATCH",
@@ -3931,7 +4583,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:653"
+			"source": "internal/api/routes.go:873"
 		},
 		{
 			"method": "GET",
@@ -3969,7 +4621,7 @@
 			"paginated": true,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:651"
+			"source": "internal/api/routes.go:871"
 		},
 		{
 			"method": "POST",
@@ -4004,7 +4656,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:652"
+			"source": "internal/api/routes.go:872"
 		},
 		{
 			"method": "GET",
@@ -4035,7 +4687,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": false,
-			"source": "internal/api/routes.go:648"
+			"source": "internal/api/routes.go:868"
 		},
 		{
 			"method": "POST",
@@ -4070,7 +4722,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": false,
-			"source": "internal/api/routes.go:647"
+			"source": "internal/api/routes.go:867"
 		},
 		{
 			"method": "GET",
@@ -4094,7 +4746,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": false,
-			"source": "internal/api/routes.go:641"
+			"source": "internal/api/routes.go:861"
 		},
 		{
 			"method": "GET",
@@ -4139,7 +4791,7 @@
 			"paginated": true,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:639"
+			"source": "internal/api/routes.go:859"
 		},
 		{
 			"method": "DELETE",
@@ -4163,7 +4815,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:625"
+			"source": "internal/api/routes.go:843"
 		},
 		{
 			"method": "GET",
@@ -4187,7 +4839,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:637"
+			"source": "internal/api/routes.go:857"
 		},
 		{
 			"method": "PATCH",
@@ -4220,6 +4872,14 @@
 					"goType": "*string",
 					"required": false,
 					"description": "Last name"
+				},
+				{
+					"in": "body",
+					"name": "email",
+					"type": "string",
+					"goType": "*string",
+					"required": false,
+					"description": "Email replaces the contact's address. It is the contact's identity, so changing it drops the verification verdict and the delivery evidence that belonged to the old mailbox."
 				},
 				{
 					"in": "body",
@@ -4294,7 +4954,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:624"
+			"source": "internal/api/routes.go:842"
 		},
 		{
 			"method": "GET",
@@ -4310,7 +4970,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": false,
-			"source": "internal/api/routes.go:633"
+			"source": "internal/api/routes.go:853"
 		},
 		{
 			"method": "POST",
@@ -4388,7 +5048,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:621"
+			"source": "internal/api/routes.go:829"
 		},
 		{
 			"method": "POST",
@@ -4412,7 +5072,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:623"
+			"source": "internal/api/routes.go:831"
 		},
 		{
 			"method": "POST",
@@ -4428,23 +5088,66 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:622"
+			"source": "internal/api/routes.go:830"
 		},
 		{
-			"method": "GET",
-			"path": "/contacts/lookup",
-			"handler": "LookupContactByEmail",
-			"doc": "Resolve a sender address to a contact (unibox CRM panel). Registered before /:id so the fixed path wins over the catch-all.",
+			"method": "POST",
+			"path": "/contacts/imports/{id}/analyze",
+			"handler": "AnalyzeContactImport",
+			"doc": "AnalyzeContactImport is POST /contacts/imports/:id/analyze: what the draft would do under a mapping, over the whole file, writing nothing.",
 			"apiPerms": [
-				"APIPermReadContacts"
+				"APIPermWriteContacts"
 			],
 			"params": [
 				{
-					"in": "query",
-					"name": "email",
+					"in": "path",
+					"name": "id",
 					"type": "string",
 					"required": true,
-					"description": "The email address to resolve."
+					"description": "Import id."
+				},
+				{
+					"in": "body",
+					"name": "mapping",
+					"type": "json",
+					"goType": "[]ContactImportColumnMapping",
+					"required": true,
+					"description": ""
+				},
+				{
+					"in": "body",
+					"name": "has_header",
+					"type": "boolean",
+					"goType": "bool",
+					"required": true,
+					"description": ""
+				}
+			],
+			"body": {
+				"kind": "object",
+				"type": "models.ContactImportAnalyzeRequest"
+			},
+			"multipart": false,
+			"paginated": false,
+			"returnsList": false,
+			"openapi": true,
+			"source": "internal/api/routes.go:838"
+		},
+		{
+			"method": "POST",
+			"path": "/contacts/imports/{id}/cancel",
+			"handler": "CancelContactImport",
+			"doc": "CancelContactImport is POST /contacts/imports/:id/cancel. Rows already written stay written.",
+			"apiPerms": [
+				"APIPermBulkContacts"
+			],
+			"params": [
+				{
+					"in": "path",
+					"name": "id",
+					"type": "string",
+					"required": true,
+					"description": "Import id."
 				}
 			],
 			"body": null,
@@ -4452,7 +5155,317 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:629"
+			"source": "internal/api/routes.go:840"
+		},
+		{
+			"method": "GET",
+			"path": "/contacts/imports/{id}/failed.csv",
+			"handler": "DownloadContactImportFailures",
+			"doc": "DownloadContactImportFailures is GET /contacts/imports/:id/failed.csv.",
+			"apiPerms": [
+				"APIPermReadContacts"
+			],
+			"params": [
+				{
+					"in": "path",
+					"name": "id",
+					"type": "string",
+					"required": true,
+					"description": "Import id."
+				}
+			],
+			"body": null,
+			"multipart": false,
+			"paginated": false,
+			"returnsList": false,
+			"openapi": true,
+			"source": "internal/api/routes.go:841"
+		},
+		{
+			"method": "POST",
+			"path": "/contacts/imports/{id}/start",
+			"handler": "StartContactImport",
+			"doc": "StartContactImport is POST /contacts/imports/:id/start. Starting an import that already started returns it unchanged, so a retry is safe.",
+			"apiPerms": [
+				"APIPermBulkContacts"
+			],
+			"params": [
+				{
+					"in": "path",
+					"name": "id",
+					"type": "string",
+					"required": true,
+					"description": "Import id."
+				},
+				{
+					"in": "body",
+					"name": "mapping",
+					"type": "json",
+					"goType": "[]ContactImportColumnMapping",
+					"required": true,
+					"description": ""
+				},
+				{
+					"in": "body",
+					"name": "dedup",
+					"type": "options",
+					"goType": "ContactImportDedupStrategy",
+					"required": true,
+					"description": "",
+					"enum": [
+						"skip",
+						"update",
+						"create_duplicate"
+					]
+				},
+				{
+					"in": "body",
+					"name": "has_header",
+					"type": "boolean",
+					"goType": "bool",
+					"required": true,
+					"description": ""
+				},
+				{
+					"in": "body",
+					"name": "category_ids",
+					"type": "stringArray",
+					"goType": "[]string",
+					"required": false,
+					"description": ""
+				},
+				{
+					"in": "body",
+					"name": "campaign_ids",
+					"type": "stringArray",
+					"goType": "[]string",
+					"required": false,
+					"description": ""
+				},
+				{
+					"in": "body",
+					"name": "segment_ids",
+					"type": "stringArray",
+					"goType": "[]string",
+					"required": false,
+					"description": "SegmentIDs pins every imported row into these segments as a manual include override, the same write the \"Add to segment\" bulk action does."
+				},
+				{
+					"in": "body",
+					"name": "subscribed_default",
+					"type": "boolean",
+					"goType": "*bool",
+					"required": false,
+					"description": "SubscribedDefault is what new contacts inherit when no subscribed column was mapped. Defaults to true server-side."
+				}
+			],
+			"body": {
+				"kind": "object",
+				"type": "models.ContactImportCommit"
+			},
+			"multipart": false,
+			"paginated": false,
+			"returnsList": false,
+			"openapi": true,
+			"source": "internal/api/routes.go:839"
+		},
+		{
+			"method": "GET",
+			"path": "/contacts/imports/{id}",
+			"handler": "GetContactImport",
+			"doc": "GetContactImport is GET /contacts/imports/:id.",
+			"apiPerms": [
+				"APIPermReadContacts"
+			],
+			"params": [
+				{
+					"in": "path",
+					"name": "id",
+					"type": "string",
+					"required": true,
+					"description": "Import id."
+				}
+			],
+			"body": null,
+			"multipart": false,
+			"paginated": false,
+			"returnsList": false,
+			"openapi": true,
+			"source": "internal/api/routes.go:836"
+		},
+		{
+			"method": "PATCH",
+			"path": "/contacts/imports/{id}",
+			"handler": "SaveContactImportDraft",
+			"doc": "SaveContactImportDraft is PATCH /contacts/imports/:id: autosaves a draft's mapping and options so a reload resumes it. Idempotent by nature.",
+			"apiPerms": [
+				"APIPermWriteContacts"
+			],
+			"params": [
+				{
+					"in": "path",
+					"name": "id",
+					"type": "string",
+					"required": true,
+					"description": "Import id."
+				},
+				{
+					"in": "body",
+					"name": "mapping",
+					"type": "json",
+					"goType": "[]ContactImportColumnMapping",
+					"required": true,
+					"description": ""
+				},
+				{
+					"in": "body",
+					"name": "dedup",
+					"type": "options",
+					"goType": "ContactImportDedupStrategy",
+					"required": true,
+					"description": "",
+					"enum": [
+						"skip",
+						"update",
+						"create_duplicate"
+					]
+				},
+				{
+					"in": "body",
+					"name": "has_header",
+					"type": "boolean",
+					"goType": "bool",
+					"required": true,
+					"description": ""
+				},
+				{
+					"in": "body",
+					"name": "category_ids",
+					"type": "stringArray",
+					"goType": "[]string",
+					"required": false,
+					"description": ""
+				},
+				{
+					"in": "body",
+					"name": "campaign_ids",
+					"type": "stringArray",
+					"goType": "[]string",
+					"required": false,
+					"description": ""
+				},
+				{
+					"in": "body",
+					"name": "segment_ids",
+					"type": "stringArray",
+					"goType": "[]string",
+					"required": false,
+					"description": "SegmentIDs pins every imported row into these segments as a manual include override, the same write the \"Add to segment\" bulk action does."
+				},
+				{
+					"in": "body",
+					"name": "subscribed_default",
+					"type": "boolean",
+					"goType": "*bool",
+					"required": false,
+					"description": "SubscribedDefault is what new contacts inherit when no subscribed column was mapped. Defaults to true server-side."
+				}
+			],
+			"body": {
+				"kind": "object",
+				"type": "models.ContactImportCommit"
+			},
+			"multipart": false,
+			"paginated": false,
+			"returnsList": false,
+			"openapi": true,
+			"source": "internal/api/routes.go:837"
+		},
+		{
+			"method": "GET",
+			"path": "/contacts/imports",
+			"handler": "ListContactImports",
+			"doc": "ListContactImports is GET /contacts/imports, newest first.",
+			"apiPerms": [
+				"APIPermReadContacts"
+			],
+			"params": [
+				{
+					"in": "query",
+					"name": "limit",
+					"type": "number",
+					"required": false,
+					"description": ""
+				},
+				{
+					"in": "query",
+					"name": "cursor",
+					"type": "string",
+					"required": false,
+					"description": "pagination.next_cursor from the previous page."
+				}
+			],
+			"body": null,
+			"multipart": false,
+			"paginated": true,
+			"returnsList": true,
+			"openapi": true,
+			"source": "internal/api/routes.go:835"
+		},
+		{
+			"method": "POST",
+			"path": "/contacts/imports",
+			"handler": "CreateContactImport",
+			"doc": "Background imports: upload once as a draft, analyse, start, and follow; every read and write is scoped to the organization.",
+			"apiPerms": [
+				"APIPermWriteContacts"
+			],
+			"params": [],
+			"body": null,
+			"multipart": true,
+			"paginated": false,
+			"returnsList": false,
+			"openapi": true,
+			"source": "internal/api/routes.go:834"
+		},
+		{
+			"method": "GET",
+			"path": "/contacts/lookup",
+			"handler": "LookupContactByEmail",
+			"doc": "Resolve a sender address to a contact (unibox CRM panel). Registered before /:id so the fixed path wins over the catch-all. A thread_id reads the unibox, so it needs unibox access as well.",
+			"apiPerms": [
+				"APIPermReadContacts",
+				"APIPermReadUnibox"
+			],
+			"params": [
+				{
+					"in": "query",
+					"name": "email",
+					"type": "string",
+					"required": false,
+					"description": "The email address to resolve. Required unless thread_id is given."
+				},
+				{
+					"in": "query",
+					"name": "thread_id",
+					"type": "string",
+					"required": false,
+					"description": "A unibox thread id. Used when the address is not a contact."
+				},
+				{
+					"in": "query",
+					"name": "account_id",
+					"type": "string",
+					"required": false,
+					"description": "The mailbox holding the thread, to limit the thread match to it."
+				}
+			],
+			"body": null,
+			"multipart": false,
+			"paginated": false,
+			"returnsList": false,
+			"openapi": true,
+			"source": "internal/api/routes.go:848"
 		},
 		{
 			"method": "POST",
@@ -4468,7 +5481,7 @@
 					"name": "contact_ids",
 					"type": "stringArray",
 					"goType": "[]uuid.UUID",
-					"required": true,
+					"required": false,
 					"description": ""
 				},
 				{
@@ -4488,7 +5501,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": false,
-			"source": "internal/api/routes.go:646"
+			"source": "internal/api/routes.go:866"
 		},
 		{
 			"method": "POST",
@@ -4504,7 +5517,7 @@
 					"name": "cursor",
 					"type": "string",
 					"required": false,
-					"description": "Opaque pagination cursor from the previous page's pagination.next_cursor."
+					"description": "Opaque pagination cursor from the previous page's pagination.next_cursor. It carries the exact position of the next page under the ordering it was issued for, so rows that share a sort value are never skipped or repeated. A malformed cursor, or one replayed with a different sort_by or reverse than it was issued under, is a 400."
 				},
 				{
 					"in": "query",
@@ -4610,6 +5623,14 @@
 				},
 				{
 					"in": "body",
+					"name": "mail_hosts",
+					"type": "stringArray",
+					"goType": "[]string",
+					"required": false,
+					"description": "Contacts whose inbox host is any of these; \"\" matches not detected yet"
+				},
+				{
+					"in": "body",
 					"name": "created_after",
 					"type": "dateTime",
 					"goType": "*time.Time",
@@ -4646,7 +5667,7 @@
 					"type": "string",
 					"goType": "string",
 					"required": false,
-					"description": "e.g., \"first_name ASC\", \"campaign_count DESC\""
+					"description": "A column name (created_at, first_name, company, ...) or \"custom:<key>\" for a custom field"
 				},
 				{
 					"in": "body",
@@ -4654,7 +5675,7 @@
 					"type": "boolean",
 					"goType": "bool",
 					"required": false,
-					"description": "ASC or DESC"
+					"description": "Ascending when true; the default is descending"
 				}
 			],
 			"body": {
@@ -4665,7 +5686,7 @@
 			"paginated": true,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:609"
+			"source": "internal/api/routes.go:817"
 		},
 		{
 			"method": "GET",
@@ -4681,7 +5702,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": false,
-			"source": "internal/api/routes.go:615"
+			"source": "internal/api/routes.go:823"
 		},
 		{
 			"method": "POST",
@@ -4699,6 +5720,30 @@
 					"goType": "[]string",
 					"required": false,
 					"description": ""
+				},
+				{
+					"in": "body",
+					"name": "all",
+					"type": "boolean",
+					"goType": "bool",
+					"required": false,
+					"description": "All switches the selection from the id list to Filters."
+				},
+				{
+					"in": "body",
+					"name": "filters",
+					"type": "json",
+					"goType": "*SearchContacts",
+					"required": false,
+					"description": "Filters is the same search body /contacts/search takes, so the set resolved here is exactly the set the list was showing."
+				},
+				{
+					"in": "body",
+					"name": "exclude",
+					"type": "stringArray",
+					"goType": "[]string",
+					"required": false,
+					"description": "Exclude drops ids from the resolved set: the rows unticked after a select-all. Ignored unless All is set."
 				},
 				{
 					"in": "body",
@@ -4725,7 +5770,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": false,
-			"source": "internal/api/routes.go:616"
+			"source": "internal/api/routes.go:824"
 		},
 		{
 			"method": "DELETE",
@@ -4745,7 +5790,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:611"
+			"source": "internal/api/routes.go:819"
 		},
 		{
 			"method": "PATCH",
@@ -4761,8 +5806,32 @@
 					"name": "contacts",
 					"type": "stringArray",
 					"goType": "[]string",
-					"required": true,
-					"description": "Contact IDs to edit (1 to 1000)."
+					"required": false,
+					"description": "Contact IDs to edit (1 to 10000). Required unless all is set."
+				},
+				{
+					"in": "body",
+					"name": "all",
+					"type": "boolean",
+					"goType": "bool",
+					"required": false,
+					"description": "All switches the selection from the id list to Filters."
+				},
+				{
+					"in": "body",
+					"name": "filters",
+					"type": "json",
+					"goType": "*SearchContacts",
+					"required": false,
+					"description": "Filters is the same search body /contacts/search takes, so the set resolved here is exactly the set the list was showing."
+				},
+				{
+					"in": "body",
+					"name": "exclude",
+					"type": "stringArray",
+					"goType": "[]string",
+					"required": false,
+					"description": "Exclude drops ids from the resolved set: the rows unticked after a select-all. Ignored unless All is set."
 				},
 				{
 					"in": "body",
@@ -4821,7 +5890,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:612"
+			"source": "internal/api/routes.go:820"
 		},
 		{
 			"method": "POST",
@@ -4841,7 +5910,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:610"
+			"source": "internal/api/routes.go:818"
 		},
 		{
 			"method": "DELETE",
@@ -4865,7 +5934,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1050"
+			"source": "internal/api/routes.go:1324"
 		},
 		{
 			"method": "GET",
@@ -4889,7 +5958,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1048"
+			"source": "internal/api/routes.go:1322"
 		},
 		{
 			"method": "PATCH",
@@ -4993,7 +6062,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1049"
+			"source": "internal/api/routes.go:1323"
 		},
 		{
 			"method": "POST",
@@ -5146,7 +6215,7 @@
 			"paginated": true,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:1046"
+			"source": "internal/api/routes.go:1320"
 		},
 		{
 			"method": "POST",
@@ -5285,7 +6354,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1047"
+			"source": "internal/api/routes.go:1321"
 		},
 		{
 			"method": "GET",
@@ -5342,7 +6411,7 @@
 			"paginated": true,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:1044"
+			"source": "internal/api/routes.go:1318"
 		},
 		{
 			"method": "POST",
@@ -5442,7 +6511,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1045"
+			"source": "internal/api/routes.go:1319"
 		},
 		{
 			"method": "DELETE",
@@ -5473,7 +6542,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1039"
+			"source": "internal/api/routes.go:1313"
 		},
 		{
 			"method": "PATCH",
@@ -5523,7 +6592,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1038"
+			"source": "internal/api/routes.go:1312"
 		},
 		{
 			"method": "POST",
@@ -5566,7 +6635,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1037"
+			"source": "internal/api/routes.go:1311"
 		},
 		{
 			"method": "DELETE",
@@ -5590,7 +6659,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1036"
+			"source": "internal/api/routes.go:1310"
 		},
 		{
 			"method": "GET",
@@ -5614,7 +6683,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1034"
+			"source": "internal/api/routes.go:1308"
 		},
 		{
 			"method": "PATCH",
@@ -5649,7 +6718,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1035"
+			"source": "internal/api/routes.go:1309"
 		},
 		{
 			"method": "GET",
@@ -5665,7 +6734,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:1032"
+			"source": "internal/api/routes.go:1306"
 		},
 		{
 			"method": "POST",
@@ -5701,7 +6770,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1033"
+			"source": "internal/api/routes.go:1307"
 		},
 		{
 			"method": "DELETE",
@@ -5725,7 +6794,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1058"
+			"source": "internal/api/routes.go:1332"
 		},
 		{
 			"method": "PATCH",
@@ -5776,7 +6845,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1057"
+			"source": "internal/api/routes.go:1331"
 		},
 		{
 			"method": "GET",
@@ -5792,7 +6861,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:1055"
+			"source": "internal/api/routes.go:1329"
 		},
 		{
 			"method": "POST",
@@ -5828,7 +6897,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1056"
+			"source": "internal/api/routes.go:1330"
 		},
 		{
 			"method": "DELETE",
@@ -5852,7 +6921,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1069"
+			"source": "internal/api/routes.go:1348"
 		},
 		{
 			"method": "GET",
@@ -5876,7 +6945,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1067"
+			"source": "internal/api/routes.go:1346"
 		},
 		{
 			"method": "PATCH",
@@ -5962,7 +7031,7 @@
 					"type": "options",
 					"goType": "*string",
 					"required": false,
-					"description": "open or done",
+					"description": "pending, in_progress, completed or cancelled",
 					"enum": [
 						"pending",
 						"in_progress",
@@ -5979,7 +7048,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1068"
+			"source": "internal/api/routes.go:1347"
 		},
 		{
 			"method": "POST",
@@ -6124,7 +7193,7 @@
 			"paginated": true,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:1065"
+			"source": "internal/api/routes.go:1344"
 		},
 		{
 			"method": "POST",
@@ -6255,7 +7324,27 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1066"
+			"source": "internal/api/routes.go:1345"
+		},
+		{
+			"method": "DELETE",
+			"path": "/crm/tasks",
+			"handler": "BulkDeleteCRMTasks",
+			"doc": "BulkDeleteCRMTasks deletes a whole selection. Two bodies are accepted: a bare id array, and the selection object ({\"all\":true,\"filters\":{...}}) the Tasks page sends for \"select all matching\".",
+			"apiPerms": [
+				"APIPermWriteCRM"
+			],
+			"params": [],
+			"body": {
+				"kind": "array",
+				"type": "string",
+				"itemType": "stringArray"
+			},
+			"multipart": false,
+			"paginated": false,
+			"returnsList": false,
+			"openapi": true,
+			"source": "internal/api/routes.go:1343"
 		},
 		{
 			"method": "GET",
@@ -6320,7 +7409,87 @@
 			"paginated": true,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:1063"
+			"source": "internal/api/routes.go:1337"
+		},
+		{
+			"method": "PATCH",
+			"path": "/crm/tasks",
+			"handler": "BulkUpdateCRMTasks",
+			"doc": "Bulk status/priority and bulk delete over a selection: the ids ticked, or the whole current filter. Same scope as the single-task routes they stand in for.",
+			"apiPerms": [
+				"APIPermWriteCRM"
+			],
+			"params": [
+				{
+					"in": "body",
+					"name": "tasks",
+					"type": "stringArray",
+					"goType": "[]string",
+					"required": false,
+					"description": ""
+				},
+				{
+					"in": "body",
+					"name": "all",
+					"type": "boolean",
+					"goType": "bool",
+					"required": false,
+					"description": "All switches the selection from the id list to Filters."
+				},
+				{
+					"in": "body",
+					"name": "filters",
+					"type": "json",
+					"goType": "*SearchTasks",
+					"required": false,
+					"description": "Filters is the same search body /crm/tasks/search takes, so the set resolved here is exactly the set the list was showing."
+				},
+				{
+					"in": "body",
+					"name": "exclude",
+					"type": "stringArray",
+					"goType": "[]string",
+					"required": false,
+					"description": "Exclude drops ids from the resolved set: the rows unticked after a select-all. Ignored unless All is set."
+				},
+				{
+					"in": "body",
+					"name": "status",
+					"type": "options",
+					"goType": "*string",
+					"required": false,
+					"description": "Status to set. completed stamps completed_at and records the completion on each linked contact's timeline.",
+					"enum": [
+						"pending",
+						"in_progress",
+						"completed",
+						"cancelled"
+					]
+				},
+				{
+					"in": "body",
+					"name": "priority",
+					"type": "options",
+					"goType": "*string",
+					"required": false,
+					"description": "Priority to set.",
+					"enum": [
+						"low",
+						"medium",
+						"high",
+						"urgent"
+					]
+				}
+			],
+			"body": {
+				"kind": "object",
+				"type": "models.BulkUpdateTasks"
+			},
+			"multipart": false,
+			"paginated": false,
+			"returnsList": false,
+			"openapi": true,
+			"source": "internal/api/routes.go:1342"
 		},
 		{
 			"method": "POST",
@@ -6418,7 +7587,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1064"
+			"source": "internal/api/routes.go:1338"
 		},
 		{
 			"method": "POST",
@@ -6518,7 +7687,78 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:845"
+			"source": "internal/api/routes.go:1100"
+		},
+		{
+			"method": "DELETE",
+			"path": "/email-images/{id}",
+			"handler": "DeleteEmailImage",
+			"doc": "DeleteEmailImage — DELETE /email-images/:id. The bytes go with the row, so any email already sent with this image loses it; the dashboard says so first.",
+			"apiPerms": [
+				"APIPermWriteCampaigns"
+			],
+			"params": [
+				{
+					"in": "path",
+					"name": "id",
+					"type": "string",
+					"required": true,
+					"description": ""
+				}
+			],
+			"body": null,
+			"multipart": false,
+			"paginated": false,
+			"returnsList": false,
+			"openapi": false,
+			"source": "internal/api/routes.go:1297"
+		},
+		{
+			"method": "GET",
+			"path": "/email-images",
+			"handler": "ListEmailImages",
+			"doc": "ListEmailImages — GET /email-images",
+			"apiPerms": [
+				"APIPermReadCampaigns"
+			],
+			"params": [
+				{
+					"in": "query",
+					"name": "limit",
+					"type": "string",
+					"required": false,
+					"description": ""
+				},
+				{
+					"in": "query",
+					"name": "cursor",
+					"type": "string",
+					"required": false,
+					"description": ""
+				}
+			],
+			"body": null,
+			"multipart": false,
+			"paginated": true,
+			"returnsList": true,
+			"openapi": false,
+			"source": "internal/api/routes.go:1295"
+		},
+		{
+			"method": "POST",
+			"path": "/email-images",
+			"handler": "UploadEmailImage",
+			"doc": "UploadEmailImage — POST /email-images (multipart \"file\")",
+			"apiPerms": [
+				"APIPermWriteCampaigns"
+			],
+			"params": [],
+			"body": null,
+			"multipart": true,
+			"paginated": false,
+			"returnsList": false,
+			"openapi": false,
+			"source": "internal/api/routes.go:1296"
 		},
 		{
 			"method": "GET",
@@ -6542,7 +7782,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:428"
+			"source": "internal/api/routes.go:518"
 		},
 		{
 			"method": "POST",
@@ -6566,7 +7806,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": false,
-			"source": "internal/api/routes.go:431"
+			"source": "internal/api/routes.go:521"
 		},
 		{
 			"method": "GET",
@@ -6590,7 +7830,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": false,
-			"source": "internal/api/routes.go:437"
+			"source": "internal/api/routes.go:534"
 		},
 		{
 			"method": "GET",
@@ -6614,7 +7854,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": false,
-			"source": "internal/api/routes.go:435"
+			"source": "internal/api/routes.go:532"
 		},
 		{
 			"method": "PUT",
@@ -6777,7 +8017,42 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": false,
-			"source": "internal/api/routes.go:436"
+			"source": "internal/api/routes.go:533"
+		},
+		{
+			"method": "PATCH",
+			"path": "/emails/{id}/direct-tracking",
+			"handler": "UpdateEmailDirectTracking",
+			"doc": "UpdateEmailDirectTracking switches open/click tracking on this mailbox's hand-written unibox sends. Off by default, and deliberately per mailbox: a pixel belongs in a cold sequence more comfortably than in a one-to-one reply. PATCH /emails/:id/direct-tracking",
+			"apiPerms": [
+				"APIPermWriteEmails"
+			],
+			"params": [
+				{
+					"in": "path",
+					"name": "id",
+					"type": "string",
+					"required": true,
+					"description": ""
+				},
+				{
+					"in": "body",
+					"name": "enabled",
+					"type": "boolean",
+					"goType": "*bool",
+					"required": true,
+					"description": ""
+				}
+			],
+			"body": {
+				"kind": "object",
+				"type": "inline"
+			},
+			"multipart": false,
+			"paginated": false,
+			"returnsList": false,
+			"openapi": false,
+			"source": "internal/api/routes.go:507"
 		},
 		{
 			"method": "POST",
@@ -6801,7 +8076,66 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": false,
-			"source": "internal/api/routes.go:426"
+			"source": "internal/api/routes.go:516"
+		},
+		{
+			"method": "POST",
+			"path": "/emails/{id}/identity/refresh",
+			"handler": "RefreshEmailSendIdentity",
+			"doc": "RefreshEmailSendIdentity re-reads the mailbox's send-as addresses from the provider and stores them, optionally importing the provider's signature.  Retry-safe without an Idempotency-Key: it reads the provider's current state and writes exactly that, so repeating it converges on the same row. POST /emails/:id/identity/refresh",
+			"apiPerms": [
+				"APIPermWriteEmails"
+			],
+			"params": [
+				{
+					"in": "path",
+					"name": "id",
+					"type": "string",
+					"required": true,
+					"description": "The mailbox id."
+				},
+				{
+					"in": "body",
+					"name": "import_signature",
+					"type": "boolean",
+					"goType": "bool",
+					"required": false,
+					"description": "Also replace the mailbox's stored signature with the one configured at the provider, for whichever identity the mailbox sends as. An empty signature at the provider changes nothing."
+				}
+			],
+			"body": {
+				"kind": "object",
+				"type": "refreshSendIdentityRequest"
+			},
+			"multipart": false,
+			"paginated": false,
+			"returnsList": false,
+			"openapi": true,
+			"source": "internal/api/routes.go:529"
+		},
+		{
+			"method": "GET",
+			"path": "/emails/{id}/identity",
+			"handler": "GetEmailSendIdentity",
+			"doc": "Which addresses the provider will let this mailbox send as, and where its signature came from. The refresh is the only half that calls the provider, and storing its answer is what a send-as choice is validated against, so it is write-scoped.",
+			"apiPerms": [
+				"APIPermReadEmails"
+			],
+			"params": [
+				{
+					"in": "path",
+					"name": "id",
+					"type": "string",
+					"required": true,
+					"description": "The mailbox id."
+				}
+			],
+			"body": null,
+			"multipart": false,
+			"paginated": false,
+			"returnsList": false,
+			"openapi": true,
+			"source": "internal/api/routes.go:528"
 		},
 		{
 			"method": "POST",
@@ -6825,7 +8159,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": false,
-			"source": "internal/api/routes.go:427"
+			"source": "internal/api/routes.go:517"
 		},
 		{
 			"method": "POST",
@@ -6937,13 +8271,13 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:442"
+			"source": "internal/api/routes.go:539"
 		},
 		{
 			"method": "GET",
 			"path": "/emails/{id}/sync",
 			"handler": "GetEmailSync",
-			"doc": "GetEmailSync reports a mailbox's sync progress and fair-use status.",
+			"doc": "GetEmailSync reports a mailbox's sync progress, fair-use status and folder settings.",
 			"apiPerms": [
 				"APIPermReadEmails"
 			],
@@ -6961,7 +8295,42 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:432"
+			"source": "internal/api/routes.go:522"
+		},
+		{
+			"method": "PUT",
+			"path": "/emails/{id}/sync",
+			"handler": "UpdateEmailSync",
+			"doc": "UpdateEmailSync replaces the folders the mailbox's sync leaves alone.  Naturally idempotent: the body is the desired list, so a retry converges on the same stored value and no Idempotency-Key is needed. PUT /emails/:id/sync",
+			"apiPerms": [
+				"APIPermWriteEmails"
+			],
+			"params": [
+				{
+					"in": "path",
+					"name": "id",
+					"type": "string",
+					"required": true,
+					"description": "The mailbox id."
+				},
+				{
+					"in": "body",
+					"name": "skip_folders",
+					"type": "stringArray",
+					"goType": "[]string",
+					"required": true,
+					"description": "Folder names as the server lists them. Case does not matter; each covers its subfolders. An empty list syncs every folder."
+				}
+			],
+			"body": {
+				"kind": "object",
+				"type": "models.UpdateSyncSettings"
+			},
+			"multipart": false,
+			"paginated": false,
+			"returnsList": false,
+			"openapi": true,
+			"source": "internal/api/routes.go:523"
 		},
 		{
 			"method": "POST",
@@ -6985,7 +8354,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": false,
-			"source": "internal/api/routes.go:420"
+			"source": "internal/api/routes.go:510"
 		},
 		{
 			"method": "GET",
@@ -7009,7 +8378,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": false,
-			"source": "internal/api/routes.go:416"
+			"source": "internal/api/routes.go:505"
 		},
 		{
 			"method": "PATCH",
@@ -7040,7 +8409,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:417"
+			"source": "internal/api/routes.go:506"
 		},
 		{
 			"method": "POST",
@@ -7075,7 +8444,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:440"
+			"source": "internal/api/routes.go:537"
 		},
 		{
 			"method": "GET",
@@ -7099,7 +8468,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:439"
+			"source": "internal/api/routes.go:536"
 		},
 		{
 			"method": "POST",
@@ -7123,7 +8492,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:422"
+			"source": "internal/api/routes.go:512"
 		},
 		{
 			"method": "POST",
@@ -7147,7 +8516,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:423"
+			"source": "internal/api/routes.go:513"
 		},
 		{
 			"method": "POST",
@@ -7171,7 +8540,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:421"
+			"source": "internal/api/routes.go:511"
 		},
 		{
 			"method": "POST",
@@ -7195,7 +8564,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:424"
+			"source": "internal/api/routes.go:514"
 		},
 		{
 			"method": "DELETE",
@@ -7219,7 +8588,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:441"
+			"source": "internal/api/routes.go:538"
 		},
 		{
 			"method": "GET",
@@ -7243,7 +8612,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:409"
+			"source": "internal/api/routes.go:498"
 		},
 		{
 			"method": "PATCH",
@@ -7300,6 +8669,14 @@
 					"goType": "*bool",
 					"required": false,
 					"description": "Treat the HTML signature as raw code."
+				},
+				{
+					"in": "body",
+					"name": "send_as_email",
+					"type": "string",
+					"goType": "*string",
+					"required": false,
+					"description": "SendAsEmail picks which verified provider alias the mailbox sends from. An empty string clears it back to the mailbox's own address; anything else has to be an address the provider reported as verified."
 				},
 				{
 					"in": "body",
@@ -7412,6 +8789,35 @@
 				},
 				{
 					"in": "body",
+					"name": "warmup_placement",
+					"type": "options",
+					"goType": "*string",
+					"required": false,
+					"description": "WarmupPlacement is \"folder\", \"inbox\" or \"archive\"; WarmupFolder names the destination for \"folder\" and is cleared back to the instance default by an empty string.",
+					"enum": [
+						"folder",
+						"inbox",
+						"archive"
+					]
+				},
+				{
+					"in": "body",
+					"name": "warmup_folder",
+					"type": "string",
+					"goType": "*string",
+					"required": false,
+					"description": "Folder (Gmail label) warmup mail is filed into when warmup_placement is \"folder\". Send an empty string to fall back to the instance default. No folder separators or control characters; 64 characters max."
+				},
+				{
+					"in": "body",
+					"name": "warmup_retention_days",
+					"type": "number",
+					"goType": "*int",
+					"required": false,
+					"description": "WarmupRetentionDays is how long warmup mail is kept in the mailbox; 0 goes back to the instance setting."
+				},
+				{
+					"in": "body",
 					"name": "timezone",
 					"type": "string",
 					"goType": "*string",
@@ -7425,6 +8831,14 @@
 					"goType": "*bool",
 					"required": false,
 					"description": "SaveToSent controls the Sent folder copy on SMTP/IMAP mailboxes. Turn it off when the submission server files its own copy, or the folder ends up with two of everything."
+				},
+				{
+					"in": "body",
+					"name": "relay_folder_moves",
+					"type": "boolean",
+					"goType": "*bool",
+					"required": false,
+					"description": "RelayFolderMoves turns the unibox's filing relay to the mailbox on or off."
 				},
 				{
 					"in": "body",
@@ -7443,7 +8857,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:410"
+			"source": "internal/api/routes.go:499"
 		},
 		{
 			"method": "GET",
@@ -7459,7 +8873,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": false,
-			"source": "internal/api/routes.go:415"
+			"source": "internal/api/routes.go:504"
 		},
 		{
 			"method": "PATCH",
@@ -7503,7 +8917,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": false,
-			"source": "internal/api/routes.go:413"
+			"source": "internal/api/routes.go:502"
 		},
 		{
 			"method": "POST",
@@ -7538,7 +8952,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:438"
+			"source": "internal/api/routes.go:535"
 		},
 		{
 			"method": "GET",
@@ -7583,7 +8997,7 @@
 			"paginated": true,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:408"
+			"source": "internal/api/routes.go:497"
 		},
 		{
 			"method": "PATCH",
@@ -7604,8 +9018,8 @@
 					"name": "position",
 					"type": "number",
 					"goType": "int32",
-					"required": false,
-					"description": ""
+					"required": true,
+					"description": "New 0-based position within the registry."
 				}
 			],
 			"body": {
@@ -7615,8 +9029,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": true,
-			"openapi": false,
-			"source": "internal/api/routes.go:705"
+			"openapi": true,
+			"source": "internal/api/routes.go:925"
 		},
 		{
 			"method": "DELETE",
@@ -7637,8 +9051,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:705"
+			"openapi": true,
+			"source": "internal/api/routes.go:925"
 		},
 		{
 			"method": "PATCH",
@@ -7660,7 +9074,7 @@
 					"type": "string",
 					"goType": "*string",
 					"required": false,
-					"description": ""
+					"description": "1 to 50 characters."
 				},
 				{
 					"in": "body",
@@ -7668,7 +9082,7 @@
 					"type": "string",
 					"goType": "*string",
 					"required": false,
-					"description": ""
+					"description": "Hex colour, `#rrggbb`."
 				}
 			],
 			"body": {
@@ -7678,8 +9092,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:705"
+			"openapi": true,
+			"source": "internal/api/routes.go:925"
 		},
 		{
 			"method": "POST",
@@ -7693,8 +9107,8 @@
 					"name": "title",
 					"type": "string",
 					"goType": "string",
-					"required": false,
-					"description": ""
+					"required": true,
+					"description": "1 to 50 characters."
 				},
 				{
 					"in": "body",
@@ -7702,7 +9116,7 @@
 					"type": "string",
 					"goType": "string",
 					"required": false,
-					"description": ""
+					"description": "Hex colour, `#rrggbb`. Omit to let the server pick from its palette."
 				}
 			],
 			"body": {
@@ -7712,8 +9126,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:705"
+			"openapi": true,
+			"source": "internal/api/routes.go:925"
 		},
 		{
 			"method": "DELETE",
@@ -7744,7 +9158,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": false,
-			"source": "internal/api/routes.go:702"
+			"source": "internal/api/routes.go:922"
 		},
 		{
 			"method": "POST",
@@ -7775,7 +9189,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": false,
-			"source": "internal/api/routes.go:701"
+			"source": "internal/api/routes.go:921"
 		},
 		{
 			"method": "GET",
@@ -7806,7 +9220,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": false,
-			"source": "internal/api/routes.go:700"
+			"source": "internal/api/routes.go:920"
 		},
 		{
 			"method": "GET",
@@ -7837,7 +9251,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": false,
-			"source": "internal/api/routes.go:698"
+			"source": "internal/api/routes.go:918"
 		},
 		{
 			"method": "DELETE",
@@ -7868,7 +9282,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": false,
-			"source": "internal/api/routes.go:697"
+			"source": "internal/api/routes.go:917"
 		},
 		{
 			"method": "GET",
@@ -7906,7 +9320,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": false,
-			"source": "internal/api/routes.go:696"
+			"source": "internal/api/routes.go:916"
 		},
 		{
 			"method": "DELETE",
@@ -7930,7 +9344,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": false,
-			"source": "internal/api/routes.go:695"
+			"source": "internal/api/routes.go:915"
 		},
 		{
 			"method": "GET",
@@ -7954,7 +9368,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": false,
-			"source": "internal/api/routes.go:693"
+			"source": "internal/api/routes.go:913"
 		},
 		{
 			"method": "PATCH",
@@ -8056,6 +9470,14 @@
 					"goType": "*bool",
 					"required": false,
 					"description": ""
+				},
+				{
+					"in": "body",
+					"name": "triage_enabled",
+					"type": "boolean",
+					"goType": "*bool",
+					"required": false,
+					"description": ""
 				}
 			],
 			"body": {
@@ -8066,7 +9488,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": false,
-			"source": "internal/api/routes.go:694"
+			"source": "internal/api/routes.go:914"
 		},
 		{
 			"method": "GET",
@@ -8082,7 +9504,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": false,
-			"source": "internal/api/routes.go:685"
+			"source": "internal/api/routes.go:905"
 		},
 		{
 			"method": "POST",
@@ -8098,7 +9520,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": false,
-			"source": "internal/api/routes.go:691"
+			"source": "internal/api/routes.go:911"
 		},
 		{
 			"method": "GET",
@@ -8114,7 +9536,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": false,
-			"source": "internal/api/routes.go:689"
+			"source": "internal/api/routes.go:909"
 		},
 		{
 			"method": "PUT",
@@ -8131,7 +9553,7 @@
 					"type": "string",
 					"goType": "string",
 					"required": false,
-					"description": ""
+					"description": "The custom forms domain"
 				}
 			],
 			"body": {
@@ -8142,7 +9564,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": false,
-			"source": "internal/api/routes.go:690"
+			"source": "internal/api/routes.go:910"
 		},
 		{
 			"method": "GET",
@@ -8158,7 +9580,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": false,
-			"source": "internal/api/routes.go:684"
+			"source": "internal/api/routes.go:904"
 		},
 		{
 			"method": "POST",
@@ -8186,7 +9608,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": false,
-			"source": "internal/api/routes.go:692"
+			"source": "internal/api/routes.go:912"
 		},
 		{
 			"method": "POST",
@@ -8263,7 +9685,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": false,
-			"source": "internal/api/routes.go:556"
+			"source": "internal/api/routes.go:764"
 		},
 		{
 			"method": "POST",
@@ -8316,7 +9738,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": false,
-			"source": "internal/api/routes.go:554"
+			"source": "internal/api/routes.go:762"
 		},
 		{
 			"method": "POST",
@@ -8353,7 +9775,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:553"
+			"source": "internal/api/routes.go:761"
 		},
 		{
 			"method": "GET",
@@ -8367,7 +9789,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:902"
+			"source": "internal/api/routes.go:1159"
 		},
 		{
 			"method": "GET",
@@ -8381,7 +9803,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:887"
+			"source": "internal/api/routes.go:1142"
 		},
 		{
 			"method": "PATCH",
@@ -8427,7 +9849,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:891"
+			"source": "internal/api/routes.go:1146"
 		},
 		{
 			"method": "DELETE",
@@ -8456,7 +9878,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:895"
+			"source": "internal/api/routes.go:1150"
 		},
 		{
 			"method": "GET",
@@ -8478,7 +9900,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:893"
+			"source": "internal/api/routes.go:1148"
 		},
 		{
 			"method": "POST",
@@ -8535,7 +9957,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:894"
+			"source": "internal/api/routes.go:1149"
 		},
 		{
 			"method": "GET",
@@ -8557,7 +9979,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:896"
+			"source": "internal/api/routes.go:1151"
 		},
 		{
 			"method": "PUT",
@@ -8598,7 +10020,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:897"
+			"source": "internal/api/routes.go:1152"
 		},
 		{
 			"method": "POST",
@@ -8619,8 +10041,8 @@
 					"name": "contact_ids",
 					"type": "stringArray",
 					"goType": "[]string",
-					"required": true,
-					"description": "Contact ids to push. Deduplicated server-side. At least 1, at most 500."
+					"required": false,
+					"description": "contact_ids is the original field name; the selection's `contacts`, `all` and `filters` are the \"select all matching\" form."
 				}
 			],
 			"body": {
@@ -8631,7 +10053,29 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:901"
+			"source": "internal/api/routes.go:1158"
+		},
+		{
+			"method": "POST",
+			"path": "/integrations/connections/{id}/rotate-inbound-url",
+			"handler": "RotateConnectionInboundURL",
+			"doc": "RotateConnectionInboundURL mints a new inbound URL for a Calendly or Cal.com connection; the previous one stops working immediately.",
+			"apiPerms": [],
+			"params": [
+				{
+					"in": "path",
+					"name": "id",
+					"type": "string",
+					"required": true,
+					"description": "Connection id."
+				}
+			],
+			"body": null,
+			"multipart": false,
+			"paginated": false,
+			"returnsList": false,
+			"openapi": true,
+			"source": "internal/api/routes.go:1156"
 		},
 		{
 			"method": "GET",
@@ -8653,7 +10097,40 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:898"
+			"source": "internal/api/routes.go:1153"
+		},
+		{
+			"method": "PUT",
+			"path": "/integrations/connections/{id}/signing-key",
+			"handler": "SetConnectionSigningKey",
+			"doc": "SetConnectionSigningKey sets the key a Calendly or Cal.com connection's deliveries must be signed with; an empty key goes back to the URL secret alone.",
+			"apiPerms": [],
+			"params": [
+				{
+					"in": "path",
+					"name": "id",
+					"type": "string",
+					"required": true,
+					"description": "Connection id."
+				},
+				{
+					"in": "body",
+					"name": "signing_key",
+					"type": "string",
+					"goType": "string",
+					"required": true,
+					"description": "Calendly signing key or Cal.com webhook secret, 8 to 512 characters. Empty removes the key."
+				}
+			],
+			"body": {
+				"kind": "object",
+				"type": "inboundSigningKeyPayload"
+			},
+			"multipart": false,
+			"paginated": false,
+			"returnsList": false,
+			"openapi": true,
+			"source": "internal/api/routes.go:1155"
 		},
 		{
 			"method": "POST",
@@ -8675,7 +10152,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:900"
+			"source": "internal/api/routes.go:1157"
 		},
 		{
 			"method": "GET",
@@ -8697,7 +10174,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:899"
+			"source": "internal/api/routes.go:1154"
 		},
 		{
 			"method": "DELETE",
@@ -8719,7 +10196,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:892"
+			"source": "internal/api/routes.go:1147"
 		},
 		{
 			"method": "GET",
@@ -8741,7 +10218,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:890"
+			"source": "internal/api/routes.go:1145"
 		},
 		{
 			"method": "GET",
@@ -8755,7 +10232,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:888"
+			"source": "internal/api/routes.go:1143"
 		},
 		{
 			"method": "POST",
@@ -8797,7 +10274,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:889"
+			"source": "internal/api/routes.go:1144"
 		},
 		{
 			"method": "GET",
@@ -8811,7 +10288,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": false,
-			"source": "internal/api/routes.go:987"
+			"source": "internal/api/routes.go:1244"
 		},
 		{
 			"method": "POST",
@@ -8853,7 +10330,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": false,
-			"source": "internal/api/routes.go:989"
+			"source": "internal/api/routes.go:1246"
 		},
 		{
 			"method": "POST",
@@ -8887,7 +10364,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": false,
-			"source": "internal/api/routes.go:988"
+			"source": "internal/api/routes.go:1245"
 		},
 		{
 			"method": "POST",
@@ -8909,7 +10386,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": false,
-			"source": "internal/api/routes.go:996"
+			"source": "internal/api/routes.go:1253"
 		},
 		{
 			"method": "DELETE",
@@ -8931,7 +10408,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": false,
-			"source": "internal/api/routes.go:995"
+			"source": "internal/api/routes.go:1252"
 		},
 		{
 			"method": "GET",
@@ -8953,7 +10430,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": false,
-			"source": "internal/api/routes.go:993"
+			"source": "internal/api/routes.go:1250"
 		},
 		{
 			"method": "PATCH",
@@ -9048,6 +10525,14 @@
 				},
 				{
 					"in": "body",
+					"name": "segment_ids",
+					"type": "stringArray",
+					"goType": "*[]string",
+					"required": false,
+					"description": ""
+				},
+				{
+					"in": "body",
 					"name": "subscribed_default",
 					"type": "boolean",
 					"goType": "*bool",
@@ -9071,18 +10556,25 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": false,
-			"source": "internal/api/routes.go:994"
+			"source": "internal/api/routes.go:1251"
 		},
 		{
 			"method": "GET",
 			"path": "/lead-sync/sources",
 			"handler": "ListLeadSyncSources",
-			"doc": "ListLeadSyncSources lists this org's saved sources, optionally filtered to a campaign via ?campaign_id=.",
+			"doc": "ListLeadSyncSources lists this org's saved sources, optionally filtered to a campaign via ?campaign_id= or to a segment via ?segment_id=.",
 			"apiPerms": [],
 			"params": [
 				{
 					"in": "query",
 					"name": "campaign_id",
+					"type": "string",
+					"required": false,
+					"description": ""
+				},
+				{
+					"in": "query",
+					"name": "segment_id",
 					"type": "string",
 					"required": false,
 					"description": ""
@@ -9093,7 +10585,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": false,
-			"source": "internal/api/routes.go:991"
+			"source": "internal/api/routes.go:1248"
 		},
 		{
 			"method": "POST",
@@ -9181,6 +10673,14 @@
 				},
 				{
 					"in": "body",
+					"name": "segment_ids",
+					"type": "stringArray",
+					"goType": "[]string",
+					"required": false,
+					"description": ""
+				},
+				{
+					"in": "body",
 					"name": "subscribed_default",
 					"type": "boolean",
 					"goType": "*bool",
@@ -9204,7 +10704,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": false,
-			"source": "internal/api/routes.go:992"
+			"source": "internal/api/routes.go:1249"
 		},
 		{
 			"method": "DELETE",
@@ -9226,7 +10726,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": false,
-			"source": "internal/api/routes.go:916"
+			"source": "internal/api/routes.go:1173"
 		},
 		{
 			"method": "GET",
@@ -9240,7 +10740,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": false,
-			"source": "internal/api/routes.go:914"
+			"source": "internal/api/routes.go:1171"
 		},
 		{
 			"method": "GET",
@@ -9290,7 +10790,7 @@
 			"paginated": true,
 			"returnsList": true,
 			"openapi": false,
-			"source": "internal/api/routes.go:913"
+			"source": "internal/api/routes.go:1170"
 		},
 		{
 			"method": "POST",
@@ -9372,7 +10872,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": false,
-			"source": "internal/api/routes.go:915"
+			"source": "internal/api/routes.go:1172"
 		},
 		{
 			"method": "GET",
@@ -9386,7 +10886,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": false,
-			"source": "internal/api/routes.go:1090"
+			"source": "internal/api/routes.go:1369"
 		},
 		{
 			"method": "POST",
@@ -9400,7 +10900,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": false,
-			"source": "internal/api/routes.go:967"
+			"source": "internal/api/routes.go:1224"
 		},
 		{
 			"method": "POST",
@@ -9422,7 +10922,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": false,
-			"source": "internal/api/routes.go:953"
+			"source": "internal/api/routes.go:1210"
 		},
 		{
 			"method": "GET",
@@ -9472,7 +10972,7 @@
 			"paginated": true,
 			"returnsList": true,
 			"openapi": false,
-			"source": "internal/api/routes.go:959"
+			"source": "internal/api/routes.go:1216"
 		},
 		{
 			"method": "GET",
@@ -9494,7 +10994,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": false,
-			"source": "internal/api/routes.go:958"
+			"source": "internal/api/routes.go:1215"
 		},
 		{
 			"method": "POST",
@@ -9516,7 +11016,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": false,
-			"source": "internal/api/routes.go:957"
+			"source": "internal/api/routes.go:1214"
 		},
 		{
 			"method": "GET",
@@ -9538,7 +11038,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": false,
-			"source": "internal/api/routes.go:956"
+			"source": "internal/api/routes.go:1213"
 		},
 		{
 			"method": "DELETE",
@@ -9560,7 +11060,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": false,
-			"source": "internal/api/routes.go:952"
+			"source": "internal/api/routes.go:1209"
 		},
 		{
 			"method": "GET",
@@ -9582,7 +11082,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": false,
-			"source": "internal/api/routes.go:950"
+			"source": "internal/api/routes.go:1207"
 		},
 		{
 			"method": "PATCH",
@@ -9679,7 +11179,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": false,
-			"source": "internal/api/routes.go:951"
+			"source": "internal/api/routes.go:1208"
 		},
 		{
 			"method": "GET",
@@ -9693,7 +11193,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": false,
-			"source": "internal/api/routes.go:948"
+			"source": "internal/api/routes.go:1205"
 		},
 		{
 			"method": "POST",
@@ -9772,7 +11272,7 @@
 					"type": "number",
 					"goType": "uint64",
 					"required": false,
-					"description": ""
+					"description": "API permission bitmask the app may request (required; see the permissions reference)"
 				}
 			],
 			"body": {
@@ -9783,7 +11283,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": false,
-			"source": "internal/api/routes.go:949"
+			"source": "internal/api/routes.go:1206"
 		},
 		{
 			"method": "GET",
@@ -9797,7 +11297,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:824"
+			"source": "internal/api/routes.go:1079"
 		},
 		{
 			"method": "PATCH",
@@ -9823,7 +11323,802 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:825"
+			"source": "internal/api/routes.go:1080"
+		},
+		{
+			"method": "POST",
+			"path": "/placement/batches/{id}/cancel",
+			"handler": "CancelPlacementBatch",
+			"doc": "CancelPlacementBatch stops a batch. Copies already sent keep being classified.",
+			"apiPerms": [
+				"APIPermSendCampaigns"
+			],
+			"params": [
+				{
+					"in": "path",
+					"name": "id",
+					"type": "string",
+					"required": true,
+					"description": "Placement batch id."
+				}
+			],
+			"body": null,
+			"multipart": false,
+			"paginated": false,
+			"returnsList": true,
+			"openapi": true,
+			"source": "internal/api/routes.go:1055"
+		},
+		{
+			"method": "GET",
+			"path": "/placement/batches/{id}/senders",
+			"handler": "ListPlacementBatchSenders",
+			"doc": "ListPlacementBatchSenders lists a batch's senders with where each one's copies landed, worst inbox rate first unless sorted otherwise.",
+			"apiPerms": [
+				"APIPermReadAnalytics"
+			],
+			"params": [
+				{
+					"in": "path",
+					"name": "id",
+					"type": "string",
+					"required": true,
+					"description": "Placement batch id."
+				},
+				{
+					"in": "query",
+					"name": "cursor",
+					"type": "string",
+					"required": false,
+					"description": "Opaque cursor from a previous pagination.next_cursor."
+				},
+				{
+					"in": "query",
+					"name": "status",
+					"type": "options",
+					"required": false,
+					"description": "Only mailboxes in this status.",
+					"enum": [
+						"queued",
+						"deferred",
+						"running",
+						"completed",
+						"skipped",
+						"failed",
+						"cancelled"
+					]
+				},
+				{
+					"in": "query",
+					"name": "q",
+					"type": "string",
+					"required": false,
+					"description": "Only addresses containing this text."
+				},
+				{
+					"in": "query",
+					"name": "sort",
+					"type": "options",
+					"required": false,
+					"description": "worst (default, lowest inbox rate first), best, email or status.",
+					"enum": [
+						"worst",
+						"best",
+						"email",
+						"status"
+					]
+				},
+				{
+					"in": "query",
+					"name": "limit",
+					"type": "number",
+					"required": false,
+					"description": "Page size, 1 to 100. Default 25."
+				}
+			],
+			"body": null,
+			"multipart": false,
+			"paginated": true,
+			"returnsList": true,
+			"openapi": true,
+			"source": "internal/api/routes.go:1052"
+		},
+		{
+			"method": "GET",
+			"path": "/placement/batches/{id}",
+			"handler": "GetPlacementBatch",
+			"doc": "GetPlacementBatch returns one batch with its placement overall and grouped by sending domain, sending provider and recipient provider.",
+			"apiPerms": [
+				"APIPermReadAnalytics"
+			],
+			"params": [
+				{
+					"in": "path",
+					"name": "id",
+					"type": "string",
+					"required": true,
+					"description": "Placement batch id."
+				}
+			],
+			"body": null,
+			"multipart": false,
+			"paginated": false,
+			"returnsList": true,
+			"openapi": true,
+			"source": "internal/api/routes.go:1051"
+		},
+		{
+			"method": "POST",
+			"path": "/placement/batches/preview",
+			"handler": "PreviewPlacementBatch",
+			"doc": "PreviewPlacementBatch reports how many senders, tests, sends and credits a batch would come to. It starts nothing.",
+			"apiPerms": [
+				"APIPermSendCampaigns"
+			],
+			"params": [
+				{
+					"in": "body",
+					"name": "sender_account_ids",
+					"type": "stringArray",
+					"goType": "[]uuid.UUID",
+					"required": false,
+					"description": "These mailboxes. Exactly one of sender_account_ids and sender_scope. Duplicates are dropped."
+				},
+				{
+					"in": "body",
+					"name": "sender_scope",
+					"type": "json",
+					"goType": "*models.PlacementSenderScope",
+					"required": false,
+					"description": "Mailboxes resolved on the server."
+				},
+				{
+					"in": "body",
+					"name": "sample",
+					"type": "json",
+					"goType": "models.PlacementSample",
+					"required": false,
+					"description": "Which resolved mailboxes to keep."
+				},
+				{
+					"in": "body",
+					"name": "campaign_id",
+					"type": "string",
+					"goType": "string",
+					"required": false,
+					"description": "Render with this campaign's opt-out line, tracking and attachments."
+				},
+				{
+					"in": "body",
+					"name": "sequence_id",
+					"type": "string",
+					"goType": "string",
+					"required": false,
+					"description": "A step of campaign_id; its subject and body are used when the request carries neither."
+				},
+				{
+					"in": "body",
+					"name": "contact_id",
+					"type": "string",
+					"goType": "string",
+					"required": false,
+					"description": "The contact to render merge fields and AI blocks for. Defaults to the campaign's first lead."
+				},
+				{
+					"in": "body",
+					"name": "subject",
+					"type": "string",
+					"goType": "string",
+					"required": false,
+					"description": "Required when there is no step to take it from."
+				},
+				{
+					"in": "body",
+					"name": "body_html",
+					"type": "string",
+					"goType": "string",
+					"required": false,
+					"description": ""
+				},
+				{
+					"in": "body",
+					"name": "body_plain",
+					"type": "string",
+					"goType": "string",
+					"required": false,
+					"description": ""
+				},
+				{
+					"in": "body",
+					"name": "tracking",
+					"type": "options",
+					"goType": "string",
+					"required": false,
+					"description": "",
+					"enum": [
+						"campaign",
+						"on",
+						"off",
+						"compare"
+					]
+				},
+				{
+					"in": "body",
+					"name": "panel",
+					"type": "options",
+					"goType": "string",
+					"required": false,
+					"description": "",
+					"enum": [
+						"instance",
+						"workspace",
+						"cloud"
+					]
+				},
+				{
+					"in": "body",
+					"name": "pace",
+					"type": "options",
+					"goType": "string",
+					"required": false,
+					"description": "A batch always sends spaced; quick is refused with a 400.",
+					"enum": [
+						"spaced",
+						"quick"
+					]
+				},
+				{
+					"in": "body",
+					"name": "families",
+					"type": "stringArray",
+					"goType": "[]string",
+					"required": false,
+					"description": "Only seeds at these provider families, as the overview's panels[].families[].family lists them. The way to narrow a test on the instance and cloud panels, whose addresses are masked."
+				},
+				{
+					"in": "body",
+					"name": "seed_ids",
+					"type": "stringArray",
+					"goType": "[]uuid.UUID",
+					"required": false,
+					"description": "Only with panel workspace: send to these seed inboxes of the workspace and no others. Each must be connected and running, and each gets a copy; seeds_per_test does not cap the list, and a sender whose daily limit cannot pay for all of them is refused with placement_daily_budget. Omit to let the test pick."
+				},
+				{
+					"in": "body",
+					"name": "on_unavailable",
+					"type": "options",
+					"goType": "string",
+					"required": false,
+					"description": "defer retries a mailbox that cannot send when its turn comes, for up to seven days; skip skips it.",
+					"enum": [
+						"defer",
+						"skip"
+					]
+				},
+				{
+					"in": "body",
+					"name": "max_credits",
+					"type": "number",
+					"goType": "int",
+					"required": false,
+					"description": "The most credits you agree to pay across the whole batch for tests past the month's free ones. Needed only when the batch needs more tests than are free; the batch never spends more."
+				}
+			],
+			"body": {
+				"kind": "object",
+				"type": "placementBatchRequest"
+			},
+			"multipart": false,
+			"paginated": false,
+			"returnsList": true,
+			"openapi": true,
+			"source": "internal/api/routes.go:1053"
+		},
+		{
+			"method": "GET",
+			"path": "/placement/batches",
+			"handler": "ListPlacementBatches",
+			"doc": "Batches: one test run from many senders, started a few at a time.",
+			"apiPerms": [
+				"APIPermReadAnalytics"
+			],
+			"params": [
+				{
+					"in": "query",
+					"name": "cursor",
+					"type": "string",
+					"required": false,
+					"description": "Opaque cursor from a previous pagination.next_cursor."
+				},
+				{
+					"in": "query",
+					"name": "limit",
+					"type": "number",
+					"required": false,
+					"description": "Page size, 1 to 100. Default 25."
+				}
+			],
+			"body": null,
+			"multipart": false,
+			"paginated": true,
+			"returnsList": true,
+			"openapi": true,
+			"source": "internal/api/routes.go:1050"
+		},
+		{
+			"method": "POST",
+			"path": "/placement/batches",
+			"handler": "CreatePlacementBatch",
+			"doc": "CreatePlacementBatch snapshots the senders and queues the batch; the backend starts its senders a few at a time.",
+			"apiPerms": [
+				"APIPermSendCampaigns"
+			],
+			"params": [
+				{
+					"in": "body",
+					"name": "sender_account_ids",
+					"type": "stringArray",
+					"goType": "[]uuid.UUID",
+					"required": false,
+					"description": "These mailboxes. Exactly one of sender_account_ids and sender_scope. Duplicates are dropped."
+				},
+				{
+					"in": "body",
+					"name": "sender_scope",
+					"type": "json",
+					"goType": "*models.PlacementSenderScope",
+					"required": false,
+					"description": "Mailboxes resolved on the server."
+				},
+				{
+					"in": "body",
+					"name": "sample",
+					"type": "json",
+					"goType": "models.PlacementSample",
+					"required": false,
+					"description": "Which resolved mailboxes to keep."
+				},
+				{
+					"in": "body",
+					"name": "campaign_id",
+					"type": "string",
+					"goType": "string",
+					"required": false,
+					"description": "Render with this campaign's opt-out line, tracking and attachments."
+				},
+				{
+					"in": "body",
+					"name": "sequence_id",
+					"type": "string",
+					"goType": "string",
+					"required": false,
+					"description": "A step of campaign_id; its subject and body are used when the request carries neither."
+				},
+				{
+					"in": "body",
+					"name": "contact_id",
+					"type": "string",
+					"goType": "string",
+					"required": false,
+					"description": "The contact to render merge fields and AI blocks for. Defaults to the campaign's first lead."
+				},
+				{
+					"in": "body",
+					"name": "subject",
+					"type": "string",
+					"goType": "string",
+					"required": false,
+					"description": "Required when there is no step to take it from."
+				},
+				{
+					"in": "body",
+					"name": "body_html",
+					"type": "string",
+					"goType": "string",
+					"required": false,
+					"description": ""
+				},
+				{
+					"in": "body",
+					"name": "body_plain",
+					"type": "string",
+					"goType": "string",
+					"required": false,
+					"description": ""
+				},
+				{
+					"in": "body",
+					"name": "tracking",
+					"type": "options",
+					"goType": "string",
+					"required": false,
+					"description": "",
+					"enum": [
+						"campaign",
+						"on",
+						"off",
+						"compare"
+					]
+				},
+				{
+					"in": "body",
+					"name": "panel",
+					"type": "options",
+					"goType": "string",
+					"required": false,
+					"description": "",
+					"enum": [
+						"instance",
+						"workspace",
+						"cloud"
+					]
+				},
+				{
+					"in": "body",
+					"name": "pace",
+					"type": "options",
+					"goType": "string",
+					"required": false,
+					"description": "A batch always sends spaced; quick is refused with a 400.",
+					"enum": [
+						"spaced",
+						"quick"
+					]
+				},
+				{
+					"in": "body",
+					"name": "families",
+					"type": "stringArray",
+					"goType": "[]string",
+					"required": false,
+					"description": "Only seeds at these provider families, as the overview's panels[].families[].family lists them. The way to narrow a test on the instance and cloud panels, whose addresses are masked."
+				},
+				{
+					"in": "body",
+					"name": "seed_ids",
+					"type": "stringArray",
+					"goType": "[]uuid.UUID",
+					"required": false,
+					"description": "Only with panel workspace: send to these seed inboxes of the workspace and no others. Each must be connected and running, and each gets a copy; seeds_per_test does not cap the list, and a sender whose daily limit cannot pay for all of them is refused with placement_daily_budget. Omit to let the test pick."
+				},
+				{
+					"in": "body",
+					"name": "on_unavailable",
+					"type": "options",
+					"goType": "string",
+					"required": false,
+					"description": "defer retries a mailbox that cannot send when its turn comes, for up to seven days; skip skips it.",
+					"enum": [
+						"defer",
+						"skip"
+					]
+				},
+				{
+					"in": "body",
+					"name": "max_credits",
+					"type": "number",
+					"goType": "int",
+					"required": false,
+					"description": "The most credits you agree to pay across the whole batch for tests past the month's free ones. Needed only when the batch needs more tests than are free; the batch never spends more."
+				}
+			],
+			"body": {
+				"kind": "object",
+				"type": "placementBatchRequest"
+			},
+			"multipart": false,
+			"paginated": false,
+			"returnsList": true,
+			"openapi": true,
+			"source": "internal/api/routes.go:1054"
+		},
+		{
+			"method": "GET",
+			"path": "/placement/coverage",
+			"handler": "GetPlacementCoverage",
+			"doc": "GetPlacementCoverage reports how much of the workspace's connected fleet delivered a placement test in the last 7 and 30 days.",
+			"apiPerms": [
+				"APIPermReadAnalytics"
+			],
+			"params": [],
+			"body": null,
+			"multipart": false,
+			"paginated": false,
+			"returnsList": true,
+			"openapi": true,
+			"source": "internal/api/routes.go:1056"
+		},
+		{
+			"method": "GET",
+			"path": "/placement/overview",
+			"handler": "GetPlacementOverview",
+			"doc": "GetPlacementOverview lists the seed panels this workspace can test on and its monthly allowance.",
+			"apiPerms": [
+				"APIPermReadAnalytics"
+			],
+			"params": [],
+			"body": null,
+			"multipart": false,
+			"paginated": false,
+			"returnsList": true,
+			"openapi": true,
+			"source": "internal/api/routes.go:1044"
+		},
+		{
+			"method": "PUT",
+			"path": "/placement/seeds/{id}",
+			"handler": "SetPlacementSeed",
+			"doc": "SetPlacementSeed makes a workspace mailbox a seed inbox, or not.",
+			"apiPerms": [
+				"APIPermWriteEmails"
+			],
+			"params": [
+				{
+					"in": "path",
+					"name": "id",
+					"type": "string",
+					"required": true,
+					"description": "The mailbox's id"
+				},
+				{
+					"in": "body",
+					"name": "seed",
+					"type": "boolean",
+					"goType": "*bool",
+					"required": true,
+					"description": "true to make it a seed inbox, false to stop"
+				}
+			],
+			"body": {
+				"kind": "object",
+				"type": "setPlacementSeedRequest"
+			},
+			"multipart": false,
+			"paginated": false,
+			"returnsList": true,
+			"openapi": true,
+			"source": "internal/api/routes.go:1058"
+		},
+		{
+			"method": "GET",
+			"path": "/placement/seeds",
+			"handler": "ListPlacementSeeds",
+			"doc": "ListPlacementSeeds lists the workspace's mailboxes and which are its seed inboxes.",
+			"apiPerms": [
+				"APIPermReadEmails"
+			],
+			"params": [],
+			"body": null,
+			"multipart": false,
+			"paginated": false,
+			"returnsList": true,
+			"openapi": true,
+			"source": "internal/api/routes.go:1057"
+		},
+		{
+			"method": "POST",
+			"path": "/placement/tests/{id}/cancel",
+			"handler": "CancelPlacementTest",
+			"doc": "CancelPlacementTest stops the copies that have not been sent yet.",
+			"apiPerms": [
+				"APIPermSendCampaigns"
+			],
+			"params": [
+				{
+					"in": "path",
+					"name": "id",
+					"type": "string",
+					"required": true,
+					"description": "Placement test id."
+				}
+			],
+			"body": null,
+			"multipart": false,
+			"paginated": false,
+			"returnsList": true,
+			"openapi": true,
+			"source": "internal/api/routes.go:1048"
+		},
+		{
+			"method": "GET",
+			"path": "/placement/tests/{id}",
+			"handler": "GetPlacementTest",
+			"doc": "GetPlacementTest returns one test with every copy, the content check and, for a tracking comparison, the other half.",
+			"apiPerms": [
+				"APIPermReadAnalytics"
+			],
+			"params": [
+				{
+					"in": "path",
+					"name": "id",
+					"type": "string",
+					"required": true,
+					"description": "Placement test id."
+				}
+			],
+			"body": null,
+			"multipart": false,
+			"paginated": false,
+			"returnsList": true,
+			"openapi": true,
+			"source": "internal/api/routes.go:1046"
+		},
+		{
+			"method": "GET",
+			"path": "/placement/tests",
+			"handler": "ListPlacementTests",
+			"doc": "ListPlacementTests lists the workspace's tests, newest first.",
+			"apiPerms": [
+				"APIPermReadAnalytics"
+			],
+			"params": [
+				{
+					"in": "query",
+					"name": "cursor",
+					"type": "string",
+					"required": false,
+					"description": "Opaque cursor from a previous pagination.next_cursor."
+				},
+				{
+					"in": "query",
+					"name": "campaign_id",
+					"type": "string",
+					"required": false,
+					"description": "Only tests of this campaign."
+				},
+				{
+					"in": "query",
+					"name": "limit",
+					"type": "number",
+					"required": false,
+					"description": "Page size, 1 to 100. Default 25."
+				}
+			],
+			"body": null,
+			"multipart": false,
+			"paginated": true,
+			"returnsList": true,
+			"openapi": true,
+			"source": "internal/api/routes.go:1045"
+		},
+		{
+			"method": "POST",
+			"path": "/placement/tests",
+			"handler": "CreatePlacementTest",
+			"doc": "CreatePlacementTest starts a test: one test, or two for a tracking comparison.",
+			"apiPerms": [
+				"APIPermSendCampaigns"
+			],
+			"params": [
+				{
+					"in": "body",
+					"name": "sender_account_id",
+					"type": "string",
+					"goType": "string",
+					"required": true,
+					"description": "The mailbox that sends every copy: connected, active and not a seed inbox."
+				},
+				{
+					"in": "body",
+					"name": "campaign_id",
+					"type": "string",
+					"goType": "string",
+					"required": false,
+					"description": "Render with this campaign's opt-out line, tracking and attachments."
+				},
+				{
+					"in": "body",
+					"name": "sequence_id",
+					"type": "string",
+					"goType": "string",
+					"required": false,
+					"description": "A step of campaign_id; its subject and body are used when the request carries neither."
+				},
+				{
+					"in": "body",
+					"name": "contact_id",
+					"type": "string",
+					"goType": "string",
+					"required": false,
+					"description": "The contact to render merge fields and AI blocks for. Defaults to the campaign's first lead."
+				},
+				{
+					"in": "body",
+					"name": "subject",
+					"type": "string",
+					"goType": "string",
+					"required": false,
+					"description": "Required when there is no step to take it from."
+				},
+				{
+					"in": "body",
+					"name": "body_html",
+					"type": "string",
+					"goType": "string",
+					"required": false,
+					"description": "HTML body of an ad-hoc template"
+				},
+				{
+					"in": "body",
+					"name": "body_plain",
+					"type": "string",
+					"goType": "string",
+					"required": false,
+					"description": "Plain-text body of an ad-hoc template"
+				},
+				{
+					"in": "body",
+					"name": "tracking",
+					"type": "options",
+					"goType": "string",
+					"required": false,
+					"description": "campaign, on, off or compare (sends twice, with and without)",
+					"enum": [
+						"campaign",
+						"on",
+						"off",
+						"compare"
+					]
+				},
+				{
+					"in": "body",
+					"name": "panel",
+					"type": "options",
+					"goType": "string",
+					"required": false,
+					"description": "instance, workspace or cloud",
+					"enum": [
+						"instance",
+						"workspace",
+						"cloud"
+					]
+				},
+				{
+					"in": "body",
+					"name": "seed_ids",
+					"type": "stringArray",
+					"goType": "[]uuid.UUID",
+					"required": false,
+					"description": "Only with panel workspace: send to these seed inboxes of the workspace and no others. Each must be connected and running, and each gets a copy; seeds_per_test does not cap the list, and a sender whose daily limit cannot pay for all of them is refused with placement_daily_budget. Omit to let the test pick."
+				},
+				{
+					"in": "body",
+					"name": "families",
+					"type": "stringArray",
+					"goType": "[]string",
+					"required": false,
+					"description": "Only seeds at these provider families, as the overview's panels[].families[].family lists them. The way to narrow a test on the instance and cloud panels, whose addresses are masked."
+				},
+				{
+					"in": "body",
+					"name": "pace",
+					"type": "options",
+					"goType": "string",
+					"required": false,
+					"description": "spaced sends about 60 seconds apart; quick about 8 seconds apart, so a test sends in minutes.",
+					"enum": [
+						"spaced",
+						"quick"
+					]
+				},
+				{
+					"in": "body",
+					"name": "max_credits",
+					"type": "number",
+					"goType": "int",
+					"required": false,
+					"description": "The most credits you agree to pay when the month's free tests on the instance panel are used up. A higher price, or none sent, is refused with placement_quota_exceeded, whose message names the price, and nothing is charged."
+				}
+			],
+			"body": {
+				"kind": "object",
+				"type": "createPlacementTestRequest"
+			},
+			"multipart": false,
+			"paginated": false,
+			"returnsList": true,
+			"openapi": true,
+			"source": "internal/api/routes.go:1047"
 		},
 		{
 			"method": "GET",
@@ -9837,7 +12132,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:1094"
+			"source": "internal/api/routes.go:1373"
 		},
 		{
 			"method": "POST",
@@ -9872,7 +12167,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": false,
-			"source": "internal/api/routes.go:675"
+			"source": "internal/api/routes.go:895"
 		},
 		{
 			"method": "POST",
@@ -9907,7 +12202,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": false,
-			"source": "internal/api/routes.go:673"
+			"source": "internal/api/routes.go:893"
 		},
 		{
 			"method": "POST",
@@ -9935,6 +12230,30 @@
 				},
 				{
 					"in": "body",
+					"name": "all",
+					"type": "boolean",
+					"goType": "bool",
+					"required": false,
+					"description": "All switches the selection from the id list to Filters."
+				},
+				{
+					"in": "body",
+					"name": "filters",
+					"type": "json",
+					"goType": "*SearchContacts",
+					"required": false,
+					"description": "Filters is the same search body /contacts/search takes, so the set resolved here is exactly the set the list was showing."
+				},
+				{
+					"in": "body",
+					"name": "exclude",
+					"type": "stringArray",
+					"goType": "[]string",
+					"required": false,
+					"description": "Exclude drops ids from the resolved set: the rows unticked after a select-all. Ignored unless All is set."
+				},
+				{
+					"in": "body",
 					"name": "mode",
 					"type": "options",
 					"goType": "SegmentMemberMode",
@@ -9955,7 +12274,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": false,
-			"source": "internal/api/routes.go:672"
+			"source": "internal/api/routes.go:892"
 		},
 		{
 			"method": "GET",
@@ -9979,7 +12298,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": false,
-			"source": "internal/api/routes.go:674"
+			"source": "internal/api/routes.go:894"
 		},
 		{
 			"method": "DELETE",
@@ -10003,7 +12322,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": false,
-			"source": "internal/api/routes.go:671"
+			"source": "internal/api/routes.go:891"
 		},
 		{
 			"method": "GET",
@@ -10027,7 +12346,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": false,
-			"source": "internal/api/routes.go:669"
+			"source": "internal/api/routes.go:889"
 		},
 		{
 			"method": "PATCH",
@@ -10098,7 +12417,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": false,
-			"source": "internal/api/routes.go:670"
+			"source": "internal/api/routes.go:890"
 		},
 		{
 			"method": "GET",
@@ -10114,7 +12433,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": false,
-			"source": "internal/api/routes.go:666"
+			"source": "internal/api/routes.go:886"
 		},
 		{
 			"method": "POST",
@@ -10162,7 +12481,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": false,
-			"source": "internal/api/routes.go:667"
+			"source": "internal/api/routes.go:887"
 		},
 		{
 			"method": "GET",
@@ -10178,7 +12497,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": false,
-			"source": "internal/api/routes.go:665"
+			"source": "internal/api/routes.go:885"
 		},
 		{
 			"method": "POST",
@@ -10242,7 +12561,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": false,
-			"source": "internal/api/routes.go:668"
+			"source": "internal/api/routes.go:888"
 		},
 		{
 			"method": "DELETE",
@@ -10266,7 +12585,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:836"
+			"source": "internal/api/routes.go:1091"
 		},
 		{
 			"method": "GET",
@@ -10304,7 +12623,7 @@
 			"paginated": true,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:834"
+			"source": "internal/api/routes.go:1089"
 		},
 		{
 			"method": "POST",
@@ -10340,7 +12659,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:835"
+			"source": "internal/api/routes.go:1090"
 		},
 		{
 			"method": "PATCH",
@@ -10361,8 +12680,8 @@
 					"name": "position",
 					"type": "number",
 					"goType": "int32",
-					"required": false,
-					"description": ""
+					"required": true,
+					"description": "New 0-based position within the registry."
 				}
 			],
 			"body": {
@@ -10372,8 +12691,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": true,
-			"openapi": false,
-			"source": "internal/api/routes.go:706"
+			"openapi": true,
+			"source": "internal/api/routes.go:926"
 		},
 		{
 			"method": "DELETE",
@@ -10394,8 +12713,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:706"
+			"openapi": true,
+			"source": "internal/api/routes.go:926"
 		},
 		{
 			"method": "PATCH",
@@ -10417,7 +12736,7 @@
 					"type": "string",
 					"goType": "*string",
 					"required": false,
-					"description": ""
+					"description": "1 to 50 characters."
 				},
 				{
 					"in": "body",
@@ -10425,7 +12744,7 @@
 					"type": "string",
 					"goType": "*string",
 					"required": false,
-					"description": ""
+					"description": "Hex colour, `#rrggbb`."
 				}
 			],
 			"body": {
@@ -10435,8 +12754,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:706"
+			"openapi": true,
+			"source": "internal/api/routes.go:926"
 		},
 		{
 			"method": "POST",
@@ -10450,8 +12769,8 @@
 					"name": "title",
 					"type": "string",
 					"goType": "string",
-					"required": false,
-					"description": ""
+					"required": true,
+					"description": "1 to 50 characters."
 				},
 				{
 					"in": "body",
@@ -10459,7 +12778,7 @@
 					"type": "string",
 					"goType": "string",
 					"required": false,
-					"description": ""
+					"description": "Hex colour, `#rrggbb`. Omit to let the server pick from its palette."
 				}
 			],
 			"body": {
@@ -10469,8 +12788,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:706"
+			"openapi": true,
+			"source": "internal/api/routes.go:926"
 		},
 		{
 			"method": "POST",
@@ -10492,7 +12811,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:854"
+			"source": "internal/api/routes.go:1109"
 		},
 		{
 			"method": "GET",
@@ -10521,7 +12840,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:853"
+			"source": "internal/api/routes.go:1108"
 		},
 		{
 			"method": "DELETE",
@@ -10552,7 +12871,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1084"
+			"source": "internal/api/routes.go:1363"
 		},
 		{
 			"method": "POST",
@@ -10587,7 +12906,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1083"
+			"source": "internal/api/routes.go:1362"
 		},
 		{
 			"method": "DELETE",
@@ -10611,7 +12930,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1082"
+			"source": "internal/api/routes.go:1361"
 		},
 		{
 			"method": "GET",
@@ -10635,7 +12954,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1080"
+			"source": "internal/api/routes.go:1359"
 		},
 		{
 			"method": "PATCH",
@@ -10678,7 +12997,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1081"
+			"source": "internal/api/routes.go:1360"
 		},
 		{
 			"method": "GET",
@@ -10694,7 +13013,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:1078"
+			"source": "internal/api/routes.go:1357"
 		},
 		{
 			"method": "POST",
@@ -10730,7 +13049,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1079"
+			"source": "internal/api/routes.go:1358"
 		},
 		{
 			"method": "POST",
@@ -10754,7 +13073,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1021"
+			"source": "internal/api/routes.go:1278"
 		},
 		{
 			"method": "POST",
@@ -10789,7 +13108,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1022"
+			"source": "internal/api/routes.go:1279"
 		},
 		{
 			"method": "DELETE",
@@ -10813,7 +13132,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1020"
+			"source": "internal/api/routes.go:1277"
 		},
 		{
 			"method": "GET",
@@ -10837,7 +13156,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1018"
+			"source": "internal/api/routes.go:1275"
 		},
 		{
 			"method": "PATCH",
@@ -10896,7 +13215,52 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1019"
+			"source": "internal/api/routes.go:1276"
+		},
+		{
+			"method": "POST",
+			"path": "/templates/analyze",
+			"handler": "AnalyzeTemplateContent",
+			"doc": "The AI half of the same check. It spends the workspace's AI credits, so it takes the WRITE scope even though it writes no template: a read-only key must not be able to spend money. JWT members still need only view_campaigns, plus use_ai, which the second gate layers on as /generation does.",
+			"apiPerms": [
+				"APIPermWriteTemplates",
+				"APIPermWriteTemplates"
+			],
+			"params": [
+				{
+					"in": "body",
+					"name": "subject",
+					"type": "string",
+					"goType": "string",
+					"required": false,
+					"description": ""
+				},
+				{
+					"in": "body",
+					"name": "body_html",
+					"type": "string",
+					"goType": "string",
+					"required": false,
+					"description": "Used when body_plain is empty."
+				},
+				{
+					"in": "body",
+					"name": "body_plain",
+					"type": "string",
+					"goType": "string",
+					"required": false,
+					"description": "Preferred over HTML when present."
+				}
+			],
+			"body": {
+				"kind": "object",
+				"type": "analyzeTemplateRequest"
+			},
+			"multipart": false,
+			"paginated": false,
+			"returnsList": false,
+			"openapi": true,
+			"source": "internal/api/routes.go:1286"
 		},
 		{
 			"method": "PATCH",
@@ -10924,7 +13288,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:1017"
+			"source": "internal/api/routes.go:1274"
 		},
 		{
 			"method": "POST",
@@ -10968,7 +13332,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1023"
+			"source": "internal/api/routes.go:1280"
 		},
 		{
 			"method": "GET",
@@ -10992,7 +13356,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:1015"
+			"source": "internal/api/routes.go:1272"
 		},
 		{
 			"method": "POST",
@@ -11044,7 +13408,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1016"
+			"source": "internal/api/routes.go:1273"
 		},
 		{
 			"method": "GET",
@@ -11058,7 +13422,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:1095"
+			"source": "internal/api/routes.go:1374"
 		},
 		{
 			"method": "GET",
@@ -11082,7 +13446,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:763"
+			"source": "internal/api/routes.go:984"
 		},
 		{
 			"method": "POST",
@@ -11117,7 +13481,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": false,
-			"source": "internal/api/routes.go:747"
+			"source": "internal/api/routes.go:968"
 		},
 		{
 			"method": "POST",
@@ -11141,7 +13505,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": false,
-			"source": "internal/api/routes.go:748"
+			"source": "internal/api/routes.go:969"
 		},
 		{
 			"method": "GET",
@@ -11157,7 +13521,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": false,
-			"source": "internal/api/routes.go:746"
+			"source": "internal/api/routes.go:967"
 		},
 		{
 			"method": "GET",
@@ -11181,7 +13545,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": false,
-			"source": "internal/api/routes.go:728"
+			"source": "internal/api/routes.go:949"
 		},
 		{
 			"method": "POST",
@@ -11226,7 +13590,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": false,
-			"source": "internal/api/routes.go:733"
+			"source": "internal/api/routes.go:954"
 		},
 		{
 			"method": "POST",
@@ -11326,7 +13690,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": false,
-			"source": "internal/api/routes.go:729"
+			"source": "internal/api/routes.go:950"
 		},
 		{
 			"method": "GET",
@@ -11350,7 +13714,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:713"
+			"source": "internal/api/routes.go:933"
 		},
 		{
 			"method": "DELETE",
@@ -11374,7 +13738,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": false,
-			"source": "internal/api/routes.go:738"
+			"source": "internal/api/routes.go:959"
 		},
 		{
 			"method": "PUT",
@@ -11439,6 +13803,14 @@
 					"goType": "string",
 					"required": false,
 					"description": ""
+				},
+				{
+					"in": "body",
+					"name": "body_html",
+					"type": "string",
+					"goType": "string",
+					"required": false,
+					"description": ""
 				}
 			],
 			"body": {
@@ -11449,7 +13821,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": false,
-			"source": "internal/api/routes.go:737"
+			"source": "internal/api/routes.go:958"
 		},
 		{
 			"method": "GET",
@@ -11465,7 +13837,56 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": false,
-			"source": "internal/api/routes.go:736"
+			"source": "internal/api/routes.go:957"
+		},
+		{
+			"method": "PATCH",
+			"path": "/unibox/folder",
+			"handler": "UniboxMoveFolder",
+			"doc": "UniboxMoveFolder re-files messages (Archive = archive, Delete = trash, Move to inbox = inbox). Org-scoped like /seen: the inbox is shared, so any member with unibox access may file it. Naturally idempotent, so no Idempotency-Key: the body names the destination, not a delta. PATCH /unibox/folder",
+			"apiPerms": [
+				"APIPermWriteUnibox"
+			],
+			"params": [
+				{
+					"in": "body",
+					"name": "email_ids",
+					"type": "stringArray",
+					"goType": "[]uuid.UUID",
+					"required": false,
+					"description": "Message UUIDs to move (max 500)."
+				},
+				{
+					"in": "body",
+					"name": "thread_ids",
+					"type": "stringArray",
+					"goType": "[]string",
+					"required": false,
+					"description": "ThreadIDs files whole conversations. A row in the list knows its thread but not the ids inside it, and filing half a conversation leaves it in the view it was filed out of. Each entry is a thread id, or a message id for mail that never got one."
+				},
+				{
+					"in": "body",
+					"name": "folder",
+					"type": "options",
+					"goType": "string",
+					"required": true,
+					"description": "Destination folder. Anything else is a `400`.",
+					"enum": [
+						"inbox",
+						"archive",
+						"trash"
+					]
+				}
+			],
+			"body": {
+				"kind": "object",
+				"type": "models.MoveFolder"
+			},
+			"multipart": false,
+			"paginated": false,
+			"returnsList": false,
+			"openapi": true,
+			"source": "internal/api/routes.go:944"
 		},
 		{
 			"method": "GET",
@@ -11481,7 +13902,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:714"
+			"source": "internal/api/routes.go:934"
 		},
 		{
 			"method": "POST",
@@ -11518,13 +13939,13 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": false,
-			"source": "internal/api/routes.go:740"
+			"source": "internal/api/routes.go:961"
 		},
 		{
 			"method": "POST",
 			"path": "/unibox/reply",
 			"handler": "UniboxReply",
-			"doc": "UniboxReply schedules a reply email from Unibox. POST /unibox/reply",
+			"doc": "UniboxReply schedules a reply or forward email from Unibox. POST /unibox/reply",
 			"apiPerms": [
 				"APIPermWriteUnibox"
 			],
@@ -11535,7 +13956,7 @@
 					"type": "string",
 					"goType": "string",
 					"required": true,
-					"description": "UUID of the sending mailbox."
+					"description": "UUID of the sending mailbox. Any active mailbox in the organization; it does not have to be the one holding the thread."
 				},
 				{
 					"in": "body",
@@ -11599,7 +14020,7 @@
 					"type": "string",
 					"goType": "string",
 					"required": false,
-					"description": ""
+					"description": "The conversation being answered. Resolves In-Reply-To when that is omitted, and is used as the provider thread only by a mailbox holding a message in it."
 				},
 				{
 					"in": "body",
@@ -11621,6 +14042,14 @@
 					"goType": "*time.Time",
 					"required": false,
 					"description": "Required when `send_mode` is `scheduled`; must be in the future."
+				},
+				{
+					"in": "body",
+					"name": "forward_message_id",
+					"type": "string",
+					"goType": "string",
+					"required": false,
+					"description": "ForwardMessageID makes the send a forward of that stored message, which goes out under the body and signature."
 				}
 			],
 			"body": {
@@ -11631,7 +14060,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:724"
+			"source": "internal/api/routes.go:945"
 		},
 		{
 			"method": "DELETE",
@@ -11655,7 +14084,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:759"
+			"source": "internal/api/routes.go:980"
 		},
 		{
 			"method": "GET",
@@ -11679,7 +14108,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:758"
+			"source": "internal/api/routes.go:979"
 		},
 		{
 			"method": "PATCH",
@@ -11697,6 +14126,14 @@
 					"goType": "[]uuid.UUID",
 					"required": false,
 					"description": "Message UUIDs to update (max 500)."
+				},
+				{
+					"in": "body",
+					"name": "thread_ids",
+					"type": "stringArray",
+					"goType": "[]string",
+					"required": false,
+					"description": "ThreadIDs marks whole conversations, so a caller holding a list row does not have to fetch the thread to learn its message ids. Each entry is a thread id, or a message id for mail that never got one."
 				},
 				{
 					"in": "body",
@@ -11731,7 +14168,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:723"
+			"source": "internal/api/routes.go:943"
 		},
 		{
 			"method": "DELETE",
@@ -11747,7 +14184,7 @@
 					"name": "thread_id",
 					"type": "string",
 					"required": true,
-					"description": "The thread to un-snooze."
+					"description": "The thread to un-snooze, or a comma-separated list of them."
 				}
 			],
 			"body": null,
@@ -11755,13 +14192,13 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:753"
+			"source": "internal/api/routes.go:974"
 		},
 		{
 			"method": "POST",
 			"path": "/unibox/snooze",
 			"handler": "CreateUniboxSnooze",
-			"doc": "CreateUniboxSnooze hides a thread until snoozed_until passes. Upsert semantics: a second call on the same thread updates the time. POST /unibox/snooze",
+			"doc": "CreateUniboxSnooze hides conversations until snoozed_until passes. Upsert semantics: a second call on the same thread updates the time. A request naming one thread answers with that row, as it always has; one naming several answers with `data`. POST /unibox/snooze",
 			"apiPerms": [
 				"APIPermWriteUnibox"
 			],
@@ -11771,8 +14208,16 @@
 					"name": "thread_id",
 					"type": "string",
 					"goType": "string",
-					"required": true,
+					"required": false,
 					"description": "The thread to snooze."
+				},
+				{
+					"in": "body",
+					"name": "thread_ids",
+					"type": "stringArray",
+					"goType": "[]string",
+					"required": false,
+					"description": "ThreadIDs snoozes a whole selection in one call. Either field will do; naming both snoozes the union."
 				},
 				{
 					"in": "body",
@@ -11789,9 +14234,9 @@
 			},
 			"multipart": false,
 			"paginated": false,
-			"returnsList": false,
+			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:752"
+			"source": "internal/api/routes.go:973"
 		},
 		{
 			"method": "GET",
@@ -11807,7 +14252,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:751"
+			"source": "internal/api/routes.go:972"
 		},
 		{
 			"method": "GET",
@@ -11838,13 +14283,13 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:720"
+			"source": "internal/api/routes.go:940"
 		},
 		{
 			"method": "PUT",
 			"path": "/unibox/thread/labels",
 			"handler": "SetUniboxThreadLabels",
-			"doc": "SetUniboxThreadLabels replaces the full conversation-label set on a thread. Idempotent (PUT semantics): the body's category_ids is the desired set, so retries are naturally safe. Only the user's own categories are attached. PUT /unibox/thread/labels",
+			"doc": "SetUniboxThreadLabels replaces the full conversation-label set on a thread. Idempotent (PUT semantics): the body's category_ids is the desired set, so retries are naturally safe. Only the workspace's own categories are attached. PUT /unibox/thread/labels",
 			"apiPerms": [
 				"APIPermWriteUnibox"
 			],
@@ -11874,7 +14319,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:721"
+			"source": "internal/api/routes.go:941"
 		},
 		{
 			"method": "GET",
@@ -11933,7 +14378,7 @@
 			"paginated": true,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:715"
+			"source": "internal/api/routes.go:935"
 		},
 		{
 			"method": "GET",
@@ -11984,7 +14429,7 @@
 					"name": "folder",
 					"type": "options",
 					"required": false,
-					"description": "Canonical folder scope. Omit for every folder except `spam` and `trash`.",
+					"description": "Canonical folder scope. Omit for every working folder: `spam`, `trash` and `archive` stay out.",
 					"enum": [
 						"inbox",
 						"sent",
@@ -11993,6 +14438,13 @@
 						"spam",
 						"trash"
 					]
+				},
+				{
+					"in": "query",
+					"name": "include_archived",
+					"type": "boolean",
+					"required": false,
+					"description": "`true` puts archived conversations back into the result, which is what the All mail view does. Ignored when `folder` is set."
 				},
 				{
 					"in": "query",
@@ -12020,7 +14472,7 @@
 					"name": "awaiting_reply",
 					"type": "boolean",
 					"required": false,
-					"description": "`true` returns only threads whose latest message was sent by you."
+					"description": "`true` returns only threads whose latest message was sent by one of your mailboxes."
 				},
 				{
 					"in": "query",
@@ -12066,6 +14518,13 @@
 				},
 				{
 					"in": "query",
+					"name": "automated",
+					"type": "boolean",
+					"required": false,
+					"description": "`true` returns only conversations no person wrote in (security alerts, notifications, bounces, auto-replies), as judged by automatic inbox tagging. `false` leaves them out, which is how the dashboard's Inbox reads. Omit for both."
+				},
+				{
+					"in": "query",
 					"name": "category_ids",
 					"type": "string",
 					"required": false,
@@ -12077,7 +14536,7 @@
 			"paginated": true,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:712"
+			"source": "internal/api/routes.go:932"
 		},
 		{
 			"method": "DELETE",
@@ -12099,7 +14558,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1008"
+			"source": "internal/api/routes.go:1265"
 		},
 		{
 			"method": "PATCH",
@@ -12181,7 +14640,7 @@
 					"type": "number",
 					"goType": "float64",
 					"required": false,
-					"description": "Selection weight, must be >= 0."
+					"description": "Selection weight, must be >= 0. Above 1 prefers the pairing, below 1 avoids it, and exactly 0 excludes it even when no other partner is available."
 				},
 				{
 					"in": "body",
@@ -12200,7 +14659,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1007"
+			"source": "internal/api/routes.go:1264"
 		},
 		{
 			"method": "GET",
@@ -12214,7 +14673,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:1005"
+			"source": "internal/api/routes.go:1262"
 		},
 		{
 			"method": "POST",
@@ -12289,7 +14748,7 @@
 					"type": "number",
 					"goType": "float64",
 					"required": false,
-					"description": "Selection weight, must be >= 0."
+					"description": "Selection weight, must be >= 0. Above 1 prefers the pairing, below 1 avoids it, and exactly 0 excludes it even when no other partner is available."
 				},
 				{
 					"in": "body",
@@ -12308,7 +14767,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1006"
+			"source": "internal/api/routes.go:1263"
 		},
 		{
 			"method": "GET",
@@ -12365,7 +14824,7 @@
 			"paginated": true,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:872"
+			"source": "internal/api/routes.go:1127"
 		},
 		{
 			"method": "POST",
@@ -12387,7 +14846,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:870"
+			"source": "internal/api/routes.go:1125"
 		},
 		{
 			"method": "POST",
@@ -12409,7 +14868,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": false,
-			"source": "internal/api/routes.go:871"
+			"source": "internal/api/routes.go:1126"
 		},
 		{
 			"method": "DELETE",
@@ -12431,7 +14890,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:869"
+			"source": "internal/api/routes.go:1124"
 		},
 		{
 			"method": "PATCH",
@@ -12488,7 +14947,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:868"
+			"source": "internal/api/routes.go:1123"
 		},
 		{
 			"method": "POST",
@@ -12510,7 +14969,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": false,
-			"source": "internal/api/routes.go:866"
+			"source": "internal/api/routes.go:1121"
 		},
 		{
 			"method": "GET",
@@ -12560,7 +15019,7 @@
 			"paginated": true,
 			"returnsList": true,
 			"openapi": false,
-			"source": "internal/api/routes.go:865"
+			"source": "internal/api/routes.go:1120"
 		},
 		{
 			"method": "GET",
@@ -12574,7 +15033,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": false,
-			"source": "internal/api/routes.go:864"
+			"source": "internal/api/routes.go:1119"
 		},
 		{
 			"method": "GET",
@@ -12588,7 +15047,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": false,
-			"source": "internal/api/routes.go:867"
+			"source": "internal/api/routes.go:1122"
 		},
 		{
 			"method": "GET",
@@ -12602,7 +15061,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:861"
+			"source": "internal/api/routes.go:1116"
 		},
 		{
 			"method": "POST",
@@ -12652,7 +15111,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:862"
+			"source": "internal/api/routes.go:1117"
 		}
 	]
 }

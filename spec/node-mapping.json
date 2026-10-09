@@ -17,6 +17,12 @@
 		"route": "DELETE /api-keys/{}",
 		"handler": "RevokeAPIKey"
 	},
+	"DELETE /api-keys/{}/permanent": {
+		"resource": "apiKey",
+		"operation": "deletePermanently",
+		"route": "DELETE /api-keys/{}/permanent",
+		"handler": "DeleteAPIKey"
+	},
 	"DELETE /automations/{}": {
 		"resource": "automation",
 		"operation": "delete",
@@ -40,6 +46,12 @@
 		"operation": "deleteAttachment",
 		"route": "DELETE /campaigns/{}/attachments/{}",
 		"handler": "DeleteCampaignAttachment"
+	},
+	"DELETE /campaigns/{}/placement-monitor": {
+		"resource": "campaign",
+		"operation": "deletePlacementMonitor",
+		"route": "DELETE /campaigns/{}/placement-monitor",
+		"handler": "DeletePlacementMonitor"
 	},
 	"DELETE /campaigns/{}/steps/{}": {
 		"resource": "campaignStep",
@@ -95,11 +107,23 @@
 		"route": "DELETE /crm/task-types/{}",
 		"handler": "DeleteTaskType"
 	},
+	"DELETE /crm/tasks": {
+		"resource": "crmTask",
+		"operation": "bulkDelete",
+		"route": "DELETE /crm/tasks",
+		"handler": "BulkDeleteCRMTasks"
+	},
 	"DELETE /crm/tasks/{}": {
 		"resource": "crmTask",
 		"operation": "delete",
 		"route": "DELETE /crm/tasks/{}",
 		"handler": "DeleteCRMTask"
+	},
+	"DELETE /email-images/{}": {
+		"resource": "emailImage",
+		"operation": "delete",
+		"route": "DELETE /email-images/{}",
+		"handler": "DeleteEmailImage"
 	},
 	"DELETE /emails/{}": {
 		"resource": "mailbox",
@@ -305,6 +329,18 @@
 		"route": "GET /analytics/deliverability",
 		"handler": "GetDeliverabilityDashboard"
 	},
+	"GET /analytics/direct": {
+		"resource": "analytics",
+		"operation": "getDirectMail",
+		"route": "GET /analytics/direct",
+		"handler": "GetDirectMailAnalytics"
+	},
+	"GET /analytics/inbox-tagging": {
+		"resource": "analytics",
+		"operation": "getInboxTagging",
+		"route": "GET /analytics/inbox-tagging",
+		"handler": "GetInboxTaggingReview"
+	},
 	"GET /analytics/usage": {
 		"resource": "analytics",
 		"operation": "getUsage",
@@ -316,6 +352,12 @@
 		"operation": "getWarmup",
 		"route": "GET /analytics/warmup",
 		"handler": "GetWarmupAnalytics"
+	},
+	"GET /analytics/warmup/placement": {
+		"resource": "analytics",
+		"operation": "getWarmupPlacement",
+		"route": "GET /analytics/warmup/placement",
+		"handler": "GetWarmupPlacement"
 	},
 	"GET /api-keys": {
 		"resource": "apiKey",
@@ -431,17 +473,47 @@
 		"route": "GET /campaigns/{}/forms",
 		"handler": "GetCampaignForms"
 	},
+	"GET /campaigns/{}/leads/{}/cc": {
+		"resource": "campaign",
+		"operation": "getLeadCc",
+		"route": "GET /campaigns/{}/leads/{}/cc",
+		"handler": "GetCampaignLeadCC"
+	},
+	"GET /campaigns/{}/leads/{}/cc/suggestions": {
+		"resource": "campaign",
+		"operation": "suggestLeadCc",
+		"route": "GET /campaigns/{}/leads/{}/cc/suggestions",
+		"handler": "SuggestCampaignLeadCC"
+	},
+	"GET /campaigns/{}/leads/{}/hold": {
+		"resource": "campaign",
+		"operation": "getLeadHold",
+		"route": "GET /campaigns/{}/leads/{}/hold",
+		"handler": "GetCampaignLeadHold"
+	},
 	"GET /campaigns/{}/logs": {
 		"resource": "campaign",
 		"operation": "getLogs",
 		"route": "GET /campaigns/{}/logs",
 		"handler": "GetCampaignLogs"
 	},
+	"GET /campaigns/{}/placement-monitor": {
+		"resource": "campaign",
+		"operation": "getPlacementMonitor",
+		"route": "GET /campaigns/{}/placement-monitor",
+		"handler": "GetPlacementMonitor"
+	},
 	"GET /campaigns/{}/segments": {
 		"resource": "campaign",
 		"operation": "getSegments",
 		"route": "GET /campaigns/{}/segments",
 		"handler": "ListCampaignSegments"
+	},
+	"GET /campaigns/{}/send-plan": {
+		"resource": "campaign",
+		"operation": "getSendPlan",
+		"route": "GET /campaigns/{}/send-plan",
+		"handler": "GetCampaignSendPlan"
 	},
 	"GET /campaigns/{}/senders": {
 		"resource": "campaign",
@@ -460,6 +532,24 @@
 		"operation": "getCustomFields",
 		"route": "GET /contacts/custom-fields",
 		"handler": "ListContactCustomFields"
+	},
+	"GET /contacts/imports": {
+		"resource": "contactImport",
+		"operation": "getAll",
+		"route": "GET /contacts/imports",
+		"handler": "ListContactImports"
+	},
+	"GET /contacts/imports/{}": {
+		"resource": "contactImport",
+		"operation": "get",
+		"route": "GET /contacts/imports/{}",
+		"handler": "GetContactImport"
+	},
+	"GET /contacts/imports/{}/failed.csv": {
+		"resource": "contactImport",
+		"operation": "downloadFailures",
+		"route": "GET /contacts/imports/{}/failed.csv",
+		"handler": "DownloadContactImportFailures"
 	},
 	"GET /contacts/lookup": {
 		"resource": "contact",
@@ -569,6 +659,12 @@
 		"route": "GET /crm/tasks/{}",
 		"handler": "GetCRMTask"
 	},
+	"GET /email-images": {
+		"resource": "emailImage",
+		"operation": "getAll",
+		"route": "GET /email-images",
+		"handler": "ListEmailImages"
+	},
 	"GET /emails": {
 		"resource": "mailbox",
 		"operation": "getAll",
@@ -604,6 +700,12 @@
 		"operation": "getBehaviorPlan",
 		"route": "GET /emails/{}/behavior/plan",
 		"handler": "GetEmailBehaviorPlan"
+	},
+	"GET /emails/{}/identity": {
+		"resource": "mailbox",
+		"operation": "getSendIdentity",
+		"route": "GET /emails/{}/identity",
+		"handler": "GetEmailSendIdentity"
 	},
 	"GET /emails/{}/sync": {
 		"resource": "mailbox",
@@ -784,6 +886,54 @@
 		"operation": "get",
 		"route": "GET /outreach/settings",
 		"handler": "GetOutreachSettings"
+	},
+	"GET /placement/batches": {
+		"resource": "placementBatch",
+		"operation": "getAll",
+		"route": "GET /placement/batches",
+		"handler": "ListPlacementBatches"
+	},
+	"GET /placement/batches/{}": {
+		"resource": "placementBatch",
+		"operation": "get",
+		"route": "GET /placement/batches/{}",
+		"handler": "GetPlacementBatch"
+	},
+	"GET /placement/batches/{}/senders": {
+		"resource": "placementBatch",
+		"operation": "getSenders",
+		"route": "GET /placement/batches/{}/senders",
+		"handler": "ListPlacementBatchSenders"
+	},
+	"GET /placement/coverage": {
+		"resource": "placementTest",
+		"operation": "getCoverage",
+		"route": "GET /placement/coverage",
+		"handler": "GetPlacementCoverage"
+	},
+	"GET /placement/overview": {
+		"resource": "placementTest",
+		"operation": "getOverview",
+		"route": "GET /placement/overview",
+		"handler": "GetPlacementOverview"
+	},
+	"GET /placement/seeds": {
+		"resource": "placementSeed",
+		"operation": "getAll",
+		"route": "GET /placement/seeds",
+		"handler": "ListPlacementSeeds"
+	},
+	"GET /placement/tests": {
+		"resource": "placementTest",
+		"operation": "getAll",
+		"route": "GET /placement/tests",
+		"handler": "ListPlacementTests"
+	},
+	"GET /placement/tests/{}": {
+		"resource": "placementTest",
+		"operation": "get",
+		"route": "GET /placement/tests/{}",
+		"handler": "GetPlacementTest"
 	},
 	"GET /plans": {
 		"resource": "workspace",
@@ -1031,6 +1181,12 @@
 		"route": "PATCH /contacts",
 		"handler": "UpdateContactBulk"
 	},
+	"PATCH /contacts/imports/{}": {
+		"resource": "contactImport",
+		"operation": "saveDraft",
+		"route": "PATCH /contacts/imports/{}",
+		"handler": "SaveContactImportDraft"
+	},
 	"PATCH /contacts/{}": {
 		"resource": "contact",
 		"operation": "update",
@@ -1067,6 +1223,12 @@
 		"route": "PATCH /crm/task-types/{}",
 		"handler": "UpdateTaskType"
 	},
+	"PATCH /crm/tasks": {
+		"resource": "crmTask",
+		"operation": "bulkUpdate",
+		"route": "PATCH /crm/tasks",
+		"handler": "BulkUpdateCRMTasks"
+	},
 	"PATCH /crm/tasks/{}": {
 		"resource": "crmTask",
 		"operation": "update",
@@ -1084,6 +1246,12 @@
 		"operation": "update",
 		"route": "PATCH /emails/{}",
 		"handler": "UpdateEmail"
+	},
+	"PATCH /emails/{}/direct-tracking": {
+		"resource": "mailbox",
+		"operation": "updateDirectTracking",
+		"route": "PATCH /emails/{}/direct-tracking",
+		"handler": "UpdateEmailDirectTracking"
 	},
 	"PATCH /emails/{}/track": {
 		"resource": "mailbox",
@@ -1168,6 +1336,12 @@
 		"operation": "update",
 		"route": "PATCH /templates/{}",
 		"handler": "UpdateTemplate"
+	},
+	"PATCH /unibox/folder": {
+		"resource": "unibox",
+		"operation": "moveFolder",
+		"route": "PATCH /unibox/folder",
+		"handler": "UniboxMoveFolder"
 	},
 	"PATCH /unibox/seen": {
 		"resource": "unibox",
@@ -1289,6 +1463,18 @@
 		"route": "POST /campaigns/{}/duplicate",
 		"handler": "DuplicateCampaign"
 	},
+	"POST /campaigns/{}/leads/{}/pause": {
+		"resource": "campaign",
+		"operation": "pauseLead",
+		"route": "POST /campaigns/{}/leads/{}/pause",
+		"handler": "PauseCampaignLead"
+	},
+	"POST /campaigns/{}/leads/{}/resume": {
+		"resource": "campaign",
+		"operation": "resumeLead",
+		"route": "POST /campaigns/{}/leads/{}/resume",
+		"handler": "ResumeCampaignLead"
+	},
 	"POST /campaigns/{}/preflight": {
 		"resource": "campaign",
 		"operation": "preflight",
@@ -1354,6 +1540,30 @@
 		"operation": "importPreview",
 		"route": "POST /contacts/import/preview",
 		"handler": "ImportPreviewContacts"
+	},
+	"POST /contacts/imports": {
+		"resource": "contactImport",
+		"operation": "create",
+		"route": "POST /contacts/imports",
+		"handler": "CreateContactImport"
+	},
+	"POST /contacts/imports/{}/analyze": {
+		"resource": "contactImport",
+		"operation": "analyze",
+		"route": "POST /contacts/imports/{}/analyze",
+		"handler": "AnalyzeContactImport"
+	},
+	"POST /contacts/imports/{}/cancel": {
+		"resource": "contactImport",
+		"operation": "cancel",
+		"route": "POST /contacts/imports/{}/cancel",
+		"handler": "CancelContactImport"
+	},
+	"POST /contacts/imports/{}/start": {
+		"resource": "contactImport",
+		"operation": "start",
+		"route": "POST /contacts/imports/{}/start",
+		"handler": "StartContactImport"
 	},
 	"POST /contacts/research/batch": {
 		"resource": "contact",
@@ -1445,6 +1655,12 @@
 		"route": "POST /deliverability/events",
 		"handler": "IngestDeliverabilityEvent"
 	},
+	"POST /email-images": {
+		"resource": "emailImage",
+		"operation": "upload",
+		"route": "POST /email-images",
+		"handler": "UploadEmailImage"
+	},
 	"POST /emails/verify": {
 		"resource": "mailbox",
 		"operation": "verify",
@@ -1462,6 +1678,12 @@
 		"operation": "hold",
 		"route": "POST /emails/{}/hold",
 		"handler": "HoldEmail"
+	},
+	"POST /emails/{}/identity/refresh": {
+		"resource": "mailbox",
+		"operation": "refreshSendIdentity",
+		"route": "POST /emails/{}/identity/refresh",
+		"handler": "RefreshEmailSendIdentity"
 	},
 	"POST /emails/{}/release": {
 		"resource": "mailbox",
@@ -1571,6 +1793,12 @@
 		"route": "POST /integrations/connections/{}/push",
 		"handler": "PushContactsToIntegration"
 	},
+	"POST /integrations/connections/{}/rotate-inbound-url": {
+		"resource": "integration",
+		"operation": "rotateInboundUrl",
+		"route": "POST /integrations/connections/{}/rotate-inbound-url",
+		"handler": "RotateConnectionInboundURL"
+	},
 	"POST /integrations/connections/{}/test": {
 		"resource": "integration",
 		"operation": "test",
@@ -1630,6 +1858,36 @@
 		"operation": "rotateWebhookSecret",
 		"route": "POST /oauth/applications/{}/webhook-secret/rotate",
 		"handler": "RotateOAuthAppWebhookSecret"
+	},
+	"POST /placement/batches": {
+		"resource": "placementBatch",
+		"operation": "create",
+		"route": "POST /placement/batches",
+		"handler": "CreatePlacementBatch"
+	},
+	"POST /placement/batches/preview": {
+		"resource": "placementBatch",
+		"operation": "preview",
+		"route": "POST /placement/batches/preview",
+		"handler": "PreviewPlacementBatch"
+	},
+	"POST /placement/batches/{}/cancel": {
+		"resource": "placementBatch",
+		"operation": "cancel",
+		"route": "POST /placement/batches/{}/cancel",
+		"handler": "CancelPlacementBatch"
+	},
+	"POST /placement/tests": {
+		"resource": "placementTest",
+		"operation": "create",
+		"route": "POST /placement/tests",
+		"handler": "CreatePlacementTest"
+	},
+	"POST /placement/tests/{}/cancel": {
+		"resource": "placementTest",
+		"operation": "cancel",
+		"route": "POST /placement/tests/{}/cancel",
+		"handler": "CancelPlacementTest"
 	},
 	"POST /segments": {
 		"resource": "segment",
@@ -1696,6 +1954,12 @@
 		"operation": "create",
 		"route": "POST /templates",
 		"handler": "CreateTemplate"
+	},
+	"POST /templates/analyze": {
+		"resource": "template",
+		"operation": "analyze",
+		"route": "POST /templates/analyze",
+		"handler": "AnalyzeTemplateContent"
 	},
 	"POST /templates/score": {
 		"resource": "template",
@@ -1787,6 +2051,18 @@
 		"route": "POST /webhooks/{}/verify",
 		"handler": "VerifyWebhookEndpoint"
 	},
+	"PUT /campaigns/{}/leads/{}/cc": {
+		"resource": "campaign",
+		"operation": "setLeadCc",
+		"route": "PUT /campaigns/{}/leads/{}/cc",
+		"handler": "SetCampaignLeadCC"
+	},
+	"PUT /campaigns/{}/placement-monitor": {
+		"resource": "campaign",
+		"operation": "setPlacementMonitor",
+		"route": "PUT /campaigns/{}/placement-monitor",
+		"handler": "PutPlacementMonitor"
+	},
 	"PUT /campaigns/{}/segments": {
 		"resource": "campaign",
 		"operation": "replaceSegments",
@@ -1805,6 +2081,12 @@
 		"route": "PUT /emails/{}/behavior",
 		"handler": "UpdateEmailBehavior"
 	},
+	"PUT /emails/{}/sync": {
+		"resource": "mailbox",
+		"operation": "updateSync",
+		"route": "PUT /emails/{}/sync",
+		"handler": "UpdateEmailSync"
+	},
 	"PUT /forms/domain": {
 		"resource": "form",
 		"operation": "setDomain",
@@ -1816,6 +2098,18 @@
 		"operation": "replaceFieldMappings",
 		"route": "PUT /integrations/connections/{}/field-mappings",
 		"handler": "ReplaceConnectionFieldMappings"
+	},
+	"PUT /integrations/connections/{}/signing-key": {
+		"resource": "integration",
+		"operation": "setSigningKey",
+		"route": "PUT /integrations/connections/{}/signing-key",
+		"handler": "SetConnectionSigningKey"
+	},
+	"PUT /placement/seeds/{}": {
+		"resource": "placementSeed",
+		"operation": "set",
+		"route": "PUT /placement/seeds/{}",
+		"handler": "SetPlacementSeed"
 	},
 	"PUT /unibox/drafts/{}": {
 		"resource": "unibox",
