@@ -28,10 +28,28 @@ export const oauthAppOperations: INodeProperties[] = [
 				description: 'Delete an OAuth application',
 			},
 			{
+				name: 'Delete Listing',
+				value: 'deleteListing',
+				action: 'Delete the marketplace listing of an OAuth application',
+				description: 'Delete the marketplace listing of an OAuth application',
+			},
+			{
+				name: 'Delete Logo',
+				value: 'deleteLogo',
+				action: 'Delete the logo of an OAuth application',
+				description: 'Delete the logo of an OAuth application',
+			},
+			{
 				name: 'Get',
 				value: 'get',
 				action: 'Get an OAuth application',
 				description: 'Get an OAuth application',
+			},
+			{
+				name: 'Get Listing',
+				value: 'getListing',
+				action: 'Get the marketplace listing of an OAuth application',
+				description: 'Get the marketplace listing of an OAuth application',
 			},
 			{
 				name: 'Get Many',
@@ -58,6 +76,12 @@ export const oauthAppOperations: INodeProperties[] = [
 				description: 'Get the webhook signing secret',
 			},
 			{
+				name: 'Replace Logo',
+				value: 'setLogo',
+				action: 'Replace the logo of an OAuth application',
+				description: 'Replace the logo of an OAuth application',
+			},
+			{
 				name: 'Rotate Secret',
 				value: 'rotateSecret',
 				action: 'Rotate the client secret',
@@ -68,6 +92,12 @@ export const oauthAppOperations: INodeProperties[] = [
 				value: 'rotateWebhookSecret',
 				action: 'Rotate the webhook signing secret',
 				description: 'Rotate the webhook signing secret',
+			},
+			{
+				name: 'Set Listing',
+				value: 'setListing',
+				action: 'Create or update the marketplace listing of an OAuth application',
+				description: 'Create or update the marketplace listing of an OAuth application',
 			},
 			{
 				name: 'Update',
@@ -149,6 +179,7 @@ export const oauthAppFields: INodeProperties[] = [
 				name: 'scopes',
 				type: 'number',
 				default: 0,
+				description: 'API permission bitmask the app may request (required; see the permissions reference)',
 			},
 			{
 				displayName: 'Webhook Events',
@@ -221,6 +252,92 @@ export const oauthAppFields: INodeProperties[] = [
 		type: 'string',
 		default: '',
 		required: true,
+		displayOptions: {
+			show: {
+				resource: [
+					'oauthApp',
+				],
+				operation: [
+					'deleteListing',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Additional Fields',
+		name: 'additionalFields',
+		type: 'collection',
+		placeholder: 'Add Field',
+		default: {},
+		displayOptions: {
+			show: {
+				resource: [
+					'oauthApp',
+				],
+				operation: [
+					'deleteListing',
+				],
+			},
+		},
+		options: [
+			{
+				displayName: 'Idempotency Key',
+				name: 'idempotencyKey',
+				type: 'string',
+				default: '',
+				description: 'Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.',
+			},
+		],
+	},
+	{
+		displayName: 'ID',
+		name: 'id',
+		type: 'string',
+		default: '',
+		required: true,
+		displayOptions: {
+			show: {
+				resource: [
+					'oauthApp',
+				],
+				operation: [
+					'deleteLogo',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Additional Fields',
+		name: 'additionalFields',
+		type: 'collection',
+		placeholder: 'Add Field',
+		default: {},
+		displayOptions: {
+			show: {
+				resource: [
+					'oauthApp',
+				],
+				operation: [
+					'deleteLogo',
+				],
+			},
+		},
+		options: [
+			{
+				displayName: 'Idempotency Key',
+				name: 'idempotencyKey',
+				type: 'string',
+				default: '',
+				description: 'Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.',
+			},
+		],
+	},
+	{
+		displayName: 'ID',
+		name: 'id',
+		type: 'string',
+		default: '',
+		required: true,
 		description: 'The application\'s id',
 		displayOptions: {
 			show: {
@@ -229,6 +346,23 @@ export const oauthAppFields: INodeProperties[] = [
 				],
 				operation: [
 					'get',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'ID',
+		name: 'id',
+		type: 'string',
+		default: '',
+		required: true,
+		displayOptions: {
+			show: {
+				resource: [
+					'oauthApp',
+				],
+				operation: [
+					'getListing',
 				],
 			},
 		},
@@ -361,6 +495,67 @@ export const oauthAppFields: INodeProperties[] = [
 		type: 'string',
 		default: '',
 		required: true,
+		displayOptions: {
+			show: {
+				resource: [
+					'oauthApp',
+				],
+				operation: [
+					'setLogo',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Input Binary Field',
+		name: 'binaryPropertyName',
+		type: 'string',
+		default: 'data',
+		required: true,
+		description: 'The name of the input binary field holding the file to upload',
+		displayOptions: {
+			show: {
+				resource: [
+					'oauthApp',
+				],
+				operation: [
+					'setLogo',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Additional Fields',
+		name: 'additionalFields',
+		type: 'collection',
+		placeholder: 'Add Field',
+		default: {},
+		displayOptions: {
+			show: {
+				resource: [
+					'oauthApp',
+				],
+				operation: [
+					'setLogo',
+				],
+			},
+		},
+		options: [
+			{
+				displayName: 'Idempotency Key',
+				name: 'idempotencyKey',
+				type: 'string',
+				default: '',
+				description: 'Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.',
+			},
+		],
+	},
+	{
+		displayName: 'ID',
+		name: 'id',
+		type: 'string',
+		default: '',
+		required: true,
 		description: 'The application\'s id',
 		displayOptions: {
 			show: {
@@ -439,6 +634,91 @@ export const oauthAppFields: INodeProperties[] = [
 				type: 'string',
 				default: '',
 				description: 'Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.',
+			},
+		],
+	},
+	{
+		displayName: 'ID',
+		name: 'id',
+		type: 'string',
+		default: '',
+		required: true,
+		displayOptions: {
+			show: {
+				resource: [
+					'oauthApp',
+				],
+				operation: [
+					'setListing',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Update Fields',
+		name: 'updateFields',
+		type: 'collection',
+		placeholder: 'Add Field',
+		default: {},
+		displayOptions: {
+			show: {
+				resource: [
+					'oauthApp',
+				],
+				operation: [
+					'setListing',
+				],
+			},
+		},
+		options: [
+			{
+				displayName: 'Category',
+				name: 'category',
+				type: 'string',
+				default: '',
+			},
+			{
+				displayName: 'Description',
+				name: 'description',
+				type: 'string',
+				default: '',
+			},
+			{
+				displayName: 'Idempotency Key',
+				name: 'idempotencyKey',
+				type: 'string',
+				default: '',
+				description: 'Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.',
+			},
+			{
+				displayName: 'Install URL',
+				name: 'install_url',
+				type: 'string',
+				default: '',
+			},
+			{
+				displayName: 'Privacy URL',
+				name: 'privacy_url',
+				type: 'string',
+				default: '',
+			},
+			{
+				displayName: 'Slug',
+				name: 'slug',
+				type: 'string',
+				default: '',
+			},
+			{
+				displayName: 'Support URL',
+				name: 'support_url',
+				type: 'string',
+				default: '',
+			},
+			{
+				displayName: 'Tagline',
+				name: 'tagline',
+				type: 'string',
+				default: '',
 			},
 		],
 	},

@@ -474,6 +474,7 @@ export const formFields: INodeProperties[] = [
 				name: 'forms_domain',
 				type: 'string',
 				default: '',
+				description: 'The custom forms domain',
 			},
 			{
 				displayName: 'Idempotency Key',
@@ -607,6 +608,12 @@ export const formFields: INodeProperties[] = [
 				name: 'success_message',
 				type: 'string',
 				default: '',
+			},
+			{
+				displayName: 'Triage Enabled',
+				name: 'triage_enabled',
+				type: 'boolean',
+				default: false,
 			},
 		],
 	},

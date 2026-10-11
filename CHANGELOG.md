@@ -3,6 +3,28 @@
 All notable changes to `n8n-nodes-warmbly` are documented here. This project
 adheres to [Semantic Versioning](https://semver.org/).
 
+## [0.2.1] - 2026-10-11
+
+Synced with the Warmbly API at server commit `176d3c24`. Operations: 305 → 398.
+
+### Added
+
+- **93 new operations**, including four new resources and three more groups:
+  contact imports (create, analyze, start, cancel, save draft, failed rows),
+  CRM (sync, backfill, owners, lists, settings, contact link and refresh),
+  Salesforce (overview, settings, import sources, activity, list views, sync),
+  inbox placement (overview, coverage, seeds, tests, batches), email images,
+  campaign lead CC / hold / pause / resume, campaign placement monitor and send
+  plan, mailbox send identity and direct tracking, community apps, connection
+  inbound URL and signing key, OAuth application listing and logo, template
+  analysis, unibox folder moves, bulk CRM task update and delete, and direct
+  mail, inbox tagging and warmup placement analytics.
+
+### Changed
+
+- Parameters and request fields refreshed on 46 existing operations to match the
+  current API.
+
 ## [0.2.0] - 2026-09-07
 
 Full coverage of the current Warmbly API, and the node is now generated from

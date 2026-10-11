@@ -22,6 +22,12 @@ export const apiKeyOperations: INodeProperties[] = [
 				description: 'Create an API key',
 			},
 			{
+				name: 'Delete Permanently',
+				value: 'deletePermanently',
+				action: 'Permanently delete an API key',
+				description: 'Permanently delete an API key',
+			},
+			{
 				name: 'Get',
 				value: 'get',
 				action: 'Get an API key',
@@ -181,6 +187,50 @@ export const apiKeyFields: INodeProperties[] = [
 				type: 'number',
 				default: 0,
 				description: 'Per-key request cap. Omit or send 0 to use the default (60 r/m).',
+			},
+		],
+	},
+	{
+		displayName: 'ID',
+		name: 'id',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'The key\'s id',
+		displayOptions: {
+			show: {
+				resource: [
+					'apiKey',
+				],
+				operation: [
+					'deletePermanently',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Additional Fields',
+		name: 'additionalFields',
+		type: 'collection',
+		placeholder: 'Add Field',
+		default: {},
+		displayOptions: {
+			show: {
+				resource: [
+					'apiKey',
+				],
+				operation: [
+					'deletePermanently',
+				],
+			},
+		},
+		options: [
+			{
+				displayName: 'Idempotency Key',
+				name: 'idempotencyKey',
+				type: 'string',
+				default: '',
+				description: 'Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.',
 			},
 		],
 	},
