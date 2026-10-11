@@ -34,24 +34,6 @@ export const outreachOperations: INodeProperties[] = [
 
 export const outreachFields: INodeProperties[] = [
 	{
-		displayName: 'Settings',
-		name: 'settings',
-		type: 'json',
-		default: '',
-		required: true,
-		description: 'Advanced outreach overrides for a campaign.',
-		displayOptions: {
-			show: {
-				resource: [
-					'outreach',
-				],
-				operation: [
-					'update',
-				],
-			},
-		},
-	},
-	{
 		displayName: 'Update Fields',
 		name: 'updateFields',
 		type: 'collection',
