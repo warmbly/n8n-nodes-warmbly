@@ -5,11 +5,11 @@ adheres to [Semantic Versioning](https://semver.org/).
 
 ## [0.2.1] - 2026-10-11
 
-Synced with the Warmbly API at server commit `176d3c24`. Operations: 305 → 398.
+Synced with the Warmbly API at server commit `169376ef`. Operations: 305 → 412.
 
 ### Added
 
-- **93 new operations**, including four new resources and three more groups:
+- **107 new operations**, including six new resources and three more groups:
   contact imports (create, analyze, start, cancel, save draft, failed rows),
   CRM (sync, backfill, owners, lists, settings, contact link and refresh),
   Salesforce (overview, settings, import sources, activity, list views, sync),
@@ -18,12 +18,16 @@ Synced with the Warmbly API at server commit `176d3c24`. Operations: 305 → 398
   plan, mailbox send identity and direct tracking, community apps, connection
   inbound URL and signing key, OAuth application listing and logo, template
   analysis, unibox folder moves, bulk CRM task update and delete, and direct
-  mail, inbox tagging and warmup placement analytics.
+  mail, inbox tagging and warmup placement analytics. Apollo (overview, lists,
+  list imports, enrichment runs, API key replacement) and Clay (get and update
+  settings) are the two newest resources.
 
 ### Changed
 
 - Parameters and request fields refreshed on 46 existing operations to match the
   current API.
+- Salesforce **Update Import Source** now offers its request fields (name, source,
+  campaign, tags, recurring, enabled); it previously sent no body.
 
 ## [0.2.0] - 2026-09-07
 

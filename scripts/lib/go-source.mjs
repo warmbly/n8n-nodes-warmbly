@@ -160,11 +160,12 @@ export function indexStructs(dirs) {
 					const field = parseStructField(lines, j);
 					if (field) fields.push(field);
 				}
-				// A later package can redeclare a name; first definition wins and
-				// the collision is visible to the caller.
-				if (!structs.has(name)) {
-					structs.set(name, { name, file, fields, pkg: pkgOf(file) });
-				}
+				// A later package can redeclare a name; first definition wins for
+				// the bare name, and every one stays reachable as `pkg.Name` (two
+				// services each define a `SourceInput`).
+				const decl = { name, file, fields, pkg: pkgOf(file) };
+				if (!structs.has(name)) structs.set(name, decl);
+				if (!structs.has(`${decl.pkg}.${name}`)) structs.set(`${decl.pkg}.${name}`, decl);
 			}
 		}
 	}
@@ -329,14 +330,18 @@ export function indexEnums(dirs) {
 }
 
 /** Resolve embedded structs so a caller sees one flat field list. */
-export function flattenStruct(structs, name, seen = new Set()) {
-	const decl = structs.get(stripPkg(name));
-	if (!decl || seen.has(decl.name)) return [];
-	seen.add(decl.name);
+export function flattenStruct(structs, name, seen = new Set(), pkg = '') {
+	const bare = name.replace(/^\*/, '');
+	// A qualified name picks its own package's struct; an embedded name without a
+	// package belongs to the package of the struct embedding it.
+	const decl =
+		structs.get(bare.includes('.') ? bare : `${pkg}.${bare}`) ?? structs.get(stripPkg(bare));
+	if (!decl || seen.has(decl)) return [];
+	seen.add(decl);
 	const out = [];
 	for (const field of decl.fields) {
 		if (field.embed) {
-			out.push(...flattenStruct(structs, field.embed, seen));
+			out.push(...flattenStruct(structs, field.embed, seen, decl.pkg));
 			continue;
 		}
 		out.push(field);

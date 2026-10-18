@@ -391,6 +391,338 @@
 			"displayName": "Rate Limit Per Minute",
 			"type": "number"
 		},
+		"apollo.createImportSource.additionalFields": {
+			"collection": true,
+			"displayName": "Additional Fields",
+			"placeholder": "Add Field"
+		},
+		"apollo.createImportSource.additionalFields.campaign_id": {
+			"default": "",
+			"description": "Campaign to add imported contacts to.",
+			"displayName": "Campaign ID",
+			"type": "string"
+		},
+		"apollo.createImportSource.additionalFields.category_ids": {
+			"default": "",
+			"description": "Contact categories to tag imported contacts with. Comma-separated list.",
+			"displayName": "Category IDs",
+			"type": "string"
+		},
+		"apollo.createImportSource.additionalFields.enabled": {
+			"default": false,
+			"description": "Whether the import is active.",
+			"displayName": "Enabled",
+			"type": "boolean"
+		},
+		"apollo.createImportSource.additionalFields.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"apollo.createImportSource.additionalFields.list_id": {
+			"default": "",
+			"description": "Id of the Apollo contact list to import.",
+			"displayName": "List ID",
+			"type": "string"
+		},
+		"apollo.createImportSource.additionalFields.list_name": {
+			"default": "",
+			"description": "Display name of the Apollo list.",
+			"displayName": "List Name",
+			"type": "string"
+		},
+		"apollo.createImportSource.additionalFields.name": {
+			"default": "",
+			"description": "Name of the list import.",
+			"displayName": "Name",
+			"type": "string"
+		},
+		"apollo.createImportSource.additionalFields.recurring": {
+			"default": false,
+			"description": "Run the import again on a schedule.",
+			"displayName": "Recurring",
+			"type": "boolean"
+		},
+		"apollo.createImportSource.additionalFields.verified_only": {
+			"default": false,
+			"description": "Import only people with a verified email address.",
+			"displayName": "Verified Only",
+			"type": "boolean"
+		},
+		"apollo.createImportSource.top.id": {
+			"default": "",
+			"description": "Apollo connection id.",
+			"displayName": "Connection ID",
+			"type": "string",
+			"required": true
+		},
+		"apollo.deleteImportSource.additionalFields": {
+			"collection": true,
+			"displayName": "Additional Fields",
+			"placeholder": "Add Field"
+		},
+		"apollo.deleteImportSource.additionalFields.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"apollo.deleteImportSource.top.id": {
+			"default": "",
+			"description": "Apollo connection id.",
+			"displayName": "Connection ID",
+			"type": "string",
+			"required": true
+		},
+		"apollo.deleteImportSource.top.sourceId": {
+			"default": "",
+			"description": "List import id.",
+			"displayName": "Import Source ID",
+			"type": "string",
+			"required": true
+		},
+		"apollo.getEnrichment.top.id": {
+			"default": "",
+			"description": "Apollo connection id.",
+			"displayName": "Connection ID",
+			"type": "string",
+			"required": true
+		},
+		"apollo.getEnrichment.top.runId": {
+			"default": "",
+			"description": "Enrichment run id.",
+			"displayName": "Run ID",
+			"type": "string",
+			"required": true
+		},
+		"apollo.getEnrichments.filters": {
+			"collection": true,
+			"displayName": "Filters",
+			"placeholder": "Add Field"
+		},
+		"apollo.getEnrichments.filters.limit": {
+			"default": 50,
+			"description": "Max number of results to return",
+			"displayName": "Limit",
+			"type": "number",
+			"typeOptions": {
+				"minValue": 1
+			}
+		},
+		"apollo.getEnrichments.top.id": {
+			"default": "",
+			"description": "Apollo connection id.",
+			"displayName": "Connection ID",
+			"type": "string",
+			"required": true
+		},
+		"apollo.getImportSources.top.id": {
+			"default": "",
+			"description": "Apollo connection id.",
+			"displayName": "Connection ID",
+			"type": "string",
+			"required": true
+		},
+		"apollo.getLists.top.id": {
+			"default": "",
+			"description": "Apollo connection id.",
+			"displayName": "Connection ID",
+			"type": "string",
+			"required": true
+		},
+		"apollo.getOverview.top.id": {
+			"default": "",
+			"description": "Apollo connection id.",
+			"displayName": "Connection ID",
+			"type": "string",
+			"required": true
+		},
+		"apollo.previewImport.additionalFields": {
+			"collection": true,
+			"displayName": "Additional Fields",
+			"placeholder": "Add Field"
+		},
+		"apollo.previewImport.additionalFields.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"apollo.previewImport.additionalFields.list_id": {
+			"default": "",
+			"description": "Id of the Apollo contact list to read.",
+			"displayName": "List ID",
+			"type": "string"
+		},
+		"apollo.previewImport.additionalFields.verified_only": {
+			"default": false,
+			"description": "Preview only people with a verified email address.",
+			"displayName": "Verified Only",
+			"type": "boolean"
+		},
+		"apollo.previewImport.top.id": {
+			"default": "",
+			"description": "Apollo connection id.",
+			"displayName": "Connection ID",
+			"type": "string",
+			"required": true
+		},
+		"apollo.replaceKey.additionalFields": {
+			"collection": true,
+			"displayName": "Additional Fields",
+			"placeholder": "Add Field"
+		},
+		"apollo.replaceKey.additionalFields.api_key": {
+			"default": "",
+			"description": "The new Apollo API key. It is checked before it replaces the old one.",
+			"displayName": "API Key",
+			"type": "string",
+			"typeOptions": {
+				"password": true
+			}
+		},
+		"apollo.replaceKey.additionalFields.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"apollo.replaceKey.top.id": {
+			"default": "",
+			"description": "Apollo connection id.",
+			"displayName": "Connection ID",
+			"type": "string",
+			"required": true
+		},
+		"apollo.runImportSource.additionalFields": {
+			"collection": true,
+			"displayName": "Additional Fields",
+			"placeholder": "Add Field"
+		},
+		"apollo.runImportSource.additionalFields.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"apollo.runImportSource.top.id": {
+			"default": "",
+			"description": "Apollo connection id.",
+			"displayName": "Connection ID",
+			"type": "string",
+			"required": true
+		},
+		"apollo.runImportSource.top.sourceId": {
+			"default": "",
+			"description": "List import id.",
+			"displayName": "Import Source ID",
+			"type": "string",
+			"required": true
+		},
+		"apollo.startEnrichment.additionalFields": {
+			"collection": true,
+			"displayName": "Additional Fields",
+			"placeholder": "Add Field"
+		},
+		"apollo.startEnrichment.additionalFields.contact_ids": {
+			"default": "",
+			"description": "Contacts to enrich. Comma-separated list.",
+			"displayName": "Contact IDs",
+			"type": "string"
+		},
+		"apollo.startEnrichment.additionalFields.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"apollo.startEnrichment.additionalFields.overwrite": {
+			"default": false,
+			"description": "Replace values that are already set on the contact.",
+			"displayName": "Overwrite",
+			"type": "boolean"
+		},
+		"apollo.startEnrichment.top.id": {
+			"default": "",
+			"description": "Apollo connection id.",
+			"displayName": "Connection ID",
+			"type": "string",
+			"required": true
+		},
+		"apollo.updateImportSource.top.id": {
+			"default": "",
+			"description": "Apollo connection id.",
+			"displayName": "Connection ID",
+			"type": "string",
+			"required": true
+		},
+		"apollo.updateImportSource.top.sourceId": {
+			"default": "",
+			"description": "List import id.",
+			"displayName": "Import Source ID",
+			"type": "string",
+			"required": true
+		},
+		"apollo.updateImportSource.updateFields": {
+			"collection": true,
+			"displayName": "Update Fields",
+			"placeholder": "Add Field"
+		},
+		"apollo.updateImportSource.updateFields.campaign_id": {
+			"default": "",
+			"description": "Campaign to add imported contacts to.",
+			"displayName": "Campaign ID",
+			"type": "string"
+		},
+		"apollo.updateImportSource.updateFields.category_ids": {
+			"default": "",
+			"description": "Contact categories to tag imported contacts with. Comma-separated list.",
+			"displayName": "Category IDs",
+			"type": "string"
+		},
+		"apollo.updateImportSource.updateFields.enabled": {
+			"default": false,
+			"description": "Whether the import is active.",
+			"displayName": "Enabled",
+			"type": "boolean"
+		},
+		"apollo.updateImportSource.updateFields.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"apollo.updateImportSource.updateFields.list_id": {
+			"default": "",
+			"description": "Id of the Apollo contact list to import.",
+			"displayName": "List ID",
+			"type": "string"
+		},
+		"apollo.updateImportSource.updateFields.list_name": {
+			"default": "",
+			"description": "Display name of the Apollo list.",
+			"displayName": "List Name",
+			"type": "string"
+		},
+		"apollo.updateImportSource.updateFields.name": {
+			"default": "",
+			"description": "Name of the list import.",
+			"displayName": "Name",
+			"type": "string"
+		},
+		"apollo.updateImportSource.updateFields.recurring": {
+			"default": false,
+			"description": "Run the import again on a schedule.",
+			"displayName": "Recurring",
+			"type": "boolean"
+		},
+		"apollo.updateImportSource.updateFields.verified_only": {
+			"default": false,
+			"description": "Import only people with a verified email address.",
+			"displayName": "Verified Only",
+			"type": "boolean"
+		},
 		"auditLog.getAll.filters": {
 			"collection": true,
 			"displayName": "Filters",
@@ -1705,6 +2037,58 @@
 			"default": 0,
 			"displayName": "Weight",
 			"type": "number"
+		},
+		"clay.getSettings.top.id": {
+			"default": "",
+			"description": "Clay connection id.",
+			"displayName": "Connection ID",
+			"type": "string",
+			"required": true
+		},
+		"clay.updateSettings.top.id": {
+			"default": "",
+			"description": "Clay connection id.",
+			"displayName": "Connection ID",
+			"type": "string",
+			"required": true
+		},
+		"clay.updateSettings.updateFields": {
+			"collection": true,
+			"displayName": "Update Fields",
+			"placeholder": "Add Field"
+		},
+		"clay.updateSettings.updateFields.auth_token": {
+			"default": "",
+			"description": "Token sent to the Clay table with each event.",
+			"displayName": "Auth Token",
+			"type": "string",
+			"typeOptions": {
+				"password": true
+			}
+		},
+		"clay.updateSettings.updateFields.defaults": {
+			"default": "",
+			"description": "Defaults applied to contacts that arrive from Clay.",
+			"displayName": "Defaults",
+			"type": "json"
+		},
+		"clay.updateSettings.updateFields.events": {
+			"default": "",
+			"description": "Warmbly events to send to Clay. Comma-separated list.",
+			"displayName": "Events",
+			"type": "string"
+		},
+		"clay.updateSettings.updateFields.idempotencyKey": {
+			"default": "",
+			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
+			"displayName": "Idempotency Key",
+			"type": "string"
+		},
+		"clay.updateSettings.updateFields.webhook_url": {
+			"default": "",
+			"description": "URL of the Clay table that receives outbound events.",
+			"displayName": "Webhook URL",
+			"type": "string"
 		},
 		"contact.bulkDelete.additionalFields": {
 			"collection": true,
@@ -5387,6 +5771,66 @@
 			"description": "Update an API key",
 			"name": "Update"
 		},
+		"apollo.createImportSource": {
+			"action": "Create an Apollo list import",
+			"description": "Save an Apollo list import and start its first run",
+			"name": "Create Import Source"
+		},
+		"apollo.deleteImportSource": {
+			"action": "Delete an Apollo list import",
+			"description": "Remove a list import; contacts it already brought in stay",
+			"name": "Delete Import Source"
+		},
+		"apollo.getEnrichment": {
+			"action": "Get an Apollo enrichment run",
+			"description": "Get one enrichment run and its progress",
+			"name": "Get Enrichment"
+		},
+		"apollo.getEnrichments": {
+			"action": "Get Apollo enrichment runs",
+			"description": "List the recent enrichment runs of a connection",
+			"name": "Get Enrichments"
+		},
+		"apollo.getImportSources": {
+			"action": "Get Apollo list imports",
+			"description": "List the saved list imports of a connection",
+			"name": "Get Import Sources"
+		},
+		"apollo.getLists": {
+			"action": "Get Apollo contact lists",
+			"description": "Get the saved contact lists of the Apollo account",
+			"name": "Get Lists"
+		},
+		"apollo.getOverview": {
+			"action": "Get the Apollo overview",
+			"description": "Get the Apollo connection overview",
+			"name": "Get Overview"
+		},
+		"apollo.previewImport": {
+			"action": "Preview an Apollo import",
+			"description": "Read the first people of a list without importing them",
+			"name": "Preview Import"
+		},
+		"apollo.replaceKey": {
+			"action": "Replace the Apollo API key",
+			"description": "Check a new Apollo API key and swap it in",
+			"name": "Replace Key"
+		},
+		"apollo.runImportSource": {
+			"action": "Run an Apollo list import",
+			"description": "Run a saved list import now",
+			"name": "Run Import Source"
+		},
+		"apollo.startEnrichment": {
+			"action": "Start an Apollo enrichment run",
+			"description": "Queue an enrichment run over a selection of contacts",
+			"name": "Start Enrichment"
+		},
+		"apollo.updateImportSource": {
+			"action": "Update an Apollo list import",
+			"description": "Edit the targets, filter and schedule of a list import",
+			"name": "Update Import Source"
+		},
 		"auditLog.getAll": {
 			"action": "Get many audit logs",
 			"description": "Get many audit logs",
@@ -5666,6 +6110,16 @@
 			"action": "Update an A/B variant",
 			"description": "Update an A/B variant",
 			"name": "Update"
+		},
+		"clay.getSettings": {
+			"action": "Get the Clay settings",
+			"description": "Get the inbound defaults, outbound table and events of the Clay connection",
+			"name": "Get Settings"
+		},
+		"clay.updateSettings": {
+			"action": "Update the Clay settings",
+			"description": "Save the inbound defaults, the outbound table and the events sent to it",
+			"name": "Update Settings"
 		},
 		"contact.bulkDelete": {
 			"action": "Bulk delete contacts",
@@ -6969,6 +7423,11 @@
 			"displayName": "API Key",
 			"noun": "API key"
 		},
+		"apollo": {
+			"defaultOperation": "getOverview",
+			"displayName": "Apollo",
+			"noun": "Apollo"
+		},
 		"auditLog": {
 			"defaultOperation": "getAll",
 			"displayName": "Audit Log",
@@ -6993,6 +7452,11 @@
 			"defaultOperation": "getAll",
 			"displayName": "Campaign A/B Variant",
 			"noun": "A/B variant"
+		},
+		"clay": {
+			"defaultOperation": "getSettings",
+			"displayName": "Clay",
+			"noun": "Clay"
 		},
 		"contact": {
 			"defaultOperation": "bulkDelete",

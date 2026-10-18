@@ -161,6 +161,12 @@
 		"route": "DELETE /forms/{}/submissions/{}",
 		"handler": "DeleteFormSubmission"
 	},
+	"DELETE /integrations/apollo/{}/import-sources/{}": {
+		"resource": "apollo",
+		"operation": "deleteImportSource",
+		"route": "DELETE /integrations/apollo/{}/import-sources/{}",
+		"handler": "DeleteApolloImportSource"
+	},
 	"DELETE /integrations/connections/{}": {
 		"resource": "integration",
 		"operation": "delete",
@@ -839,6 +845,36 @@
 		"route": "GET /forms/{}/submissions",
 		"handler": "ListFormSubmissions"
 	},
+	"GET /integrations/apollo/{}": {
+		"resource": "apollo",
+		"operation": "getOverview",
+		"route": "GET /integrations/apollo/{}",
+		"handler": "ApolloOverview"
+	},
+	"GET /integrations/apollo/{}/enrichments": {
+		"resource": "apollo",
+		"operation": "getEnrichments",
+		"route": "GET /integrations/apollo/{}/enrichments",
+		"handler": "ListApolloEnrichments"
+	},
+	"GET /integrations/apollo/{}/enrichments/{}": {
+		"resource": "apollo",
+		"operation": "getEnrichment",
+		"route": "GET /integrations/apollo/{}/enrichments/{}",
+		"handler": "GetApolloEnrichment"
+	},
+	"GET /integrations/apollo/{}/import-sources": {
+		"resource": "apollo",
+		"operation": "getImportSources",
+		"route": "GET /integrations/apollo/{}/import-sources",
+		"handler": "ListApolloImportSources"
+	},
+	"GET /integrations/apollo/{}/lists": {
+		"resource": "apollo",
+		"operation": "getLists",
+		"route": "GET /integrations/apollo/{}/lists",
+		"handler": "ApolloLists"
+	},
 	"GET /integrations/bookings": {
 		"resource": "integration",
 		"operation": "getBookings",
@@ -850,6 +886,12 @@
 		"operation": "getCatalog",
 		"route": "GET /integrations/catalog",
 		"handler": "ListIntegrationCatalog"
+	},
+	"GET /integrations/clay/{}": {
+		"resource": "clay",
+		"operation": "getSettings",
+		"route": "GET /integrations/clay/{}",
+		"handler": "GetClaySettings"
 	},
 	"GET /integrations/community": {
 		"resource": "integration",
@@ -1421,6 +1463,18 @@
 		"route": "PATCH /forms/{}",
 		"handler": "UpdateForm"
 	},
+	"PATCH /integrations/apollo/{}/import-sources/{}": {
+		"resource": "apollo",
+		"operation": "updateImportSource",
+		"route": "PATCH /integrations/apollo/{}/import-sources/{}",
+		"handler": "UpdateApolloImportSource"
+	},
+	"PATCH /integrations/clay/{}": {
+		"resource": "clay",
+		"operation": "updateSettings",
+		"route": "PATCH /integrations/clay/{}",
+		"handler": "UpdateClaySettings"
+	},
 	"PATCH /integrations/connections/{}/config": {
 		"resource": "integration",
 		"operation": "updateConfig",
@@ -1979,6 +2033,30 @@
 		"route": "POST /generation/write",
 		"handler": "GenerateWriting"
 	},
+	"POST /integrations/apollo/{}/enrichments": {
+		"resource": "apollo",
+		"operation": "startEnrichment",
+		"route": "POST /integrations/apollo/{}/enrichments",
+		"handler": "StartApolloEnrichment"
+	},
+	"POST /integrations/apollo/{}/import-sources": {
+		"resource": "apollo",
+		"operation": "createImportSource",
+		"route": "POST /integrations/apollo/{}/import-sources",
+		"handler": "CreateApolloImportSource"
+	},
+	"POST /integrations/apollo/{}/import-sources/{}/run": {
+		"resource": "apollo",
+		"operation": "runImportSource",
+		"route": "POST /integrations/apollo/{}/import-sources/{}/run",
+		"handler": "RunApolloImportSource"
+	},
+	"POST /integrations/apollo/{}/import/preview": {
+		"resource": "apollo",
+		"operation": "previewImport",
+		"route": "POST /integrations/apollo/{}/import/preview",
+		"handler": "PreviewApolloImport"
+	},
 	"POST /integrations/connections": {
 		"resource": "integration",
 		"operation": "create",
@@ -2344,6 +2422,12 @@
 		"operation": "setDomain",
 		"route": "PUT /forms/domain",
 		"handler": "SetFormsDomain"
+	},
+	"PUT /integrations/apollo/{}/key": {
+		"resource": "apollo",
+		"operation": "replaceKey",
+		"route": "PUT /integrations/apollo/{}/key",
+		"handler": "ReplaceApolloKey"
 	},
 	"PUT /integrations/connections/{}/field-mappings": {
 		"resource": "integration",

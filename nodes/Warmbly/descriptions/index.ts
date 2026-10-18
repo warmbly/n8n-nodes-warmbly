@@ -5,12 +5,14 @@ import { agentToolOperations, agentToolFields } from './agentTool';
 import { aiSkillOperations, aiSkillFields } from './aiSkill';
 import { analyticsOperations, analyticsFields } from './analytics';
 import { apiKeyOperations, apiKeyFields } from './apiKey';
+import { apolloOperations, apolloFields } from './apollo';
 import { auditLogOperations, auditLogFields } from './auditLog';
 import { automationOperations, automationFields } from './automation';
 import { campaignOperations, campaignFields } from './campaign';
 import { campaignVariantOperations, campaignVariantFields } from './campaignVariant';
 import { folderOperations, folderFields } from './folder';
 import { campaignStepOperations, campaignStepFields } from './campaignStep';
+import { clayOperations, clayFields } from './clay';
 import { contactOperations, contactFields } from './contact';
 import { contactCategoryOperations, contactCategoryFields } from './contactCategory';
 import { contactImportOperations, contactImportFields } from './contactImport';
@@ -72,6 +74,10 @@ export const resourceProperty: INodeProperties = {
 			value: 'apiKey',
 		},
 		{
+			name: 'Apollo',
+			value: 'apollo',
+		},
+		{
 			name: 'Audit Log',
 			value: 'auditLog',
 		},
@@ -94,6 +100,10 @@ export const resourceProperty: INodeProperties = {
 		{
 			name: 'Campaign Step',
 			value: 'campaignStep',
+		},
+		{
+			name: 'Clay',
+			value: 'clay',
 		},
 		{
 			name: 'Contact',
@@ -233,12 +243,14 @@ export const operationProperties: INodeProperties[] = [
 	...aiSkillOperations,
 	...analyticsOperations,
 	...apiKeyOperations,
+	...apolloOperations,
 	...auditLogOperations,
 	...automationOperations,
 	...campaignOperations,
 	...campaignVariantOperations,
 	...folderOperations,
 	...campaignStepOperations,
+	...clayOperations,
 	...contactOperations,
 	...contactCategoryOperations,
 	...contactImportOperations,
@@ -279,12 +291,14 @@ export const fieldProperties: INodeProperties[] = [
 	...aiSkillFields,
 	...analyticsFields,
 	...apiKeyFields,
+	...apolloFields,
 	...auditLogFields,
 	...automationFields,
 	...campaignFields,
 	...campaignVariantFields,
 	...folderFields,
 	...campaignStepFields,
+	...clayFields,
 	...contactFields,
 	...contactCategoryFields,
 	...contactImportFields,
