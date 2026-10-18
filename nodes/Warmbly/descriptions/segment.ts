@@ -429,11 +429,32 @@ export const segmentFields: INodeProperties[] = [
 		},
 		options: [
 			{
+				displayName: 'All',
+				name: 'all',
+				type: 'boolean',
+				default: false,
+				description: 'All switches the selection from the id list to Filters.',
+			},
+			{
 				displayName: 'Contacts',
 				name: 'contacts',
 				type: 'string',
 				default: '',
 				description: 'Comma-separated list.',
+			},
+			{
+				displayName: 'Exclude',
+				name: 'exclude',
+				type: 'string',
+				default: '',
+				description: 'Exclude drops ids from the resolved set: the rows unticked after a select-all. Ignored unless All is set. Comma-separated list.',
+			},
+			{
+				displayName: 'Filters',
+				name: 'filters',
+				type: 'json',
+				default: '',
+				description: 'Filters is the same search body /contacts/search takes, so the set resolved here is exactly the set the list was showing. Provide as JSON.',
 			},
 			{
 				displayName: 'Idempotency Key',

@@ -58,6 +58,17 @@ export const integrationOperations: INodeProperties[] = [
 				description: 'List the integration catalog',
 			},
 			{
+				name: 'Get Community App',
+				value: 'getCommunityApp',
+				action: 'Get a community app',
+				description: 'Get a community app',
+			},
+			{
+				name: 'Get Community Apps',
+				value: 'getCommunityApps',
+				action: 'Get community apps',
+			},
+			{
 				name: 'Get Event Subscriptions',
 				value: 'getEventSubscriptions',
 				action: 'List event subscriptions',
@@ -97,6 +108,18 @@ export const integrationOperations: INodeProperties[] = [
 				name: 'Replace Field Mappings',
 				value: 'replaceFieldMappings',
 				action: 'Replace field mappings',
+			},
+			{
+				name: 'Rotate Inbound URL',
+				value: 'rotateInboundUrl',
+				action: 'Rotate the inbound URL of a connection',
+				description: 'Rotate the inbound URL of a connection',
+			},
+			{
+				name: 'Set Signing Key',
+				value: 'setSigningKey',
+				action: 'Set the signing key of a connection',
+				description: 'Set the signing key of a connection',
 			},
 			{
 				name: 'Test Connection',
@@ -393,6 +416,64 @@ export const integrationFields: INodeProperties[] = [
 		},
 	},
 	{
+		displayName: 'Slug',
+		name: 'slug',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'The listing\'s slug.',
+		displayOptions: {
+			show: {
+				resource: [
+					'integration',
+				],
+				operation: [
+					'getCommunityApp',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Return All',
+		name: 'returnAll',
+		type: 'boolean',
+		default: false,
+		description: 'Whether to return all results or only up to a given limit',
+		displayOptions: {
+			show: {
+				resource: [
+					'integration',
+				],
+				operation: [
+					'getCommunityApps',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Limit',
+		name: 'limit',
+		type: 'number',
+		typeOptions: {
+			minValue: 1,
+		},
+		default: 50,
+		description: 'Max number of results to return',
+		displayOptions: {
+			show: {
+				resource: [
+					'integration',
+				],
+				operation: [
+					'getCommunityApps',
+				],
+				returnAll: [
+					false,
+				],
+			},
+		},
+	},
+	{
 		displayName: 'Connection ID',
 		name: 'id',
 		type: 'string',
@@ -611,6 +692,112 @@ export const integrationFields: INodeProperties[] = [
 				type: 'string',
 				default: '',
 				description: 'The provider object the mappings apply to (e.g. contact).',
+			},
+		],
+	},
+	{
+		displayName: 'ID',
+		name: 'id',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'Connection id.',
+		displayOptions: {
+			show: {
+				resource: [
+					'integration',
+				],
+				operation: [
+					'rotateInboundUrl',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Additional Fields',
+		name: 'additionalFields',
+		type: 'collection',
+		placeholder: 'Add Field',
+		default: {},
+		displayOptions: {
+			show: {
+				resource: [
+					'integration',
+				],
+				operation: [
+					'rotateInboundUrl',
+				],
+			},
+		},
+		options: [
+			{
+				displayName: 'Idempotency Key',
+				name: 'idempotencyKey',
+				type: 'string',
+				default: '',
+				description: 'Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.',
+			},
+		],
+	},
+	{
+		displayName: 'ID',
+		name: 'id',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'Connection id.',
+		displayOptions: {
+			show: {
+				resource: [
+					'integration',
+				],
+				operation: [
+					'setSigningKey',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Signing Key',
+		name: 'signing_key',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'Calendly signing key or Cal.com webhook secret, 8 to 512 characters. Empty removes the key.',
+		displayOptions: {
+			show: {
+				resource: [
+					'integration',
+				],
+				operation: [
+					'setSigningKey',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Update Fields',
+		name: 'updateFields',
+		type: 'collection',
+		placeholder: 'Add Field',
+		default: {},
+		displayOptions: {
+			show: {
+				resource: [
+					'integration',
+				],
+				operation: [
+					'setSigningKey',
+				],
+			},
+		},
+		options: [
+			{
+				displayName: 'Idempotency Key',
+				name: 'idempotencyKey',
+				type: 'string',
+				default: '',
+				description: 'Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.',
 			},
 		],
 	},
