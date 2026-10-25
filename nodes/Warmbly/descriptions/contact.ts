@@ -94,6 +94,12 @@ export const contactOperations: INodeProperties[] = [
 				description: 'Get contact research',
 			},
 			{
+				name: 'Get Salesforce Links',
+				value: 'getSalesforce',
+				action: 'Get the Salesforce links of a contact',
+				description: 'Get the Salesforce links of a contact',
+			},
+			{
 				name: 'Get Segments',
 				value: 'getSegments',
 				action: 'Get the segments a contact is in',
@@ -148,6 +154,18 @@ export const contactOperations: INodeProperties[] = [
 				description: 'Search contacts',
 			},
 			{
+				name: 'Sync to Salesforce',
+				value: 'syncSalesforce',
+				action: 'Sync a contact to Salesforce',
+				description: 'Sync a contact to Salesforce',
+			},
+			{
+				name: 'Unlink Salesforce',
+				value: 'unlinkSalesforce',
+				action: 'Unlink a contact from Salesforce',
+				description: 'Unlink a contact from Salesforce',
+			},
+			{
 				name: 'Update',
 				value: 'update',
 				action: 'Update a contact',
@@ -159,24 +177,6 @@ export const contactOperations: INodeProperties[] = [
 ];
 
 export const contactFields: INodeProperties[] = [
-	{
-		displayName: 'Contact IDs',
-		name: 'contact_ids',
-		type: 'string',
-		default: '',
-		required: true,
-		description: 'Comma-separated list of contact IDs to delete (1 to 1000).',
-		displayOptions: {
-			show: {
-				resource: [
-					'contact',
-				],
-				operation: [
-					'bulkDelete',
-				],
-			},
-		},
-	},
 	{
 		displayName: 'Additional Fields',
 		name: 'additionalFields',
@@ -194,6 +194,34 @@ export const contactFields: INodeProperties[] = [
 			},
 		},
 		options: [
+			{
+				displayName: 'All',
+				name: 'all',
+				type: 'boolean',
+				default: false,
+				description: 'All switches the selection from the id list to Filters.',
+			},
+			{
+				displayName: 'Contacts',
+				name: 'contacts',
+				type: 'string',
+				default: '',
+				description: 'Comma-separated list.',
+			},
+			{
+				displayName: 'Exclude',
+				name: 'exclude',
+				type: 'string',
+				default: '',
+				description: 'Exclude drops ids from the resolved set: the rows unticked after a select-all. Ignored unless All is set. Comma-separated list.',
+			},
+			{
+				displayName: 'Filters',
+				name: 'filters',
+				type: 'json',
+				default: '',
+				description: 'Filters is the same search body /contacts/search takes, so the set resolved here is exactly the set the list was showing. Provide as JSON.',
+			},
 			{
 				displayName: 'Idempotency Key',
 				name: 'idempotencyKey',
@@ -286,6 +314,46 @@ export const contactFields: INodeProperties[] = [
 				type: 'boolean',
 				default: false,
 				description: 'Set subscription status for all listed contacts.',
+			},
+		],
+	},
+	{
+		displayName: 'Update Fields',
+		name: 'updateFields',
+		type: 'collection',
+		placeholder: 'Add Field',
+		default: {},
+		displayOptions: {
+			show: {
+				resource: [
+					'contact',
+				],
+				operation: [
+					'bulkUpdate',
+				],
+			},
+		},
+		options: [
+			{
+				displayName: 'All',
+				name: 'all',
+				type: 'boolean',
+				default: false,
+				description: 'All switches the selection from the id list to Filters.',
+			},
+			{
+				displayName: 'Exclude',
+				name: 'exclude',
+				type: 'string',
+				default: '',
+				description: 'Exclude drops ids from the resolved set: the rows unticked after a select-all. Ignored unless All is set. Comma-separated list.',
+			},
+			{
+				displayName: 'Filters',
+				name: 'filters',
+				type: 'json',
+				default: '',
+				description: 'Filters is the same search body /contacts/search takes, so the set resolved here is exactly the set the list was showing. Provide as JSON.',
 			},
 		],
 	},
@@ -772,6 +840,24 @@ export const contactFields: INodeProperties[] = [
 		type: 'string',
 		default: '',
 		required: true,
+		description: 'Contact id.',
+		displayOptions: {
+			show: {
+				resource: [
+					'contact',
+				],
+				operation: [
+					'getSalesforce',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'ID',
+		name: 'id',
+		type: 'string',
+		default: '',
+		required: true,
 		displayOptions: {
 			show: {
 				resource: [
@@ -886,6 +972,39 @@ export const contactFields: INodeProperties[] = [
 		},
 	},
 	{
+		displayName: 'Filters',
+		name: 'filters',
+		type: 'collection',
+		placeholder: 'Add Field',
+		default: {},
+		displayOptions: {
+			show: {
+				resource: [
+					'contact',
+				],
+				operation: [
+					'lookup',
+				],
+			},
+		},
+		options: [
+			{
+				displayName: 'Account ID',
+				name: 'account_id',
+				type: 'string',
+				default: '',
+				description: 'The mailbox holding the thread, to limit the thread match to it.',
+			},
+			{
+				displayName: 'Thread ID',
+				name: 'thread_id',
+				type: 'string',
+				default: '',
+				description: 'A unibox thread id. Used when the address is not a contact.',
+			},
+		],
+	},
+	{
 		displayName: 'Input Binary Field',
 		name: 'binaryPropertyName',
 		type: 'string',
@@ -953,6 +1072,13 @@ export const contactFields: INodeProperties[] = [
 				default: '',
 			},
 			{
+				displayName: 'All',
+				name: 'all',
+				type: 'boolean',
+				default: false,
+				description: 'All switches the selection from the id list to Filters.',
+			},
+			{
 				displayName: 'Campaign ID',
 				name: 'campaign_id',
 				type: 'string',
@@ -965,6 +1091,20 @@ export const contactFields: INodeProperties[] = [
 				type: 'string',
 				default: '',
 				description: 'Comma-separated list.',
+			},
+			{
+				displayName: 'Exclude',
+				name: 'exclude',
+				type: 'string',
+				default: '',
+				description: 'Exclude drops ids from the resolved set: the rows unticked after a select-all. Ignored unless All is set. Comma-separated list.',
+			},
+			{
+				displayName: 'Filters',
+				name: 'filters',
+				type: 'json',
+				default: '',
+				description: 'Filters is the same search body /contacts/search takes, so the set resolved here is exactly the set the list was showing. Provide as JSON.',
 			},
 			{
 				displayName: 'Idempotency Key',
@@ -1026,24 +1166,6 @@ export const contactFields: INodeProperties[] = [
 		],
 	},
 	{
-		displayName: 'Contact IDs',
-		name: 'contact_ids',
-		type: 'string',
-		default: '',
-		required: true,
-		description: 'Comma-separated list.',
-		displayOptions: {
-			show: {
-				resource: [
-					'contact',
-				],
-				operation: [
-					'researchMany',
-				],
-			},
-		},
-	},
-	{
 		displayName: 'Additional Fields',
 		name: 'additionalFields',
 		type: 'collection',
@@ -1060,6 +1182,13 @@ export const contactFields: INodeProperties[] = [
 			},
 		},
 		options: [
+			{
+				displayName: 'Contact IDs',
+				name: 'contact_ids',
+				type: 'string',
+				default: '',
+				description: 'Comma-separated list.',
+			},
 			{
 				displayName: 'Idempotency Key',
 				name: 'idempotencyKey',
@@ -1266,6 +1395,13 @@ export const contactFields: INodeProperties[] = [
 				description: 'Filter by derived lead status; requires exactly one campaign_id',
 			},
 			{
+				displayName: 'Mail Hosts',
+				name: 'mail_hosts',
+				type: 'string',
+				default: '',
+				description: 'Contacts whose inbox host is any of these; "" matches not detected yet. Comma-separated list.',
+			},
+			{
 				displayName: 'Segment IDs',
 				name: 'segment_ids',
 				type: 'string',
@@ -1278,6 +1414,125 @@ export const contactFields: INodeProperties[] = [
 				type: 'string',
 				default: '',
 				description: 'Filter by verification verdict: valid | risky | invalid | unknown',
+			},
+		],
+	},
+	{
+		displayName: 'ID',
+		name: 'id',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'Contact id.',
+		displayOptions: {
+			show: {
+				resource: [
+					'contact',
+				],
+				operation: [
+					'syncSalesforce',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Additional Fields',
+		name: 'additionalFields',
+		type: 'collection',
+		placeholder: 'Add Field',
+		default: {},
+		displayOptions: {
+			show: {
+				resource: [
+					'contact',
+				],
+				operation: [
+					'syncSalesforce',
+				],
+			},
+		},
+		options: [
+			{
+				displayName: 'Connection ID',
+				name: 'connection_id',
+				type: 'string',
+				default: '',
+			},
+			{
+				displayName: 'Create As',
+				name: 'create_as',
+				type: 'string',
+				default: '',
+				description: 'Record type to create when the contact has no linked record, for example `lead` or `contact`.',
+			},
+			{
+				displayName: 'Idempotency Key',
+				name: 'idempotencyKey',
+				type: 'string',
+				default: '',
+				description: 'Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.',
+			},
+		],
+	},
+	{
+		displayName: 'ID',
+		name: 'id',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'Contact id.',
+		displayOptions: {
+			show: {
+				resource: [
+					'contact',
+				],
+				operation: [
+					'unlinkSalesforce',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Link ID',
+		name: 'linkId',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'Link id.',
+		displayOptions: {
+			show: {
+				resource: [
+					'contact',
+				],
+				operation: [
+					'unlinkSalesforce',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Additional Fields',
+		name: 'additionalFields',
+		type: 'collection',
+		placeholder: 'Add Field',
+		default: {},
+		displayOptions: {
+			show: {
+				resource: [
+					'contact',
+				],
+				operation: [
+					'unlinkSalesforce',
+				],
+			},
+		},
+		options: [
+			{
+				displayName: 'Idempotency Key',
+				name: 'idempotencyKey',
+				type: 'string',
+				default: '',
+				description: 'Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.',
 			},
 		],
 	},
@@ -1348,6 +1603,14 @@ export const contactFields: INodeProperties[] = [
 				type: 'json',
 				default: '',
 				description: 'Replaces the custom-fields map.',
+			},
+			{
+				displayName: 'Email',
+				name: 'email',
+				type: 'string',
+				default: '',
+				description: 'Email replaces the contact\'s address. It is the contact\'s identity, so changing it drops the verification verdict and the delivery evidence that belonged to the old mailbox.',
+				placeholder: 'name@email.com',
 			},
 			{
 				displayName: 'First Name',

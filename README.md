@@ -40,7 +40,7 @@ HTTP plumbing.
 
 It ships two nodes:
 
-- **Warmbly** is an action node covering **305 operations across 36 resources**:
+- **Warmbly** is an action node covering **413 operations across 52 resources**:
   campaigns and sequences, mailboxes and warmup, the unibox, contacts, segments
   and suppressions, hosted forms, CRM, analytics, the deliverability advisor,
   lead sync, meetings, integrations, automations, webhooks, OAuth applications
@@ -91,8 +91,58 @@ In n8n, create a **Warmbly API** credential:
 
 | Field | Description |
 |-------|-------------|
-| **API Key** | Your key, starting with `wmbly_`. Stored encrypted by n8n and sent as a Bearer token. |
-| **Base URL** | `https://api.warmbly.com/v1` for Warmbly Cloud, or your own instance, e.g. `https://api.yourdomain.com/v1`. |
+| **Advisor** | 9 | Apply Finding, Dismiss Finding, Get Many, Get Settings, Get Summary, Refresh, Snooze Finding, Submit Feedback, Undo Finding |
+| **Agent Tool** | 2 | Call, Get Many |
+| **AI Skill** | 4 | Create, Delete, Get Many, Update |
+| **Analytics** | 13 | Compare Campaigns, Get Account, Get Accounts, Get Campaign, Get Campaign Daily Stats, Get Campaign Hourly Stats, Get Dashboard, Get Deliverability, Get Direct Mail, Get Inbox Tagging, Get Usage, Get Warmup, Get Warmup Placement |
+| **API Key** | 12 | Create, Delete Permanently, Get, Get Analytics, Get Logs, Get Many, Get Permissions, Get Usage Analytics, Get Usage Summary, Revoke, Revoke Own Key, Update |
+| **Apollo** | 4 | Get Lists, Get Overview, Preview Import, Replace API Key |
+| **Apollo Enrichment** | 3 | Get, Get Many, Start |
+| **Apollo Import Source** | 5 | Create, Delete, Get Many, Run, Update |
+| **Audit Log** | 1 | Get Many |
+| **Automation** | 8 | Create, Delete, Get, Get Many, Get Runs, Test, Update, Update Layout |
+| **Campaign** | 31 | Create, Delete, Delete Attachment, Duplicate, Estimate, Generate AI Variable, Generate Edit, Generate Writing, Get, Get A/B Analysis, Get Advanced Settings, Get Attachments, Get Forms, Get Logs, Get Many, Get Overview, Get Segments, Get Send Plan, Get Senders, Preview Template, Replace Segments, Replace Senders, Run Preflight, Send Test Email, Start, Stop, Update, Update Advanced Settings, Update Step Layout, Upload Attachment, Verify Tracking Domain |
+| **Campaign A/B Variant** | 4 | Create, Delete, Get Many, Update |
+| **Campaign Folder** | 4 | Create, Delete, Move, Update |
+| **Campaign Lead** | 6 | Get CC, Get Hold, Pause, Resume, Set CC, Suggest CC |
+| **Campaign Step** | 4 | Create, Delete, Get Many, Update |
+| **Clay** | 2 | Get Settings, Update Settings |
+| **Community App** | 2 | Get, Get Many |
+| **Contact** | 26 | Bulk Delete, Bulk Update, Commit Import, Create, Delete, Export, Get, Get Activities, Get Campaigns, Get Custom Fields, Get Deals, Get Emails, Get Research, Get Salesforce Links, Get Segments, Get Timeline, Get Verification, Look Up by Email, Preview Import, Request Verification, Research, Research Many, Search, Sync to Salesforce, Unlink Salesforce, Update |
+| **Contact Category** | 4 | Create, Delete, Move, Update |
+| **Contact Import** | 8 | Analyze, Cancel, Create, Download Failures, Get, Get Many, Save Draft, Start |
+| **Contact Note** | 4 | Create, Delete, Get Many, Update |
+| **CRM** | 14 | Discard Sync Failures, Get Backfill, Get Lists, Get Metadata, Get Owners, Get Settings, Get Sync Health, Import List, Map Owner, Preview List Import, Retry Sync Failures, Start Backfill, Sync Now, Update Settings |
+| **CRM Contact** | 4 | Get, Link, Refresh, Update |
+| **CRM Task** | 9 | Bulk Delete, Bulk Update, Create, Delete, Get, Get Many, Get Summary, Search, Update |
+| **CRM Task Type** | 4 | Create, Delete, Get Many, Update |
+| **Dead Letter** | 2 | Get Many, Replay |
+| **Deal** | 7 | Create, Delete, Get, Get Many, Get Summary, Search, Update |
+| **Deliverability** | 1 | Ingest Event |
+| **Email Image** | 3 | Delete, Get Many, Upload |
+| **Form** | 15 | Create, Delete, Delete Asset, Delete Submission, Get, Get Config, Get Domain, Get Many, Get Prefilled Link, Get Stats, Get Submissions, Set Domain, Update, Upload Asset, Verify Domain |
+| **Inbox Placement** | 4 | Get Coverage, Get Overview, Get Seeds, Set Seed |
+| **Integration** | 18 | Create, Create Event Subscription, Delete, Delete Event Subscription, Get, Get Bookings, Get Catalog, Get Event Subscriptions, Get Field Mappings, Get Many, Get Sync Runs, Get Webhook Secret, Push Contacts, Replace Field Mappings, Rotate Inbound URL, Set Signing Key, Test Connection, Update Config |
+| **Lead Sync Source** | 9 | Create, Delete, Get, Get Google Connection, Get Google Spreadsheet, Get Many, Preview Google Sheet, Sync Now, Update |
+| **Mailbox** | 30 | Bulk Tag, Check Domain Authentication, Delete, Get, Get Allowance, Get Behavior, Get Behavior Plan, Get Certificates, Get Many, Get Send Identity, Get Sync Status, Get Tracking Domain, Get Warmup Ban Status, Hold Sending, Pause Warmup, Refresh Auth Check, Refresh Send Identity, Release Sending, Resume Warmup, Send Email, Start Warmup, Stop Warmup, Submit Warmup Appeal, Update, Update Behavior, Update Direct Tracking, Update Sync, Update Tracking Domain, Verify Address, Verify Tracking Domain |
+| **Mailbox Tag** | 4 | Create, Delete, Move, Update |
+| **Meeting** | 4 | Create, Delete, Get Many, Get Summary |
+| **OAuth Application** | 16 | Create, Delete, Delete Listing, Delete Logo, Get, Get Listing, Get Many, Get Webhook Deliveries, Get Webhook Endpoints, Get Webhook Secret, Rotate Secret, Rotate Webhook Secret, Set Listing, Update, Upload App Logo, Upload Logo |
+| **Outreach Settings** | 2 | Get Settings, Update Settings |
+| **Pipeline** | 8 | Create, Create Stage, Delete, Delete Stage, Get, Get Many, Update, Update Stage |
+| **Placement Batch** | 6 | Cancel, Create, Get, Get Many, Get Senders, Preview |
+| **Placement Monitor** | 3 | Delete, Get, Set |
+| **Placement Test** | 4 | Cancel, Create, Get, Get Many |
+| **Reply Template** | 10 | Analyze, Create, Delete, Duplicate, Get, Get Many, Render, Reorder, Score Content, Update |
+| **Salesforce** | 11 | Get Activity, Get Campaigns, Get List Views, Get Metadata, Get Overview, Get Settings, Get Users, Preview Import, Retry Activity, Sync Now, Update Settings |
+| **Salesforce Import Source** | 5 | Create, Delete, Get Many, Run, Update |
+| **Segment** | 11 | Add to Campaign, Create, Delete, Get, Get Fields, Get Many, Get Overrides, Look Up Members, Preview, Set Members, Update |
+| **Suppression** | 3 | Add, Get Many, Remove |
+| **Team** | 7 | Add Member, Create, Delete, Get, Get Many, Remove Member, Update |
+| **Unibox** | 25 | Approve Agent Draft, Cancel Scheduled Send, Compose, Delete Draft, Discard Agent Draft, Draft Compose, Draft Reply, Get Agent Drafts, Get Compose Candidates, Get Drafts, Get Many, Get Message, Get Overview, Get Scheduled Sends, Get Snoozes, Get Thread, Get Thread Labels, Get Unseen Count, Mark Seen, Move to Folder, Reply, Save Draft, Set Thread Labels, Snooze, Unsnooze |
+| **Warmup Routing Rule** | 4 | Create, Delete, Get Many, Update |
+| **Webhook** | 11 | Create, Delete, Get All Deliveries, Get Deliveries, Get Event Types, Get Many, Get Throttle Drops, Redeliver, Rotate Secret, Update, Verify Endpoint |
+| **Workspace** | 3 | Get Identity, Get Plans, Get Timezones |
 
 The credential's **Test** button calls a lightweight authenticated endpoint, so
 you get a green check the moment the key and base URL are right. Requests are
@@ -129,7 +179,7 @@ calls never reach your logic.
 ## Operations
 
 <details>
-<summary><strong>All 305 operations, by resource</strong></summary>
+<summary><strong>All 413 operations, by resource</strong></summary>
 
 | Resource | # | Operations |
 |----------|---|------------|
