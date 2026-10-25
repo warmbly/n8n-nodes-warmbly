@@ -3,6 +3,53 @@
 All notable changes to `n8n-nodes-warmbly` are documented here. This project
 adheres to [Semantic Versioning](https://semver.org/).
 
+## [0.3.0] - 2026-10-25
+
+Catches the node up with the Warmbly API (server range `b32a2877..ec3e1df78`).
+Operations: 305 → 413 across 52 resources (was 36).
+
+### Breaking
+
+- **Contact → Bulk Delete**: the `Contact IDs` field is replaced by `Contacts`
+  (IDs), plus `All`, `Filters` and `Exclude` to delete every contact matching a
+  search.
+- **Campaign → Create / Get Many**: the `Kind` field is gone; one-time
+  campaigns no longer exist in the API.
+- **Contact → Research Many**: `Contact IDs` moved from the main fields into
+  Additional Fields, since a search selection can be used instead.
+- **Campaign Folder, Mailbox Tag and Contact Category → Create / Move**: `Title`
+  and `Position` are now required and sit at the top of the form instead of in
+  Additional Fields or Update Fields.
+
+### Added
+
+- **108 new operations on 16 new resources**: Campaign Lead (CC, hold, pause,
+  resume), Placement Monitor, Contact Import (create, analyze, start, cancel,
+  failures), CRM (backfill, sync health, lists, owners, settings, metadata),
+  CRM Contact, Email Image, Apollo (overview, lists, key, enrichments, import
+  sources), Salesforce (overview, settings, activity, import sources, users,
+  list views), Clay settings, Community Apps, and Inbox Placement (overview,
+  coverage, seeds, tests, batches).
+- New operations on existing resources: analytics (direct mail, inbox tagging,
+  warmup placement), API key permanent delete, campaign send plan, contact
+  Salesforce links, CRM task bulk update and delete, mailbox certificates,
+  send identity, direct tracking and sync settings, OAuth application listing
+  and logo, integration inbound URL rotation and signing key, reply template
+  analysis, and unibox move to folder.
+- New fields on existing operations, including campaign entry delay and
+  estimate inputs, campaign step content and conditions, contact search by mail
+  host, selections (`All`, `Filters`, `Exclude`) on bulk contact and segment
+  operations, mailbox sending and warmup settings, lead-sync segments, unibox
+  filters, and form triage.
+- Secret fields (API keys, signing keys, auth tokens) are masked in the editor.
+
+### Fixed
+
+- The generator now reads handlers that accept several body shapes, request
+  structs seeded with defaults, and route registrations split over several
+  lines, so Contact → Create / Bulk Delete, Contact → Look Up by Email and
+  Outreach settings keep their fields.
+
 ## [0.2.0] - 2026-09-07
 
 Full coverage of the current Warmbly API, and the node is now generated from
@@ -55,6 +102,7 @@ Warmbly's own source so it stays that way.
   field: the API accepts neither (campaign create takes `steps`; step create
   takes no body at all).
 
+[0.3.0]: https://github.com/warmbly/n8n-nodes-warmbly/releases/tag/v0.3.0
 [0.2.0]: https://github.com/warmbly/n8n-nodes-warmbly/releases/tag/v0.2.0
 
 ## [0.1.0] - 2026-06-15
