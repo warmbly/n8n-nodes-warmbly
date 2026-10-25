@@ -137,6 +137,11 @@ function paramName(param) {
 	return param.name;
 }
 
+/** A string parameter that carries a credential, so the editor masks it. */
+function isSecret(param) {
+	return param.type === 'string' && /(^|_)(api_key|auth_token|signing_key|secret|password)$/.test(param.name);
+}
+
 /** Turn one surface operation into its registry entry. */
 function buildMeta(op, resource, operation) {
 	const meta = { method: op.method, path: op.path, fields: [] };
@@ -173,6 +178,7 @@ function buildMeta(op, resource, operation) {
 			loc: required ? 'top' : collectionFor(resource, operation, param, meta),
 			in: param.in,
 			type: param.type,
+			...(isSecret(param) ? { typeOptions: { password: true } } : {}),
 		});
 	}
 
@@ -304,6 +310,9 @@ function fieldUi(resource, operation, field, param) {
 	if (ui.type === 'string' && /(^|_)e?mail$/.test(field.name)) {
 		ui.placeholder = 'name@email.com';
 	}
+	if (isSecret(param ?? field)) {
+		ui.typeOptions = { password: true };
+	}
 	if (field.name === 'idempotencyKey') {
 		ui.displayName = 'Idempotency Key';
 		ui.description = IDEMPOTENCY_DESCRIPTION;
@@ -313,6 +322,12 @@ function fieldUi(resource, operation, field, param) {
 	}
 	const description = describe(field, param);
 	if (description) ui.description = description;
+	// A `limit` on a list the API does not paginate is still a result cap.
+	if (field.name === 'limit' && ui.type === 'number') {
+		ui.default = 50;
+		ui.description = 'Max number of results to return';
+		ui.typeOptions = { minValue: 1 };
+	}
 	if (param?.enum?.length) {
 		ui.options = param.enum
 			.map((value) => ({ name: titleCase(String(value)), value }))
@@ -406,6 +421,7 @@ function writeRegistry() {
 		"\tin: 'path' | 'query' | 'body' | 'header';",
 		'\ttype: string;',
 		'\tbodyField?: boolean;',
+		'\ttypeOptions?: { password?: boolean };',
 		'}',
 		'',
 		'export interface WarmblyOperationMeta {',

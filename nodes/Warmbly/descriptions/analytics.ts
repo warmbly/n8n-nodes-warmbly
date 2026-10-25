@@ -61,6 +61,18 @@ export const analyticsOperations: INodeProperties[] = [
 				description: 'Get deliverability dashboard',
 			},
 			{
+				name: 'Get Direct Mail',
+				value: 'getDirectMail',
+				action: 'Get direct mail analytics',
+				description: 'Get direct mail analytics',
+			},
+			{
+				name: 'Get Inbox Tagging',
+				value: 'getInboxTagging',
+				action: 'Get the inbox tagging review',
+				description: 'Get the inbox tagging review',
+			},
+			{
 				name: 'Get Usage',
 				value: 'getUsage',
 				action: 'Get usage overview',
@@ -71,6 +83,12 @@ export const analyticsOperations: INodeProperties[] = [
 				value: 'getWarmup',
 				action: 'Get warmup analytics',
 				description: 'Get warmup analytics',
+			},
+			{
+				name: 'Get Warmup Placement',
+				value: 'getWarmupPlacement',
+				action: 'Get warmup placement results',
+				description: 'Get warmup placement results',
 			},
 		],
 		default: 'compareCampaigns',
@@ -151,6 +169,72 @@ export const analyticsFields: INodeProperties[] = [
 		},
 	},
 	{
+		displayName: 'Return All',
+		name: 'returnAll',
+		type: 'boolean',
+		default: false,
+		description: 'Whether to return all results or only up to a given limit',
+		displayOptions: {
+			show: {
+				resource: [
+					'analytics',
+				],
+				operation: [
+					'getAccounts',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Limit',
+		name: 'limit',
+		type: 'number',
+		typeOptions: {
+			minValue: 1,
+		},
+		default: 50,
+		description: 'Max number of results to return',
+		displayOptions: {
+			show: {
+				resource: [
+					'analytics',
+				],
+				operation: [
+					'getAccounts',
+				],
+				returnAll: [
+					false,
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Filters',
+		name: 'filters',
+		type: 'collection',
+		placeholder: 'Add Field',
+		default: {},
+		displayOptions: {
+			show: {
+				resource: [
+					'analytics',
+				],
+				operation: [
+					'getAccounts',
+				],
+			},
+		},
+		options: [
+			{
+				displayName: 'Email IDs',
+				name: 'email_ids',
+				type: 'string',
+				default: '',
+				description: 'Comma-separated mailbox UUIDs to return the status of (up to 200). Use this to ask only for the mailboxes a page shows. A foreign-workspace id matches nothing. Invalid or over-limit returns 400.',
+			},
+		],
+	},
+	{
 		displayName: 'Campaign ID',
 		name: 'id',
 		type: 'string',
@@ -167,6 +251,39 @@ export const analyticsFields: INodeProperties[] = [
 				],
 			},
 		},
+	},
+	{
+		displayName: 'Filters',
+		name: 'filters',
+		type: 'collection',
+		placeholder: 'Add Field',
+		default: {},
+		displayOptions: {
+			show: {
+				resource: [
+					'analytics',
+				],
+				operation: [
+					'getCampaign',
+				],
+			},
+		},
+		options: [
+			{
+				displayName: 'From',
+				name: 'from',
+				type: 'string',
+				default: '',
+				description: 'First day of the period (YYYY-MM-DD, UTC). Requires to; omit both for all time.',
+			},
+			{
+				displayName: 'To',
+				name: 'to',
+				type: 'string',
+				default: '',
+				description: 'Last day of the period (YYYY-MM-DD, UTC), included. Requires from.',
+			},
+		],
 	},
 	{
 		displayName: 'Campaign ID',
@@ -340,6 +457,96 @@ export const analyticsFields: INodeProperties[] = [
 		],
 	},
 	{
+		displayName: 'Filters',
+		name: 'filters',
+		type: 'collection',
+		placeholder: 'Add Field',
+		default: {},
+		displayOptions: {
+			show: {
+				resource: [
+					'analytics',
+				],
+				operation: [
+					'getDirectMail',
+				],
+			},
+		},
+		options: [
+			{
+				displayName: 'Period',
+				name: 'period',
+				type: 'string',
+				default: '',
+			},
+		],
+	},
+	{
+		displayName: 'Return All',
+		name: 'returnAll',
+		type: 'boolean',
+		default: false,
+		description: 'Whether to return all results or only up to a given limit',
+		displayOptions: {
+			show: {
+				resource: [
+					'analytics',
+				],
+				operation: [
+					'getInboxTagging',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Limit',
+		name: 'limit',
+		type: 'number',
+		typeOptions: {
+			minValue: 1,
+		},
+		default: 50,
+		description: 'Max number of results to return',
+		displayOptions: {
+			show: {
+				resource: [
+					'analytics',
+				],
+				operation: [
+					'getInboxTagging',
+				],
+				returnAll: [
+					false,
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Filters',
+		name: 'filters',
+		type: 'collection',
+		placeholder: 'Add Field',
+		default: {},
+		displayOptions: {
+			show: {
+				resource: [
+					'analytics',
+				],
+				operation: [
+					'getInboxTagging',
+				],
+			},
+		},
+		options: [
+			{
+				displayName: 'Needs Review',
+				name: 'needs_review',
+				type: 'string',
+				default: '',
+			},
+		],
+	},
+	{
 		displayName: 'Additional Fields',
 		name: 'additionalFields',
 		type: 'collection',
@@ -439,6 +646,46 @@ export const analyticsFields: INodeProperties[] = [
 				default: '',
 				description: 'Limit to one email account. Invalid UUIDs are ignored.',
 				placeholder: 'name@email.com',
+			},
+		],
+	},
+	{
+		displayName: 'Filters',
+		name: 'filters',
+		type: 'collection',
+		placeholder: 'Add Field',
+		default: {},
+		displayOptions: {
+			show: {
+				resource: [
+					'analytics',
+				],
+				operation: [
+					'getWarmupPlacement',
+				],
+			},
+		},
+		options: [
+			{
+				displayName: 'Email ID',
+				name: 'email_id',
+				type: 'string',
+				default: '',
+				description: 'Limit to one email account in the workspace. Omit for the workspace report.',
+			},
+			{
+				displayName: 'From',
+				name: 'from',
+				type: 'string',
+				default: '',
+				description: 'Range start (YYYY-MM-DD). Defaults to 29 days before to.',
+			},
+			{
+				displayName: 'To',
+				name: 'to',
+				type: 'string',
+				default: '',
+				description: 'Range end (YYYY-MM-DD). Defaults to today (UTC).',
 			},
 		],
 	},

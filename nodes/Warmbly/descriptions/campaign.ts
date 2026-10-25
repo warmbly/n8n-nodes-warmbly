@@ -116,6 +116,12 @@ export const campaignOperations: INodeProperties[] = [
 				description: 'Get campaign segments',
 			},
 			{
+				name: 'Get Send Plan',
+				value: 'getSendPlan',
+				action: 'Get the send plan of a campaign',
+				description: 'Get the send plan of a campaign',
+			},
+			{
 				name: 'Get Senders',
 				value: 'getSenders',
 				action: 'List campaign senders',
@@ -297,6 +303,12 @@ export const campaignFields: INodeProperties[] = [
 				description: 'Legacy daily end (HH:MM).',
 			},
 			{
+				displayName: 'Entry Delay Minutes',
+				name: 'entry_delay_minutes',
+				type: 'number',
+				default: 0,
+			},
+			{
 				displayName: 'ESP Match Mode',
 				name: 'esp_match_mode',
 				type: 'options',
@@ -329,13 +341,6 @@ export const campaignFields: INodeProperties[] = [
 				type: 'string',
 				default: '',
 				description: 'Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.',
-			},
-			{
-				displayName: 'Kind',
-				name: 'kind',
-				type: 'string',
-				default: '',
-				description: 'Kind defaults to "sequence". A "one_time" campaign accepts a single email step here and refuses further ones later.',
 			},
 			{
 				displayName: 'Link Tracking',
@@ -689,6 +694,13 @@ export const campaignFields: INodeProperties[] = [
 		},
 		options: [
 			{
+				displayName: 'Campaign ID',
+				name: 'campaign_id',
+				type: 'string',
+				default: '',
+				description: 'CampaignID projects a saved campaign, filling anything not sent from it.',
+			},
+			{
 				displayName: 'Daily Limit',
 				name: 'daily_limit',
 				type: 'number',
@@ -706,6 +718,12 @@ export const campaignFields: INodeProperties[] = [
 				type: 'string',
 				default: '',
 				description: 'Comma-separated list.',
+			},
+			{
+				displayName: 'End Time',
+				name: 'end_time',
+				type: 'string',
+				default: '',
 			},
 			{
 				displayName: 'Idempotency Key',
@@ -726,6 +744,20 @@ export const campaignFields: INodeProperties[] = [
 				name: 'start_date',
 				type: 'dateTime',
 				default: '',
+			},
+			{
+				displayName: 'Start Time',
+				name: 'start_time',
+				type: 'string',
+				default: '',
+				description: 'StartTime and EndTime are the daily sending window ("HH:MM"); absent means the scheduler\'s default window.',
+			},
+			{
+				displayName: 'Step Waits',
+				name: 'step_waits',
+				type: 'json',
+				default: '',
+				description: 'StepWaits is each follow-up\'s wait_after in days, in order. Empty is a single email. Provide as JSON.',
 			},
 			{
 				displayName: 'Timezone',
@@ -1114,12 +1146,6 @@ export const campaignFields: INodeProperties[] = [
 				description: 'Restrict to a single folder id.',
 			},
 			{
-				displayName: 'Kind',
-				name: 'kind',
-				type: 'string',
-				default: '',
-			},
-			{
 				displayName: 'Q',
 				name: 'q',
 				type: 'string',
@@ -1149,6 +1175,24 @@ export const campaignFields: INodeProperties[] = [
 				],
 				operation: [
 					'getSegments',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'ID',
+		name: 'id',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'The campaign\'s id',
+		displayOptions: {
+			show: {
+				resource: [
+					'campaign',
+				],
+				operation: [
+					'getSendPlan',
 				],
 			},
 		},
@@ -1708,6 +1752,12 @@ export const campaignFields: INodeProperties[] = [
 				name: 'end_time',
 				type: 'string',
 				default: '',
+			},
+			{
+				displayName: 'Entry Delay Minutes',
+				name: 'entry_delay_minutes',
+				type: 'number',
+				default: 0,
 			},
 			{
 				displayName: 'ESP Match Mode',

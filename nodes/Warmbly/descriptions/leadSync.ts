@@ -152,6 +152,13 @@ export const leadSyncFields: INodeProperties[] = [
 				default: '',
 			},
 			{
+				displayName: 'Segment IDs',
+				name: 'segment_ids',
+				type: 'string',
+				default: '',
+				description: 'Comma-separated list.',
+			},
+			{
 				displayName: 'Sheet ID',
 				name: 'sheet_id',
 				type: 'string',
@@ -301,6 +308,12 @@ export const leadSyncFields: INodeProperties[] = [
 			{
 				displayName: 'Campaign ID',
 				name: 'campaign_id',
+				type: 'string',
+				default: '',
+			},
+			{
+				displayName: 'Segment ID',
+				name: 'segment_id',
 				type: 'string',
 				default: '',
 			},
@@ -485,6 +498,13 @@ export const leadSyncFields: INodeProperties[] = [
 				name: 'label',
 				type: 'string',
 				default: '',
+			},
+			{
+				displayName: 'Segment IDs',
+				name: 'segment_ids',
+				type: 'string',
+				default: '',
+				description: 'Comma-separated list.',
 			},
 			{
 				displayName: 'Sheet ID',
