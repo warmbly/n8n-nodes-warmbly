@@ -5216,6 +5216,24 @@
 			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
 			"displayName": "Idempotency Key",
 			"type": "string"
+		},
+		"clay.updateSettings.updateFields.auth_token": {
+			"displayName": "Auth Token",
+			"type": "string",
+			"default": "",
+			"typeOptions": {
+				"password": true
+			},
+			"description": "Omission or null leaves the token unchanged. An empty string clears it."
+		},
+		"apollo.getEnrichments.filters.limit": {
+			"displayName": "Limit",
+			"type": "number",
+			"default": 50,
+			"typeOptions": {
+				"minValue": 1
+			},
+			"description": "Max number of results to return"
 		}
 	},
 	"operations": {
@@ -5302,6 +5320,16 @@
 			"description": "Get deliverability dashboard",
 			"name": "Get Deliverability"
 		},
+		"analytics.getDirectMail": {
+			"action": "Get direct mail analytics",
+			"description": "Get direct mail analytics",
+			"name": "Get Direct Mail"
+		},
+		"analytics.getInboxTagging": {
+			"action": "Get the inbox tagging review",
+			"description": "Get the inbox tagging review",
+			"name": "Get Inbox Tagging"
+		},
 		"analytics.getUsage": {
 			"action": "Get usage overview",
 			"description": "Get usage overview",
@@ -5312,10 +5340,20 @@
 			"description": "Get warmup analytics",
 			"name": "Get Warmup"
 		},
+		"analytics.getWarmupPlacement": {
+			"action": "Get warmup inbox placement analytics",
+			"description": "Get warmup inbox placement analytics",
+			"name": "Get Warmup Placement"
+		},
 		"apiKey.create": {
 			"action": "Create an API key",
 			"description": "Create an API key",
 			"name": "Create"
+		},
+		"apiKey.deletePermanently": {
+			"action": "Permanently delete an API key",
+			"description": "Permanently delete an API key",
+			"name": "Delete Permanently"
 		},
 		"apiKey.get": {
 			"action": "Get an API key",
@@ -5366,6 +5404,66 @@
 			"action": "Update an API key",
 			"description": "Update an API key",
 			"name": "Update"
+		},
+		"apollo.createImportSource": {
+			"action": "Create a Apollo import source",
+			"description": "Create a Apollo import source",
+			"name": "Create Import Source"
+		},
+		"apollo.deleteImportSource": {
+			"action": "Delete a Apollo import source",
+			"description": "Delete a Apollo import source",
+			"name": "Delete Import Source"
+		},
+		"apollo.getEnrichment": {
+			"action": "Get a Apollo enrichment",
+			"description": "Get a Apollo enrichment",
+			"name": "Get Enrichment"
+		},
+		"apollo.getEnrichments": {
+			"action": "Get many Apollo enrichments",
+			"description": "Get many Apollo enrichments",
+			"name": "Get Enrichments"
+		},
+		"apollo.getImportSources": {
+			"action": "Get many Apollo import sources",
+			"description": "Get many Apollo import sources",
+			"name": "Get Import Sources"
+		},
+		"apollo.getLists": {
+			"action": "Get many Apollo lists",
+			"description": "Get many Apollo lists",
+			"name": "Get Lists"
+		},
+		"apollo.getOverview": {
+			"action": "Get the Apollo overview",
+			"description": "Get the Apollo overview",
+			"name": "Get Overview"
+		},
+		"apollo.previewImport": {
+			"action": "Preview a Apollo import",
+			"description": "Preview a Apollo import",
+			"name": "Preview Import"
+		},
+		"apollo.replaceKey": {
+			"action": "Replace the Apollo API key",
+			"description": "Replace the Apollo API key",
+			"name": "Replace Key"
+		},
+		"apollo.runImportSource": {
+			"action": "Run a Apollo import source",
+			"description": "Run a Apollo import source",
+			"name": "Run Import Source"
+		},
+		"apollo.startEnrichment": {
+			"action": "Start a Apollo enrichment",
+			"description": "Start a Apollo enrichment",
+			"name": "Start Enrichment"
+		},
+		"apollo.updateImportSource": {
+			"action": "Update a Apollo import source",
+			"description": "Update a Apollo import source",
+			"name": "Update Import Source"
 		},
 		"auditLog.getAll": {
 			"action": "Get many audit logs",
@@ -5427,6 +5525,11 @@
 			"description": "Delete an attachment",
 			"name": "Delete Attachment"
 		},
+		"campaign.deletePlacementMonitor": {
+			"action": "Delete the placement monitor of a campaign",
+			"description": "Delete the placement monitor of a campaign",
+			"name": "Delete Placement Monitor"
+		},
 		"campaign.duplicate": {
 			"action": "Duplicate a campaign",
 			"description": "Duplicate a campaign",
@@ -5480,6 +5583,16 @@
 			"description": "Get the forms feeding a campaign",
 			"name": "Get Forms"
 		},
+		"campaign.getLeadCc": {
+			"action": "Get the CC recipients of a campaign lead",
+			"description": "Get the CC recipients of a campaign lead",
+			"name": "Get Lead CC"
+		},
+		"campaign.getLeadHold": {
+			"action": "Get the hold status of a campaign lead",
+			"description": "Get the hold status of a campaign lead",
+			"name": "Get Lead Hold"
+		},
 		"campaign.getLogs": {
 			"action": "Get campaign logs",
 			"description": "Get campaign logs",
@@ -5490,15 +5603,30 @@
 			"description": "Get the campaigns overview",
 			"name": "Get Overview"
 		},
+		"campaign.getPlacementMonitor": {
+			"action": "Get the placement monitor of a campaign",
+			"description": "Get the placement monitor of a campaign",
+			"name": "Get Placement Monitor"
+		},
 		"campaign.getSegments": {
 			"action": "Get campaign segments",
 			"description": "Get campaign segments",
 			"name": "Get Segments"
 		},
+		"campaign.getSendPlan": {
+			"action": "Get the send plan of a campaign",
+			"description": "Get the send plan of a campaign",
+			"name": "Get Send Plan"
+		},
 		"campaign.getSenders": {
 			"action": "List campaign senders",
 			"description": "List campaign senders",
 			"name": "Get Senders"
+		},
+		"campaign.pauseLead": {
+			"action": "Pause a lead in a campaign",
+			"description": "Pause a lead in a campaign",
+			"name": "Pause Lead"
 		},
 		"campaign.preflight": {
 			"action": "Run preflight",
@@ -5518,10 +5646,25 @@
 			"action": "Replace senders",
 			"name": "Replace Senders"
 		},
+		"campaign.resumeLead": {
+			"action": "Resume a lead in a campaign",
+			"description": "Resume a lead in a campaign",
+			"name": "Resume Lead"
+		},
 		"campaign.sendTestEmail": {
 			"action": "Send a test email",
 			"description": "Send a test email",
 			"name": "Send Test Email"
+		},
+		"campaign.setLeadCc": {
+			"action": "Set the CC recipients of a campaign lead",
+			"description": "Set the CC recipients of a campaign lead",
+			"name": "Set Lead CC"
+		},
+		"campaign.setPlacementMonitor": {
+			"action": "Set the placement monitor of a campaign",
+			"description": "Set the placement monitor of a campaign",
+			"name": "Set Placement Monitor"
 		},
 		"campaign.start": {
 			"action": "Start a campaign",
@@ -5532,6 +5675,11 @@
 			"action": "Stop a campaign",
 			"description": "Stop a campaign",
 			"name": "Stop"
+		},
+		"campaign.suggestLeadCc": {
+			"action": "Suggest CC recipients for a campaign lead",
+			"description": "Suggest CC recipients for a campaign lead",
+			"name": "Suggest Lead CC"
 		},
 		"campaign.update": {
 			"action": "Update a campaign",
@@ -5597,6 +5745,26 @@
 			"description": "Update an A/B variant",
 			"name": "Update"
 		},
+		"clay.getSettings": {
+			"action": "Get the Clay settings",
+			"description": "Get the Clay settings",
+			"name": "Get Settings"
+		},
+		"clay.updateSettings": {
+			"action": "Update the Clay settings",
+			"description": "Update the Clay settings",
+			"name": "Update Settings"
+		},
+		"communityApp.get": {
+			"action": "Get a community app",
+			"description": "Get a community app",
+			"name": "Get"
+		},
+		"communityApp.getAll": {
+			"action": "Get many community apps",
+			"description": "Get many community apps",
+			"name": "Get Many"
+		},
 		"contact.bulkDelete": {
 			"action": "Bulk delete contacts",
 			"bodyField": "contact_ids",
@@ -5659,6 +5827,11 @@
 			"description": "Get contact research",
 			"name": "Get Research"
 		},
+		"contact.getSalesforce": {
+			"action": "Get the Salesforce link of a contact",
+			"description": "Get the Salesforce link of a contact",
+			"name": "Get Salesforce Link"
+		},
 		"contact.getSegments": {
 			"action": "Get the segments a contact is in",
 			"description": "Get the segments a contact is in",
@@ -5709,6 +5882,16 @@
 			"description": "Search contacts",
 			"name": "Search"
 		},
+		"contact.syncSalesforce": {
+			"action": "Sync a contact with Salesforce",
+			"description": "Sync a contact with Salesforce",
+			"name": "Sync With Salesforce"
+		},
+		"contact.unlinkSalesforce": {
+			"action": "Unlink a contact from Salesforce",
+			"description": "Unlink a contact from Salesforce",
+			"name": "Unlink Salesforce"
+		},
 		"contact.update": {
 			"action": "Update a contact",
 			"description": "Update a contact",
@@ -5718,6 +5901,46 @@
 			"action": "Move a contact category",
 			"description": "Move a contact category",
 			"name": "Move"
+		},
+		"contactImport.analyze": {
+			"action": "Analyze a contact import",
+			"description": "Analyze a contact import",
+			"name": "Analyze"
+		},
+		"contactImport.cancel": {
+			"action": "Cancel a contact import",
+			"description": "Cancel a contact import",
+			"name": "Cancel"
+		},
+		"contactImport.create": {
+			"action": "Create a contact import",
+			"description": "Create a contact import",
+			"name": "Create"
+		},
+		"contactImport.get": {
+			"action": "Get a contact import",
+			"description": "Get a contact import",
+			"name": "Get"
+		},
+		"contactImport.getAll": {
+			"action": "Get many contact imports",
+			"description": "Get many contact imports",
+			"name": "Get Many"
+		},
+		"contactImport.getFailures": {
+			"action": "Download the failed rows of a contact import",
+			"description": "Download the failed rows of a contact import",
+			"name": "Get Failures"
+		},
+		"contactImport.start": {
+			"action": "Start a contact import",
+			"description": "Start a contact import",
+			"name": "Start"
+		},
+		"contactImport.update": {
+			"action": "Update a contact import draft",
+			"description": "Update a contact import draft",
+			"name": "Update"
 		},
 		"contactNote.create": {
 			"action": "Create a contact note",
@@ -5738,6 +5961,106 @@
 			"action": "Update a contact note",
 			"description": "Update a contact note",
 			"name": "Update"
+		},
+		"crm.discardSyncFailures": {
+			"action": "Discard failed CRM syncs",
+			"description": "Discard failed CRM syncs",
+			"name": "Discard Sync Failures"
+		},
+		"crm.getBackfill": {
+			"action": "Get the CRM backfill status",
+			"description": "Get the CRM backfill status",
+			"name": "Get Backfill"
+		},
+		"crm.getContact": {
+			"action": "Get the CRM record of a contact",
+			"description": "Get the CRM record of a contact",
+			"name": "Get Contact"
+		},
+		"crm.getLists": {
+			"action": "Get many CRM lists",
+			"description": "Get many CRM lists",
+			"name": "Get Lists"
+		},
+		"crm.getMetadata": {
+			"action": "Get CRM metadata",
+			"description": "Get CRM metadata",
+			"name": "Get Metadata"
+		},
+		"crm.getOwners": {
+			"action": "Get many CRM owners",
+			"description": "Get many CRM owners",
+			"name": "Get Owners"
+		},
+		"crm.getSettings": {
+			"action": "Get the CRM settings",
+			"description": "Get the CRM settings",
+			"name": "Get Settings"
+		},
+		"crm.getSyncHealth": {
+			"action": "Get the CRM sync health",
+			"description": "Get the CRM sync health",
+			"name": "Get Sync Health"
+		},
+		"crm.importList": {
+			"action": "Import a CRM list",
+			"description": "Import a CRM list",
+			"name": "Import List"
+		},
+		"crm.linkContact": {
+			"action": "Link a contact to a CRM record",
+			"description": "Link a contact to a CRM record",
+			"name": "Link Contact"
+		},
+		"crm.mapOwner": {
+			"action": "Map a CRM owner to a team member",
+			"description": "Map a CRM owner to a team member",
+			"name": "Map Owner"
+		},
+		"crm.previewImport": {
+			"action": "Preview a CRM list import",
+			"description": "Preview a CRM list import",
+			"name": "Preview Import"
+		},
+		"crm.refreshContact": {
+			"action": "Refresh a contact from the CRM",
+			"description": "Refresh a contact from the CRM",
+			"name": "Refresh Contact"
+		},
+		"crm.retrySyncFailures": {
+			"action": "Retry failed CRM syncs",
+			"description": "Retry failed CRM syncs",
+			"name": "Retry Sync Failures"
+		},
+		"crm.startBackfill": {
+			"action": "Start a CRM backfill",
+			"description": "Start a CRM backfill",
+			"name": "Start Backfill"
+		},
+		"crm.syncNow": {
+			"action": "Run a CRM sync now",
+			"description": "Run a CRM sync now",
+			"name": "Sync Now"
+		},
+		"crm.updateContact": {
+			"action": "Update the CRM record of a contact",
+			"description": "Update the CRM record of a contact",
+			"name": "Update Contact"
+		},
+		"crm.updateSettings": {
+			"action": "Update the CRM settings",
+			"description": "Update the CRM settings",
+			"name": "Update Settings"
+		},
+		"crmTask.bulkDelete": {
+			"action": "Delete many CRM tasks",
+			"description": "Delete many CRM tasks",
+			"name": "Bulk Delete"
+		},
+		"crmTask.bulkUpdate": {
+			"action": "Update many CRM tasks",
+			"description": "Update many CRM tasks",
+			"name": "Bulk Update"
 		},
 		"crmTask.create": {
 			"action": "Create task",
@@ -5843,6 +6166,21 @@
 			"action": "Ingest a deliverability event",
 			"description": "Ingest a deliverability event",
 			"name": "Ingest Event"
+		},
+		"emailImage.delete": {
+			"action": "Delete an email image",
+			"description": "Delete an email image",
+			"name": "Delete"
+		},
+		"emailImage.getAll": {
+			"action": "Get many email images",
+			"description": "Get many email images",
+			"name": "Get Many"
+		},
+		"emailImage.upload": {
+			"action": "Upload an email image",
+			"description": "Upload an email image",
+			"name": "Upload"
 		},
 		"folder.move": {
 			"action": "Move a campaign folder",
@@ -5968,6 +6306,16 @@
 			"action": "Replace field mappings",
 			"name": "Replace Field Mappings"
 		},
+		"integration.rotateInboundUrl": {
+			"action": "Rotate the inbound URL of an integration",
+			"description": "Rotate the inbound URL of an integration",
+			"name": "Rotate Inbound URL"
+		},
+		"integration.setSigningKey": {
+			"action": "Set the signing key of an integration",
+			"description": "Set the signing key of an integration",
+			"name": "Set Signing Key"
+		},
 		"integration.test": {
 			"action": "Test a connection",
 			"description": "Test a connection",
@@ -6037,6 +6385,16 @@
 			"description": "Get the sending behavior plan",
 			"name": "Get Behavior Plan"
 		},
+		"mailbox.getCertificates": {
+			"action": "Get the certificates of a mailbox",
+			"description": "Get the certificates of a mailbox",
+			"name": "Get Certificates"
+		},
+		"mailbox.getIdentity": {
+			"action": "Get the send identity of a mailbox",
+			"description": "Get the send identity of a mailbox",
+			"name": "Get Identity"
+		},
 		"mailbox.getSyncStatus": {
 			"action": "Get mailbox sync status",
 			"description": "Get mailbox sync status",
@@ -6057,6 +6415,11 @@
 			"description": "Refresh the domain auth check",
 			"name": "Refresh Auth Check"
 		},
+		"mailbox.refreshIdentity": {
+			"action": "Refresh the send identity of a mailbox",
+			"description": "Refresh the send identity of a mailbox",
+			"name": "Refresh Identity"
+		},
 		"mailbox.release": {
 			"action": "Release a held mailbox",
 			"description": "Release a held mailbox",
@@ -6076,6 +6439,16 @@
 			"action": "Update sending behavior",
 			"description": "Update sending behavior",
 			"name": "Update Behavior"
+		},
+		"mailbox.updateDirectTracking": {
+			"action": "Update direct tracking for a mailbox",
+			"description": "Update direct tracking for a mailbox",
+			"name": "Update Direct Tracking"
+		},
+		"mailbox.updateSync": {
+			"action": "Update the sync settings of a mailbox",
+			"description": "Update the sync settings of a mailbox",
+			"name": "Update Sync"
 		},
 		"mailbox.updateTrackingDomain": {
 			"action": "Update the tracking domain",
@@ -6127,6 +6500,21 @@
 			"description": "Get the meetings summary",
 			"name": "Get Summary"
 		},
+		"oauthApp.deleteListing": {
+			"action": "Delete the listing of an OAuth application",
+			"description": "Delete the listing of an OAuth application",
+			"name": "Delete Listing"
+		},
+		"oauthApp.deleteLogo": {
+			"action": "Delete the logo of an OAuth application",
+			"description": "Delete the logo of an OAuth application",
+			"name": "Delete Logo"
+		},
+		"oauthApp.getListing": {
+			"action": "Get the listing of an OAuth application",
+			"description": "Get the listing of an OAuth application",
+			"name": "Get Listing"
+		},
 		"oauthApp.getWebhookDeliveries": {
 			"action": "Get many webhook deliveries",
 			"description": "Get many webhook deliveries",
@@ -6151,6 +6539,11 @@
 			"action": "Rotate the webhook signing secret",
 			"description": "Rotate the webhook signing secret",
 			"name": "Rotate Webhook Secret"
+		},
+		"oauthApp.setListing": {
+			"action": "Set the listing of an OAuth application",
+			"description": "Set the listing of an OAuth application",
+			"name": "Set Listing"
 		},
 		"oauthApp.uploadLogo": {
 			"action": "Upload an application logo",
@@ -6203,6 +6596,156 @@
 		"pipeline.updateStage": {
 			"action": "Update stage",
 			"name": "Update Stage"
+		},
+		"placement.cancelBatch": {
+			"action": "Cancel a placement batch",
+			"description": "Cancel a placement batch",
+			"name": "Cancel Batch"
+		},
+		"placement.cancelTest": {
+			"action": "Cancel a placement test",
+			"description": "Cancel a placement test",
+			"name": "Cancel Test"
+		},
+		"placement.createBatch": {
+			"action": "Create a placement batch",
+			"description": "Create a placement batch",
+			"name": "Create Batch"
+		},
+		"placement.createTest": {
+			"action": "Create a placement test",
+			"description": "Create a placement test",
+			"name": "Create Test"
+		},
+		"placement.getBatch": {
+			"action": "Get a placement batch",
+			"description": "Get a placement batch",
+			"name": "Get Batch"
+		},
+		"placement.getBatchSenders": {
+			"action": "Get the senders of a placement batch",
+			"description": "Get the senders of a placement batch",
+			"name": "Get Batch Senders"
+		},
+		"placement.getBatches": {
+			"action": "Get many placement batches",
+			"description": "Get many placement batches",
+			"name": "Get Batches"
+		},
+		"placement.getCoverage": {
+			"action": "Get inbox placement coverage",
+			"description": "Get inbox placement coverage",
+			"name": "Get Coverage"
+		},
+		"placement.getOverview": {
+			"action": "Get the inbox placement overview",
+			"description": "Get the inbox placement overview",
+			"name": "Get Overview"
+		},
+		"placement.getSeeds": {
+			"action": "Get many placement seeds",
+			"description": "Get many placement seeds",
+			"name": "Get Seeds"
+		},
+		"placement.getTest": {
+			"action": "Get a placement test",
+			"description": "Get a placement test",
+			"name": "Get Test"
+		},
+		"placement.getTests": {
+			"action": "Get many placement tests",
+			"description": "Get many placement tests",
+			"name": "Get Tests"
+		},
+		"placement.previewBatch": {
+			"action": "Preview a placement batch",
+			"description": "Preview a placement batch",
+			"name": "Preview Batch"
+		},
+		"placement.setSeed": {
+			"action": "Set a placement seed",
+			"description": "Set a placement seed",
+			"name": "Set Seed"
+		},
+		"salesforce.createImportSource": {
+			"action": "Create a Salesforce import source",
+			"description": "Create a Salesforce import source",
+			"name": "Create Import Source"
+		},
+		"salesforce.deleteImportSource": {
+			"action": "Delete a Salesforce import source",
+			"description": "Delete a Salesforce import source",
+			"name": "Delete Import Source"
+		},
+		"salesforce.getActivity": {
+			"action": "Get Salesforce activity",
+			"description": "Get Salesforce activity",
+			"name": "Get Activity"
+		},
+		"salesforce.getCampaigns": {
+			"action": "Get many Salesforce campaigns",
+			"description": "Get many Salesforce campaigns",
+			"name": "Get Campaigns"
+		},
+		"salesforce.getImportSources": {
+			"action": "Get many Salesforce import sources",
+			"description": "Get many Salesforce import sources",
+			"name": "Get Import Sources"
+		},
+		"salesforce.getListViews": {
+			"action": "Get many Salesforce list views",
+			"description": "Get many Salesforce list views",
+			"name": "Get List Views"
+		},
+		"salesforce.getMetadata": {
+			"action": "Get Salesforce metadata",
+			"description": "Get Salesforce metadata",
+			"name": "Get Metadata"
+		},
+		"salesforce.getOverview": {
+			"action": "Get the Salesforce overview",
+			"description": "Get the Salesforce overview",
+			"name": "Get Overview"
+		},
+		"salesforce.getSettings": {
+			"action": "Get the Salesforce settings",
+			"description": "Get the Salesforce settings",
+			"name": "Get Settings"
+		},
+		"salesforce.getUsers": {
+			"action": "Get many Salesforce users",
+			"description": "Get many Salesforce users",
+			"name": "Get Users"
+		},
+		"salesforce.previewImport": {
+			"action": "Preview a Salesforce import",
+			"description": "Preview a Salesforce import",
+			"name": "Preview Import"
+		},
+		"salesforce.retryActivity": {
+			"action": "Retry failed Salesforce activity",
+			"description": "Retry failed Salesforce activity",
+			"name": "Retry Activity"
+		},
+		"salesforce.runImportSource": {
+			"action": "Run a Salesforce import source",
+			"description": "Run a Salesforce import source",
+			"name": "Run Import Source"
+		},
+		"salesforce.syncNow": {
+			"action": "Run a Salesforce sync now",
+			"description": "Run a Salesforce sync now",
+			"name": "Sync Now"
+		},
+		"salesforce.updateImportSource": {
+			"action": "Update a Salesforce import source",
+			"description": "Update a Salesforce import source",
+			"name": "Update Import Source"
+		},
+		"salesforce.updateSettings": {
+			"action": "Update the Salesforce settings",
+			"description": "Update the Salesforce settings",
+			"name": "Update Settings"
 		},
 		"segment.addToCampaign": {
 			"action": "Add a segment to a campaign",
@@ -6278,6 +6821,11 @@
 			"action": "Update a team",
 			"description": "Update a team",
 			"name": "Update"
+		},
+		"template.analyze": {
+			"action": "Analyze template content",
+			"description": "Analyze template content",
+			"name": "Analyze Content"
 		},
 		"template.create": {
 			"action": "Create a reply template",
@@ -6418,6 +6966,11 @@
 			"description": "Mark messages seen",
 			"name": "Mark Seen"
 		},
+		"unibox.moveFolder": {
+			"action": "Move a thread to a folder",
+			"description": "Move a thread to a folder",
+			"name": "Move to Folder"
+		},
 		"unibox.reply": {
 			"action": "Reply from the inbox",
 			"description": "Reply from the inbox",
@@ -6531,6 +7084,11 @@
 			"action": "List timezones",
 			"description": "List timezones",
 			"name": "Get Timezones"
+		},
+		"oauthApp.uploadApplicationLogo": {
+			"action": "Upload the logo of an OAuth application",
+			"description": "Upload the logo of an OAuth application",
+			"name": "Upload Application Logo"
 		}
 	},
 	"resources": {
@@ -6713,6 +7271,46 @@
 			"defaultOperation": "getPlans",
 			"displayName": "Workspace",
 			"noun": "workspace"
+		},
+		"contactImport": {
+			"defaultOperation": "getAll",
+			"displayName": "Contact Import",
+			"noun": "contact import"
+		},
+		"crm": {
+			"defaultOperation": "getSyncHealth",
+			"displayName": "CRM",
+			"noun": "CRM"
+		},
+		"emailImage": {
+			"defaultOperation": "getAll",
+			"displayName": "Email Image",
+			"noun": "email image"
+		},
+		"apollo": {
+			"defaultOperation": "getOverview",
+			"displayName": "Apollo",
+			"noun": "Apollo integration"
+		},
+		"clay": {
+			"defaultOperation": "getSettings",
+			"displayName": "Clay",
+			"noun": "Clay integration"
+		},
+		"communityApp": {
+			"defaultOperation": "getAll",
+			"displayName": "Community App",
+			"noun": "community app"
+		},
+		"salesforce": {
+			"defaultOperation": "getOverview",
+			"displayName": "Salesforce",
+			"noun": "Salesforce integration"
+		},
+		"placement": {
+			"defaultOperation": "getOverview",
+			"displayName": "Inbox Placement",
+			"noun": "inbox placement"
 		}
 	}
 }
