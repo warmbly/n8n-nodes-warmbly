@@ -116,10 +116,22 @@ export const campaignOperations: INodeProperties[] = [
 				description: 'Get campaign segments',
 			},
 			{
+				name: 'Get Send Plan',
+				value: 'getSendPlan',
+				action: 'Get Send Plan campaign',
+				description: 'Get Send Plan campaign',
+			},
+			{
 				name: 'Get Senders',
 				value: 'getSenders',
 				action: 'List campaign senders',
 				description: 'List campaign senders',
+			},
+			{
+				name: 'Get Warmup Placement',
+				value: 'getWarmupPlacement',
+				action: 'Get Warmup Placement campaign',
+				description: 'Get Warmup Placement campaign',
 			},
 			{
 				name: 'Preview Template',
@@ -297,6 +309,12 @@ export const campaignFields: INodeProperties[] = [
 				description: 'Legacy daily end (HH:MM).',
 			},
 			{
+				displayName: 'Entry Delay Minutes',
+				name: 'entry_delay_minutes',
+				type: 'number',
+				default: 0,
+			},
+			{
 				displayName: 'ESP Match Mode',
 				name: 'esp_match_mode',
 				type: 'options',
@@ -324,18 +342,32 @@ export const campaignFields: INodeProperties[] = [
 				description: 'Comma-separated list.',
 			},
 			{
+				displayName: 'Follow Up Sender',
+				name: 'follow_up_sender',
+				type: 'options',
+				options: [
+					{
+						name: 'Rotate',
+						value: 'rotate',
+					},
+					{
+						name: 'Same',
+						value: 'same',
+					},
+					{
+						name: 'Same Domain',
+						value: 'same_domain',
+					},
+				],
+				default: 'same',
+				description: 'Which mailbox sends a lead\'s follow-ups: same (default, the mailbox that sent the first email), same_domain (rotate among mailboxes on that domain) or rotate (rotate across the pool).',
+			},
+			{
 				displayName: 'Idempotency Key',
 				name: 'idempotencyKey',
 				type: 'string',
 				default: '',
 				description: 'Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.',
-			},
-			{
-				displayName: 'Kind',
-				name: 'kind',
-				type: 'string',
-				default: '',
-				description: 'Kind defaults to "sequence". A "one_time" campaign accepts a single email step here and refuses further ones later.',
 			},
 			{
 				displayName: 'Link Tracking',
@@ -447,6 +479,12 @@ export const campaignFields: INodeProperties[] = [
 				type: 'json',
 				default: '',
 				description: 'Initial sequences (in order) — caller can also create them after. Provide as JSON.',
+			},
+			{
+				displayName: 'Stop On Meeting',
+				name: 'stop_on_meeting',
+				type: 'boolean',
+				default: false,
 			},
 			{
 				displayName: 'Stop On Reply',
@@ -689,6 +727,13 @@ export const campaignFields: INodeProperties[] = [
 		},
 		options: [
 			{
+				displayName: 'Campaign ID',
+				name: 'campaign_id',
+				type: 'string',
+				default: '',
+				description: 'CampaignID projects a saved campaign, filling anything not sent from it.',
+			},
+			{
 				displayName: 'Daily Limit',
 				name: 'daily_limit',
 				type: 'number',
@@ -706,6 +751,12 @@ export const campaignFields: INodeProperties[] = [
 				type: 'string',
 				default: '',
 				description: 'Comma-separated list.',
+			},
+			{
+				displayName: 'End Time',
+				name: 'end_time',
+				type: 'string',
+				default: '',
 			},
 			{
 				displayName: 'Idempotency Key',
@@ -726,6 +777,20 @@ export const campaignFields: INodeProperties[] = [
 				name: 'start_date',
 				type: 'dateTime',
 				default: '',
+			},
+			{
+				displayName: 'Start Time',
+				name: 'start_time',
+				type: 'string',
+				default: '',
+				description: 'StartTime and EndTime are the daily sending window ("HH:MM"); absent means the scheduler\'s default window.',
+			},
+			{
+				displayName: 'Step Waits',
+				name: 'step_waits',
+				type: 'json',
+				default: '',
+				description: 'StepWaits is each follow-up\'s wait_after in days, in order. Empty is a single email. Provide as JSON.',
 			},
 			{
 				displayName: 'Timezone',
@@ -1114,12 +1179,6 @@ export const campaignFields: INodeProperties[] = [
 				description: 'Restrict to a single folder id.',
 			},
 			{
-				displayName: 'Kind',
-				name: 'kind',
-				type: 'string',
-				default: '',
-			},
-			{
 				displayName: 'Q',
 				name: 'q',
 				type: 'string',
@@ -1154,6 +1213,24 @@ export const campaignFields: INodeProperties[] = [
 		},
 	},
 	{
+		displayName: 'ID',
+		name: 'id',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'The campaign\'s id',
+		displayOptions: {
+			show: {
+				resource: [
+					'campaign',
+				],
+				operation: [
+					'getSendPlan',
+				],
+			},
+		},
+	},
+	{
 		displayName: 'Campaign ID',
 		name: 'id',
 		type: 'string',
@@ -1166,6 +1243,23 @@ export const campaignFields: INodeProperties[] = [
 				],
 				operation: [
 					'getSenders',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'ID',
+		name: 'id',
+		type: 'string',
+		default: '',
+		required: true,
+		displayOptions: {
+			show: {
+				resource: [
+					'campaign',
+				],
+				operation: [
+					'getWarmupPlacement',
 				],
 			},
 		},
@@ -1710,6 +1804,12 @@ export const campaignFields: INodeProperties[] = [
 				default: '',
 			},
 			{
+				displayName: 'Entry Delay Minutes',
+				name: 'entry_delay_minutes',
+				type: 'number',
+				default: 0,
+			},
+			{
 				displayName: 'ESP Match Mode',
 				name: 'esp_match_mode',
 				type: 'options',
@@ -1735,6 +1835,27 @@ export const campaignFields: INodeProperties[] = [
 				type: 'string',
 				default: '',
 				description: 'Comma-separated list.',
+			},
+			{
+				displayName: 'Follow Up Sender',
+				name: 'follow_up_sender',
+				type: 'options',
+				options: [
+					{
+						name: 'Rotate',
+						value: 'rotate',
+					},
+					{
+						name: 'Same',
+						value: 'same',
+					},
+					{
+						name: 'Same Domain',
+						value: 'same_domain',
+					},
+				],
+				default: 'same',
+				description: 'Which mailbox sends a lead\'s follow-ups: same (default, the mailbox that sent the first email), same_domain (rotate among mailboxes on that domain) or rotate (rotate across the pool).',
 			},
 			{
 				displayName: 'Guardrail Bounce Rate Max',
@@ -1917,6 +2038,12 @@ export const campaignFields: INodeProperties[] = [
 				],
 				default: 'draft',
 				description: 'Campaign lifecycle status.',
+			},
+			{
+				displayName: 'Stop On Meeting',
+				name: 'stop_on_meeting',
+				type: 'boolean',
+				default: false,
 			},
 			{
 				displayName: 'Stop On Reply',

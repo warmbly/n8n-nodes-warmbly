@@ -46,6 +46,24 @@ export const contactCategoryOperations: INodeProperties[] = [
 
 export const contactCategoryFields: INodeProperties[] = [
 	{
+		displayName: 'Title',
+		name: 'title',
+		type: 'string',
+		default: '',
+		required: true,
+		description: '1 to 50 characters.',
+		displayOptions: {
+			show: {
+				resource: [
+					'contactCategory',
+				],
+				operation: [
+					'create',
+				],
+			},
+		},
+	},
+	{
 		displayName: 'Additional Fields',
 		name: 'additionalFields',
 		type: 'collection',
@@ -67,6 +85,7 @@ export const contactCategoryFields: INodeProperties[] = [
 				name: 'color',
 				type: 'color',
 				default: '',
+				description: 'Hex colour, `#rrggbb`. Omit to let the server pick from its palette.',
 			},
 			{
 				displayName: 'Idempotency Key',
@@ -74,12 +93,6 @@ export const contactCategoryFields: INodeProperties[] = [
 				type: 'string',
 				default: '',
 				description: 'Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.',
-			},
-			{
-				displayName: 'Title',
-				name: 'title',
-				type: 'string',
-				default: '',
 			},
 		],
 	},
@@ -144,6 +157,24 @@ export const contactCategoryFields: INodeProperties[] = [
 		},
 	},
 	{
+		displayName: 'Position',
+		name: 'position',
+		type: 'number',
+		default: 0,
+		required: true,
+		description: 'New 0-based position within the registry.',
+		displayOptions: {
+			show: {
+				resource: [
+					'contactCategory',
+				],
+				operation: [
+					'move',
+				],
+			},
+		},
+	},
+	{
 		displayName: 'Update Fields',
 		name: 'updateFields',
 		type: 'collection',
@@ -166,12 +197,6 @@ export const contactCategoryFields: INodeProperties[] = [
 				type: 'string',
 				default: '',
 				description: 'Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.',
-			},
-			{
-				displayName: 'Position',
-				name: 'position',
-				type: 'number',
-				default: 0,
 			},
 		],
 	},
@@ -214,6 +239,7 @@ export const contactCategoryFields: INodeProperties[] = [
 				name: 'color',
 				type: 'color',
 				default: '',
+				description: 'Hex colour, `#rrggbb`.',
 			},
 			{
 				displayName: 'Idempotency Key',
@@ -227,6 +253,7 @@ export const contactCategoryFields: INodeProperties[] = [
 				name: 'title',
 				type: 'string',
 				default: '',
+				description: '1 to 50 characters.',
 			},
 		],
 	},

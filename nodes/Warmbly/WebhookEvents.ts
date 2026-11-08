@@ -16,7 +16,7 @@ export const webhookEvents: INodePropertyOptions[] = [
 	{
 		name: 'Automation: Run',
 		value: 'automation.run',
-		description: 'An automation run completed.',
+		description: 'An automation finished a run. High-volume event; subscribe to it explicitly.',
 	},
 	{
 		name: 'Automation: Updated',
@@ -26,27 +26,27 @@ export const webhookEvents: INodePropertyOptions[] = [
 	{
 		name: 'Bulk Operations: Completed',
 		value: 'bulk_operation.completed',
-		description: 'A bulk import/export completed.',
+		description: 'A contact file import finished.',
 	},
 	{
 		name: 'Bulk Operations: Failed',
 		value: 'bulk_operation.failed',
-		description: 'A bulk import/export failed.',
+		description: 'A contact file import stopped with an error.',
 	},
 	{
 		name: 'Bulk Operations: Started',
 		value: 'bulk_operation.started',
-		description: 'A bulk import/export started.',
+		description: 'A contact file import was started.',
 	},
 	{
 		name: 'Campaign: Action',
 		value: 'campaign.action',
-		description: 'A campaign sequence "notify" action fired.',
+		description: 'Deprecated, never delivered: the trigger of automations a campaign step runs.',
 	},
 	{
 		name: 'Campaign: Completed',
 		value: 'campaign.completed',
-		description: 'A campaign finished its last scheduled send.',
+		description: 'A campaign finished: every lead is done, or it reached its end date.',
 	},
 	{
 		name: 'Campaign: Created',
@@ -76,7 +76,7 @@ export const webhookEvents: INodePropertyOptions[] = [
 	{
 		name: 'Campaign: Email Delivered',
 		value: 'campaign.email_delivered',
-		description: 'A campaign email was accepted by the receiving server. High-volume event; subscribe to it explicitly.',
+		description: 'Deprecated, never delivered: Warmbly cannot observe delivery. Use campaign.email_sent and campaign.email_bounced. High-volume event; subscribe to it explicitly.',
 	},
 	{
 		name: 'Campaign: Email Opened',
@@ -102,6 +102,21 @@ export const webhookEvents: INodePropertyOptions[] = [
 		name: 'Campaign: Started',
 		value: 'campaign.started',
 		description: 'A campaign began sending.',
+	},
+	{
+		name: 'Campaign: Template Created',
+		value: 'template.created',
+		description: 'An email template was created.',
+	},
+	{
+		name: 'Campaign: Template Deleted',
+		value: 'template.deleted',
+		description: 'An email template was deleted.',
+	},
+	{
+		name: 'Campaign: Template Updated',
+		value: 'template.updated',
+		description: 'An email template was updated.',
 	},
 	{
 		name: 'Campaign: Unsubscribed',
@@ -186,7 +201,7 @@ export const webhookEvents: INodePropertyOptions[] = [
 	{
 		name: 'Inbox: Email Deleted',
 		value: 'inbox.email_deleted',
-		description: 'An inbox email was deleted. High-volume event; subscribe to it explicitly.',
+		description: 'Deprecated, never delivered: per-message inbox changes are not sent as webhooks. High-volume event; subscribe to it explicitly.',
 	},
 	{
 		name: 'Inbox: Email Received',
@@ -196,12 +211,12 @@ export const webhookEvents: INodePropertyOptions[] = [
 	{
 		name: 'Inbox: Email Updated',
 		value: 'inbox.email_updated',
-		description: 'An inbox email changed (read state, labels, category). High-volume event; subscribe to it explicitly.',
+		description: 'Deprecated, never delivered: per-message inbox changes are not sent as webhooks. High-volume event; subscribe to it explicitly.',
 	},
 	{
 		name: 'Inbox: Reply Received',
 		value: 'inbox.reply_received',
-		description: 'A human reply was received (including non-campaign replies).',
+		description: 'A person (not an auto-reply) answered a campaign email or an email sent from the inbox.',
 	},
 	{
 		name: 'Mailbox: Connected',
@@ -211,17 +226,17 @@ export const webhookEvents: INodePropertyOptions[] = [
 	{
 		name: 'Mailbox: Disconnected',
 		value: 'email_account.disconnected',
-		description: 'A mailbox was disconnected.',
+		description: 'A mailbox stopped working and was paused (sign-in refused, account disabled, fair-use stop).',
 	},
 	{
 		name: 'Mailbox: Error',
 		value: 'email_account.error',
-		description: 'A mailbox hit an auth or sync error.',
+		description: 'A mailbox hit a new temporary sending or sync error.',
 	},
 	{
 		name: 'Mailbox: Health Changed',
 		value: 'email_account.health_changed',
-		description: 'A mailbox\'s health state changed.',
+		description: 'Deprecated, never delivered: use warmup.health_changed, which carries the same transition.',
 	},
 	{
 		name: 'Mailbox: Removed',
@@ -231,7 +246,7 @@ export const webhookEvents: INodePropertyOptions[] = [
 	{
 		name: 'Mailbox: Synced',
 		value: 'email_account.synced',
-		description: 'A mailbox finished a sync. High-volume event; subscribe to it explicitly.',
+		description: 'A mailbox finished importing its existing mail.',
 	},
 	{
 		name: 'Meeting: Booked',
