@@ -6559,6 +6559,11 @@
 			"displayName": "API Key",
 			"noun": "API key"
 		},
+		"apollo": {
+			"defaultOperation": "getOverview",
+			"displayName": "Apollo",
+			"noun": "Apollo integration"
+		},
 		"auditLog": {
 			"defaultOperation": "getAll",
 			"displayName": "Audit Log",
@@ -6573,6 +6578,11 @@
 			"defaultOperation": "getAll",
 			"displayName": "Campaign",
 			"noun": "campaign"
+		},
+		"campaignLead": {
+			"defaultOperation": "getCC",
+			"displayName": "Campaign Lead",
+			"noun": "campaign lead"
 		},
 		"campaignStep": {
 			"defaultOperation": "getAll",
@@ -6594,10 +6604,25 @@
 			"displayName": "Contact Category",
 			"noun": "contact category"
 		},
+		"contactImport": {
+			"defaultOperation": "getAll",
+			"displayName": "Contact Import",
+			"noun": "contact import"
+		},
 		"contactNote": {
 			"defaultOperation": "getAll",
 			"displayName": "Contact Note",
 			"noun": "contact note"
+		},
+		"crm": {
+			"defaultOperation": "getSyncHealth",
+			"displayName": "CRM",
+			"noun": "CRM sync"
+		},
+		"crmContact": {
+			"defaultOperation": "get",
+			"displayName": "CRM Contact",
+			"noun": "CRM contact"
 		},
 		"crmTask": {
 			"defaultOperation": "getAll",
@@ -6624,6 +6649,11 @@
 			"displayName": "Deliverability",
 			"noun": "deliverability event"
 		},
+		"emailImage": {
+			"defaultOperation": "getAll",
+			"displayName": "Email Image",
+			"noun": "email image"
+		},
 		"folder": {
 			"defaultOperation": "create",
 			"displayName": "Campaign Folder",
@@ -6638,6 +6668,26 @@
 			"defaultOperation": "getAll",
 			"displayName": "Integration",
 			"noun": "integration"
+		},
+		"lead": {
+			"defaultOperation": "query",
+			"displayName": "Lead",
+			"noun": "lead"
+		},
+		"leadEnrichment": {
+			"defaultOperation": "getAll",
+			"displayName": "Lead Enrichment",
+			"noun": "lead enrichment run"
+		},
+		"leadPerson": {
+			"defaultOperation": "add",
+			"displayName": "Lead Person",
+			"noun": "lead person"
+		},
+		"leadSearch": {
+			"defaultOperation": "getAll",
+			"displayName": "Lead Search",
+			"noun": "saved lead search"
 		},
 		"leadSync": {
 			"defaultOperation": "getAll",
@@ -6673,6 +6723,31 @@
 			"defaultOperation": "getAll",
 			"displayName": "Pipeline",
 			"noun": "pipeline"
+		},
+		"placement": {
+			"defaultOperation": "getOverview",
+			"displayName": "Placement",
+			"noun": "placement"
+		},
+		"placementBatch": {
+			"defaultOperation": "getAll",
+			"displayName": "Placement Batch",
+			"noun": "placement batch"
+		},
+		"placementMonitor": {
+			"defaultOperation": "get",
+			"displayName": "Placement Monitor",
+			"noun": "placement monitor"
+		},
+		"placementTest": {
+			"defaultOperation": "getAll",
+			"displayName": "Placement Test",
+			"noun": "placement test"
+		},
+		"salesforce": {
+			"defaultOperation": "getOverview",
+			"displayName": "Salesforce",
+			"noun": "Salesforce integration"
 		},
 		"segment": {
 			"defaultOperation": "getAll",

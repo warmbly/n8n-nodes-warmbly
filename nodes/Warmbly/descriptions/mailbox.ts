@@ -16,10 +16,28 @@ export const mailboxOperations: INodeProperties[] = [
 		},
 		options: [
 			{
+				name: 'Bulk Delete',
+				value: 'bulkDelete',
+				action: 'Bulk Delete mailbox',
+				description: 'Bulk Delete mailbox',
+			},
+			{
+				name: 'Bulk Set Status',
+				value: 'bulkSetStatus',
+				action: 'Bulk Set Status mailbox',
+				description: 'Bulk Set Status mailbox',
+			},
+			{
 				name: 'Bulk Tag',
 				value: 'bulkTag',
 				action: 'Tag many mailboxes',
 				description: 'Tag many mailboxes',
+			},
+			{
+				name: 'Bulk Warmup',
+				value: 'bulkWarmup',
+				action: 'Bulk Warmup mailbox',
+				description: 'Bulk Warmup mailbox',
 			},
 			{
 				name: 'Check Domain Authentication',
@@ -57,10 +75,22 @@ export const mailboxOperations: INodeProperties[] = [
 				description: 'Get the sending behavior plan',
 			},
 			{
+				name: 'Get Certificates',
+				value: 'getCertificates',
+				action: 'Get Certificates mailbox',
+				description: 'Get Certificates mailbox',
+			},
+			{
 				name: 'Get Many',
 				value: 'getAll',
 				action: 'Get many mailboxes',
 				description: 'Get many mailboxes',
+			},
+			{
+				name: 'Get Send Identity',
+				value: 'getSendIdentity',
+				action: 'Get Send Identity mailbox',
+				description: 'Get Send Identity mailbox',
 			},
 			{
 				name: 'Get Sync Status',
@@ -97,10 +127,22 @@ export const mailboxOperations: INodeProperties[] = [
 				description: 'Refresh the domain auth check',
 			},
 			{
+				name: 'Refresh Send Identity',
+				value: 'refreshSendIdentity',
+				action: 'Refresh Send Identity mailbox',
+				description: 'Refresh Send Identity mailbox',
+			},
+			{
 				name: 'Release Sending',
 				value: 'release',
 				action: 'Release a held mailbox',
 				description: 'Release a held mailbox',
+			},
+			{
+				name: 'Resume Sending',
+				value: 'resumeSending',
+				action: 'Resume Sending mailbox',
+				description: 'Resume Sending mailbox',
 			},
 			{
 				name: 'Resume Warmup',
@@ -142,6 +184,18 @@ export const mailboxOperations: INodeProperties[] = [
 				description: 'Update sending behavior',
 			},
 			{
+				name: 'Update Direct Tracking',
+				value: 'updateDirectTracking',
+				action: 'Update Direct Tracking mailbox',
+				description: 'Update Direct Tracking mailbox',
+			},
+			{
+				name: 'Update Sync',
+				value: 'updateSync',
+				action: 'Update Sync mailbox',
+				description: 'Update Sync mailbox',
+			},
+			{
 				name: 'Update Tracking Domain',
 				value: 'updateTrackingDomain',
 				action: 'Update the tracking domain',
@@ -165,6 +219,111 @@ export const mailboxOperations: INodeProperties[] = [
 ];
 
 export const mailboxFields: INodeProperties[] = [
+	{
+		displayName: 'Email IDs',
+		name: 'email_ids',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'Comma-separated list.',
+		displayOptions: {
+			show: {
+				resource: [
+					'mailbox',
+				],
+				operation: [
+					'bulkDelete',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Additional Fields',
+		name: 'additionalFields',
+		type: 'collection',
+		placeholder: 'Add Field',
+		default: {},
+		displayOptions: {
+			show: {
+				resource: [
+					'mailbox',
+				],
+				operation: [
+					'bulkDelete',
+				],
+			},
+		},
+		options: [
+			{
+				displayName: 'Idempotency Key',
+				name: 'idempotencyKey',
+				type: 'string',
+				default: '',
+				description: 'Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.',
+			},
+		],
+	},
+	{
+		displayName: 'Email IDs',
+		name: 'email_ids',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'Comma-separated list.',
+		displayOptions: {
+			show: {
+				resource: [
+					'mailbox',
+				],
+				operation: [
+					'bulkSetStatus',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Status',
+		name: 'status',
+		type: 'string',
+		default: '',
+		required: true,
+		displayOptions: {
+			show: {
+				resource: [
+					'mailbox',
+				],
+				operation: [
+					'bulkSetStatus',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Additional Fields',
+		name: 'additionalFields',
+		type: 'collection',
+		placeholder: 'Add Field',
+		default: {},
+		displayOptions: {
+			show: {
+				resource: [
+					'mailbox',
+				],
+				operation: [
+					'bulkSetStatus',
+				],
+			},
+		},
+		options: [
+			{
+				displayName: 'Idempotency Key',
+				name: 'idempotencyKey',
+				type: 'string',
+				default: '',
+				description: 'Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.',
+			},
+		],
+	},
 	{
 		displayName: 'Email IDs',
 		name: 'email_ids',
@@ -220,6 +379,67 @@ export const mailboxFields: INodeProperties[] = [
 				type: 'string',
 				default: '',
 				description: 'Comma-separated list.',
+			},
+		],
+	},
+	{
+		displayName: 'Email IDs',
+		name: 'email_ids',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'Comma-separated list.',
+		displayOptions: {
+			show: {
+				resource: [
+					'mailbox',
+				],
+				operation: [
+					'bulkWarmup',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Action',
+		name: 'action',
+		type: 'string',
+		default: '',
+		required: true,
+		displayOptions: {
+			show: {
+				resource: [
+					'mailbox',
+				],
+				operation: [
+					'bulkWarmup',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Additional Fields',
+		name: 'additionalFields',
+		type: 'collection',
+		placeholder: 'Add Field',
+		default: {},
+		displayOptions: {
+			show: {
+				resource: [
+					'mailbox',
+				],
+				operation: [
+					'bulkWarmup',
+				],
+			},
+		},
+		options: [
+			{
+				displayName: 'Idempotency Key',
+				name: 'idempotencyKey',
+				type: 'string',
+				default: '',
+				description: 'Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.',
 			},
 		],
 	},
@@ -340,6 +560,24 @@ export const mailboxFields: INodeProperties[] = [
 		},
 	},
 	{
+		displayName: 'ID',
+		name: 'id',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'The mailbox id.',
+		displayOptions: {
+			show: {
+				resource: [
+					'mailbox',
+				],
+				operation: [
+					'getCertificates',
+				],
+			},
+		},
+	},
+	{
 		displayName: 'Return All',
 		name: 'returnAll',
 		type: 'boolean',
@@ -411,6 +649,24 @@ export const mailboxFields: INodeProperties[] = [
 				description: 'Tag id to filter by.',
 			},
 		],
+	},
+	{
+		displayName: 'ID',
+		name: 'id',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'The mailbox id.',
+		displayOptions: {
+			show: {
+				resource: [
+					'mailbox',
+				],
+				operation: [
+					'getSendIdentity',
+				],
+			},
+		},
 	},
 	{
 		displayName: 'ID',
@@ -604,6 +860,57 @@ export const mailboxFields: INodeProperties[] = [
 		type: 'string',
 		default: '',
 		required: true,
+		description: 'The mailbox id.',
+		displayOptions: {
+			show: {
+				resource: [
+					'mailbox',
+				],
+				operation: [
+					'refreshSendIdentity',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Additional Fields',
+		name: 'additionalFields',
+		type: 'collection',
+		placeholder: 'Add Field',
+		default: {},
+		displayOptions: {
+			show: {
+				resource: [
+					'mailbox',
+				],
+				operation: [
+					'refreshSendIdentity',
+				],
+			},
+		},
+		options: [
+			{
+				displayName: 'Idempotency Key',
+				name: 'idempotencyKey',
+				type: 'string',
+				default: '',
+				description: 'Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.',
+			},
+			{
+				displayName: 'Import Signature',
+				name: 'import_signature',
+				type: 'boolean',
+				default: false,
+				description: 'Also replace the mailbox\'s stored signature with the one configured at the provider, for whichever identity the mailbox sends as. An empty signature at the provider changes nothing.',
+			},
+		],
+	},
+	{
+		displayName: 'ID',
+		name: 'id',
+		type: 'string',
+		default: '',
+		required: true,
 		description: 'The mailbox\'s id',
 		displayOptions: {
 			show: {
@@ -629,6 +936,49 @@ export const mailboxFields: INodeProperties[] = [
 				],
 				operation: [
 					'release',
+				],
+			},
+		},
+		options: [
+			{
+				displayName: 'Idempotency Key',
+				name: 'idempotencyKey',
+				type: 'string',
+				default: '',
+				description: 'Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.',
+			},
+		],
+	},
+	{
+		displayName: 'ID',
+		name: 'id',
+		type: 'string',
+		default: '',
+		required: true,
+		displayOptions: {
+			show: {
+				resource: [
+					'mailbox',
+				],
+				operation: [
+					'resumeSending',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Additional Fields',
+		name: 'additionalFields',
+		type: 'collection',
+		placeholder: 'Add Field',
+		default: {},
+		displayOptions: {
+			show: {
+				resource: [
+					'mailbox',
+				],
+				operation: [
+					'resumeSending',
 				],
 			},
 		},
@@ -1036,10 +1386,23 @@ export const mailboxFields: INodeProperties[] = [
 				description: 'Display name on outgoing mail.',
 			},
 			{
+				displayName: 'Relay Folder Moves',
+				name: 'relay_folder_moves',
+				type: 'boolean',
+				default: false,
+				description: 'RelayFolderMoves turns the unibox\'s filing relay to the mailbox on or off.',
+			},
+			{
 				displayName: 'Reply To',
 				name: 'reply_to',
 				type: 'string',
 				default: '',
+			},
+			{
+				displayName: 'Rolling Recipient Limit',
+				name: 'rolling_recipient_limit',
+				type: 'number',
+				default: 0,
 			},
 			{
 				displayName: 'Save To Sent',
@@ -1047,6 +1410,27 @@ export const mailboxFields: INodeProperties[] = [
 				type: 'boolean',
 				default: false,
 				description: 'SaveToSent controls the Sent folder copy on SMTP/IMAP mailboxes. Turn it off when the submission server files its own copy, or the folder ends up with two of everything.',
+			},
+			{
+				displayName: 'Send As Email',
+				name: 'send_as_email',
+				type: 'string',
+				default: '',
+				description: 'SendAsEmail picks which verified provider alias the mailbox sends from. An empty string clears it back to the mailbox\'s own address; anything else has to be an address the provider reported as verified.',
+				placeholder: 'name@email.com',
+			},
+			{
+				displayName: 'Send Recovery Resolution',
+				name: 'send_recovery_resolution',
+				type: 'json',
+				default: '',
+				description: 'Provide as JSON.',
+			},
+			{
+				displayName: 'Shared Daily Limit',
+				name: 'shared_daily_limit',
+				type: 'number',
+				default: 0,
 			},
 			{
 				displayName: 'Signature Code',
@@ -1101,6 +1485,38 @@ export const mailboxFields: INodeProperties[] = [
 				description: 'Tag ids assigned to the mailbox. Comma-separated list.',
 			},
 			{
+				displayName: 'Test Mode',
+				name: 'test_mode',
+				type: 'options',
+				options: [
+					{
+						name: 'Diagnostic',
+						value: 'diagnostic',
+					},
+					{
+						name: 'Legacy',
+						value: 'legacy',
+					},
+					{
+						name: 'Off',
+						value: 'off',
+					},
+				],
+				default: 'legacy',
+			},
+			{
+				displayName: 'Test Receive Enabled',
+				name: 'test_receive_enabled',
+				type: 'boolean',
+				default: false,
+			},
+			{
+				displayName: 'Test Send Enabled',
+				name: 'test_send_enabled',
+				type: 'boolean',
+				default: false,
+			},
+			{
 				displayName: 'Timezone',
 				name: 'timezone',
 				type: 'string',
@@ -1135,6 +1551,13 @@ export const mailboxFields: INodeProperties[] = [
 				description: 'Daily warmup window end, HH:MM.',
 			},
 			{
+				displayName: 'Warmup Folder',
+				name: 'warmup_folder',
+				type: 'string',
+				default: '',
+				description: 'Folder (Gmail label) warmup mail is filed into when warmup_placement is "folder". Send an empty string to fall back to the instance default. No folder separators or control characters; 64 characters max.',
+			},
+			{
 				displayName: 'Warmup Increase',
 				name: 'warmup_increase',
 				type: 'number',
@@ -1149,11 +1572,39 @@ export const mailboxFields: INodeProperties[] = [
 				description: 'Warmup daily ceiling.',
 			},
 			{
+				displayName: 'Warmup Placement',
+				name: 'warmup_placement',
+				type: 'options',
+				options: [
+					{
+						name: 'Archive',
+						value: 'archive',
+					},
+					{
+						name: 'Folder',
+						value: 'folder',
+					},
+					{
+						name: 'Inbox',
+						value: 'inbox',
+					},
+				],
+				default: 'folder',
+				description: 'WarmupPlacement is "folder", "inbox" or "archive"; WarmupFolder names the destination for "folder" and is cleared back to the instance default by an empty string.',
+			},
+			{
 				displayName: 'Warmup Reply Rate',
 				name: 'warmup_reply_rate',
 				type: 'number',
 				default: 0,
 				description: 'Percentage of warmup threads to reply to.',
+			},
+			{
+				displayName: 'Warmup Retention Days',
+				name: 'warmup_retention_days',
+				type: 'number',
+				default: 0,
+				description: 'WarmupRetentionDays is how long warmup mail is kept in the mailbox; 0 goes back to the instance setting.',
 			},
 			{
 				displayName: 'Warmup Start Time',
@@ -1313,6 +1764,128 @@ export const mailboxFields: INodeProperties[] = [
 				name: 'work_start_min',
 				type: 'number',
 				default: 0,
+			},
+		],
+	},
+	{
+		displayName: 'ID',
+		name: 'id',
+		type: 'string',
+		default: '',
+		required: true,
+		displayOptions: {
+			show: {
+				resource: [
+					'mailbox',
+				],
+				operation: [
+					'updateDirectTracking',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Enabled',
+		name: 'enabled',
+		type: 'boolean',
+		default: false,
+		required: true,
+		displayOptions: {
+			show: {
+				resource: [
+					'mailbox',
+				],
+				operation: [
+					'updateDirectTracking',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Update Fields',
+		name: 'updateFields',
+		type: 'collection',
+		placeholder: 'Add Field',
+		default: {},
+		displayOptions: {
+			show: {
+				resource: [
+					'mailbox',
+				],
+				operation: [
+					'updateDirectTracking',
+				],
+			},
+		},
+		options: [
+			{
+				displayName: 'Idempotency Key',
+				name: 'idempotencyKey',
+				type: 'string',
+				default: '',
+				description: 'Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.',
+			},
+		],
+	},
+	{
+		displayName: 'ID',
+		name: 'id',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'The mailbox id.',
+		displayOptions: {
+			show: {
+				resource: [
+					'mailbox',
+				],
+				operation: [
+					'updateSync',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Skip Folders',
+		name: 'skip_folders',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'Folder names as the server lists them. Case does not matter; each covers its subfolders. An empty list syncs every folder. Comma-separated list.',
+		displayOptions: {
+			show: {
+				resource: [
+					'mailbox',
+				],
+				operation: [
+					'updateSync',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Update Fields',
+		name: 'updateFields',
+		type: 'collection',
+		placeholder: 'Add Field',
+		default: {},
+		displayOptions: {
+			show: {
+				resource: [
+					'mailbox',
+				],
+				operation: [
+					'updateSync',
+				],
+			},
+		},
+		options: [
+			{
+				displayName: 'Idempotency Key',
+				name: 'idempotencyKey',
+				type: 'string',
+				default: '',
+				description: 'Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.',
 			},
 		],
 	},

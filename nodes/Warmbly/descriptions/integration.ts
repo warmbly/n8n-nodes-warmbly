@@ -58,6 +58,24 @@ export const integrationOperations: INodeProperties[] = [
 				description: 'List the integration catalog',
 			},
 			{
+				name: 'Get Clay Settings',
+				value: 'getClaySettings',
+				action: 'Get Clay Settings integration',
+				description: 'Get Clay Settings integration',
+			},
+			{
+				name: 'Get Community App',
+				value: 'getCommunityApp',
+				action: 'Get Community App integration',
+				description: 'Get Community App integration',
+			},
+			{
+				name: 'Get Community Apps',
+				value: 'getCommunityApps',
+				action: 'Get Community Apps integration',
+				description: 'Get Community Apps integration',
+			},
+			{
 				name: 'Get Event Subscriptions',
 				value: 'getEventSubscriptions',
 				action: 'List event subscriptions',
@@ -99,10 +117,28 @@ export const integrationOperations: INodeProperties[] = [
 				action: 'Replace field mappings',
 			},
 			{
+				name: 'Rotate Inbound URL',
+				value: 'rotateInboundUrl',
+				action: 'Rotate Inbound URL integration',
+				description: 'Rotate Inbound URL integration',
+			},
+			{
+				name: 'Set Signing Key',
+				value: 'setSigningKey',
+				action: 'Set Signing Key integration',
+				description: 'Set Signing Key integration',
+			},
+			{
 				name: 'Test Connection',
 				value: 'test',
 				action: 'Test a connection',
 				description: 'Test a connection',
+			},
+			{
+				name: 'Update Clay Settings',
+				value: 'updateClaySettings',
+				action: 'Update Clay Settings integration',
+				description: 'Update Clay Settings integration',
 			},
 			{
 				name: 'Update Config',
@@ -393,6 +429,82 @@ export const integrationFields: INodeProperties[] = [
 		},
 	},
 	{
+		displayName: 'ID',
+		name: 'id',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'Connection id.',
+		displayOptions: {
+			show: {
+				resource: [
+					'integration',
+				],
+				operation: [
+					'getClaySettings',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Slug',
+		name: 'slug',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'The listing\'s slug.',
+		displayOptions: {
+			show: {
+				resource: [
+					'integration',
+				],
+				operation: [
+					'getCommunityApp',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Return All',
+		name: 'returnAll',
+		type: 'boolean',
+		default: false,
+		description: 'Whether to return all results or only up to a given limit',
+		displayOptions: {
+			show: {
+				resource: [
+					'integration',
+				],
+				operation: [
+					'getCommunityApps',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Limit',
+		name: 'limit',
+		type: 'number',
+		typeOptions: {
+			minValue: 1,
+		},
+		default: 50,
+		description: 'Max number of results to return',
+		displayOptions: {
+			show: {
+				resource: [
+					'integration',
+				],
+				operation: [
+					'getCommunityApps',
+				],
+				returnAll: [
+					false,
+				],
+			},
+		},
+	},
+	{
 		displayName: 'Connection ID',
 		name: 'id',
 		type: 'string',
@@ -518,6 +630,34 @@ export const integrationFields: INodeProperties[] = [
 		},
 		options: [
 			{
+				displayName: 'All',
+				name: 'all',
+				type: 'boolean',
+				default: false,
+				description: 'All switches the selection from the id list to Filters.',
+			},
+			{
+				displayName: 'Contacts',
+				name: 'contacts',
+				type: 'string',
+				default: '',
+				description: 'Contact ids to push. Comma-separated list.',
+			},
+			{
+				displayName: 'Exclude',
+				name: 'exclude',
+				type: 'string',
+				default: '',
+				description: 'Exclude drops ids from the resolved set: the rows unticked after a select-all. Ignored unless All is set. Comma-separated list.',
+			},
+			{
+				displayName: 'Filters',
+				name: 'filters',
+				type: 'json',
+				default: '',
+				description: 'Filters is the same search body /contacts/search takes, so the set resolved here is exactly the set the list was showing. Provide as JSON.',
+			},
+			{
 				displayName: 'Idempotency Key',
 				name: 'idempotencyKey',
 				type: 'string',
@@ -615,6 +755,112 @@ export const integrationFields: INodeProperties[] = [
 		],
 	},
 	{
+		displayName: 'ID',
+		name: 'id',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'Connection id.',
+		displayOptions: {
+			show: {
+				resource: [
+					'integration',
+				],
+				operation: [
+					'rotateInboundUrl',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Additional Fields',
+		name: 'additionalFields',
+		type: 'collection',
+		placeholder: 'Add Field',
+		default: {},
+		displayOptions: {
+			show: {
+				resource: [
+					'integration',
+				],
+				operation: [
+					'rotateInboundUrl',
+				],
+			},
+		},
+		options: [
+			{
+				displayName: 'Idempotency Key',
+				name: 'idempotencyKey',
+				type: 'string',
+				default: '',
+				description: 'Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.',
+			},
+		],
+	},
+	{
+		displayName: 'ID',
+		name: 'id',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'Connection id.',
+		displayOptions: {
+			show: {
+				resource: [
+					'integration',
+				],
+				operation: [
+					'setSigningKey',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Signing Key',
+		name: 'signing_key',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'Calendly signing key or Cal.com webhook secret, 8 to 512 characters. Empty removes the key.',
+		displayOptions: {
+			show: {
+				resource: [
+					'integration',
+				],
+				operation: [
+					'setSigningKey',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Update Fields',
+		name: 'updateFields',
+		type: 'collection',
+		placeholder: 'Add Field',
+		default: {},
+		displayOptions: {
+			show: {
+				resource: [
+					'integration',
+				],
+				operation: [
+					'setSigningKey',
+				],
+			},
+		},
+		options: [
+			{
+				displayName: 'Idempotency Key',
+				name: 'idempotencyKey',
+				type: 'string',
+				default: '',
+				description: 'Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.',
+			},
+		],
+	},
+	{
 		displayName: 'Connection ID',
 		name: 'id',
 		type: 'string',
@@ -655,6 +901,81 @@ export const integrationFields: INodeProperties[] = [
 				type: 'string',
 				default: '',
 				description: 'Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.',
+			},
+		],
+	},
+	{
+		displayName: 'ID',
+		name: 'id',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'Connection id.',
+		displayOptions: {
+			show: {
+				resource: [
+					'integration',
+				],
+				operation: [
+					'updateClaySettings',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Update Fields',
+		name: 'updateFields',
+		type: 'collection',
+		placeholder: 'Add Field',
+		default: {},
+		displayOptions: {
+			show: {
+				resource: [
+					'integration',
+				],
+				operation: [
+					'updateClaySettings',
+				],
+			},
+		},
+		options: [
+			{
+				displayName: 'Auth Token',
+				name: 'auth_token',
+				type: 'string',
+				typeOptions: {
+					password: true,
+				},
+				default: '',
+				description: 'Omission or null leaves the token unchanged. An empty string clears it.',
+			},
+			{
+				displayName: 'Defaults',
+				name: 'defaults',
+				type: 'json',
+				default: '',
+				description: 'Provide as JSON.',
+			},
+			{
+				displayName: 'Events',
+				name: 'events',
+				type: 'string',
+				default: '',
+				description: 'Comma-separated list.',
+			},
+			{
+				displayName: 'Idempotency Key',
+				name: 'idempotencyKey',
+				type: 'string',
+				default: '',
+				description: 'Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.',
+			},
+			{
+				displayName: 'Webhook URL',
+				name: 'webhook_url',
+				type: 'string',
+				default: '',
+				description: 'Omission or null leaves the URL unchanged. An empty string clears it.',
 			},
 		],
 	},

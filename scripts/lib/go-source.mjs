@@ -162,9 +162,11 @@ export function indexStructs(dirs) {
 				}
 				// A later package can redeclare a name; first definition wins and
 				// the collision is visible to the caller.
-				if (!structs.has(name)) {
-					structs.set(name, { name, file, fields, pkg: pkgOf(file) });
-				}
+				const decl = { name, file, fields, pkg: pkgOf(file) };
+				if (!structs.has(name)) structs.set(name, decl);
+				// Two packages can each declare `Settings`; `pkg.Name` tells them apart.
+				const qualified = `${decl.pkg}.${name}`;
+				if (!structs.has(qualified)) structs.set(qualified, decl);
 			}
 		}
 	}
@@ -190,7 +192,7 @@ function findNestedClose(lines, open) {
 // The type is everything between the field name and its tag: `[]string`,
 // `map[string]any`, `*models.Thing`, `json.RawMessage`.
 const FIELD_RE = /^\t(\w+)\s+([^\s`][^`]*?)\s+`([^`]*)`(?:\s*\/\/\s?(.*))?$/;
-const EMBED_RE = /^\t([A-Z][\w]*(?:\.\w+)?)(?:\s+`([^`]*)`)?\s*$/;
+const EMBED_RE = /^\t((?:[a-z]\w*\.)?[A-Z]\w*)(?:\s+`([^`]*)`)?\s*$/;
 
 function parseStructField(lines, i) {
 	const line = lines[i];
@@ -330,9 +332,9 @@ export function indexEnums(dirs) {
 
 /** Resolve embedded structs so a caller sees one flat field list. */
 export function flattenStruct(structs, name, seen = new Set()) {
-	const decl = structs.get(stripPkg(name));
-	if (!decl || seen.has(decl.name)) return [];
-	seen.add(decl.name);
+	const decl = structs.get(name.replace(/^\*/, '')) ?? structs.get(stripPkg(name));
+	if (!decl || seen.has(decl)) return [];
+	seen.add(decl);
 	const out = [];
 	for (const field of decl.fields) {
 		if (field.embed) {
@@ -346,4 +348,23 @@ export function flattenStruct(structs, name, seen = new Set()) {
 
 export function stripPkg(name) {
 	return name.replace(/^\*/, '').replace(/^\w+\./, '');
+}
+
+/** Net count of opened parentheses on a line, ignoring string literals and comments. */
+export function parenDepth(line) {
+	let depth = 0;
+	let quote = '';
+	for (let i = 0; i < line.length; i++) {
+		const ch = line[i];
+		if (quote) {
+			if (ch === '\\' && quote !== '`') i++;
+			else if (ch === quote) quote = '';
+			continue;
+		}
+		if (ch === '"' || ch === '`' || ch === "'") quote = ch;
+		else if (ch === '/' && line[i + 1] === '/') break;
+		else if (ch === '(') depth++;
+		else if (ch === ')') depth--;
+	}
+	return depth;
 }
