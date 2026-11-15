@@ -603,6 +603,26 @@
 			"displayName": "Idempotency Key",
 			"type": "string"
 		},
+		"campaign.copyToWorkspaces.additionalFields.template_ids": {
+			"displayName": "Reply Template IDs",
+			"type": "string",
+			"default": "",
+			"description": "IDs of reply templates in this workspace to copy along with the campaign, comma-separated."
+		},
+		"campaign.copyToWorkspaces.top.id": {
+			"displayName": "Campaign ID",
+			"type": "string",
+			"default": "",
+			"description": "The campaign to copy",
+			"required": true
+		},
+		"campaign.copyToWorkspaces.top.organization_ids": {
+			"displayName": "Workspace IDs",
+			"type": "string",
+			"default": "",
+			"description": "IDs of the destination workspaces, comma-separated. You must be able to write to each one (up to 10).",
+			"required": true
+		},
 		"campaign.create.additionalFields": {
 			"collection": true,
 			"displayName": "Additional Fields",
@@ -800,6 +820,22 @@
 			"displayName": "Timezone",
 			"type": "string"
 		},
+		"campaign.create.additionalFields.timezone_mode": {
+			"displayName": "Timezone Mode",
+			"type": "options",
+			"default": "campaign",
+			"description": "Whose clock the sending schedule runs on: the campaign's timezone, or each lead's own timezone (falling back to the campaign's when unknown)",
+			"options": [
+				{
+					"name": "Campaign",
+					"value": "campaign"
+				},
+				{
+					"name": "Recipient",
+					"value": "recipient"
+				}
+			]
+		},
 		"campaign.create.additionalFields.tracking_domain": {
 			"default": "",
 			"displayName": "Tracking Domain",
@@ -815,6 +851,12 @@
 			"description": "A/B variants for the first step.",
 			"displayName": "Variants",
 			"type": "json"
+		},
+		"campaign.create.additionalFields.warmup_graduation": {
+			"displayName": "Warmup Graduation",
+			"type": "boolean",
+			"default": true,
+			"description": "Whether mailboxes whose warmup is running or paused earn volume in this campaign with replies: 5 a day, plus one a day for each lead who replied in the last seven days. Off uses each mailbox's own daily cap and the ramp."
 		},
 		"campaign.create.top.name": {
 			"default": "",
@@ -861,6 +903,36 @@
 			"displayName": "Campaign ID",
 			"required": true,
 			"type": "string"
+		},
+		"campaign.estimate.additionalFields.ramp_ceiling": {
+			"displayName": "Ramp Ceiling",
+			"type": "number",
+			"default": 0,
+			"description": "The daily volume the ramp stops at"
+		},
+		"campaign.estimate.additionalFields.ramp_enabled": {
+			"displayName": "Ramp Enabled",
+			"type": "boolean",
+			"default": false,
+			"description": "Whether the campaign ramps its daily volume up"
+		},
+		"campaign.estimate.additionalFields.ramp_increment": {
+			"displayName": "Ramp Increment",
+			"type": "number",
+			"default": 0,
+			"description": "Sends added per day while ramping"
+		},
+		"campaign.estimate.additionalFields.ramp_start": {
+			"displayName": "Ramp Start",
+			"type": "number",
+			"default": 0,
+			"description": "Sends per day on the first day of the ramp"
+		},
+		"campaign.estimate.additionalFields.warmup_graduation": {
+			"displayName": "Warmup Graduation",
+			"type": "boolean",
+			"default": true,
+			"description": "Whether mailboxes leaving warmup earn volume with replies. Unsent ramp fields come from the saved campaign, else a new campaign's defaults."
 		},
 		"campaign.generateWriting.additionalFields": {
 			"collection": true,
@@ -926,6 +998,13 @@
 			"displayName": "Campaign ID",
 			"required": true,
 			"type": "string"
+		},
+		"campaign.getLeadTimezones.top.id": {
+			"displayName": "Campaign ID",
+			"type": "string",
+			"default": "",
+			"description": "The campaign whose leads to count by timezone",
+			"required": true
 		},
 		"campaign.getLogs.top.id": {
 			"default": "",
@@ -1324,6 +1403,22 @@
 			"displayName": "Timezone",
 			"type": "string"
 		},
+		"campaign.update.updateFields.timezone_mode": {
+			"displayName": "Timezone Mode",
+			"type": "options",
+			"default": "campaign",
+			"description": "Whose clock the sending schedule runs on: the campaign's timezone, or each lead's own timezone (falling back to the campaign's when unknown)",
+			"options": [
+				{
+					"name": "Campaign",
+					"value": "campaign"
+				},
+				{
+					"name": "Recipient",
+					"value": "recipient"
+				}
+			]
+		},
 		"campaign.update.updateFields.tracking_domain": {
 			"default": "",
 			"displayName": "Tracking Domain",
@@ -1333,6 +1428,12 @@
 			"default": false,
 			"displayName": "Unsubscribe Header",
 			"type": "boolean"
+		},
+		"campaign.update.updateFields.warmup_graduation": {
+			"displayName": "Warmup Graduation",
+			"type": "boolean",
+			"default": true,
+			"description": "Whether mailboxes whose warmup is running or paused earn volume in this campaign with replies: 5 a day, plus one a day for each lead who replied in the last seven days. Off uses each mailbox's own daily cap and the ramp."
 		},
 		"campaign.updateAdvanced.top.id": {
 			"default": "",
@@ -1705,6 +1806,317 @@
 			"default": 0,
 			"displayName": "Weight",
 			"type": "number"
+		},
+		"clientConnectLink.create.additionalFields.expires_in_days": {
+			"displayName": "Expires In (Days)",
+			"type": "number",
+			"default": 0,
+			"description": "Days until the link expires, 1 to 90. 0 uses the default of 7.",
+			"typeOptions": {
+				"minValue": 0,
+				"maxValue": 90
+			}
+		},
+		"clientConnectLink.create.additionalFields.label": {
+			"displayName": "Label",
+			"type": "string",
+			"default": "",
+			"description": "A name for the link, shown in the link list"
+		},
+		"clientConnectLink.create.additionalFields.max_mailboxes": {
+			"displayName": "Max Mailboxes",
+			"type": "number",
+			"default": 1,
+			"description": "The most mailboxes the link can connect, 1 to 500",
+			"typeOptions": {
+				"minValue": 1,
+				"maxValue": 500
+			}
+		},
+		"clientConnectLink.create.additionalFields.providers": {
+			"displayName": "Providers",
+			"type": "string",
+			"default": "",
+			"description": "How a client may connect, comma-separated: gmail, outlook, smtp_imap or vendor. At least one is needed."
+		},
+		"clientConnectLink.create.additionalFields.tag_ids": {
+			"displayName": "Mailbox Tag IDs",
+			"type": "string",
+			"default": "",
+			"description": "Mailbox tags applied to every mailbox the link connects, comma-separated (up to 20)"
+		},
+		"clientConnectLink.create.additionalFields.warmup": {
+			"displayName": "Start Warmup",
+			"type": "boolean",
+			"default": false,
+			"description": "Whether to start warmup on every mailbox the link connects"
+		},
+		"clientConnectLink.getUses.top.id": {
+			"displayName": "Link ID",
+			"type": "string",
+			"default": "",
+			"description": "The client connect link",
+			"required": true
+		},
+		"clientConnectLink.revoke.top.id": {
+			"displayName": "Link ID",
+			"type": "string",
+			"default": "",
+			"description": "The client connect link",
+			"required": true
+		},
+		"clientReport.create.additionalFields.access": {
+			"displayName": "Access",
+			"type": "json",
+			"default": "",
+			"description": "Which campaigns, folders and mailboxes the report covers, as JSON: {\"scope\": \"restricted\", \"campaign_ids\": [], \"campaign_folder_ids\": [], \"email_account_ids\": []}. Omit to cover the whole workspace."
+		},
+		"clientReport.create.additionalFields.date_range": {
+			"displayName": "Date Range",
+			"type": "options",
+			"default": "last_30_days",
+			"description": "The period the report covers, in whole UTC days",
+			"options": [
+				{
+					"name": "Last 7 Days",
+					"value": "last_7_days"
+				},
+				{
+					"name": "Last 30 Days",
+					"value": "last_30_days"
+				},
+				{
+					"name": "This Month",
+					"value": "this_month"
+				},
+				{
+					"name": "Last Month",
+					"value": "last_month"
+				}
+			]
+		},
+		"clientReport.create.additionalFields.sections": {
+			"displayName": "Sections",
+			"type": "json",
+			"default": "",
+			"description": "Which sections the report shows, as JSON: {\"overview\": true, \"campaigns\": true, \"replies\": true, \"positive_replies\": true, \"mailboxes\": true, \"daily_chart\": true}."
+		},
+		"clientReport.create.additionalFields.show_reply_snippets": {
+			"displayName": "Show Reply Snippets",
+			"type": "boolean",
+			"default": false,
+			"description": "Whether the report shows the text of replies"
+		},
+		"clientReport.create.top.name": {
+			"displayName": "Name",
+			"type": "string",
+			"default": "",
+			"description": "The report name, shown to the client",
+			"required": true
+		},
+		"clientReport.createLink.additionalFields.expires_in_days": {
+			"displayName": "Expires In (Days)",
+			"type": "number",
+			"default": 90,
+			"description": "Days until the link expires, up to 365. Defaults to 90. A new link replaces any earlier one, and its URL is only shown in this response.",
+			"typeOptions": {
+				"minValue": 1,
+				"maxValue": 365
+			}
+		},
+		"clientReport.createLink.top.id": {
+			"displayName": "Report ID",
+			"type": "string",
+			"default": "",
+			"description": "The client report",
+			"required": true
+		},
+		"clientReport.delete.top.id": {
+			"displayName": "Report ID",
+			"type": "string",
+			"default": "",
+			"description": "The client report",
+			"required": true
+		},
+		"clientReport.deleteSchedule.top.id": {
+			"displayName": "Report ID",
+			"type": "string",
+			"default": "",
+			"description": "The client report",
+			"required": true
+		},
+		"clientReport.get.top.id": {
+			"displayName": "Report ID",
+			"type": "string",
+			"default": "",
+			"description": "The client report",
+			"required": true
+		},
+		"clientReport.preview.filters.range": {
+			"displayName": "Date Range",
+			"type": "options",
+			"default": "last_30_days",
+			"description": "The period to preview. Defaults to the report's own range.",
+			"options": [
+				{
+					"name": "Last 7 Days",
+					"value": "last_7_days"
+				},
+				{
+					"name": "Last 30 Days",
+					"value": "last_30_days"
+				},
+				{
+					"name": "This Month",
+					"value": "this_month"
+				},
+				{
+					"name": "Last Month",
+					"value": "last_month"
+				}
+			]
+		},
+		"clientReport.preview.top.id": {
+			"displayName": "Report ID",
+			"type": "string",
+			"default": "",
+			"description": "The client report",
+			"required": true
+		},
+		"clientReport.revokeLink.top.id": {
+			"displayName": "Report ID",
+			"type": "string",
+			"default": "",
+			"description": "The client report",
+			"required": true
+		},
+		"clientReport.setSchedule.top.cadence": {
+			"displayName": "Cadence",
+			"type": "options",
+			"default": "weekly",
+			"description": "How often the report email goes out",
+			"required": true,
+			"options": [
+				{
+					"name": "Monthly",
+					"value": "monthly"
+				},
+				{
+					"name": "Weekly",
+					"value": "weekly"
+				}
+			]
+		},
+		"clientReport.setSchedule.top.id": {
+			"displayName": "Report ID",
+			"type": "string",
+			"default": "",
+			"description": "The client report",
+			"required": true
+		},
+		"clientReport.setSchedule.top.recipients": {
+			"displayName": "Recipients",
+			"type": "string",
+			"default": "",
+			"description": "Email addresses the report is sent to, comma-separated",
+			"required": true
+		},
+		"clientReport.setSchedule.updateFields.hour": {
+			"displayName": "Hour",
+			"type": "number",
+			"default": 9,
+			"description": "The hour it goes out, 0 to 23, in the schedule's timezone",
+			"typeOptions": {
+				"minValue": 0,
+				"maxValue": 23
+			}
+		},
+		"clientReport.setSchedule.updateFields.month_day": {
+			"displayName": "Day of Month",
+			"type": "number",
+			"default": 1,
+			"description": "For a monthly schedule, the day it goes out: 1 to 28",
+			"typeOptions": {
+				"minValue": 1,
+				"maxValue": 28
+			}
+		},
+		"clientReport.setSchedule.updateFields.paused": {
+			"displayName": "Paused",
+			"type": "boolean",
+			"default": false,
+			"description": "Whether the schedule is paused"
+		},
+		"clientReport.setSchedule.updateFields.timezone": {
+			"displayName": "Timezone",
+			"type": "string",
+			"default": "",
+			"description": "An IANA timezone such as Europe/Berlin. Defaults to UTC."
+		},
+		"clientReport.setSchedule.updateFields.weekday": {
+			"displayName": "Weekday",
+			"type": "number",
+			"default": 0,
+			"description": "For a weekly schedule, the day it goes out: 0 (Sunday) to 6 (Saturday)",
+			"typeOptions": {
+				"minValue": 0,
+				"maxValue": 6
+			}
+		},
+		"clientReport.update.top.id": {
+			"displayName": "Report ID",
+			"type": "string",
+			"default": "",
+			"description": "The client report",
+			"required": true
+		},
+		"clientReport.update.updateFields.access": {
+			"displayName": "Access",
+			"type": "json",
+			"default": "",
+			"description": "Which campaigns, folders and mailboxes the report covers, as JSON: {\"scope\": \"restricted\", \"campaign_ids\": [], \"campaign_folder_ids\": [], \"email_account_ids\": []}. Omit to cover the whole workspace."
+		},
+		"clientReport.update.updateFields.date_range": {
+			"displayName": "Date Range",
+			"type": "options",
+			"default": "last_30_days",
+			"description": "The period the report covers, in whole UTC days",
+			"options": [
+				{
+					"name": "Last 7 Days",
+					"value": "last_7_days"
+				},
+				{
+					"name": "Last 30 Days",
+					"value": "last_30_days"
+				},
+				{
+					"name": "This Month",
+					"value": "this_month"
+				},
+				{
+					"name": "Last Month",
+					"value": "last_month"
+				}
+			]
+		},
+		"clientReport.update.updateFields.name": {
+			"displayName": "Name",
+			"type": "string",
+			"default": "",
+			"description": "The report name, shown to the client"
+		},
+		"clientReport.update.updateFields.sections": {
+			"displayName": "Sections",
+			"type": "json",
+			"default": "",
+			"description": "Which sections the report shows, as JSON: {\"overview\": true, \"campaigns\": true, \"replies\": true, \"positive_replies\": true, \"mailboxes\": true, \"daily_chart\": true}."
+		},
+		"clientReport.update.updateFields.show_reply_snippets": {
+			"displayName": "Show Reply Snippets",
+			"type": "boolean",
+			"default": false,
+			"description": "Whether the report shows the text of replies"
 		},
 		"contact.bulkDelete.additionalFields": {
 			"collection": true,
@@ -3621,12 +4033,148 @@
 			],
 			"type": "options"
 		},
+		"lead.enrich.additionalFields.web_search": {
+			"displayName": "Web Search",
+			"type": "boolean",
+			"default": true,
+			"description": "Whether the run may search the web for a missing website or a blocked site's addresses, when a search provider is set up"
+		},
 		"mailbox.authCheck.top.id": {
 			"default": "",
 			"description": "The mailbox id. The domain is derived from the mailbox address.",
 			"displayName": "Mailbox ID",
 			"required": true,
 			"type": "string"
+		},
+		"mailbox.clearWarmupFilterTag.top.id": {
+			"displayName": "Mailbox ID",
+			"type": "string",
+			"default": "",
+			"description": "The mailbox whose warmup filter tag to read or change",
+			"required": true
+		},
+		"mailbox.connectOAuth.additionalFields.code": {
+			"displayName": "Authorization Code",
+			"type": "string",
+			"default": "",
+			"description": "An authorization code from your own OAuth app, sent with the redirect URI it was issued for",
+			"typeOptions": {
+				"password": true
+			}
+		},
+		"mailbox.connectOAuth.additionalFields.code_verifier": {
+			"displayName": "Code Verifier",
+			"type": "string",
+			"default": "",
+			"description": "The PKCE code verifier, when the sign-in used PKCE",
+			"typeOptions": {
+				"password": true
+			}
+		},
+		"mailbox.connectOAuth.additionalFields.email": {
+			"displayName": "Email",
+			"type": "string",
+			"default": "",
+			"description": "When set, must be the address the sign-in belongs to",
+			"placeholder": "name@email.com"
+		},
+		"mailbox.connectOAuth.additionalFields.redirect_uri": {
+			"displayName": "Redirect URI",
+			"type": "string",
+			"default": "",
+			"description": "The redirect URI the authorization code was issued for"
+		},
+		"mailbox.connectOAuth.additionalFields.refresh_token": {
+			"displayName": "Refresh Token",
+			"type": "string",
+			"default": "",
+			"description": "A refresh token from your own OAuth app. Send this or an authorization code.",
+			"typeOptions": {
+				"password": true
+			}
+		},
+		"mailbox.connectOAuth.additionalFields.warmup": {
+			"displayName": "Warmup",
+			"type": "json",
+			"default": "",
+			"description": "Warmup to start as the mailbox connects, as JSON: {\"enabled\": true, \"start\": 2, \"max\": 40, \"increase\": 2, \"reply_rate\": 30}. Unset numbers keep the mailbox defaults."
+		},
+		"mailbox.connectOAuth.top.provider": {
+			"displayName": "Provider",
+			"type": "options",
+			"default": "gmail",
+			"description": "The mailbox provider the sign-in was made with",
+			"required": true,
+			"options": [
+				{
+					"name": "Gmail",
+					"value": "gmail"
+				},
+				{
+					"name": "Outlook",
+					"value": "outlook"
+				}
+			]
+		},
+		"mailbox.connectOAuthBulk.additionalFields.warmup": {
+			"displayName": "Warmup",
+			"type": "json",
+			"default": "",
+			"description": "Warmup to start on every connected mailbox, as JSON: {\"enabled\": true, \"start\": 2, \"max\": 40, \"increase\": 2, \"reply_rate\": 30}. Unset numbers keep the mailbox defaults."
+		},
+		"mailbox.connectOAuthBulk.top.grants": {
+			"displayName": "Sign-Ins",
+			"type": "json",
+			"default": "",
+			"description": "Up to 50 sign-ins as a JSON array, each {\"provider\": \"gmail\", \"refresh_token\": \"...\"} or {\"provider\": \"outlook\", \"code\": \"...\", \"redirect_uri\": \"...\"}, with an optional \"email\" and \"code_verifier\".",
+			"required": true
+		},
+		"mailbox.connectSmtp.additionalFields.name": {
+			"displayName": "Sender Name",
+			"type": "string",
+			"default": "",
+			"description": "The name mail from this mailbox is sent under"
+		},
+		"mailbox.connectSmtp.additionalFields.warmup": {
+			"displayName": "Warmup",
+			"type": "json",
+			"default": "",
+			"description": "Warmup to start as the mailbox connects, as JSON: {\"enabled\": true, \"start\": 2, \"max\": 40, \"increase\": 2, \"reply_rate\": 30}. Unset numbers keep the mailbox defaults."
+		},
+		"mailbox.connectSmtp.top.email": {
+			"displayName": "Email",
+			"type": "string",
+			"default": "",
+			"description": "The mailbox address",
+			"required": true,
+			"placeholder": "name@email.com"
+		},
+		"mailbox.connectSmtp.top.imap": {
+			"displayName": "IMAP Settings",
+			"type": "json",
+			"default": "",
+			"description": "Server settings as JSON: {\"host\": \"imap.example.com\", \"port\": 993, \"username\": \"name@example.com\", \"password\": \"...\", \"security\": \"ssl\"}.",
+			"required": true
+		},
+		"mailbox.connectSmtp.top.smtp": {
+			"displayName": "SMTP Settings",
+			"type": "json",
+			"default": "",
+			"description": "Server settings as JSON: {\"host\": \"smtp.example.com\", \"port\": 587, \"username\": \"name@example.com\", \"password\": \"...\", \"security\": \"starttls\"}.",
+			"required": true
+		},
+		"mailbox.connectSmtpBulk.additionalFields.warmup": {
+			"displayName": "Warmup",
+			"type": "json",
+			"default": "",
+			"description": "Warmup to start on every connected mailbox, as JSON: {\"enabled\": true, \"start\": 2, \"max\": 40, \"increase\": 2, \"reply_rate\": 30}. Unset numbers keep the mailbox defaults."
+		},
+		"mailbox.connectSmtpBulk.top.accounts": {
+			"displayName": "Mailboxes",
+			"type": "json",
+			"default": "",
+			"description": "Up to 50 mailboxes as a JSON array, each {\"email\": \"...\", \"name\": \"...\", \"smtp\": {...}, \"imap\": {...}} with the same server settings as a single connect",
+			"required": true
 		},
 		"mailbox.delete.additionalFields": {
 			"collection": true,
@@ -3669,6 +4217,13 @@
 			"description": "Tag id to filter by.",
 			"displayName": "Tag",
 			"type": "string"
+		},
+		"mailbox.getWarmupFilterTag.top.id": {
+			"displayName": "Mailbox ID",
+			"type": "string",
+			"default": "",
+			"description": "The mailbox whose warmup filter tag to read or change",
+			"required": true
 		},
 		"mailbox.send.additionalFields": {
 			"collection": true,
@@ -3760,6 +4315,19 @@
 			"displayName": "To",
 			"required": true,
 			"type": "string"
+		},
+		"mailbox.setWarmupFilterTag.top.id": {
+			"displayName": "Mailbox ID",
+			"type": "string",
+			"default": "",
+			"description": "The mailbox whose warmup filter tag to read or change",
+			"required": true
+		},
+		"mailbox.setWarmupFilterTag.updateFields.tag": {
+			"displayName": "Tag",
+			"type": "string",
+			"default": "",
+			"description": "The code appended to warmup mail this mailbox receives, for a mail filter to match. Leave empty to issue a new random one."
 		},
 		"mailbox.update.top.id": {
 			"default": "",
@@ -4044,6 +4612,127 @@
 			"displayName": "Mailbox ID",
 			"required": true,
 			"type": "string"
+		},
+		"mailboxOAuthApp.delete.top.provider": {
+			"displayName": "Provider",
+			"type": "options",
+			"default": "gmail",
+			"description": "The mailbox provider the OAuth app signs in to",
+			"required": true,
+			"options": [
+				{
+					"name": "Gmail",
+					"value": "gmail"
+				},
+				{
+					"name": "Outlook",
+					"value": "outlook"
+				}
+			]
+		},
+		"mailboxOAuthApp.set.top.provider": {
+			"displayName": "Provider",
+			"type": "options",
+			"default": "gmail",
+			"description": "The mailbox provider the OAuth app signs in to",
+			"required": true,
+			"options": [
+				{
+					"name": "Gmail",
+					"value": "gmail"
+				},
+				{
+					"name": "Outlook",
+					"value": "outlook"
+				}
+			]
+		},
+		"mailboxOAuthApp.set.updateFields.app_name": {
+			"displayName": "App Name",
+			"type": "string",
+			"default": "",
+			"description": "A name for the app, shown in the workspace"
+		},
+		"mailboxOAuthApp.set.updateFields.client_id": {
+			"displayName": "Client ID",
+			"type": "string",
+			"default": "",
+			"description": "The OAuth client ID from Google Cloud or Microsoft Entra"
+		},
+		"mailboxOAuthApp.set.updateFields.client_secret": {
+			"displayName": "Client Secret",
+			"type": "string",
+			"default": "",
+			"description": "The OAuth client secret. Leave empty to keep the stored one.",
+			"typeOptions": {
+				"password": true
+			}
+		},
+		"mailboxOAuthApp.set.updateFields.redirect_url": {
+			"displayName": "Redirect URL",
+			"type": "string",
+			"default": "",
+			"description": "A custom callback URL registered on the client. Leave empty to use Warmbly's own."
+		},
+		"mailboxSignInLink.create.additionalFields.email": {
+			"displayName": "Email",
+			"type": "string",
+			"default": "",
+			"description": "When set, the sign-in must be for this address",
+			"placeholder": "name@email.com"
+		},
+		"mailboxSignInLink.create.additionalFields.expires_in_hours": {
+			"displayName": "Expires In (Hours)",
+			"type": "number",
+			"default": 0,
+			"description": "Hours until the link expires, 1 to 168. 0 uses the default of 72.",
+			"typeOptions": {
+				"minValue": 0,
+				"maxValue": 168
+			}
+		},
+		"mailboxSignInLink.create.additionalFields.return_url": {
+			"displayName": "Return URL",
+			"type": "string",
+			"default": "",
+			"description": "An https address the mailbox owner is sent to after signing in"
+		},
+		"mailboxSignInLink.create.additionalFields.warmup": {
+			"displayName": "Warmup",
+			"type": "json",
+			"default": "",
+			"description": "Warmup to start as the mailbox connects, as JSON: {\"enabled\": true, \"start\": 2, \"max\": 40, \"increase\": 2, \"reply_rate\": 30}. Unset numbers keep the mailbox defaults."
+		},
+		"mailboxSignInLink.create.top.provider": {
+			"displayName": "Provider",
+			"type": "options",
+			"default": "gmail",
+			"description": "The provider the mailbox owner signs in with",
+			"required": true,
+			"options": [
+				{
+					"name": "Gmail",
+					"value": "gmail"
+				},
+				{
+					"name": "Outlook",
+					"value": "outlook"
+				}
+			]
+		},
+		"mailboxSignInLink.get.top.id": {
+			"displayName": "Link ID",
+			"type": "string",
+			"default": "",
+			"description": "The mailbox sign-in link",
+			"required": true
+		},
+		"mailboxSignInLink.revoke.top.id": {
+			"displayName": "Link ID",
+			"type": "string",
+			"default": "",
+			"description": "The mailbox sign-in link",
+			"required": true
 		},
 		"outreach.update.top.settings": {
 			"default": "",
@@ -4357,6 +5046,20 @@
 			"displayName": "Name",
 			"type": "string"
 		},
+		"template.copyToWorkspaces.top.organization_ids": {
+			"displayName": "Workspace IDs",
+			"type": "string",
+			"default": "",
+			"description": "IDs of the destination workspaces, comma-separated. You must be able to write to each one (up to 10).",
+			"required": true
+		},
+		"template.copyToWorkspaces.top.template_ids": {
+			"displayName": "Reply Template IDs",
+			"type": "string",
+			"default": "",
+			"description": "IDs of the reply templates to copy, comma-separated (up to 50).",
+			"required": true
+		},
 		"template.create.additionalFields": {
 			"collection": true,
 			"displayName": "Additional Fields",
@@ -4540,6 +5243,74 @@
 			"default": "",
 			"displayName": "Subject",
 			"type": "string"
+		},
+		"toolMigration.cancel.top.id": {
+			"displayName": "Migration ID",
+			"type": "string",
+			"default": "",
+			"description": "The tool migration",
+			"required": true
+		},
+		"toolMigration.create.additionalFields.label": {
+			"displayName": "Label",
+			"type": "string",
+			"default": "",
+			"description": "A name for the migration"
+		},
+		"toolMigration.create.top.credentials": {
+			"displayName": "Credentials",
+			"type": "json",
+			"default": "",
+			"description": "The API keys to read with, as a JSON array with one object per key, for example [{\"api_key\": \"...\"}]. Get Providers lists the fields each tool needs.",
+			"required": true
+		},
+		"toolMigration.create.top.provider": {
+			"displayName": "Provider",
+			"type": "string",
+			"default": "",
+			"description": "The tool to migrate from, such as smartlead, instantly, lemlist, replyio, woodpecker, mailshake, saleshandy, snovio, apollo or quickmail. Get Providers lists what this instance supports.",
+			"required": true
+		},
+		"toolMigration.dismiss.top.id": {
+			"displayName": "Migration ID",
+			"type": "string",
+			"default": "",
+			"description": "The tool migration",
+			"required": true
+		},
+		"toolMigration.get.top.id": {
+			"displayName": "Migration ID",
+			"type": "string",
+			"default": "",
+			"description": "The tool migration",
+			"required": true
+		},
+		"toolMigration.linkSenders.top.id": {
+			"displayName": "Migration ID",
+			"type": "string",
+			"default": "",
+			"description": "The tool migration",
+			"required": true
+		},
+		"toolMigration.start.additionalFields.targets": {
+			"displayName": "Targets",
+			"type": "json",
+			"default": "",
+			"description": "For an agency, where each source workspace goes, as a JSON array of {\"workspace_id\": \"...\", \"key\": 0} with \"organization_id\", \"create_name\" or \"skip\": true. Leave empty for a workspace's own migration."
+		},
+		"toolMigration.start.top.id": {
+			"displayName": "Migration ID",
+			"type": "string",
+			"default": "",
+			"description": "The tool migration",
+			"required": true
+		},
+		"toolMigration.start.top.options": {
+			"displayName": "Options",
+			"type": "json",
+			"default": "",
+			"description": "What to bring over, as JSON: {\"kinds\": [\"mailboxes\", \"campaigns\", \"leads\", \"blocklist\"], \"campaign_ids\": [], \"skip_finished\": true, \"warmup\": true}. An empty campaign_ids brings every campaign.",
+			"required": true
 		},
 		"unibox.cancelScheduled.additionalFields": {
 			"collection": true,
@@ -5412,6 +6183,11 @@
 			"description": "Update the automation layout",
 			"name": "Update Layout"
 		},
+		"campaign.copyToWorkspaces": {
+			"action": "Copy a campaign to other workspaces",
+			"description": "Copy a campaign to other workspaces",
+			"name": "Copy to Workspaces"
+		},
 		"campaign.create": {
 			"action": "Create a campaign",
 			"description": "Create a campaign",
@@ -5479,6 +6255,11 @@
 			"action": "Get the forms feeding a campaign",
 			"description": "Get the forms feeding a campaign",
 			"name": "Get Forms"
+		},
+		"campaign.getLeadTimezones": {
+			"action": "Count a campaign's leads by timezone",
+			"description": "Count a campaign's leads by timezone",
+			"name": "Get Lead Timezones"
 		},
 		"campaign.getLogs": {
 			"action": "Get campaign logs",
@@ -5596,6 +6377,41 @@
 			"action": "Update an A/B variant",
 			"description": "Update an A/B variant",
 			"name": "Update"
+		},
+		"clientConnectLink.getUses": {
+			"action": "Get the mailboxes a client connect link connected",
+			"description": "Get the mailboxes a client connect link connected",
+			"name": "Get Uses"
+		},
+		"clientConnectLink.revoke": {
+			"action": "Revoke a client connect link",
+			"description": "Revoke a client connect link",
+			"name": "Revoke"
+		},
+		"clientReport.createLink": {
+			"action": "Create a share link for a client report",
+			"description": "Create a share link for a client report",
+			"name": "Create Share Link"
+		},
+		"clientReport.deleteSchedule": {
+			"action": "Delete a client report's email schedule",
+			"description": "Delete a client report's email schedule",
+			"name": "Delete Schedule"
+		},
+		"clientReport.preview": {
+			"action": "Preview a client report's data",
+			"description": "Preview a client report's data",
+			"name": "Preview"
+		},
+		"clientReport.revokeLink": {
+			"action": "Revoke a client report's share link",
+			"description": "Revoke a client report's share link",
+			"name": "Revoke Share Link"
+		},
+		"clientReport.setSchedule": {
+			"action": "Set a client report's email schedule",
+			"description": "Set a client report's email schedule",
+			"name": "Set Schedule"
 		},
 		"contact.bulkDelete": {
 			"action": "Bulk delete contacts",
@@ -6007,6 +6823,31 @@
 			"description": "Tag many mailboxes",
 			"name": "Bulk Tag"
 		},
+		"mailbox.clearWarmupFilterTag": {
+			"action": "Turn off a mailbox's warmup filter tag",
+			"description": "Turn off a mailbox's warmup filter tag",
+			"name": "Clear Warmup Filter Tag"
+		},
+		"mailbox.connectOAuth": {
+			"action": "Connect a mailbox from a completed OAuth sign-in",
+			"description": "Connect a mailbox from a completed OAuth sign-in",
+			"name": "Connect via OAuth"
+		},
+		"mailbox.connectOAuthBulk": {
+			"action": "Connect many mailboxes from completed OAuth sign-ins",
+			"description": "Connect many mailboxes from completed OAuth sign-ins",
+			"name": "Connect Many via OAuth"
+		},
+		"mailbox.connectSmtp": {
+			"action": "Connect a mailbox with SMTP and IMAP credentials",
+			"description": "Connect a mailbox with SMTP and IMAP credentials",
+			"name": "Connect via SMTP/IMAP"
+		},
+		"mailbox.connectSmtpBulk": {
+			"action": "Connect many mailboxes with SMTP and IMAP credentials",
+			"description": "Connect many mailboxes with SMTP and IMAP credentials",
+			"name": "Connect Many via SMTP/IMAP"
+		},
 		"mailbox.delete": {
 			"action": "Delete a mailbox",
 			"description": "Delete a mailbox",
@@ -6047,6 +6888,11 @@
 			"description": "Get the tracking domain",
 			"name": "Get Tracking Domain"
 		},
+		"mailbox.getWarmupFilterTag": {
+			"action": "Get a mailbox's warmup filter tag",
+			"description": "Get a mailbox's warmup filter tag",
+			"name": "Get Warmup Filter Tag"
+		},
 		"mailbox.hold": {
 			"action": "Hold sending from a mailbox",
 			"description": "Hold sending from a mailbox",
@@ -6066,6 +6912,11 @@
 			"action": "Send from a mailbox",
 			"description": "Send from a mailbox",
 			"name": "Send Email"
+		},
+		"mailbox.setWarmupFilterTag": {
+			"action": "Set a mailbox's warmup filter tag",
+			"description": "Set a mailbox's warmup filter tag",
+			"name": "Set Warmup Filter Tag"
 		},
 		"mailbox.update": {
 			"action": "Update a mailbox",
@@ -6116,6 +6967,16 @@
 		"mailbox.warmupStop": {
 			"action": "Stop warmup",
 			"name": "Stop Warmup"
+		},
+		"mailboxOAuthApp.set": {
+			"action": "Create or update a mailbox OAuth app",
+			"description": "Create or update a mailbox OAuth app",
+			"name": "Set"
+		},
+		"mailboxSignInLink.revoke": {
+			"action": "Revoke a mailbox sign-in link",
+			"description": "Revoke a mailbox sign-in link",
+			"name": "Revoke"
 		},
 		"mailboxTag.move": {
 			"action": "Move a mailbox tag",
@@ -6279,6 +7140,11 @@
 			"description": "Update a team",
 			"name": "Update"
 		},
+		"template.copyToWorkspaces": {
+			"action": "Copy reply templates to other workspaces",
+			"description": "Copy reply templates to other workspaces",
+			"name": "Copy to Workspaces"
+		},
 		"template.create": {
 			"action": "Create a reply template",
 			"description": "Create a reply template",
@@ -6323,6 +7189,31 @@
 			"action": "Update a reply template",
 			"description": "Update a reply template",
 			"name": "Update"
+		},
+		"toolMigration.cancel": {
+			"action": "Cancel a tool migration",
+			"description": "Cancel a tool migration",
+			"name": "Cancel"
+		},
+		"toolMigration.dismiss": {
+			"action": "Dismiss a tool migration",
+			"description": "Dismiss a tool migration",
+			"name": "Dismiss"
+		},
+		"toolMigration.getProviders": {
+			"action": "Get the tools a migration can import from",
+			"description": "Get the tools a migration can import from",
+			"name": "Get Providers"
+		},
+		"toolMigration.linkSenders": {
+			"action": "Link newly connected mailboxes to migrated campaigns",
+			"description": "Link newly connected mailboxes to migrated campaigns",
+			"name": "Link Senders"
+		},
+		"toolMigration.start": {
+			"action": "Start a scanned tool migration",
+			"description": "Start a scanned tool migration",
+			"name": "Start"
 		},
 		"unibox.approveAgentDraft": {
 			"action": "Approve an agent draft",
@@ -6594,6 +7485,16 @@
 			"displayName": "Campaign A/B Variant",
 			"noun": "A/B variant"
 		},
+		"clientConnectLink": {
+			"defaultOperation": "getAll",
+			"displayName": "Client Connect Link",
+			"noun": "client connect link"
+		},
+		"clientReport": {
+			"defaultOperation": "getAll",
+			"displayName": "Client Report",
+			"noun": "client report"
+		},
 		"contact": {
 			"defaultOperation": "bulkDelete",
 			"displayName": "Contact",
@@ -6699,6 +7600,16 @@
 			"displayName": "Mailbox",
 			"noun": "mailbox"
 		},
+		"mailboxOAuthApp": {
+			"defaultOperation": "getAll",
+			"displayName": "Mailbox OAuth App",
+			"noun": "mailbox OAuth app"
+		},
+		"mailboxSignInLink": {
+			"defaultOperation": "getAll",
+			"displayName": "Mailbox Sign-In Link",
+			"noun": "mailbox sign-in link"
+		},
 		"mailboxTag": {
 			"defaultOperation": "create",
 			"displayName": "Mailbox Tag",
@@ -6768,6 +7679,11 @@
 			"defaultOperation": "getAll",
 			"displayName": "Reply Template",
 			"noun": "reply template"
+		},
+		"toolMigration": {
+			"defaultOperation": "getAll",
+			"displayName": "Tool Migration",
+			"noun": "tool migration"
 		},
 		"unibox": {
 			"defaultOperation": "getAll",

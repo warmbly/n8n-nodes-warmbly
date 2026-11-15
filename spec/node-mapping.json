@@ -131,11 +131,29 @@
 		"route": "DELETE /email-images/{}",
 		"handler": "DeleteEmailImage"
 	},
+	"DELETE /emails/connect/links/{}": {
+		"resource": "mailboxSignInLink",
+		"operation": "revoke",
+		"route": "DELETE /emails/connect/links/{}",
+		"handler": "RevokeMailboxConnectLink"
+	},
+	"DELETE /emails/oauth-apps/{}": {
+		"resource": "mailboxOAuthApp",
+		"operation": "delete",
+		"route": "DELETE /emails/oauth-apps/{}",
+		"handler": "DeleteMailboxOAuthApp"
+	},
 	"DELETE /emails/{}": {
 		"resource": "mailbox",
 		"operation": "delete",
 		"route": "DELETE /emails/{}",
 		"handler": "DeleteEmail"
+	},
+	"DELETE /emails/{}/warmup-filter-tag": {
+		"resource": "mailbox",
+		"operation": "clearWarmupFilterTag",
+		"route": "DELETE /emails/{}/warmup-filter-tag",
+		"handler": "ClearWarmupFilterTag"
 	},
 	"DELETE /folders/{}": {
 		"resource": "folder",
@@ -215,6 +233,12 @@
 		"route": "DELETE /meetings/{}",
 		"handler": "DeleteMeeting"
 	},
+	"DELETE /migrations/{}": {
+		"resource": "toolMigration",
+		"operation": "dismiss",
+		"route": "DELETE /migrations/{}",
+		"handler": "DismissToolMigration"
+	},
 	"DELETE /oauth/applications/{}": {
 		"resource": "oauthApp",
 		"operation": "delete",
@@ -232,6 +256,24 @@
 		"operation": "deleteLogo",
 		"route": "DELETE /oauth/applications/{}/logo",
 		"handler": "DeleteOAuthApplicationLogo"
+	},
+	"DELETE /reports/{}": {
+		"resource": "clientReport",
+		"operation": "delete",
+		"route": "DELETE /reports/{}",
+		"handler": "DeleteClientReport"
+	},
+	"DELETE /reports/{}/link": {
+		"resource": "clientReport",
+		"operation": "revokeLink",
+		"route": "DELETE /reports/{}/link",
+		"handler": "RevokeClientReportLink"
+	},
+	"DELETE /reports/{}/schedule": {
+		"resource": "clientReport",
+		"operation": "deleteSchedule",
+		"route": "DELETE /reports/{}/schedule",
+		"handler": "DeleteClientReportSchedule"
 	},
 	"DELETE /segments/{}": {
 		"resource": "segment",
@@ -521,6 +563,12 @@
 		"route": "GET /campaigns/{}/forms",
 		"handler": "GetCampaignForms"
 	},
+	"GET /campaigns/{}/lead-timezones": {
+		"resource": "campaign",
+		"operation": "getLeadTimezones",
+		"route": "GET /campaigns/{}/lead-timezones",
+		"handler": "GetCampaignLeadTimezones"
+	},
 	"GET /campaigns/{}/leads/{}/cc": {
 		"resource": "campaignLead",
 		"operation": "getCC",
@@ -779,6 +827,36 @@
 		"route": "GET /emails/allowance",
 		"handler": "GetMailboxAllowance"
 	},
+	"GET /emails/client-links": {
+		"resource": "clientConnectLink",
+		"operation": "getAll",
+		"route": "GET /emails/client-links",
+		"handler": "ListConnectLinks"
+	},
+	"GET /emails/client-links/{}/uses": {
+		"resource": "clientConnectLink",
+		"operation": "getUses",
+		"route": "GET /emails/client-links/{}/uses",
+		"handler": "ListConnectLinkUses"
+	},
+	"GET /emails/connect/links": {
+		"resource": "mailboxSignInLink",
+		"operation": "getAll",
+		"route": "GET /emails/connect/links",
+		"handler": "ListMailboxConnectLinks"
+	},
+	"GET /emails/connect/links/{}": {
+		"resource": "mailboxSignInLink",
+		"operation": "get",
+		"route": "GET /emails/connect/links/{}",
+		"handler": "GetMailboxConnectLink"
+	},
+	"GET /emails/oauth-apps": {
+		"resource": "mailboxOAuthApp",
+		"operation": "getAll",
+		"route": "GET /emails/oauth-apps",
+		"handler": "ListMailboxOAuthApps"
+	},
 	"GET /emails/{}": {
 		"resource": "mailbox",
 		"operation": "get",
@@ -826,6 +904,12 @@
 		"operation": "getTrackingDomain",
 		"route": "GET /emails/{}/track",
 		"handler": "GetEmailTrackingDomain"
+	},
+	"GET /emails/{}/warmup-filter-tag": {
+		"resource": "mailbox",
+		"operation": "getWarmupFilterTag",
+		"route": "GET /emails/{}/warmup-filter-tag",
+		"handler": "GetWarmupFilterTag"
 	},
 	"GET /emails/{}/warmup/ban-status": {
 		"resource": "mailbox",
@@ -1091,6 +1175,24 @@
 		"route": "GET /meetings/summary",
 		"handler": "MeetingsSummary"
 	},
+	"GET /migrations": {
+		"resource": "toolMigration",
+		"operation": "getAll",
+		"route": "GET /migrations",
+		"handler": "ListToolMigrations"
+	},
+	"GET /migrations/providers": {
+		"resource": "toolMigration",
+		"operation": "getProviders",
+		"route": "GET /migrations/providers",
+		"handler": "ListToolMigrationProviders"
+	},
+	"GET /migrations/{}": {
+		"resource": "toolMigration",
+		"operation": "get",
+		"route": "GET /migrations/{}",
+		"handler": "GetToolMigration"
+	},
 	"GET /oauth/applications": {
 		"resource": "oauthApp",
 		"operation": "getAll",
@@ -1186,6 +1288,24 @@
 		"operation": "getPlans",
 		"route": "GET /plans",
 		"handler": "ListPlans"
+	},
+	"GET /reports": {
+		"resource": "clientReport",
+		"operation": "getAll",
+		"route": "GET /reports",
+		"handler": "ListClientReports"
+	},
+	"GET /reports/{}": {
+		"resource": "clientReport",
+		"operation": "get",
+		"route": "GET /reports/{}",
+		"handler": "GetClientReport"
+	},
+	"GET /reports/{}/preview": {
+		"resource": "clientReport",
+		"operation": "preview",
+		"route": "GET /reports/{}/preview",
+		"handler": "PreviewClientReport"
 	},
 	"GET /segments": {
 		"resource": "segment",
@@ -1595,6 +1715,12 @@
 		"route": "PATCH /outreach/settings",
 		"handler": "UpdateOutreachSettings"
 	},
+	"PATCH /reports/{}": {
+		"resource": "clientReport",
+		"operation": "update",
+		"route": "PATCH /reports/{}",
+		"handler": "UpdateClientReport"
+	},
 	"PATCH /segments/{}": {
 		"resource": "segment",
 		"operation": "update",
@@ -1750,6 +1876,12 @@
 		"operation": "uploadAttachment",
 		"route": "POST /campaigns/{}/attachments",
 		"handler": "UploadCampaignAttachment"
+	},
+	"POST /campaigns/{}/copy-to": {
+		"resource": "campaign",
+		"operation": "copyToWorkspaces",
+		"route": "POST /campaigns/{}/copy-to",
+		"handler": "CopyCampaignToWorkspaces"
 	},
 	"POST /campaigns/{}/duplicate": {
 		"resource": "campaign",
@@ -2026,6 +2158,48 @@
 		"operation": "bulkWarmup",
 		"route": "POST /emails/bulk/warmup",
 		"handler": "BulkWarmupEmails"
+	},
+	"POST /emails/client-links": {
+		"resource": "clientConnectLink",
+		"operation": "create",
+		"route": "POST /emails/client-links",
+		"handler": "CreateConnectLink"
+	},
+	"POST /emails/client-links/{}/revoke": {
+		"resource": "clientConnectLink",
+		"operation": "revoke",
+		"route": "POST /emails/client-links/{}/revoke",
+		"handler": "RevokeConnectLink"
+	},
+	"POST /emails/connect/links": {
+		"resource": "mailboxSignInLink",
+		"operation": "create",
+		"route": "POST /emails/connect/links",
+		"handler": "CreateMailboxConnectLink"
+	},
+	"POST /emails/connect/oauth": {
+		"resource": "mailbox",
+		"operation": "connectOAuth",
+		"route": "POST /emails/connect/oauth",
+		"handler": "ConnectMailboxGrant"
+	},
+	"POST /emails/connect/oauth/bulk": {
+		"resource": "mailbox",
+		"operation": "connectOAuthBulk",
+		"route": "POST /emails/connect/oauth/bulk",
+		"handler": "ConnectMailboxGrantBulk"
+	},
+	"POST /emails/connect/smtp-imap": {
+		"resource": "mailbox",
+		"operation": "connectSmtp",
+		"route": "POST /emails/connect/smtp-imap",
+		"handler": "ConnectMailboxSMTP"
+	},
+	"POST /emails/connect/smtp-imap/bulk": {
+		"resource": "mailbox",
+		"operation": "connectSmtpBulk",
+		"route": "POST /emails/connect/smtp-imap/bulk",
+		"handler": "ConnectMailboxSMTPBulk"
 	},
 	"POST /emails/verify": {
 		"resource": "mailbox",
@@ -2315,6 +2489,30 @@
 		"route": "POST /meetings",
 		"handler": "CreateMeeting"
 	},
+	"POST /migrations": {
+		"resource": "toolMigration",
+		"operation": "create",
+		"route": "POST /migrations",
+		"handler": "CreateToolMigration"
+	},
+	"POST /migrations/{}/cancel": {
+		"resource": "toolMigration",
+		"operation": "cancel",
+		"route": "POST /migrations/{}/cancel",
+		"handler": "CancelToolMigration"
+	},
+	"POST /migrations/{}/link-senders": {
+		"resource": "toolMigration",
+		"operation": "linkSenders",
+		"route": "POST /migrations/{}/link-senders",
+		"handler": "LinkToolMigrationSenders"
+	},
+	"POST /migrations/{}/start": {
+		"resource": "toolMigration",
+		"operation": "start",
+		"route": "POST /migrations/{}/start",
+		"handler": "StartToolMigration"
+	},
 	"POST /oauth/application-logo": {
 		"resource": "oauthApp",
 		"operation": "uploadLogo",
@@ -2374,6 +2572,18 @@
 		"operation": "cancel",
 		"route": "POST /placement/tests/{}/cancel",
 		"handler": "CancelPlacementTest"
+	},
+	"POST /reports": {
+		"resource": "clientReport",
+		"operation": "create",
+		"route": "POST /reports",
+		"handler": "CreateClientReport"
+	},
+	"POST /reports/{}/link": {
+		"resource": "clientReport",
+		"operation": "createLink",
+		"route": "POST /reports/{}/link",
+		"handler": "CreateClientReportLink"
 	},
 	"POST /segments": {
 		"resource": "segment",
@@ -2446,6 +2656,12 @@
 		"operation": "analyze",
 		"route": "POST /templates/analyze",
 		"handler": "AnalyzeTemplateContent"
+	},
+	"POST /templates/copy-to": {
+		"resource": "template",
+		"operation": "copyToWorkspaces",
+		"route": "POST /templates/copy-to",
+		"handler": "CopyTemplatesToWorkspaces"
 	},
 	"POST /templates/score": {
 		"resource": "template",
@@ -2573,6 +2789,12 @@
 		"route": "PUT /crm/settings",
 		"handler": "UpdateCRMSettings"
 	},
+	"PUT /emails/oauth-apps/{}": {
+		"resource": "mailboxOAuthApp",
+		"operation": "set",
+		"route": "PUT /emails/oauth-apps/{}",
+		"handler": "PutMailboxOAuthApp"
+	},
 	"PUT /emails/{}/behavior": {
 		"resource": "mailbox",
 		"operation": "updateBehavior",
@@ -2584,6 +2806,12 @@
 		"operation": "updateSync",
 		"route": "PUT /emails/{}/sync",
 		"handler": "UpdateEmailSync"
+	},
+	"PUT /emails/{}/warmup-filter-tag": {
+		"resource": "mailbox",
+		"operation": "setWarmupFilterTag",
+		"route": "PUT /emails/{}/warmup-filter-tag",
+		"handler": "SetWarmupFilterTag"
 	},
 	"PUT /forms/domain": {
 		"resource": "form",
@@ -2626,6 +2854,12 @@
 		"operation": "setSeed",
 		"route": "PUT /placement/seeds/{}",
 		"handler": "SetPlacementSeed"
+	},
+	"PUT /reports/{}/schedule": {
+		"resource": "clientReport",
+		"operation": "setSchedule",
+		"route": "PUT /reports/{}/schedule",
+		"handler": "SetClientReportSchedule"
 	},
 	"PUT /unibox/ai-drafts/by-thread": {
 		"resource": "unibox",

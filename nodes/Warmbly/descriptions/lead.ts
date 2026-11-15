@@ -401,6 +401,13 @@ export const leadFields: INodeProperties[] = [
 				type: 'boolean',
 				default: false,
 			},
+			{
+				displayName: 'Web Search',
+				name: 'web_search',
+				type: 'boolean',
+				default: true,
+				description: 'Whether the run may search the web for a missing website or a blocked site\'s addresses, when a search provider is set up',
+			},
 		],
 	},
 	{

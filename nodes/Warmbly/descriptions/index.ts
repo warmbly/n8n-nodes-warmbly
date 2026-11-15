@@ -13,6 +13,8 @@ import { campaignVariantOperations, campaignVariantFields } from './campaignVari
 import { folderOperations, folderFields } from './folder';
 import { campaignLeadOperations, campaignLeadFields } from './campaignLead';
 import { campaignStepOperations, campaignStepFields } from './campaignStep';
+import { clientConnectLinkOperations, clientConnectLinkFields } from './clientConnectLink';
+import { clientReportOperations, clientReportFields } from './clientReport';
 import { contactOperations, contactFields } from './contact';
 import { contactCategoryOperations, contactCategoryFields } from './contactCategory';
 import { contactImportOperations, contactImportFields } from './contactImport';
@@ -33,6 +35,8 @@ import { leadPersonOperations, leadPersonFields } from './leadPerson';
 import { leadSearchOperations, leadSearchFields } from './leadSearch';
 import { leadSyncOperations, leadSyncFields } from './leadSync';
 import { mailboxOperations, mailboxFields } from './mailbox';
+import { mailboxOAuthAppOperations, mailboxOAuthAppFields } from './mailboxOAuthApp';
+import { mailboxSignInLinkOperations, mailboxSignInLinkFields } from './mailboxSignInLink';
 import { mailboxTagOperations, mailboxTagFields } from './mailboxTag';
 import { meetingOperations, meetingFields } from './meeting';
 import { oauthAppOperations, oauthAppFields } from './oauthApp';
@@ -47,6 +51,7 @@ import { salesforceOperations, salesforceFields } from './salesforce';
 import { segmentOperations, segmentFields } from './segment';
 import { suppressionOperations, suppressionFields } from './suppression';
 import { teamOperations, teamFields } from './team';
+import { toolMigrationOperations, toolMigrationFields } from './toolMigration';
 import { uniboxOperations, uniboxFields } from './unibox';
 import { warmupRoutingOperations, warmupRoutingFields } from './warmupRouting';
 import { webhookOperations, webhookFields } from './webhook';
@@ -110,6 +115,14 @@ export const resourceProperty: INodeProperties = {
 		{
 			name: 'Campaign Step',
 			value: 'campaignStep',
+		},
+		{
+			name: 'Client Connect Link',
+			value: 'clientConnectLink',
+		},
+		{
+			name: 'Client Report',
+			value: 'clientReport',
 		},
 		{
 			name: 'Contact',
@@ -192,6 +205,14 @@ export const resourceProperty: INodeProperties = {
 			value: 'mailbox',
 		},
 		{
+			name: 'Mailbox OAuth App',
+			value: 'mailboxOAuthApp',
+		},
+		{
+			name: 'Mailbox Sign-In Link',
+			value: 'mailboxSignInLink',
+		},
+		{
 			name: 'Mailbox Tag',
 			value: 'mailboxTag',
 		},
@@ -248,6 +269,10 @@ export const resourceProperty: INodeProperties = {
 			value: 'team',
 		},
 		{
+			name: 'Tool Migration',
+			value: 'toolMigration',
+		},
+		{
 			name: 'Unibox',
 			value: 'unibox',
 		},
@@ -281,6 +306,8 @@ export const operationProperties: INodeProperties[] = [
 	...folderOperations,
 	...campaignLeadOperations,
 	...campaignStepOperations,
+	...clientConnectLinkOperations,
+	...clientReportOperations,
 	...contactOperations,
 	...contactCategoryOperations,
 	...contactImportOperations,
@@ -301,6 +328,8 @@ export const operationProperties: INodeProperties[] = [
 	...leadSearchOperations,
 	...leadSyncOperations,
 	...mailboxOperations,
+	...mailboxOAuthAppOperations,
+	...mailboxSignInLinkOperations,
 	...mailboxTagOperations,
 	...meetingOperations,
 	...oauthAppOperations,
@@ -315,6 +344,7 @@ export const operationProperties: INodeProperties[] = [
 	...segmentOperations,
 	...suppressionOperations,
 	...teamOperations,
+	...toolMigrationOperations,
 	...uniboxOperations,
 	...warmupRoutingOperations,
 	...webhookOperations,
@@ -335,6 +365,8 @@ export const fieldProperties: INodeProperties[] = [
 	...folderFields,
 	...campaignLeadFields,
 	...campaignStepFields,
+	...clientConnectLinkFields,
+	...clientReportFields,
 	...contactFields,
 	...contactCategoryFields,
 	...contactImportFields,
@@ -355,6 +387,8 @@ export const fieldProperties: INodeProperties[] = [
 	...leadSearchFields,
 	...leadSyncFields,
 	...mailboxFields,
+	...mailboxOAuthAppFields,
+	...mailboxSignInLinkFields,
 	...mailboxTagFields,
 	...meetingFields,
 	...oauthAppFields,
@@ -369,6 +403,7 @@ export const fieldProperties: INodeProperties[] = [
 	...segmentFields,
 	...suppressionFields,
 	...teamFields,
+	...toolMigrationFields,
 	...uniboxFields,
 	...warmupRoutingFields,
 	...webhookFields,

@@ -1,10 +1,10 @@
 {
 	"source": {
 		"repo": "warmbly/warmbly",
-		"commit": "a5f0400b8",
+		"commit": "83c7df41",
 		"routes": "internal/api/routes.go"
 	},
-	"operationCount": 441,
+	"operationCount": 480,
 	"operations": [
 		{
 			"method": "POST",
@@ -27,8 +27,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:904"
+			"openapi": true,
+			"source": "internal/api/routes.go:966"
 		},
 		{
 			"method": "POST",
@@ -62,8 +62,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:907"
+			"openapi": true,
+			"source": "internal/api/routes.go:969"
 		},
 		{
 			"method": "POST",
@@ -105,8 +105,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:908"
+			"openapi": true,
+			"source": "internal/api/routes.go:970"
 		},
 		{
 			"method": "POST",
@@ -140,8 +140,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:906"
+			"openapi": true,
+			"source": "internal/api/routes.go:968"
 		},
 		{
 			"method": "POST",
@@ -164,8 +164,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:905"
+			"openapi": true,
+			"source": "internal/api/routes.go:967"
 		},
 		{
 			"method": "GET",
@@ -179,16 +179,32 @@
 				{
 					"in": "query",
 					"name": "surface",
-					"type": "string",
+					"type": "options",
 					"required": false,
-					"description": ""
+					"description": "",
+					"enum": [
+						"campaigns",
+						"emails",
+						"deliverability",
+						"contacts",
+						"analytics",
+						"settings"
+					]
 				},
 				{
 					"in": "query",
 					"name": "category",
-					"type": "string",
+					"type": "options",
 					"required": false,
-					"description": ""
+					"description": "",
+					"enum": [
+						"deliverability",
+						"mailbox",
+						"warmup",
+						"campaign",
+						"copy",
+						"list"
+					]
 				},
 				{
 					"in": "query",
@@ -223,8 +239,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": true,
-			"openapi": false,
-			"source": "internal/api/routes.go:896"
+			"openapi": true,
+			"source": "internal/api/routes.go:958"
 		},
 		{
 			"method": "POST",
@@ -239,8 +255,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:903"
+			"openapi": true,
+			"source": "internal/api/routes.go:965"
 		},
 		{
 			"method": "GET",
@@ -255,8 +271,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:898"
+			"openapi": true,
+			"source": "internal/api/routes.go:960"
 		},
 		{
 			"method": "GET",
@@ -271,8 +287,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:897"
+			"openapi": true,
+			"source": "internal/api/routes.go:959"
 		},
 		{
 			"method": "DELETE",
@@ -295,8 +311,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:875"
+			"openapi": true,
+			"source": "internal/api/routes.go:937"
 		},
 		{
 			"method": "PATCH",
@@ -354,8 +370,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:874"
+			"openapi": true,
+			"source": "internal/api/routes.go:936"
 		},
 		{
 			"method": "GET",
@@ -370,8 +386,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": true,
-			"openapi": false,
-			"source": "internal/api/routes.go:872"
+			"openapi": true,
+			"source": "internal/api/routes.go:934"
 		},
 		{
 			"method": "POST",
@@ -422,8 +438,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:873"
+			"openapi": true,
+			"source": "internal/api/routes.go:935"
 		},
 		{
 			"method": "POST",
@@ -447,7 +463,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:887"
+			"source": "internal/api/routes.go:949"
 		},
 		{
 			"method": "GET",
@@ -475,7 +491,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:886"
+			"source": "internal/api/routes.go:948"
 		},
 		{
 			"method": "GET",
@@ -497,7 +513,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1171"
+			"source": "internal/api/routes.go:1271"
 		},
 		{
 			"method": "GET",
@@ -533,7 +549,7 @@
 			"paginated": true,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:1170"
+			"source": "internal/api/routes.go:1270"
 		},
 		{
 			"method": "GET",
@@ -569,7 +585,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:1168"
+			"source": "internal/api/routes.go:1268"
 		},
 		{
 			"method": "GET",
@@ -598,7 +614,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:1169"
+			"source": "internal/api/routes.go:1269"
 		},
 		{
 			"method": "GET",
@@ -634,7 +650,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1167"
+			"source": "internal/api/routes.go:1267"
 		},
 		{
 			"method": "GET",
@@ -670,7 +686,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1166"
+			"source": "internal/api/routes.go:1266"
 		},
 		{
 			"method": "GET",
@@ -697,7 +713,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1159"
+			"source": "internal/api/routes.go:1259"
 		},
 		{
 			"method": "GET",
@@ -726,7 +742,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1163"
+			"source": "internal/api/routes.go:1263"
 		},
 		{
 			"method": "GET",
@@ -747,8 +763,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:1160"
+			"openapi": true,
+			"source": "internal/api/routes.go:1260"
 		},
 		{
 			"method": "GET",
@@ -783,8 +799,8 @@
 			"multipart": false,
 			"paginated": true,
 			"returnsList": true,
-			"openapi": false,
-			"source": "internal/api/routes.go:1162"
+			"openapi": true,
+			"source": "internal/api/routes.go:1262"
 		},
 		{
 			"method": "GET",
@@ -811,7 +827,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1172"
+			"source": "internal/api/routes.go:1272"
 		},
 		{
 			"method": "GET",
@@ -847,7 +863,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1165"
+			"source": "internal/api/routes.go:1265"
 		},
 		{
 			"method": "GET",
@@ -883,7 +899,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1164"
+			"source": "internal/api/routes.go:1264"
 		},
 		{
 			"method": "GET",
@@ -931,7 +947,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1151"
+			"source": "internal/api/routes.go:1251"
 		},
 		{
 			"method": "GET",
@@ -967,7 +983,7 @@
 			"paginated": true,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:1152"
+			"source": "internal/api/routes.go:1252"
 		},
 		{
 			"method": "DELETE",
@@ -989,7 +1005,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1150"
+			"source": "internal/api/routes.go:1250"
 		},
 		{
 			"method": "DELETE",
@@ -1018,7 +1034,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1147"
+			"source": "internal/api/routes.go:1247"
 		},
 		{
 			"method": "GET",
@@ -1040,7 +1056,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1145"
+			"source": "internal/api/routes.go:1245"
 		},
 		{
 			"method": "PATCH",
@@ -1113,7 +1129,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1146"
+			"source": "internal/api/routes.go:1246"
 		},
 		{
 			"method": "GET",
@@ -1127,7 +1143,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:1142"
+			"source": "internal/api/routes.go:1242"
 		},
 		{
 			"method": "DELETE",
@@ -1148,8 +1164,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:1131"
+			"openapi": true,
+			"source": "internal/api/routes.go:1230"
 		},
 		{
 			"method": "GET",
@@ -1190,7 +1206,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1144"
+			"source": "internal/api/routes.go:1244"
 		},
 		{
 			"method": "GET",
@@ -1204,7 +1220,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1143"
+			"source": "internal/api/routes.go:1243"
 		},
 		{
 			"method": "GET",
@@ -1233,7 +1249,7 @@
 			"paginated": true,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:1137"
+			"source": "internal/api/routes.go:1237"
 		},
 		{
 			"method": "POST",
@@ -1307,7 +1323,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1141"
+			"source": "internal/api/routes.go:1241"
 		},
 		{
 			"method": "GET",
@@ -1385,7 +1401,7 @@
 			"paginated": true,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:1202"
+			"source": "internal/api/routes.go:1302"
 		},
 		{
 			"method": "PATCH",
@@ -1417,8 +1433,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:1372"
+			"openapi": true,
+			"source": "internal/api/routes.go:1472"
 		},
 		{
 			"method": "GET",
@@ -1447,7 +1463,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:1375"
+			"source": "internal/api/routes.go:1475"
 		},
 		{
 			"method": "POST",
@@ -1488,7 +1504,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1374"
+			"source": "internal/api/routes.go:1474"
 		},
 		{
 			"method": "DELETE",
@@ -1510,7 +1526,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1373"
+			"source": "internal/api/routes.go:1473"
 		},
 		{
 			"method": "GET",
@@ -1532,7 +1548,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1369"
+			"source": "internal/api/routes.go:1469"
 		},
 		{
 			"method": "PATCH",
@@ -1597,7 +1613,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1370"
+			"source": "internal/api/routes.go:1470"
 		},
 		{
 			"method": "GET",
@@ -1611,7 +1627,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:1367"
+			"source": "internal/api/routes.go:1467"
 		},
 		{
 			"method": "POST",
@@ -1669,7 +1685,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1368"
+			"source": "internal/api/routes.go:1468"
 		},
 		{
 			"method": "POST",
@@ -1753,7 +1769,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:757"
+			"source": "internal/api/routes.go:816"
 		},
 		{
 			"method": "POST",
@@ -1838,6 +1854,46 @@
 				},
 				{
 					"in": "body",
+					"name": "warmup_graduation",
+					"type": "boolean",
+					"goType": "*bool",
+					"required": false,
+					"description": "The campaign's ramp-up as the wizard has it; unsent fields come from the saved campaign, else a new campaign's defaults."
+				},
+				{
+					"in": "body",
+					"name": "ramp_enabled",
+					"type": "boolean",
+					"goType": "*bool",
+					"required": false,
+					"description": ""
+				},
+				{
+					"in": "body",
+					"name": "ramp_start",
+					"type": "number",
+					"goType": "*int",
+					"required": false,
+					"description": ""
+				},
+				{
+					"in": "body",
+					"name": "ramp_increment",
+					"type": "number",
+					"goType": "*int",
+					"required": false,
+					"description": ""
+				},
+				{
+					"in": "body",
+					"name": "ramp_ceiling",
+					"type": "number",
+					"goType": "*int",
+					"required": false,
+					"description": ""
+				},
+				{
+					"in": "body",
 					"name": "campaign_id",
 					"type": "string",
 					"goType": "*string",
@@ -1852,8 +1908,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:766"
+			"openapi": true,
+			"source": "internal/api/routes.go:825"
 		},
 		{
 			"method": "GET",
@@ -1868,8 +1924,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:762"
+			"openapi": true,
+			"source": "internal/api/routes.go:821"
 		},
 		{
 			"method": "GET",
@@ -1893,7 +1949,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:789"
+			"source": "internal/api/routes.go:850"
 		},
 		{
 			"method": "DELETE",
@@ -1924,7 +1980,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:784"
+			"source": "internal/api/routes.go:845"
 		},
 		{
 			"method": "PATCH",
@@ -2022,7 +2078,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:783"
+			"source": "internal/api/routes.go:844"
 		},
 		{
 			"method": "GET",
@@ -2046,7 +2102,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:781"
+			"source": "internal/api/routes.go:842"
 		},
 		{
 			"method": "POST",
@@ -2145,7 +2201,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:782"
+			"source": "internal/api/routes.go:843"
 		},
 		{
 			"method": "GET",
@@ -2169,7 +2225,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:779"
+			"source": "internal/api/routes.go:840"
 		},
 		{
 			"method": "PATCH",
@@ -2204,7 +2260,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:780"
+			"source": "internal/api/routes.go:841"
 		},
 		{
 			"method": "DELETE",
@@ -2235,7 +2291,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:787"
+			"source": "internal/api/routes.go:848"
 		},
 		{
 			"method": "GET",
@@ -2259,7 +2315,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:785"
+			"source": "internal/api/routes.go:846"
 		},
 		{
 			"method": "POST",
@@ -2290,7 +2346,50 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:786"
+			"source": "internal/api/routes.go:847"
+		},
+		{
+			"method": "POST",
+			"path": "/campaigns/{id}/copy-to",
+			"handler": "CopyCampaignToWorkspaces",
+			"doc": "Reads the source here; the handler and service check write rights in every destination.",
+			"apiPerms": [
+				"APIPermReadCampaigns"
+			],
+			"params": [
+				{
+					"in": "path",
+					"name": "id",
+					"type": "string",
+					"required": true,
+					"description": ""
+				},
+				{
+					"in": "body",
+					"name": "organization_ids",
+					"type": "stringArray",
+					"goType": "[]uuid.UUID",
+					"required": false,
+					"description": ""
+				},
+				{
+					"in": "body",
+					"name": "template_ids",
+					"type": "stringArray",
+					"goType": "[]uuid.UUID",
+					"required": false,
+					"description": ""
+				}
+			],
+			"body": {
+				"kind": "object",
+				"type": "models.CopyCampaignToWorkspacesRequest"
+			},
+			"multipart": false,
+			"paginated": false,
+			"returnsList": false,
+			"openapi": false,
+			"source": "internal/api/routes.go:837"
 		},
 		{
 			"method": "POST",
@@ -2324,8 +2423,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:776"
+			"openapi": true,
+			"source": "internal/api/routes.go:835"
 		},
 		{
 			"method": "GET",
@@ -2348,8 +2447,32 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": true,
-			"openapi": false,
-			"source": "internal/api/routes.go:808"
+			"openapi": true,
+			"source": "internal/api/routes.go:870"
+		},
+		{
+			"method": "GET",
+			"path": "/campaigns/{id}/lead-timezones",
+			"handler": "GetCampaignLeadTimezones",
+			"doc": "GetCampaignLeadTimezones counts a campaign's leads by the timezone their records resolve to. GET /campaigns/:id/lead-timezones",
+			"apiPerms": [
+				"APIPermReadCampaigns"
+			],
+			"params": [
+				{
+					"in": "path",
+					"name": "id",
+					"type": "string",
+					"required": true,
+					"description": "The campaign's id"
+				}
+			],
+			"body": null,
+			"multipart": false,
+			"paginated": false,
+			"returnsList": false,
+			"openapi": true,
+			"source": "internal/api/routes.go:867"
 		},
 		{
 			"method": "GET",
@@ -2381,7 +2504,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:838"
+			"source": "internal/api/routes.go:900"
 		},
 		{
 			"method": "GET",
@@ -2413,7 +2536,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:836"
+			"source": "internal/api/routes.go:898"
 		},
 		{
 			"method": "PUT",
@@ -2456,7 +2579,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:837"
+			"source": "internal/api/routes.go:899"
 		},
 		{
 			"method": "GET",
@@ -2487,7 +2610,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:828"
+			"source": "internal/api/routes.go:890"
 		},
 		{
 			"method": "POST",
@@ -2537,7 +2660,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:829"
+			"source": "internal/api/routes.go:891"
 		},
 		{
 			"method": "POST",
@@ -2568,7 +2691,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:830"
+			"source": "internal/api/routes.go:892"
 		},
 		{
 			"method": "GET",
@@ -2606,7 +2729,7 @@
 			"paginated": true,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:802"
+			"source": "internal/api/routes.go:863"
 		},
 		{
 			"method": "DELETE",
@@ -2630,7 +2753,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:797"
+			"source": "internal/api/routes.go:858"
 		},
 		{
 			"method": "GET",
@@ -2654,7 +2777,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:795"
+			"source": "internal/api/routes.go:856"
 		},
 		{
 			"method": "PUT",
@@ -2726,7 +2849,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:796"
+			"source": "internal/api/routes.go:857"
 		},
 		{
 			"method": "POST",
@@ -2750,7 +2873,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:788"
+			"source": "internal/api/routes.go:849"
 		},
 		{
 			"method": "GET",
@@ -2773,8 +2896,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": true,
-			"openapi": false,
-			"source": "internal/api/routes.go:817"
+			"openapi": true,
+			"source": "internal/api/routes.go:879"
 		},
 		{
 			"method": "PUT",
@@ -2808,8 +2931,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": true,
-			"openapi": false,
-			"source": "internal/api/routes.go:818"
+			"openapi": true,
+			"source": "internal/api/routes.go:880"
 		},
 		{
 			"method": "GET",
@@ -2833,7 +2956,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:805"
+			"source": "internal/api/routes.go:866"
 		},
 		{
 			"method": "GET",
@@ -2857,7 +2980,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:811"
+			"source": "internal/api/routes.go:873"
 		},
 		{
 			"method": "PUT",
@@ -2892,7 +3015,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:812"
+			"source": "internal/api/routes.go:874"
 		},
 		{
 			"method": "POST",
@@ -2927,7 +3050,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:800"
+			"source": "internal/api/routes.go:861"
 		},
 		{
 			"method": "PATCH",
@@ -2961,8 +3084,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:850"
+			"openapi": true,
+			"source": "internal/api/routes.go:912"
 		},
 		{
 			"method": "DELETE",
@@ -2993,7 +3116,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:845"
+			"source": "internal/api/routes.go:907"
 		},
 		{
 			"method": "PATCH",
@@ -3120,7 +3243,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:844"
+			"source": "internal/api/routes.go:906"
 		},
 		{
 			"method": "GET",
@@ -3144,7 +3267,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:842"
+			"source": "internal/api/routes.go:904"
 		},
 		{
 			"method": "POST",
@@ -3264,7 +3387,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:843"
+			"source": "internal/api/routes.go:905"
 		},
 		{
 			"method": "POST",
@@ -3288,7 +3411,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:801"
+			"source": "internal/api/routes.go:862"
 		},
 		{
 			"method": "POST",
@@ -3347,7 +3470,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:792"
+			"source": "internal/api/routes.go:853"
 		},
 		{
 			"method": "POST",
@@ -3371,7 +3494,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:821"
+			"source": "internal/api/routes.go:883"
 		},
 		{
 			"method": "GET",
@@ -3395,7 +3518,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:791"
+			"source": "internal/api/routes.go:852"
 		},
 		{
 			"method": "DELETE",
@@ -3419,7 +3542,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:775"
+			"source": "internal/api/routes.go:834"
 		},
 		{
 			"method": "GET",
@@ -3443,7 +3566,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:773"
+			"source": "internal/api/routes.go:832"
 		},
 		{
 			"method": "PATCH",
@@ -3608,6 +3731,18 @@
 				},
 				{
 					"in": "body",
+					"name": "timezone_mode",
+					"type": "options",
+					"goType": "*string",
+					"required": false,
+					"description": "Whose clock the sending schedule is read on: campaign (default, the campaign's timezone) or recipient (each lead's own timezone, worked out from their record, falling back to the campaign's when it is not known).",
+					"enum": [
+						"campaign",
+						"recipient"
+					]
+				},
+				{
+					"in": "body",
 					"name": "days",
 					"type": "number",
 					"goType": "*uint8",
@@ -3746,6 +3881,14 @@
 					"goType": "*int",
 					"required": false,
 					"description": ""
+				},
+				{
+					"in": "body",
+					"name": "warmup_graduation",
+					"type": "boolean",
+					"goType": "*bool",
+					"required": false,
+					"description": "Hold mailboxes whose warmup is running or paused to the reply-earned ceiling in this campaign: 5 a day, plus one a day for each lead who replied in the last seven days. Default true. false leaves each mailbox's daily cap, daily_limit and the ramp."
 				},
 				{
 					"in": "body",
@@ -3889,7 +4032,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:774"
+			"source": "internal/api/routes.go:833"
 		},
 		{
 			"method": "GET",
@@ -3941,7 +4084,7 @@
 			"paginated": true,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:771"
+			"source": "internal/api/routes.go:830"
 		},
 		{
 			"method": "POST",
@@ -4082,6 +4225,18 @@
 				},
 				{
 					"in": "body",
+					"name": "timezone_mode",
+					"type": "options",
+					"goType": "*string",
+					"required": false,
+					"description": "Whose clock the sending schedule is read on: campaign (default, the campaign's timezone) or recipient (each lead's own timezone, worked out from their record, falling back to the campaign's when it is not known).",
+					"enum": [
+						"campaign",
+						"recipient"
+					]
+				},
+				{
+					"in": "body",
 					"name": "days",
 					"type": "number",
 					"goType": "*uint8",
@@ -4203,6 +4358,14 @@
 				},
 				{
 					"in": "body",
+					"name": "warmup_graduation",
+					"type": "boolean",
+					"goType": "*bool",
+					"required": false,
+					"description": "WarmupGraduation defaults to true: mailboxes leaving warmup earn volume with replies."
+				},
+				{
+					"in": "body",
 					"name": "esp_match_mode",
 					"type": "options",
 					"goType": "*string",
@@ -4319,7 +4482,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:772"
+			"source": "internal/api/routes.go:831"
 		},
 		{
 			"method": "PATCH",
@@ -4352,7 +4515,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:1062"
+			"source": "internal/api/routes.go:1161"
 		},
 		{
 			"method": "DELETE",
@@ -4374,7 +4537,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1062"
+			"source": "internal/api/routes.go:1161"
 		},
 		{
 			"method": "PATCH",
@@ -4415,7 +4578,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1062"
+			"source": "internal/api/routes.go:1161"
 		},
 		{
 			"method": "POST",
@@ -4449,7 +4612,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1062"
+			"source": "internal/api/routes.go:1161"
 		},
 		{
 			"method": "GET",
@@ -4487,7 +4650,7 @@
 			"paginated": true,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:1005"
+			"source": "internal/api/routes.go:1067"
 		},
 		{
 			"method": "GET",
@@ -4510,8 +4673,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": true,
-			"openapi": false,
-			"source": "internal/api/routes.go:990"
+			"openapi": true,
+			"source": "internal/api/routes.go:1052"
 		},
 		{
 			"method": "GET",
@@ -4535,7 +4698,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:1006"
+			"source": "internal/api/routes.go:1068"
 		},
 		{
 			"method": "GET",
@@ -4580,7 +4743,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:988"
+			"source": "internal/api/routes.go:1050"
 		},
 		{
 			"method": "DELETE",
@@ -4611,7 +4774,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1004"
+			"source": "internal/api/routes.go:1066"
 		},
 		{
 			"method": "PATCH",
@@ -4653,7 +4816,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1003"
+			"source": "internal/api/routes.go:1065"
 		},
 		{
 			"method": "GET",
@@ -4691,7 +4854,7 @@
 			"paginated": true,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:1001"
+			"source": "internal/api/routes.go:1063"
 		},
 		{
 			"method": "POST",
@@ -4726,7 +4889,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1002"
+			"source": "internal/api/routes.go:1064"
 		},
 		{
 			"method": "GET",
@@ -4756,8 +4919,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": true,
-			"openapi": false,
-			"source": "internal/api/routes.go:998"
+			"openapi": true,
+			"source": "internal/api/routes.go:1060"
 		},
 		{
 			"method": "POST",
@@ -4791,8 +4954,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:997"
+			"openapi": true,
+			"source": "internal/api/routes.go:1059"
 		},
 		{
 			"method": "DELETE",
@@ -4823,7 +4986,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1011"
+			"source": "internal/api/routes.go:1073"
 		},
 		{
 			"method": "POST",
@@ -4866,7 +5029,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1010"
+			"source": "internal/api/routes.go:1072"
 		},
 		{
 			"method": "GET",
@@ -4890,7 +5053,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1009"
+			"source": "internal/api/routes.go:1071"
 		},
 		{
 			"method": "GET",
@@ -4913,8 +5076,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": true,
-			"openapi": false,
-			"source": "internal/api/routes.go:991"
+			"openapi": true,
+			"source": "internal/api/routes.go:1053"
 		},
 		{
 			"method": "GET",
@@ -4959,7 +5122,7 @@
 			"paginated": true,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:989"
+			"source": "internal/api/routes.go:1051"
 		},
 		{
 			"method": "DELETE",
@@ -4983,7 +5146,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:973"
+			"source": "internal/api/routes.go:1035"
 		},
 		{
 			"method": "GET",
@@ -5007,7 +5170,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:987"
+			"source": "internal/api/routes.go:1049"
 		},
 		{
 			"method": "PATCH",
@@ -5122,7 +5285,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:972"
+			"source": "internal/api/routes.go:1034"
 		},
 		{
 			"method": "GET",
@@ -5137,8 +5300,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": true,
-			"openapi": false,
-			"source": "internal/api/routes.go:983"
+			"openapi": true,
+			"source": "internal/api/routes.go:1045"
 		},
 		{
 			"method": "POST",
@@ -5216,7 +5379,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:959"
+			"source": "internal/api/routes.go:1021"
 		},
 		{
 			"method": "POST",
@@ -5240,7 +5403,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:961"
+			"source": "internal/api/routes.go:1023"
 		},
 		{
 			"method": "POST",
@@ -5256,7 +5419,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:960"
+			"source": "internal/api/routes.go:1022"
 		},
 		{
 			"method": "POST",
@@ -5299,7 +5462,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:968"
+			"source": "internal/api/routes.go:1030"
 		},
 		{
 			"method": "POST",
@@ -5323,7 +5486,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:970"
+			"source": "internal/api/routes.go:1032"
 		},
 		{
 			"method": "GET",
@@ -5347,7 +5510,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:971"
+			"source": "internal/api/routes.go:1033"
 		},
 		{
 			"method": "POST",
@@ -5443,7 +5606,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:969"
+			"source": "internal/api/routes.go:1031"
 		},
 		{
 			"method": "GET",
@@ -5467,7 +5630,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:966"
+			"source": "internal/api/routes.go:1028"
 		},
 		{
 			"method": "PATCH",
@@ -5563,7 +5726,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:967"
+			"source": "internal/api/routes.go:1029"
 		},
 		{
 			"method": "GET",
@@ -5594,7 +5757,7 @@
 			"paginated": true,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:965"
+			"source": "internal/api/routes.go:1027"
 		},
 		{
 			"method": "POST",
@@ -5610,7 +5773,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:964"
+			"source": "internal/api/routes.go:1026"
 		},
 		{
 			"method": "GET",
@@ -5649,7 +5812,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:978"
+			"source": "internal/api/routes.go:1040"
 		},
 		{
 			"method": "POST",
@@ -5684,8 +5847,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:996"
+			"openapi": true,
+			"source": "internal/api/routes.go:1058"
 		},
 		{
 			"method": "POST",
@@ -5870,7 +6033,7 @@
 			"paginated": true,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:947"
+			"source": "internal/api/routes.go:1009"
 		},
 		{
 			"method": "GET",
@@ -5885,8 +6048,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:953"
+			"openapi": true,
+			"source": "internal/api/routes.go:1015"
 		},
 		{
 			"method": "POST",
@@ -5953,8 +6116,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:954"
+			"openapi": true,
+			"source": "internal/api/routes.go:1016"
 		},
 		{
 			"method": "DELETE",
@@ -6006,7 +6169,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:949"
+			"source": "internal/api/routes.go:1011"
 		},
 		{
 			"method": "PATCH",
@@ -6114,7 +6277,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:950"
+			"source": "internal/api/routes.go:1012"
 		},
 		{
 			"method": "POST",
@@ -6134,7 +6297,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:948"
+			"source": "internal/api/routes.go:1010"
 		},
 		{
 			"method": "GET",
@@ -6147,8 +6310,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:1541"
+			"openapi": true,
+			"source": "internal/api/routes.go:1642"
 		},
 		{
 			"method": "POST",
@@ -6189,8 +6352,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:1542"
+			"openapi": true,
+			"source": "internal/api/routes.go:1643"
 		},
 		{
 			"method": "POST",
@@ -6211,8 +6374,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:1545"
+			"openapi": true,
+			"source": "internal/api/routes.go:1646"
 		},
 		{
 			"method": "POST",
@@ -6233,8 +6396,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:1544"
+			"openapi": true,
+			"source": "internal/api/routes.go:1645"
 		},
 		{
 			"method": "GET",
@@ -6255,8 +6418,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:1543"
+			"openapi": true,
+			"source": "internal/api/routes.go:1644"
 		},
 		{
 			"method": "PATCH",
@@ -6304,8 +6467,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:1546"
+			"openapi": true,
+			"source": "internal/api/routes.go:1647"
 		},
 		{
 			"method": "DELETE",
@@ -6329,7 +6492,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1516"
+			"source": "internal/api/routes.go:1617"
 		},
 		{
 			"method": "GET",
@@ -6353,7 +6516,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1514"
+			"source": "internal/api/routes.go:1615"
 		},
 		{
 			"method": "PATCH",
@@ -6457,7 +6620,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1515"
+			"source": "internal/api/routes.go:1616"
 		},
 		{
 			"method": "POST",
@@ -6610,7 +6773,7 @@
 			"paginated": true,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:1512"
+			"source": "internal/api/routes.go:1613"
 		},
 		{
 			"method": "POST",
@@ -6749,7 +6912,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1513"
+			"source": "internal/api/routes.go:1614"
 		},
 		{
 			"method": "GET",
@@ -6806,7 +6969,7 @@
 			"paginated": true,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:1510"
+			"source": "internal/api/routes.go:1611"
 		},
 		{
 			"method": "POST",
@@ -6906,7 +7069,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1511"
+			"source": "internal/api/routes.go:1612"
 		},
 		{
 			"method": "POST",
@@ -6941,8 +7104,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:1549"
+			"openapi": true,
+			"source": "internal/api/routes.go:1650"
 		},
 		{
 			"method": "POST",
@@ -6977,8 +7140,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:1548"
+			"openapi": true,
+			"source": "internal/api/routes.go:1649"
 		},
 		{
 			"method": "GET",
@@ -7015,8 +7178,8 @@
 			"multipart": false,
 			"paginated": true,
 			"returnsList": true,
-			"openapi": false,
-			"source": "internal/api/routes.go:1547"
+			"openapi": true,
+			"source": "internal/api/routes.go:1648"
 		},
 		{
 			"method": "GET",
@@ -7029,8 +7192,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:1534"
+			"openapi": true,
+			"source": "internal/api/routes.go:1635"
 		},
 		{
 			"method": "PUT",
@@ -7062,8 +7225,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:1536"
+			"openapi": true,
+			"source": "internal/api/routes.go:1637"
 		},
 		{
 			"method": "GET",
@@ -7076,8 +7239,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": true,
-			"openapi": false,
-			"source": "internal/api/routes.go:1535"
+			"openapi": true,
+			"source": "internal/api/routes.go:1636"
 		},
 		{
 			"method": "DELETE",
@@ -7108,7 +7271,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1505"
+			"source": "internal/api/routes.go:1606"
 		},
 		{
 			"method": "PATCH",
@@ -7158,7 +7321,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1504"
+			"source": "internal/api/routes.go:1605"
 		},
 		{
 			"method": "POST",
@@ -7201,7 +7364,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1503"
+			"source": "internal/api/routes.go:1604"
 		},
 		{
 			"method": "DELETE",
@@ -7225,7 +7388,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1502"
+			"source": "internal/api/routes.go:1603"
 		},
 		{
 			"method": "GET",
@@ -7249,7 +7412,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1500"
+			"source": "internal/api/routes.go:1601"
 		},
 		{
 			"method": "PATCH",
@@ -7284,7 +7447,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1501"
+			"source": "internal/api/routes.go:1602"
 		},
 		{
 			"method": "GET",
@@ -7300,7 +7463,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:1498"
+			"source": "internal/api/routes.go:1599"
 		},
 		{
 			"method": "POST",
@@ -7336,7 +7499,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1499"
+			"source": "internal/api/routes.go:1600"
 		},
 		{
 			"method": "GET",
@@ -7349,8 +7512,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:1532"
+			"openapi": true,
+			"source": "internal/api/routes.go:1633"
 		},
 		{
 			"method": "PUT",
@@ -7404,8 +7567,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:1533"
+			"openapi": true,
+			"source": "internal/api/routes.go:1634"
 		},
 		{
 			"method": "POST",
@@ -7430,8 +7593,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:1540"
+			"openapi": true,
+			"source": "internal/api/routes.go:1641"
 		},
 		{
 			"method": "POST",
@@ -7456,8 +7619,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:1539"
+			"openapi": true,
+			"source": "internal/api/routes.go:1640"
 		},
 		{
 			"method": "GET",
@@ -7470,8 +7633,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:1537"
+			"openapi": true,
+			"source": "internal/api/routes.go:1638"
 		},
 		{
 			"method": "POST",
@@ -7484,8 +7647,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:1538"
+			"openapi": true,
+			"source": "internal/api/routes.go:1639"
 		},
 		{
 			"method": "DELETE",
@@ -7509,7 +7672,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1524"
+			"source": "internal/api/routes.go:1625"
 		},
 		{
 			"method": "PATCH",
@@ -7560,7 +7723,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1523"
+			"source": "internal/api/routes.go:1624"
 		},
 		{
 			"method": "GET",
@@ -7576,7 +7739,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:1521"
+			"source": "internal/api/routes.go:1622"
 		},
 		{
 			"method": "POST",
@@ -7612,7 +7775,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1522"
+			"source": "internal/api/routes.go:1623"
 		},
 		{
 			"method": "DELETE",
@@ -7636,7 +7799,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1564"
+			"source": "internal/api/routes.go:1665"
 		},
 		{
 			"method": "GET",
@@ -7660,7 +7823,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1562"
+			"source": "internal/api/routes.go:1663"
 		},
 		{
 			"method": "PATCH",
@@ -7763,7 +7926,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1563"
+			"source": "internal/api/routes.go:1664"
 		},
 		{
 			"method": "POST",
@@ -7908,7 +8071,7 @@
 			"paginated": true,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:1560"
+			"source": "internal/api/routes.go:1661"
 		},
 		{
 			"method": "POST",
@@ -8039,7 +8202,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1561"
+			"source": "internal/api/routes.go:1662"
 		},
 		{
 			"method": "DELETE",
@@ -8091,7 +8254,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1559"
+			"source": "internal/api/routes.go:1660"
 		},
 		{
 			"method": "GET",
@@ -8156,7 +8319,7 @@
 			"paginated": true,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:1553"
+			"source": "internal/api/routes.go:1654"
 		},
 		{
 			"method": "PATCH",
@@ -8236,7 +8399,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1558"
+			"source": "internal/api/routes.go:1659"
 		},
 		{
 			"method": "POST",
@@ -8334,7 +8497,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1554"
+			"source": "internal/api/routes.go:1655"
 		},
 		{
 			"method": "POST",
@@ -8434,7 +8597,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1237"
+			"source": "internal/api/routes.go:1337"
 		},
 		{
 			"method": "DELETE",
@@ -8457,8 +8620,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:1489"
+			"openapi": true,
+			"source": "internal/api/routes.go:1590"
 		},
 		{
 			"method": "GET",
@@ -8488,8 +8651,8 @@
 			"multipart": false,
 			"paginated": true,
 			"returnsList": true,
-			"openapi": false,
-			"source": "internal/api/routes.go:1487"
+			"openapi": true,
+			"source": "internal/api/routes.go:1588"
 		},
 		{
 			"method": "POST",
@@ -8504,8 +8667,8 @@
 			"multipart": true,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:1488"
+			"openapi": true,
+			"source": "internal/api/routes.go:1589"
 		},
 		{
 			"method": "GET",
@@ -8529,7 +8692,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:603"
+			"source": "internal/api/routes.go:658"
 		},
 		{
 			"method": "POST",
@@ -8552,8 +8715,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:606"
+			"openapi": true,
+			"source": "internal/api/routes.go:661"
 		},
 		{
 			"method": "GET",
@@ -8576,8 +8739,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:620"
+			"openapi": true,
+			"source": "internal/api/routes.go:675"
 		},
 		{
 			"method": "GET",
@@ -8600,8 +8763,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:618"
+			"openapi": true,
+			"source": "internal/api/routes.go:673"
 		},
 		{
 			"method": "PUT",
@@ -8763,8 +8926,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:619"
+			"openapi": true,
+			"source": "internal/api/routes.go:674"
 		},
 		{
 			"method": "GET",
@@ -8788,7 +8951,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:609"
+			"source": "internal/api/routes.go:664"
 		},
 		{
 			"method": "PATCH",
@@ -8822,8 +8985,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:591"
+			"openapi": true,
+			"source": "internal/api/routes.go:646"
 		},
 		{
 			"method": "POST",
@@ -8846,8 +9009,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:600"
+			"openapi": true,
+			"source": "internal/api/routes.go:655"
 		},
 		{
 			"method": "POST",
@@ -8882,7 +9045,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:615"
+			"source": "internal/api/routes.go:670"
 		},
 		{
 			"method": "GET",
@@ -8906,7 +9069,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:614"
+			"source": "internal/api/routes.go:669"
 		},
 		{
 			"method": "POST",
@@ -8929,8 +9092,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:601"
+			"openapi": true,
+			"source": "internal/api/routes.go:656"
 		},
 		{
 			"method": "POST",
@@ -8953,8 +9116,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:602"
+			"openapi": true,
+			"source": "internal/api/routes.go:657"
 		},
 		{
 			"method": "POST",
@@ -9066,7 +9229,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:625"
+			"source": "internal/api/routes.go:684"
 		},
 		{
 			"method": "GET",
@@ -9090,7 +9253,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:607"
+			"source": "internal/api/routes.go:662"
 		},
 		{
 			"method": "PUT",
@@ -9125,7 +9288,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:608"
+			"source": "internal/api/routes.go:663"
 		},
 		{
 			"method": "POST",
@@ -9148,8 +9311,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:594"
+			"openapi": true,
+			"source": "internal/api/routes.go:649"
 		},
 		{
 			"method": "GET",
@@ -9172,8 +9335,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:589"
+			"openapi": true,
+			"source": "internal/api/routes.go:644"
 		},
 		{
 			"method": "PATCH",
@@ -9204,7 +9367,90 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:590"
+			"source": "internal/api/routes.go:645"
+		},
+		{
+			"method": "DELETE",
+			"path": "/emails/{id}/warmup-filter-tag",
+			"handler": "ClearWarmupFilterTag",
+			"doc": "ClearWarmupFilterTag turns the tag off; warmup mail carries no visible marker again.",
+			"apiPerms": [
+				"APIPermWriteEmails"
+			],
+			"params": [
+				{
+					"in": "path",
+					"name": "id",
+					"type": "string",
+					"required": true,
+					"description": ""
+				}
+			],
+			"body": null,
+			"multipart": false,
+			"paginated": false,
+			"returnsList": false,
+			"openapi": false,
+			"source": "internal/api/routes.go:680"
+		},
+		{
+			"method": "GET",
+			"path": "/emails/{id}/warmup-filter-tag",
+			"handler": "GetWarmupFilterTag",
+			"doc": "GetWarmupFilterTag returns the code appended to warmup mail this mailbox receives, null when off.",
+			"apiPerms": [
+				"APIPermReadEmails"
+			],
+			"params": [
+				{
+					"in": "path",
+					"name": "id",
+					"type": "string",
+					"required": true,
+					"description": ""
+				}
+			],
+			"body": null,
+			"multipart": false,
+			"paginated": false,
+			"returnsList": false,
+			"openapi": false,
+			"source": "internal/api/routes.go:677"
+		},
+		{
+			"method": "PUT",
+			"path": "/emails/{id}/warmup-filter-tag",
+			"handler": "SetWarmupFilterTag",
+			"doc": "PUT without a tag issues a new random one; a repeat with the same Idempotency-Key returns the first.",
+			"apiPerms": [
+				"APIPermWriteEmails"
+			],
+			"params": [
+				{
+					"in": "path",
+					"name": "id",
+					"type": "string",
+					"required": true,
+					"description": ""
+				},
+				{
+					"in": "body",
+					"name": "tag",
+					"type": "string",
+					"goType": "string",
+					"required": false,
+					"description": "Tag is the code to use; empty issues a new random one."
+				}
+			],
+			"body": {
+				"kind": "object",
+				"type": "setWarmupFilterTagRequest"
+			},
+			"multipart": false,
+			"paginated": false,
+			"returnsList": false,
+			"openapi": false,
+			"source": "internal/api/routes.go:679"
 		},
 		{
 			"method": "POST",
@@ -9239,7 +9485,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:623"
+			"source": "internal/api/routes.go:682"
 		},
 		{
 			"method": "GET",
@@ -9263,7 +9509,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:622"
+			"source": "internal/api/routes.go:681"
 		},
 		{
 			"method": "POST",
@@ -9287,7 +9533,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:596"
+			"source": "internal/api/routes.go:651"
 		},
 		{
 			"method": "POST",
@@ -9311,7 +9557,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:597"
+			"source": "internal/api/routes.go:652"
 		},
 		{
 			"method": "POST",
@@ -9335,7 +9581,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:595"
+			"source": "internal/api/routes.go:650"
 		},
 		{
 			"method": "POST",
@@ -9359,7 +9605,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:598"
+			"source": "internal/api/routes.go:653"
 		},
 		{
 			"method": "DELETE",
@@ -9383,7 +9629,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:624"
+			"source": "internal/api/routes.go:683"
 		},
 		{
 			"method": "GET",
@@ -9407,7 +9653,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:578"
+			"source": "internal/api/routes.go:616"
 		},
 		{
 			"method": "PATCH",
@@ -9705,7 +9951,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:579"
+			"source": "internal/api/routes.go:617"
 		},
 		{
 			"method": "GET",
@@ -9720,8 +9966,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:588"
+			"openapi": true,
+			"source": "internal/api/routes.go:638"
 		},
 		{
 			"method": "POST",
@@ -9748,8 +9994,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:584"
+			"openapi": true,
+			"source": "internal/api/routes.go:622"
 		},
 		{
 			"method": "POST",
@@ -9784,8 +10030,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:586"
+			"openapi": true,
+			"source": "internal/api/routes.go:624"
 		},
 		{
 			"method": "POST",
@@ -9820,8 +10066,611 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
+			"openapi": true,
+			"source": "internal/api/routes.go:623"
+		},
+		{
+			"method": "POST",
+			"path": "/emails/client-links/{id}/revoke",
+			"handler": "RevokeConnectLink",
+			"doc": "RevokeConnectLink is POST /v1/emails/client-links/:id/revoke. A repeat returns the already revoked link, so a retry is safe without an Idempotency-Key.",
+			"apiPerms": [
+				"APIPermWriteEmails"
+			],
+			"params": [
+				{
+					"in": "path",
+					"name": "id",
+					"type": "string",
+					"required": true,
+					"description": ""
+				}
+			],
+			"body": null,
+			"multipart": false,
+			"paginated": false,
+			"returnsList": false,
 			"openapi": false,
-			"source": "internal/api/routes.go:585"
+			"source": "internal/api/routes.go:643"
+		},
+		{
+			"method": "GET",
+			"path": "/emails/client-links/{id}/uses",
+			"handler": "ListConnectLinkUses",
+			"doc": "ListConnectLinkUses is GET /v1/emails/client-links/:id/uses: the mailboxes a link connected.",
+			"apiPerms": [
+				"APIPermReadEmails"
+			],
+			"params": [
+				{
+					"in": "path",
+					"name": "id",
+					"type": "string",
+					"required": true,
+					"description": ""
+				}
+			],
+			"body": null,
+			"multipart": false,
+			"paginated": false,
+			"returnsList": true,
+			"openapi": false,
+			"source": "internal/api/routes.go:642"
+		},
+		{
+			"method": "GET",
+			"path": "/emails/client-links",
+			"handler": "ListConnectLinks",
+			"doc": "ListConnectLinks is GET /v1/emails/client-links.",
+			"apiPerms": [
+				"APIPermReadEmails"
+			],
+			"params": [
+				{
+					"in": "query",
+					"name": "limit",
+					"type": "string",
+					"required": false,
+					"description": ""
+				},
+				{
+					"in": "query",
+					"name": "cursor",
+					"type": "string",
+					"required": false,
+					"description": ""
+				}
+			],
+			"body": null,
+			"multipart": false,
+			"paginated": true,
+			"returnsList": true,
+			"openapi": false,
+			"source": "internal/api/routes.go:641"
+		},
+		{
+			"method": "POST",
+			"path": "/emails/client-links",
+			"handler": "CreateConnectLink",
+			"doc": "Client connect links: a client connects mailboxes into the workspace without an account.",
+			"apiPerms": [
+				"APIPermWriteEmails"
+			],
+			"params": [
+				{
+					"in": "body",
+					"name": "label",
+					"type": "string",
+					"goType": "string",
+					"required": false,
+					"description": ""
+				},
+				{
+					"in": "body",
+					"name": "providers",
+					"type": "stringArray",
+					"goType": "[]string",
+					"required": false,
+					"description": ""
+				},
+				{
+					"in": "body",
+					"name": "max_mailboxes",
+					"type": "number",
+					"goType": "int",
+					"required": false,
+					"description": ""
+				},
+				{
+					"in": "body",
+					"name": "expires_in_days",
+					"type": "number",
+					"goType": "int",
+					"required": false,
+					"description": "ExpiresInDays is 1 to ClientConnectLinkMaxDays; 0 takes the default."
+				},
+				{
+					"in": "body",
+					"name": "tag_ids",
+					"type": "stringArray",
+					"goType": "[]string",
+					"required": false,
+					"description": ""
+				},
+				{
+					"in": "body",
+					"name": "warmup",
+					"type": "boolean",
+					"goType": "bool",
+					"required": false,
+					"description": ""
+				}
+			],
+			"body": {
+				"kind": "object",
+				"type": "models.NewClientConnectLink"
+			},
+			"multipart": false,
+			"paginated": false,
+			"returnsList": false,
+			"openapi": false,
+			"source": "internal/api/routes.go:640"
+		},
+		{
+			"method": "DELETE",
+			"path": "/emails/connect/links/{id}",
+			"handler": "RevokeMailboxConnectLink",
+			"doc": "RevokeMailboxConnectLink is DELETE /emails/connect/links/:id; a link that already connected is left as it is.",
+			"apiPerms": [
+				"APIPermConnectEmails"
+			],
+			"params": [
+				{
+					"in": "path",
+					"name": "id",
+					"type": "string",
+					"required": true,
+					"description": ""
+				}
+			],
+			"body": null,
+			"multipart": false,
+			"paginated": false,
+			"returnsList": false,
+			"openapi": false,
+			"source": "internal/api/routes.go:633"
+		},
+		{
+			"method": "GET",
+			"path": "/emails/connect/links/{id}",
+			"handler": "GetMailboxConnectLink",
+			"doc": "GetMailboxConnectLink is GET /emails/connect/links/:id.",
+			"apiPerms": [
+				"APIPermConnectEmails"
+			],
+			"params": [
+				{
+					"in": "path",
+					"name": "id",
+					"type": "string",
+					"required": true,
+					"description": ""
+				}
+			],
+			"body": null,
+			"multipart": false,
+			"paginated": false,
+			"returnsList": false,
+			"openapi": false,
+			"source": "internal/api/routes.go:632"
+		},
+		{
+			"method": "GET",
+			"path": "/emails/connect/links",
+			"handler": "ListMailboxConnectLinks",
+			"doc": "ListMailboxConnectLinks is GET /emails/connect/links?cursor=&limit=.",
+			"apiPerms": [
+				"APIPermConnectEmails"
+			],
+			"params": [
+				{
+					"in": "query",
+					"name": "limit",
+					"type": "string",
+					"required": false,
+					"description": ""
+				},
+				{
+					"in": "query",
+					"name": "cursor",
+					"type": "string",
+					"required": false,
+					"description": ""
+				}
+			],
+			"body": null,
+			"multipart": false,
+			"paginated": true,
+			"returnsList": true,
+			"openapi": false,
+			"source": "internal/api/routes.go:631"
+		},
+		{
+			"method": "POST",
+			"path": "/emails/connect/links",
+			"handler": "CreateMailboxConnectLink",
+			"doc": "CreateMailboxConnectLink is POST /emails/connect/links.",
+			"apiPerms": [
+				"APIPermConnectEmails"
+			],
+			"params": [
+				{
+					"in": "body",
+					"name": "provider",
+					"type": "options",
+					"goType": "InboxProvider",
+					"required": false,
+					"description": "",
+					"enum": [
+						"gmail",
+						"outlook",
+						"smtp_imap"
+					]
+				},
+				{
+					"in": "body",
+					"name": "email",
+					"type": "string",
+					"goType": "string",
+					"required": false,
+					"description": ""
+				},
+				{
+					"in": "body",
+					"name": "warmup",
+					"type": "json",
+					"goType": "*MailboxConnectWarmup",
+					"required": false,
+					"description": ""
+				},
+				{
+					"in": "body",
+					"name": "return_url",
+					"type": "string",
+					"goType": "string",
+					"required": false,
+					"description": ""
+				},
+				{
+					"in": "body",
+					"name": "expires_in_hours",
+					"type": "number",
+					"goType": "int",
+					"required": false,
+					"description": ""
+				}
+			],
+			"body": {
+				"kind": "object",
+				"type": "models.NewMailboxConnectLink"
+			},
+			"multipart": false,
+			"paginated": false,
+			"returnsList": false,
+			"openapi": false,
+			"source": "internal/api/routes.go:630"
+		},
+		{
+			"method": "POST",
+			"path": "/emails/connect/oauth/bulk",
+			"handler": "ConnectMailboxGrantBulk",
+			"doc": "ConnectMailboxGrantBulk is POST /emails/connect/oauth/bulk; it always answers 200 with a status per sign-in.",
+			"apiPerms": [
+				"APIPermConnectEmails"
+			],
+			"params": [
+				{
+					"in": "body",
+					"name": "grants",
+					"type": "json",
+					"goType": "[]models.MailboxOAuthGrant",
+					"required": false,
+					"description": ""
+				},
+				{
+					"in": "body",
+					"name": "warmup",
+					"type": "json",
+					"goType": "*models.MailboxConnectWarmup",
+					"required": false,
+					"description": ""
+				}
+			],
+			"body": {
+				"kind": "object",
+				"type": "ConnectGrantBulkRequest"
+			},
+			"multipart": false,
+			"paginated": false,
+			"returnsList": false,
+			"openapi": false,
+			"source": "internal/api/routes.go:629"
+		},
+		{
+			"method": "POST",
+			"path": "/emails/connect/oauth",
+			"handler": "ConnectMailboxGrant",
+			"doc": "ConnectMailboxGrant is POST /emails/connect/oauth: 201 for a new mailbox, 200 when it renewed one the workspace had.",
+			"apiPerms": [
+				"APIPermConnectEmails"
+			],
+			"params": [
+				{
+					"in": "body",
+					"name": "provider",
+					"type": "options",
+					"goType": "InboxProvider",
+					"required": false,
+					"description": "",
+					"enum": [
+						"gmail",
+						"outlook",
+						"smtp_imap"
+					]
+				},
+				{
+					"in": "body",
+					"name": "refresh_token",
+					"type": "string",
+					"goType": "string",
+					"required": false,
+					"description": ""
+				},
+				{
+					"in": "body",
+					"name": "code",
+					"type": "string",
+					"goType": "string",
+					"required": false,
+					"description": ""
+				},
+				{
+					"in": "body",
+					"name": "redirect_uri",
+					"type": "string",
+					"goType": "string",
+					"required": false,
+					"description": ""
+				},
+				{
+					"in": "body",
+					"name": "code_verifier",
+					"type": "string",
+					"goType": "string",
+					"required": false,
+					"description": ""
+				},
+				{
+					"in": "body",
+					"name": "email",
+					"type": "string",
+					"goType": "string",
+					"required": false,
+					"description": "Email, when set, must be the address the sign-in belongs to."
+				},
+				{
+					"in": "body",
+					"name": "warmup",
+					"type": "json",
+					"goType": "*models.MailboxConnectWarmup",
+					"required": false,
+					"description": ""
+				}
+			],
+			"body": {
+				"kind": "object",
+				"type": "ConnectGrantRequest"
+			},
+			"multipart": false,
+			"paginated": false,
+			"returnsList": false,
+			"openapi": false,
+			"source": "internal/api/routes.go:628"
+		},
+		{
+			"method": "POST",
+			"path": "/emails/connect/smtp-imap/bulk",
+			"handler": "ConnectMailboxSMTPBulk",
+			"doc": "ConnectMailboxSMTPBulk is POST /emails/connect/smtp-imap/bulk; it always answers 200 with a status per row.",
+			"apiPerms": [
+				"APIPermConnectEmails"
+			],
+			"params": [
+				{
+					"in": "body",
+					"name": "accounts",
+					"type": "json",
+					"goType": "[]OnboardingSMTPIMAPRequest",
+					"required": false,
+					"description": ""
+				},
+				{
+					"in": "body",
+					"name": "warmup",
+					"type": "json",
+					"goType": "*models.MailboxConnectWarmup",
+					"required": false,
+					"description": ""
+				}
+			],
+			"body": {
+				"kind": "object",
+				"type": "ConnectSMTPBulkRequest"
+			},
+			"multipart": false,
+			"paginated": false,
+			"returnsList": false,
+			"openapi": false,
+			"source": "internal/api/routes.go:627"
+		},
+		{
+			"method": "POST",
+			"path": "/emails/connect/smtp-imap",
+			"handler": "ConnectMailboxSMTP",
+			"doc": "Partnership tools: connecting mailboxes with their credentials, sign-in links and the workspace's own OAuth apps.",
+			"apiPerms": [
+				"APIPermConnectEmails"
+			],
+			"params": [
+				{
+					"in": "body",
+					"name": "email",
+					"type": "string",
+					"goType": "string",
+					"required": false,
+					"description": ""
+				},
+				{
+					"in": "body",
+					"name": "name",
+					"type": "string",
+					"goType": "string",
+					"required": false,
+					"description": ""
+				},
+				{
+					"in": "body",
+					"name": "smtp",
+					"type": "json",
+					"goType": "*models.Service",
+					"required": false,
+					"description": ""
+				},
+				{
+					"in": "body",
+					"name": "imap",
+					"type": "json",
+					"goType": "*models.Service",
+					"required": false,
+					"description": ""
+				},
+				{
+					"in": "body",
+					"name": "warmup",
+					"type": "json",
+					"goType": "*models.MailboxConnectWarmup",
+					"required": false,
+					"description": ""
+				}
+			],
+			"body": {
+				"kind": "object",
+				"type": "ConnectSMTPRequest"
+			},
+			"multipart": false,
+			"paginated": false,
+			"returnsList": false,
+			"openapi": false,
+			"source": "internal/api/routes.go:626"
+		},
+		{
+			"method": "DELETE",
+			"path": "/emails/oauth-apps/{provider}",
+			"handler": "DeleteMailboxOAuthApp",
+			"doc": "DeleteMailboxOAuthApp is DELETE /emails/oauth-apps/:provider; refused while mailboxes hold grants from it.",
+			"apiPerms": [
+				"APIPermConnectEmails"
+			],
+			"params": [
+				{
+					"in": "path",
+					"name": "provider",
+					"type": "string",
+					"required": true,
+					"description": ""
+				}
+			],
+			"body": null,
+			"multipart": false,
+			"paginated": false,
+			"returnsList": false,
+			"openapi": false,
+			"source": "internal/api/routes.go:636"
+		},
+		{
+			"method": "PUT",
+			"path": "/emails/oauth-apps/{provider}",
+			"handler": "PutMailboxOAuthApp",
+			"doc": "PutMailboxOAuthApp is PUT /emails/oauth-apps/:provider; an empty client_secret keeps the stored one.",
+			"apiPerms": [
+				"APIPermConnectEmails"
+			],
+			"params": [
+				{
+					"in": "path",
+					"name": "provider",
+					"type": "string",
+					"required": true,
+					"description": ""
+				},
+				{
+					"in": "body",
+					"name": "client_id",
+					"type": "string",
+					"goType": "string",
+					"required": false,
+					"description": ""
+				},
+				{
+					"in": "body",
+					"name": "client_secret",
+					"type": "string",
+					"goType": "string",
+					"required": false,
+					"description": ""
+				},
+				{
+					"in": "body",
+					"name": "app_name",
+					"type": "string",
+					"goType": "string",
+					"required": false,
+					"description": ""
+				},
+				{
+					"in": "body",
+					"name": "redirect_url",
+					"type": "string",
+					"goType": "string",
+					"required": false,
+					"description": ""
+				}
+			],
+			"body": {
+				"kind": "object",
+				"type": "models.MailboxOAuthAppInput"
+			},
+			"multipart": false,
+			"paginated": false,
+			"returnsList": false,
+			"openapi": false,
+			"source": "internal/api/routes.go:635"
+		},
+		{
+			"method": "GET",
+			"path": "/emails/oauth-apps",
+			"handler": "ListMailboxOAuthApps",
+			"doc": "ListMailboxOAuthApps is GET /emails/oauth-apps: the workspace's own Google and Microsoft clients, secrets never included.",
+			"apiPerms": [
+				"APIPermConnectEmails"
+			],
+			"params": [],
+			"body": null,
+			"multipart": false,
+			"paginated": false,
+			"returnsList": true,
+			"openapi": false,
+			"source": "internal/api/routes.go:634"
 		},
 		{
 			"method": "PATCH",
@@ -9864,8 +10713,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:582"
+			"openapi": true,
+			"source": "internal/api/routes.go:620"
 		},
 		{
 			"method": "POST",
@@ -9900,7 +10749,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:621"
+			"source": "internal/api/routes.go:676"
 		},
 		{
 			"method": "GET",
@@ -9945,7 +10794,7 @@
 			"paginated": true,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:577"
+			"source": "internal/api/routes.go:615"
 		},
 		{
 			"method": "PATCH",
@@ -9978,7 +10827,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:1060"
+			"source": "internal/api/routes.go:1159"
 		},
 		{
 			"method": "DELETE",
@@ -10000,7 +10849,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1060"
+			"source": "internal/api/routes.go:1159"
 		},
 		{
 			"method": "PATCH",
@@ -10041,7 +10890,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1060"
+			"source": "internal/api/routes.go:1159"
 		},
 		{
 			"method": "POST",
@@ -10075,7 +10924,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1060"
+			"source": "internal/api/routes.go:1159"
 		},
 		{
 			"method": "DELETE",
@@ -10105,8 +10954,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:1057"
+			"openapi": true,
+			"source": "internal/api/routes.go:1156"
 		},
 		{
 			"method": "POST",
@@ -10136,8 +10985,8 @@
 			"multipart": true,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:1056"
+			"openapi": true,
+			"source": "internal/api/routes.go:1155"
 		},
 		{
 			"method": "GET",
@@ -10167,8 +11016,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:1055"
+			"openapi": true,
+			"source": "internal/api/routes.go:1154"
 		},
 		{
 			"method": "GET",
@@ -10198,8 +11047,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:1053"
+			"openapi": true,
+			"source": "internal/api/routes.go:1152"
 		},
 		{
 			"method": "DELETE",
@@ -10229,8 +11078,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:1052"
+			"openapi": true,
+			"source": "internal/api/routes.go:1151"
 		},
 		{
 			"method": "GET",
@@ -10257,6 +11106,13 @@
 				},
 				{
 					"in": "query",
+					"name": "cursor",
+					"type": "string",
+					"required": false,
+					"description": ""
+				},
+				{
+					"in": "query",
 					"name": "before",
 					"type": "string",
 					"required": false,
@@ -10265,10 +11121,10 @@
 			],
 			"body": null,
 			"multipart": false,
-			"paginated": false,
+			"paginated": true,
 			"returnsList": true,
-			"openapi": false,
-			"source": "internal/api/routes.go:1051"
+			"openapi": true,
+			"source": "internal/api/routes.go:1150"
 		},
 		{
 			"method": "DELETE",
@@ -10291,8 +11147,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:1050"
+			"openapi": true,
+			"source": "internal/api/routes.go:1149"
 		},
 		{
 			"method": "GET",
@@ -10315,8 +11171,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:1048"
+			"openapi": true,
+			"source": "internal/api/routes.go:1147"
 		},
 		{
 			"method": "PATCH",
@@ -10435,8 +11291,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:1049"
+			"openapi": true,
+			"source": "internal/api/routes.go:1148"
 		},
 		{
 			"method": "GET",
@@ -10451,8 +11307,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:1040"
+			"openapi": true,
+			"source": "internal/api/routes.go:1139"
 		},
 		{
 			"method": "POST",
@@ -10467,8 +11323,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:1046"
+			"openapi": true,
+			"source": "internal/api/routes.go:1145"
 		},
 		{
 			"method": "GET",
@@ -10483,8 +11339,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:1044"
+			"openapi": true,
+			"source": "internal/api/routes.go:1143"
 		},
 		{
 			"method": "PUT",
@@ -10511,8 +11367,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:1045"
+			"openapi": true,
+			"source": "internal/api/routes.go:1144"
 		},
 		{
 			"method": "GET",
@@ -10527,8 +11383,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": true,
-			"openapi": false,
-			"source": "internal/api/routes.go:1039"
+			"openapi": true,
+			"source": "internal/api/routes.go:1138"
 		},
 		{
 			"method": "POST",
@@ -10555,8 +11411,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:1047"
+			"openapi": true,
+			"source": "internal/api/routes.go:1146"
 		},
 		{
 			"method": "POST",
@@ -10632,8 +11488,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:862"
+			"openapi": true,
+			"source": "internal/api/routes.go:924"
 		},
 		{
 			"method": "POST",
@@ -10685,8 +11541,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:860"
+			"openapi": true,
+			"source": "internal/api/routes.go:922"
 		},
 		{
 			"method": "POST",
@@ -10723,7 +11579,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:859"
+			"source": "internal/api/routes.go:921"
 		},
 		{
 			"method": "GET",
@@ -10752,7 +11608,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1336"
+			"source": "internal/api/routes.go:1436"
 		},
 		{
 			"method": "GET",
@@ -10781,7 +11637,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:1334"
+			"source": "internal/api/routes.go:1434"
 		},
 		{
 			"method": "POST",
@@ -10856,7 +11712,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1335"
+			"source": "internal/api/routes.go:1435"
 		},
 		{
 			"method": "POST",
@@ -10885,7 +11741,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1332"
+			"source": "internal/api/routes.go:1432"
 		},
 		{
 			"method": "DELETE",
@@ -10914,7 +11770,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1333"
+			"source": "internal/api/routes.go:1433"
 		},
 		{
 			"method": "PATCH",
@@ -10943,7 +11799,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1331"
+			"source": "internal/api/routes.go:1431"
 		},
 		{
 			"method": "GET",
@@ -10965,7 +11821,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:1329"
+			"source": "internal/api/routes.go:1429"
 		},
 		{
 			"method": "POST",
@@ -11054,7 +11910,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1330"
+			"source": "internal/api/routes.go:1430"
 		},
 		{
 			"method": "POST",
@@ -11095,7 +11951,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1328"
+			"source": "internal/api/routes.go:1428"
 		},
 		{
 			"method": "PUT",
@@ -11128,7 +11984,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1326"
+			"source": "internal/api/routes.go:1426"
 		},
 		{
 			"method": "GET",
@@ -11150,7 +12006,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:1327"
+			"source": "internal/api/routes.go:1427"
 		},
 		{
 			"method": "GET",
@@ -11172,7 +12028,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1325"
+			"source": "internal/api/routes.go:1425"
 		},
 		{
 			"method": "GET",
@@ -11188,7 +12044,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:1300"
+			"source": "internal/api/routes.go:1400"
 		},
 		{
 			"method": "GET",
@@ -11202,7 +12058,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:1279"
+			"source": "internal/api/routes.go:1379"
 		},
 		{
 			"method": "GET",
@@ -11224,7 +12080,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1340"
+			"source": "internal/api/routes.go:1440"
 		},
 		{
 			"method": "PATCH",
@@ -11281,7 +12137,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1341"
+			"source": "internal/api/routes.go:1441"
 		},
 		{
 			"method": "GET",
@@ -11303,7 +12159,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1282"
+			"source": "internal/api/routes.go:1382"
 		},
 		{
 			"method": "GET",
@@ -11332,7 +12188,7 @@
 			"paginated": true,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:1281"
+			"source": "internal/api/routes.go:1381"
 		},
 		{
 			"method": "PATCH",
@@ -11378,7 +12234,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1286"
+			"source": "internal/api/routes.go:1386"
 		},
 		{
 			"method": "DELETE",
@@ -11407,7 +12263,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1290"
+			"source": "internal/api/routes.go:1390"
 		},
 		{
 			"method": "GET",
@@ -11429,7 +12285,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:1288"
+			"source": "internal/api/routes.go:1388"
 		},
 		{
 			"method": "POST",
@@ -11486,7 +12342,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1289"
+			"source": "internal/api/routes.go:1389"
 		},
 		{
 			"method": "GET",
@@ -11508,7 +12364,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:1291"
+			"source": "internal/api/routes.go:1391"
 		},
 		{
 			"method": "PUT",
@@ -11549,7 +12405,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1292"
+			"source": "internal/api/routes.go:1392"
 		},
 		{
 			"method": "POST",
@@ -11614,7 +12470,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1298"
+			"source": "internal/api/routes.go:1398"
 		},
 		{
 			"method": "POST",
@@ -11636,7 +12492,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1296"
+			"source": "internal/api/routes.go:1396"
 		},
 		{
 			"method": "GET",
@@ -11658,7 +12514,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:1293"
+			"source": "internal/api/routes.go:1393"
 		},
 		{
 			"method": "PUT",
@@ -11691,7 +12547,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1295"
+			"source": "internal/api/routes.go:1395"
 		},
 		{
 			"method": "POST",
@@ -11713,7 +12569,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1297"
+			"source": "internal/api/routes.go:1397"
 		},
 		{
 			"method": "GET",
@@ -11735,7 +12591,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1294"
+			"source": "internal/api/routes.go:1394"
 		},
 		{
 			"method": "DELETE",
@@ -11757,7 +12613,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1287"
+			"source": "internal/api/routes.go:1387"
 		},
 		{
 			"method": "GET",
@@ -11779,7 +12635,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1285"
+			"source": "internal/api/routes.go:1385"
 		},
 		{
 			"method": "GET",
@@ -11793,7 +12649,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:1283"
+			"source": "internal/api/routes.go:1383"
 		},
 		{
 			"method": "POST",
@@ -11835,7 +12691,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1284"
+			"source": "internal/api/routes.go:1384"
 		},
 		{
 			"method": "POST",
@@ -11868,7 +12724,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1319"
+			"source": "internal/api/routes.go:1419"
 		},
 		{
 			"method": "GET",
@@ -11924,7 +12780,7 @@
 			"paginated": true,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:1318"
+			"source": "internal/api/routes.go:1418"
 		},
 		{
 			"method": "GET",
@@ -11953,7 +12809,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:1311"
+			"source": "internal/api/routes.go:1411"
 		},
 		{
 			"method": "POST",
@@ -11982,7 +12838,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1316"
+			"source": "internal/api/routes.go:1416"
 		},
 		{
 			"method": "DELETE",
@@ -12011,7 +12867,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1317"
+			"source": "internal/api/routes.go:1417"
 		},
 		{
 			"method": "PATCH",
@@ -12040,7 +12896,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1315"
+			"source": "internal/api/routes.go:1415"
 		},
 		{
 			"method": "GET",
@@ -12062,7 +12918,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:1313"
+			"source": "internal/api/routes.go:1413"
 		},
 		{
 			"method": "POST",
@@ -12163,7 +13019,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1314"
+			"source": "internal/api/routes.go:1414"
 		},
 		{
 			"method": "POST",
@@ -12216,7 +13072,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1312"
+			"source": "internal/api/routes.go:1412"
 		},
 		{
 			"method": "GET",
@@ -12245,7 +13101,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:1310"
+			"source": "internal/api/routes.go:1410"
 		},
 		{
 			"method": "GET",
@@ -12267,7 +13123,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1308"
+			"source": "internal/api/routes.go:1408"
 		},
 		{
 			"method": "GET",
@@ -12299,7 +13155,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1305"
+			"source": "internal/api/routes.go:1405"
 		},
 		{
 			"method": "GET",
@@ -12321,7 +13177,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1306"
+			"source": "internal/api/routes.go:1406"
 		},
 		{
 			"method": "PUT",
@@ -12402,7 +13258,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1307"
+			"source": "internal/api/routes.go:1407"
 		},
 		{
 			"method": "POST",
@@ -12424,7 +13280,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1320"
+			"source": "internal/api/routes.go:1420"
 		},
 		{
 			"method": "GET",
@@ -12453,7 +13309,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:1309"
+			"source": "internal/api/routes.go:1409"
 		},
 		{
 			"method": "GET",
@@ -12466,8 +13322,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:1436"
+			"openapi": true,
+			"source": "internal/api/routes.go:1536"
 		},
 		{
 			"method": "POST",
@@ -12508,8 +13364,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:1438"
+			"openapi": true,
+			"source": "internal/api/routes.go:1538"
 		},
 		{
 			"method": "POST",
@@ -12542,8 +13398,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:1437"
+			"openapi": true,
+			"source": "internal/api/routes.go:1537"
 		},
 		{
 			"method": "POST",
@@ -12564,8 +13420,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:1445"
+			"openapi": true,
+			"source": "internal/api/routes.go:1545"
 		},
 		{
 			"method": "DELETE",
@@ -12586,8 +13442,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:1444"
+			"openapi": true,
+			"source": "internal/api/routes.go:1544"
 		},
 		{
 			"method": "GET",
@@ -12608,8 +13464,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:1442"
+			"openapi": true,
+			"source": "internal/api/routes.go:1542"
 		},
 		{
 			"method": "PATCH",
@@ -12734,8 +13590,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:1443"
+			"openapi": true,
+			"source": "internal/api/routes.go:1543"
 		},
 		{
 			"method": "GET",
@@ -12763,8 +13619,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": true,
-			"openapi": false,
-			"source": "internal/api/routes.go:1440"
+			"openapi": true,
+			"source": "internal/api/routes.go:1540"
 		},
 		{
 			"method": "POST",
@@ -12882,8 +13738,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:1441"
+			"openapi": true,
+			"source": "internal/api/routes.go:1541"
 		},
 		{
 			"method": "POST",
@@ -12911,8 +13767,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:941"
+			"openapi": true,
+			"source": "internal/api/routes.go:1003"
 		},
 		{
 			"method": "DELETE",
@@ -12940,8 +13796,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:940"
+			"openapi": true,
+			"source": "internal/api/routes.go:1002"
 		},
 		{
 			"method": "PATCH",
@@ -13028,8 +13884,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:939"
+			"openapi": true,
+			"source": "internal/api/routes.go:1001"
 		},
 		{
 			"method": "POST",
@@ -13109,8 +13965,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:938"
+			"openapi": true,
+			"source": "internal/api/routes.go:1000"
 		},
 		{
 			"method": "GET",
@@ -13131,8 +13987,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:936"
+			"openapi": true,
+			"source": "internal/api/routes.go:998"
 		},
 		{
 			"method": "PATCH",
@@ -13202,8 +14058,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:937"
+			"openapi": true,
+			"source": "internal/api/routes.go:999"
 		},
 		{
 			"method": "GET",
@@ -13216,8 +14072,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:920"
+			"openapi": true,
+			"source": "internal/api/routes.go:982"
 		},
 		{
 			"method": "POST",
@@ -13322,8 +14178,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:932"
+			"openapi": true,
+			"source": "internal/api/routes.go:994"
 		},
 		{
 			"method": "GET",
@@ -13344,8 +14200,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:931"
+			"openapi": true,
+			"source": "internal/api/routes.go:993"
 		},
 		{
 			"method": "GET",
@@ -13358,8 +14214,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": true,
-			"openapi": false,
-			"source": "internal/api/routes.go:930"
+			"openapi": true,
+			"source": "internal/api/routes.go:992"
 		},
 		{
 			"method": "POST",
@@ -13407,6 +14263,14 @@
 					"goType": "*bool",
 					"required": false,
 					"description": "People also finds the people each site names and works out their addresses."
+				},
+				{
+					"in": "body",
+					"name": "web_search",
+					"type": "boolean",
+					"goType": "*bool",
+					"required": false,
+					"description": "WebSearch lets the run search the web for a missing site or a blocked site's addresses, when a search is set up; on unless false."
 				}
 			],
 			"body": {
@@ -13416,8 +14280,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:929"
+			"openapi": true,
+			"source": "internal/api/routes.go:991"
 		},
 		{
 			"method": "POST",
@@ -13482,8 +14346,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:926"
+			"openapi": true,
+			"source": "internal/api/routes.go:988"
 		},
 		{
 			"method": "POST",
@@ -13539,8 +14403,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:925"
+			"openapi": true,
+			"source": "internal/api/routes.go:987"
 		},
 		{
 			"method": "GET",
@@ -13582,8 +14446,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": true,
-			"openapi": false,
-			"source": "internal/api/routes.go:921"
+			"openapi": true,
+			"source": "internal/api/routes.go:983"
 		},
 		{
 			"method": "POST",
@@ -13639,8 +14503,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": true,
-			"openapi": false,
-			"source": "internal/api/routes.go:924"
+			"openapi": true,
+			"source": "internal/api/routes.go:986"
 		},
 		{
 			"method": "POST",
@@ -13696,8 +14560,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": true,
-			"openapi": false,
-			"source": "internal/api/routes.go:923"
+			"openapi": true,
+			"source": "internal/api/routes.go:985"
 		},
 		{
 			"method": "DELETE",
@@ -13718,8 +14582,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:935"
+			"openapi": true,
+			"source": "internal/api/routes.go:997"
 		},
 		{
 			"method": "PATCH",
@@ -13759,8 +14623,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:934"
+			"openapi": true,
+			"source": "internal/api/routes.go:996"
 		},
 		{
 			"method": "GET",
@@ -13781,8 +14645,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": true,
-			"openapi": false,
-			"source": "internal/api/routes.go:933"
+			"openapi": true,
+			"source": "internal/api/routes.go:995"
 		},
 		{
 			"method": "POST",
@@ -13877,8 +14741,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": true,
-			"openapi": false,
-			"source": "internal/api/routes.go:922"
+			"openapi": true,
+			"source": "internal/api/routes.go:984"
 		},
 		{
 			"method": "DELETE",
@@ -13919,8 +14783,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:928"
+			"openapi": true,
+			"source": "internal/api/routes.go:990"
 		},
 		{
 			"method": "PATCH",
@@ -14007,8 +14871,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:927"
+			"openapi": true,
+			"source": "internal/api/routes.go:989"
 		},
 		{
 			"method": "DELETE",
@@ -14029,8 +14893,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:1355"
+			"openapi": true,
+			"source": "internal/api/routes.go:1455"
 		},
 		{
 			"method": "GET",
@@ -14043,8 +14907,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:1353"
+			"openapi": true,
+			"source": "internal/api/routes.go:1453"
 		},
 		{
 			"method": "GET",
@@ -14093,8 +14957,8 @@
 			"multipart": false,
 			"paginated": true,
 			"returnsList": true,
-			"openapi": false,
-			"source": "internal/api/routes.go:1352"
+			"openapi": true,
+			"source": "internal/api/routes.go:1452"
 		},
 		{
 			"method": "POST",
@@ -14175,8 +15039,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:1354"
+			"openapi": true,
+			"source": "internal/api/routes.go:1454"
 		},
 		{
 			"method": "GET",
@@ -14189,8 +15053,222 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
+			"openapi": true,
+			"source": "internal/api/routes.go:1686"
+		},
+		{
+			"method": "POST",
+			"path": "/migrations/{id}/cancel",
+			"handler": "CancelToolMigration",
+			"doc": "CancelToolMigration is POST /migrations/:id/cancel.",
+			"apiPerms": [],
+			"params": [
+				{
+					"in": "path",
+					"name": "id",
+					"type": "string",
+					"required": true,
+					"description": ""
+				}
+			],
+			"body": null,
+			"multipart": false,
+			"paginated": false,
+			"returnsList": false,
 			"openapi": false,
-			"source": "internal/api/routes.go:1585"
+			"source": "internal/api/routes.go:1088"
+		},
+		{
+			"method": "POST",
+			"path": "/migrations/{id}/link-senders",
+			"handler": "LinkToolMigrationSenders",
+			"doc": "LinkToolMigrationSenders is POST /migrations/:id/link-senders.",
+			"apiPerms": [],
+			"params": [
+				{
+					"in": "path",
+					"name": "id",
+					"type": "string",
+					"required": true,
+					"description": ""
+				}
+			],
+			"body": null,
+			"multipart": false,
+			"paginated": false,
+			"returnsList": false,
+			"openapi": false,
+			"source": "internal/api/routes.go:1089"
+		},
+		{
+			"method": "POST",
+			"path": "/migrations/{id}/start",
+			"handler": "StartToolMigration",
+			"doc": "StartToolMigration is POST /migrations/:id/start.",
+			"apiPerms": [],
+			"params": [
+				{
+					"in": "path",
+					"name": "id",
+					"type": "string",
+					"required": true,
+					"description": ""
+				},
+				{
+					"in": "body",
+					"name": "options",
+					"type": "json",
+					"goType": "ToolMigrationOptions",
+					"required": false,
+					"description": ""
+				},
+				{
+					"in": "body",
+					"name": "targets",
+					"type": "json",
+					"goType": "[]ToolMigrationTargetChoice",
+					"required": false,
+					"description": "Targets maps source workspaces onto Warmbly workspaces. A workspace's own migration sends none: every source workspace lands in it. An agency names each, either an existing client or a new one to create."
+				}
+			],
+			"body": {
+				"kind": "object",
+				"type": "models.StartToolMigration"
+			},
+			"multipart": false,
+			"paginated": false,
+			"returnsList": false,
+			"openapi": false,
+			"source": "internal/api/routes.go:1087"
+		},
+		{
+			"method": "DELETE",
+			"path": "/migrations/{id}",
+			"handler": "DismissToolMigration",
+			"doc": "DismissToolMigration is DELETE /migrations/:id.",
+			"apiPerms": [],
+			"params": [
+				{
+					"in": "path",
+					"name": "id",
+					"type": "string",
+					"required": true,
+					"description": ""
+				}
+			],
+			"body": null,
+			"multipart": false,
+			"paginated": false,
+			"returnsList": false,
+			"openapi": false,
+			"source": "internal/api/routes.go:1090"
+		},
+		{
+			"method": "GET",
+			"path": "/migrations/{id}",
+			"handler": "GetToolMigration",
+			"doc": "GetToolMigration is GET /migrations/:id.",
+			"apiPerms": [],
+			"params": [
+				{
+					"in": "path",
+					"name": "id",
+					"type": "string",
+					"required": true,
+					"description": ""
+				}
+			],
+			"body": null,
+			"multipart": false,
+			"paginated": false,
+			"returnsList": false,
+			"openapi": false,
+			"source": "internal/api/routes.go:1086"
+		},
+		{
+			"method": "GET",
+			"path": "/migrations/providers",
+			"handler": "ListToolMigrationProviders",
+			"doc": "ListToolMigrationProviders is GET /migrations/providers and its agency twin.",
+			"apiPerms": [],
+			"params": [],
+			"body": null,
+			"multipart": false,
+			"paginated": false,
+			"returnsList": true,
+			"openapi": false,
+			"source": "internal/api/routes.go:1083"
+		},
+		{
+			"method": "GET",
+			"path": "/migrations",
+			"handler": "ListToolMigrations",
+			"doc": "ListToolMigrations is GET /migrations.",
+			"apiPerms": [],
+			"params": [
+				{
+					"in": "query",
+					"name": "limit",
+					"type": "string",
+					"required": false,
+					"description": ""
+				},
+				{
+					"in": "query",
+					"name": "cursor",
+					"type": "string",
+					"required": false,
+					"description": ""
+				}
+			],
+			"body": null,
+			"multipart": false,
+			"paginated": true,
+			"returnsList": true,
+			"openapi": false,
+			"source": "internal/api/routes.go:1084"
+		},
+		{
+			"method": "POST",
+			"path": "/migrations",
+			"handler": "CreateToolMigration",
+			"doc": "CreateToolMigration is POST /migrations: it checks the keys and starts the scan.",
+			"apiPerms": [],
+			"params": [
+				{
+					"in": "body",
+					"name": "provider",
+					"type": "string",
+					"goType": "source.ProviderID",
+					"required": false,
+					"description": ""
+				},
+				{
+					"in": "body",
+					"name": "label",
+					"type": "string",
+					"goType": "string",
+					"required": false,
+					"description": ""
+				},
+				{
+					"in": "body",
+					"name": "credentials",
+					"type": "json",
+					"goType": "[]source.Credentials",
+					"required": false,
+					"description": "Credentials holds one set per key; most tools need one, an agency on a tool with a key per workspace adds one for each."
+				}
+			],
+			"body": {
+				"kind": "object",
+				"type": "models.NewToolMigration"
+			},
+			"multipart": false,
+			"paginated": false,
+			"returnsList": false,
+			"openapi": false,
+			"source": "internal/api/routes.go:1085"
 		},
 		{
 			"method": "POST",
@@ -14203,8 +15281,8 @@
 			"multipart": true,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:1411"
+			"openapi": true,
+			"source": "internal/api/routes.go:1511"
 		},
 		{
 			"method": "DELETE",
@@ -14225,8 +15303,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:1397"
+			"openapi": true,
+			"source": "internal/api/routes.go:1497"
 		},
 		{
 			"method": "GET",
@@ -14247,8 +15325,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:1395"
+			"openapi": true,
+			"source": "internal/api/routes.go:1495"
 		},
 		{
 			"method": "PUT",
@@ -14328,8 +15406,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:1396"
+			"openapi": true,
+			"source": "internal/api/routes.go:1496"
 		},
 		{
 			"method": "DELETE",
@@ -14350,8 +15428,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:1393"
+			"openapi": true,
+			"source": "internal/api/routes.go:1493"
 		},
 		{
 			"method": "POST",
@@ -14372,8 +15450,8 @@
 			"multipart": true,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:1392"
+			"openapi": true,
+			"source": "internal/api/routes.go:1492"
 		},
 		{
 			"method": "POST",
@@ -14394,8 +15472,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:1390"
+			"openapi": true,
+			"source": "internal/api/routes.go:1490"
 		},
 		{
 			"method": "GET",
@@ -14444,8 +15522,8 @@
 			"multipart": false,
 			"paginated": true,
 			"returnsList": true,
-			"openapi": false,
-			"source": "internal/api/routes.go:1403"
+			"openapi": true,
+			"source": "internal/api/routes.go:1503"
 		},
 		{
 			"method": "GET",
@@ -14466,8 +15544,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": true,
-			"openapi": false,
-			"source": "internal/api/routes.go:1402"
+			"openapi": true,
+			"source": "internal/api/routes.go:1502"
 		},
 		{
 			"method": "POST",
@@ -14488,8 +15566,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:1401"
+			"openapi": true,
+			"source": "internal/api/routes.go:1501"
 		},
 		{
 			"method": "GET",
@@ -14510,8 +15588,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:1400"
+			"openapi": true,
+			"source": "internal/api/routes.go:1500"
 		},
 		{
 			"method": "DELETE",
@@ -14532,8 +15610,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:1389"
+			"openapi": true,
+			"source": "internal/api/routes.go:1489"
 		},
 		{
 			"method": "GET",
@@ -14554,8 +15632,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:1387"
+			"openapi": true,
+			"source": "internal/api/routes.go:1487"
 		},
 		{
 			"method": "PATCH",
@@ -14651,8 +15729,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:1388"
+			"openapi": true,
+			"source": "internal/api/routes.go:1488"
 		},
 		{
 			"method": "GET",
@@ -14665,8 +15743,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": true,
-			"openapi": false,
-			"source": "internal/api/routes.go:1385"
+			"openapi": true,
+			"source": "internal/api/routes.go:1485"
 		},
 		{
 			"method": "POST",
@@ -14755,8 +15833,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:1386"
+			"openapi": true,
+			"source": "internal/api/routes.go:1486"
 		},
 		{
 			"method": "GET",
@@ -14770,7 +15848,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1216"
+			"source": "internal/api/routes.go:1316"
 		},
 		{
 			"method": "PATCH",
@@ -14796,7 +15874,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1217"
+			"source": "internal/api/routes.go:1317"
 		},
 		{
 			"method": "POST",
@@ -14820,7 +15898,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:1192"
+			"source": "internal/api/routes.go:1292"
 		},
 		{
 			"method": "GET",
@@ -14894,7 +15972,7 @@
 			"paginated": true,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:1189"
+			"source": "internal/api/routes.go:1289"
 		},
 		{
 			"method": "GET",
@@ -14918,7 +15996,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:1188"
+			"source": "internal/api/routes.go:1288"
 		},
 		{
 			"method": "POST",
@@ -15093,7 +16171,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:1190"
+			"source": "internal/api/routes.go:1290"
 		},
 		{
 			"method": "GET",
@@ -15124,7 +16202,7 @@
 			"paginated": true,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:1187"
+			"source": "internal/api/routes.go:1287"
 		},
 		{
 			"method": "POST",
@@ -15299,7 +16377,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:1191"
+			"source": "internal/api/routes.go:1291"
 		},
 		{
 			"method": "GET",
@@ -15315,7 +16393,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:1193"
+			"source": "internal/api/routes.go:1293"
 		},
 		{
 			"method": "GET",
@@ -15331,7 +16409,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:1181"
+			"source": "internal/api/routes.go:1281"
 		},
 		{
 			"method": "PUT",
@@ -15366,7 +16444,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:1195"
+			"source": "internal/api/routes.go:1295"
 		},
 		{
 			"method": "GET",
@@ -15382,7 +16460,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:1194"
+			"source": "internal/api/routes.go:1294"
 		},
 		{
 			"method": "POST",
@@ -15406,7 +16484,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:1185"
+			"source": "internal/api/routes.go:1285"
 		},
 		{
 			"method": "GET",
@@ -15430,7 +16508,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:1183"
+			"source": "internal/api/routes.go:1283"
 		},
 		{
 			"method": "GET",
@@ -15468,7 +16546,7 @@
 			"paginated": true,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:1182"
+			"source": "internal/api/routes.go:1282"
 		},
 		{
 			"method": "POST",
@@ -15615,7 +16693,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:1184"
+			"source": "internal/api/routes.go:1284"
 		},
 		{
 			"method": "GET",
@@ -15629,7 +16707,412 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:1589"
+			"source": "internal/api/routes.go:1690"
+		},
+		{
+			"method": "DELETE",
+			"path": "/reports/{id}/link",
+			"handler": "RevokeClientReportLink",
+			"doc": "",
+			"apiPerms": [],
+			"params": [
+				{
+					"in": "path",
+					"name": "id",
+					"type": "string",
+					"required": true,
+					"description": ""
+				}
+			],
+			"body": null,
+			"multipart": false,
+			"paginated": false,
+			"returnsList": false,
+			"openapi": false,
+			"source": "internal/api/routes.go:1127"
+		},
+		{
+			"method": "POST",
+			"path": "/reports/{id}/link",
+			"handler": "CreateClientReportLink",
+			"doc": "CreateClientReportLink mints a share link, replacing any earlier one; the response is the only time the URL is shown.",
+			"apiPerms": [],
+			"params": [
+				{
+					"in": "path",
+					"name": "id",
+					"type": "string",
+					"required": true,
+					"description": ""
+				},
+				{
+					"in": "body",
+					"name": "expires_in_days",
+					"type": "number",
+					"goType": "*int",
+					"required": false,
+					"description": "ExpiresInDays defaults to ClientReportLinkDefaultDays."
+				}
+			],
+			"body": {
+				"kind": "object",
+				"type": "models.CreateClientReportLinkRequest"
+			},
+			"multipart": false,
+			"paginated": false,
+			"returnsList": false,
+			"openapi": false,
+			"source": "internal/api/routes.go:1126"
+		},
+		{
+			"method": "GET",
+			"path": "/reports/{id}/preview",
+			"handler": "PreviewClientReport",
+			"doc": "",
+			"apiPerms": [],
+			"params": [
+				{
+					"in": "path",
+					"name": "id",
+					"type": "string",
+					"required": true,
+					"description": ""
+				},
+				{
+					"in": "query",
+					"name": "range",
+					"type": "options",
+					"required": false,
+					"description": "",
+					"enum": [
+						"last_7_days",
+						"last_30_days",
+						"this_month",
+						"last_month"
+					]
+				}
+			],
+			"body": null,
+			"multipart": false,
+			"paginated": false,
+			"returnsList": false,
+			"openapi": false,
+			"source": "internal/api/routes.go:1123"
+		},
+		{
+			"method": "DELETE",
+			"path": "/reports/{id}/schedule",
+			"handler": "DeleteClientReportSchedule",
+			"doc": "",
+			"apiPerms": [],
+			"params": [
+				{
+					"in": "path",
+					"name": "id",
+					"type": "string",
+					"required": true,
+					"description": ""
+				}
+			],
+			"body": null,
+			"multipart": false,
+			"paginated": false,
+			"returnsList": false,
+			"openapi": false,
+			"source": "internal/api/routes.go:1129"
+		},
+		{
+			"method": "PUT",
+			"path": "/reports/{id}/schedule",
+			"handler": "SetClientReportSchedule",
+			"doc": "",
+			"apiPerms": [],
+			"params": [
+				{
+					"in": "path",
+					"name": "id",
+					"type": "string",
+					"required": true,
+					"description": ""
+				},
+				{
+					"in": "body",
+					"name": "recipients",
+					"type": "stringArray",
+					"goType": "[]string",
+					"required": false,
+					"description": ""
+				},
+				{
+					"in": "body",
+					"name": "cadence",
+					"type": "options",
+					"goType": "ClientReportCadence",
+					"required": false,
+					"description": "",
+					"enum": [
+						"weekly",
+						"monthly"
+					]
+				},
+				{
+					"in": "body",
+					"name": "weekday",
+					"type": "number",
+					"goType": "int",
+					"required": false,
+					"description": ""
+				},
+				{
+					"in": "body",
+					"name": "month_day",
+					"type": "number",
+					"goType": "int",
+					"required": false,
+					"description": ""
+				},
+				{
+					"in": "body",
+					"name": "hour",
+					"type": "number",
+					"goType": "int",
+					"required": false,
+					"description": ""
+				},
+				{
+					"in": "body",
+					"name": "timezone",
+					"type": "string",
+					"goType": "string",
+					"required": false,
+					"description": ""
+				},
+				{
+					"in": "body",
+					"name": "paused",
+					"type": "boolean",
+					"goType": "bool",
+					"required": false,
+					"description": ""
+				}
+			],
+			"body": {
+				"kind": "object",
+				"type": "models.SetClientReportScheduleRequest"
+			},
+			"multipart": false,
+			"paginated": false,
+			"returnsList": false,
+			"openapi": false,
+			"source": "internal/api/routes.go:1128"
+		},
+		{
+			"method": "DELETE",
+			"path": "/reports/{id}",
+			"handler": "DeleteClientReport",
+			"doc": "",
+			"apiPerms": [],
+			"params": [
+				{
+					"in": "path",
+					"name": "id",
+					"type": "string",
+					"required": true,
+					"description": ""
+				}
+			],
+			"body": null,
+			"multipart": false,
+			"paginated": false,
+			"returnsList": false,
+			"openapi": false,
+			"source": "internal/api/routes.go:1125"
+		},
+		{
+			"method": "GET",
+			"path": "/reports/{id}",
+			"handler": "GetClientReport",
+			"doc": "",
+			"apiPerms": [],
+			"params": [
+				{
+					"in": "path",
+					"name": "id",
+					"type": "string",
+					"required": true,
+					"description": ""
+				}
+			],
+			"body": null,
+			"multipart": false,
+			"paginated": false,
+			"returnsList": false,
+			"openapi": false,
+			"source": "internal/api/routes.go:1122"
+		},
+		{
+			"method": "PATCH",
+			"path": "/reports/{id}",
+			"handler": "UpdateClientReport",
+			"doc": "",
+			"apiPerms": [],
+			"params": [
+				{
+					"in": "path",
+					"name": "id",
+					"type": "string",
+					"required": true,
+					"description": ""
+				},
+				{
+					"in": "body",
+					"name": "name",
+					"type": "string",
+					"goType": "*string",
+					"required": false,
+					"description": ""
+				},
+				{
+					"in": "body",
+					"name": "access",
+					"type": "json",
+					"goType": "*MemberAccess",
+					"required": false,
+					"description": ""
+				},
+				{
+					"in": "body",
+					"name": "sections",
+					"type": "json",
+					"goType": "*ClientReportSections",
+					"required": false,
+					"description": ""
+				},
+				{
+					"in": "body",
+					"name": "show_reply_snippets",
+					"type": "boolean",
+					"goType": "*bool",
+					"required": false,
+					"description": ""
+				},
+				{
+					"in": "body",
+					"name": "date_range",
+					"type": "options",
+					"goType": "*ClientReportRange",
+					"required": false,
+					"description": "",
+					"enum": [
+						"last_7_days",
+						"last_30_days",
+						"this_month",
+						"last_month"
+					]
+				}
+			],
+			"body": {
+				"kind": "object",
+				"type": "models.ClientReportInput"
+			},
+			"multipart": false,
+			"paginated": false,
+			"returnsList": false,
+			"openapi": false,
+			"source": "internal/api/routes.go:1124"
+		},
+		{
+			"method": "GET",
+			"path": "/reports",
+			"handler": "ListClientReports",
+			"doc": "",
+			"apiPerms": [],
+			"params": [
+				{
+					"in": "query",
+					"name": "limit",
+					"type": "string",
+					"required": false,
+					"description": ""
+				},
+				{
+					"in": "query",
+					"name": "cursor",
+					"type": "string",
+					"required": false,
+					"description": ""
+				}
+			],
+			"body": null,
+			"multipart": false,
+			"paginated": true,
+			"returnsList": true,
+			"openapi": false,
+			"source": "internal/api/routes.go:1120"
+		},
+		{
+			"method": "POST",
+			"path": "/reports",
+			"handler": "CreateClientReport",
+			"doc": "",
+			"apiPerms": [],
+			"params": [
+				{
+					"in": "body",
+					"name": "name",
+					"type": "string",
+					"goType": "*string",
+					"required": false,
+					"description": ""
+				},
+				{
+					"in": "body",
+					"name": "access",
+					"type": "json",
+					"goType": "*MemberAccess",
+					"required": false,
+					"description": ""
+				},
+				{
+					"in": "body",
+					"name": "sections",
+					"type": "json",
+					"goType": "*ClientReportSections",
+					"required": false,
+					"description": ""
+				},
+				{
+					"in": "body",
+					"name": "show_reply_snippets",
+					"type": "boolean",
+					"goType": "*bool",
+					"required": false,
+					"description": ""
+				},
+				{
+					"in": "body",
+					"name": "date_range",
+					"type": "options",
+					"goType": "*ClientReportRange",
+					"required": false,
+					"description": "",
+					"enum": [
+						"last_7_days",
+						"last_30_days",
+						"this_month",
+						"last_month"
+					]
+				}
+			],
+			"body": {
+				"kind": "object",
+				"type": "models.ClientReportInput"
+			},
+			"multipart": false,
+			"paginated": false,
+			"returnsList": false,
+			"openapi": false,
+			"source": "internal/api/routes.go:1121"
 		},
 		{
 			"method": "POST",
@@ -15671,8 +17154,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:1030"
+			"openapi": true,
+			"source": "internal/api/routes.go:1109"
 		},
 		{
 			"method": "POST",
@@ -15706,8 +17189,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": true,
-			"openapi": false,
-			"source": "internal/api/routes.go:1028"
+			"openapi": true,
+			"source": "internal/api/routes.go:1107"
 		},
 		{
 			"method": "POST",
@@ -15778,8 +17261,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:1027"
+			"openapi": true,
+			"source": "internal/api/routes.go:1106"
 		},
 		{
 			"method": "GET",
@@ -15802,8 +17285,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": true,
-			"openapi": false,
-			"source": "internal/api/routes.go:1029"
+			"openapi": true,
+			"source": "internal/api/routes.go:1108"
 		},
 		{
 			"method": "DELETE",
@@ -15826,8 +17309,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:1026"
+			"openapi": true,
+			"source": "internal/api/routes.go:1105"
 		},
 		{
 			"method": "GET",
@@ -15850,8 +17333,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:1024"
+			"openapi": true,
+			"source": "internal/api/routes.go:1103"
 		},
 		{
 			"method": "PATCH",
@@ -15921,8 +17404,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:1025"
+			"openapi": true,
+			"source": "internal/api/routes.go:1104"
 		},
 		{
 			"method": "GET",
@@ -15937,8 +17420,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": true,
-			"openapi": false,
-			"source": "internal/api/routes.go:1021"
+			"openapi": true,
+			"source": "internal/api/routes.go:1100"
 		},
 		{
 			"method": "POST",
@@ -15985,8 +17468,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:1022"
+			"openapi": true,
+			"source": "internal/api/routes.go:1101"
 		},
 		{
 			"method": "GET",
@@ -16001,8 +17484,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": true,
-			"openapi": false,
-			"source": "internal/api/routes.go:1020"
+			"openapi": true,
+			"source": "internal/api/routes.go:1099"
 		},
 		{
 			"method": "POST",
@@ -16065,8 +17548,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:1023"
+			"openapi": true,
+			"source": "internal/api/routes.go:1102"
 		},
 		{
 			"method": "DELETE",
@@ -16090,7 +17573,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1228"
+			"source": "internal/api/routes.go:1328"
 		},
 		{
 			"method": "GET",
@@ -16128,7 +17611,7 @@
 			"paginated": true,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:1226"
+			"source": "internal/api/routes.go:1326"
 		},
 		{
 			"method": "POST",
@@ -16164,7 +17647,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1227"
+			"source": "internal/api/routes.go:1327"
 		},
 		{
 			"method": "PATCH",
@@ -16197,7 +17680,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:1061"
+			"source": "internal/api/routes.go:1160"
 		},
 		{
 			"method": "DELETE",
@@ -16219,7 +17702,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1061"
+			"source": "internal/api/routes.go:1160"
 		},
 		{
 			"method": "PATCH",
@@ -16260,7 +17743,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1061"
+			"source": "internal/api/routes.go:1160"
 		},
 		{
 			"method": "POST",
@@ -16294,7 +17777,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1061"
+			"source": "internal/api/routes.go:1160"
 		},
 		{
 			"method": "POST",
@@ -16316,7 +17799,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1246"
+			"source": "internal/api/routes.go:1346"
 		},
 		{
 			"method": "GET",
@@ -16345,7 +17828,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:1245"
+			"source": "internal/api/routes.go:1345"
 		},
 		{
 			"method": "DELETE",
@@ -16376,7 +17859,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1579"
+			"source": "internal/api/routes.go:1680"
 		},
 		{
 			"method": "POST",
@@ -16411,7 +17894,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1578"
+			"source": "internal/api/routes.go:1679"
 		},
 		{
 			"method": "DELETE",
@@ -16435,7 +17918,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1577"
+			"source": "internal/api/routes.go:1678"
 		},
 		{
 			"method": "GET",
@@ -16459,7 +17942,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1575"
+			"source": "internal/api/routes.go:1676"
 		},
 		{
 			"method": "PATCH",
@@ -16502,7 +17985,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1576"
+			"source": "internal/api/routes.go:1677"
 		},
 		{
 			"method": "GET",
@@ -16518,7 +18001,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:1573"
+			"source": "internal/api/routes.go:1674"
 		},
 		{
 			"method": "POST",
@@ -16554,7 +18037,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1574"
+			"source": "internal/api/routes.go:1675"
 		},
 		{
 			"method": "POST",
@@ -16578,7 +18061,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1470"
+			"source": "internal/api/routes.go:1570"
 		},
 		{
 			"method": "POST",
@@ -16613,7 +18096,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1471"
+			"source": "internal/api/routes.go:1572"
 		},
 		{
 			"method": "DELETE",
@@ -16637,7 +18120,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1469"
+			"source": "internal/api/routes.go:1569"
 		},
 		{
 			"method": "GET",
@@ -16661,7 +18144,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1467"
+			"source": "internal/api/routes.go:1567"
 		},
 		{
 			"method": "PATCH",
@@ -16720,7 +18203,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1468"
+			"source": "internal/api/routes.go:1568"
 		},
 		{
 			"method": "POST",
@@ -16765,7 +18248,43 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1478"
+			"source": "internal/api/routes.go:1579"
+		},
+		{
+			"method": "POST",
+			"path": "/templates/copy-to",
+			"handler": "CopyTemplatesToWorkspaces",
+			"doc": "CopyTemplatesToWorkspaces copies reply templates into other workspaces the caller belongs to. POST /templates/copy-to",
+			"apiPerms": [
+				"APIPermReadTemplates"
+			],
+			"params": [
+				{
+					"in": "body",
+					"name": "template_ids",
+					"type": "stringArray",
+					"goType": "[]uuid.UUID",
+					"required": false,
+					"description": ""
+				},
+				{
+					"in": "body",
+					"name": "organization_ids",
+					"type": "stringArray",
+					"goType": "[]uuid.UUID",
+					"required": false,
+					"description": ""
+				}
+			],
+			"body": {
+				"kind": "object",
+				"type": "models.CopyTemplatesToWorkspacesRequest"
+			},
+			"multipart": false,
+			"paginated": false,
+			"returnsList": false,
+			"openapi": false,
+			"source": "internal/api/routes.go:1571"
 		},
 		{
 			"method": "PATCH",
@@ -16793,7 +18312,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:1466"
+			"source": "internal/api/routes.go:1566"
 		},
 		{
 			"method": "POST",
@@ -16837,7 +18356,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1472"
+			"source": "internal/api/routes.go:1573"
 		},
 		{
 			"method": "GET",
@@ -16861,7 +18380,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:1464"
+			"source": "internal/api/routes.go:1564"
 		},
 		{
 			"method": "POST",
@@ -16913,7 +18432,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1465"
+			"source": "internal/api/routes.go:1565"
 		},
 		{
 			"method": "GET",
@@ -16927,7 +18446,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:1590"
+			"source": "internal/api/routes.go:1691"
 		},
 		{
 			"method": "GET",
@@ -16951,7 +18470,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1122"
+			"source": "internal/api/routes.go:1221"
 		},
 		{
 			"method": "POST",
@@ -16985,8 +18504,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:1103"
+			"openapi": true,
+			"source": "internal/api/routes.go:1202"
 		},
 		{
 			"method": "POST",
@@ -17009,8 +18528,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:1104"
+			"openapi": true,
+			"source": "internal/api/routes.go:1203"
 		},
 		{
 			"method": "GET",
@@ -17025,8 +18544,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": true,
-			"openapi": false,
-			"source": "internal/api/routes.go:1102"
+			"openapi": true,
+			"source": "internal/api/routes.go:1201"
 		},
 		{
 			"method": "PUT",
@@ -17085,8 +18604,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:1107"
+			"openapi": true,
+			"source": "internal/api/routes.go:1206"
 		},
 		{
 			"method": "GET",
@@ -17109,8 +18628,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:1084"
+			"openapi": true,
+			"source": "internal/api/routes.go:1183"
 		},
 		{
 			"method": "POST",
@@ -17154,8 +18673,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:1089"
+			"openapi": true,
+			"source": "internal/api/routes.go:1188"
 		},
 		{
 			"method": "POST",
@@ -17254,8 +18773,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:1085"
+			"openapi": true,
+			"source": "internal/api/routes.go:1184"
 		},
 		{
 			"method": "GET",
@@ -17279,7 +18798,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1068"
+			"source": "internal/api/routes.go:1167"
 		},
 		{
 			"method": "DELETE",
@@ -17302,8 +18821,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:1094"
+			"openapi": true,
+			"source": "internal/api/routes.go:1193"
 		},
 		{
 			"method": "PUT",
@@ -17385,8 +18904,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:1093"
+			"openapi": true,
+			"source": "internal/api/routes.go:1192"
 		},
 		{
 			"method": "GET",
@@ -17401,8 +18920,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": true,
-			"openapi": false,
-			"source": "internal/api/routes.go:1092"
+			"openapi": true,
+			"source": "internal/api/routes.go:1191"
 		},
 		{
 			"method": "PATCH",
@@ -17451,7 +18970,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1079"
+			"source": "internal/api/routes.go:1178"
 		},
 		{
 			"method": "GET",
@@ -17467,7 +18986,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1069"
+			"source": "internal/api/routes.go:1168"
 		},
 		{
 			"method": "POST",
@@ -17503,8 +19022,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:1096"
+			"openapi": true,
+			"source": "internal/api/routes.go:1195"
 		},
 		{
 			"method": "POST",
@@ -17625,7 +19144,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1080"
+			"source": "internal/api/routes.go:1179"
 		},
 		{
 			"method": "DELETE",
@@ -17649,7 +19168,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1118"
+			"source": "internal/api/routes.go:1217"
 		},
 		{
 			"method": "GET",
@@ -17673,7 +19192,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:1117"
+			"source": "internal/api/routes.go:1216"
 		},
 		{
 			"method": "PATCH",
@@ -17733,7 +19252,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1078"
+			"source": "internal/api/routes.go:1177"
 		},
 		{
 			"method": "DELETE",
@@ -17757,7 +19276,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1112"
+			"source": "internal/api/routes.go:1211"
 		},
 		{
 			"method": "POST",
@@ -17801,7 +19320,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:1111"
+			"source": "internal/api/routes.go:1210"
 		},
 		{
 			"method": "GET",
@@ -17817,7 +19336,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:1110"
+			"source": "internal/api/routes.go:1209"
 		},
 		{
 			"method": "GET",
@@ -17848,7 +19367,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:1075"
+			"source": "internal/api/routes.go:1174"
 		},
 		{
 			"method": "PUT",
@@ -17884,7 +19403,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:1076"
+			"source": "internal/api/routes.go:1175"
 		},
 		{
 			"method": "GET",
@@ -17943,7 +19462,7 @@
 			"paginated": true,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:1070"
+			"source": "internal/api/routes.go:1169"
 		},
 		{
 			"method": "GET",
@@ -18112,7 +19631,7 @@
 			"paginated": true,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:1067"
+			"source": "internal/api/routes.go:1166"
 		},
 		{
 			"method": "DELETE",
@@ -18134,7 +19653,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1457"
+			"source": "internal/api/routes.go:1557"
 		},
 		{
 			"method": "PATCH",
@@ -18235,7 +19754,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1456"
+			"source": "internal/api/routes.go:1556"
 		},
 		{
 			"method": "GET",
@@ -18249,7 +19768,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:1454"
+			"source": "internal/api/routes.go:1554"
 		},
 		{
 			"method": "POST",
@@ -18343,7 +19862,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1455"
+			"source": "internal/api/routes.go:1555"
 		},
 		{
 			"method": "GET",
@@ -18400,7 +19919,7 @@
 			"paginated": true,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:1264"
+			"source": "internal/api/routes.go:1364"
 		},
 		{
 			"method": "POST",
@@ -18422,7 +19941,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1262"
+			"source": "internal/api/routes.go:1362"
 		},
 		{
 			"method": "POST",
@@ -18443,8 +19962,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:1263"
+			"openapi": true,
+			"source": "internal/api/routes.go:1363"
 		},
 		{
 			"method": "DELETE",
@@ -18466,7 +19985,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1261"
+			"source": "internal/api/routes.go:1361"
 		},
 		{
 			"method": "PATCH",
@@ -18523,7 +20042,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1260"
+			"source": "internal/api/routes.go:1360"
 		},
 		{
 			"method": "POST",
@@ -18544,8 +20063,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": false,
-			"openapi": false,
-			"source": "internal/api/routes.go:1258"
+			"openapi": true,
+			"source": "internal/api/routes.go:1358"
 		},
 		{
 			"method": "GET",
@@ -18594,8 +20113,8 @@
 			"multipart": false,
 			"paginated": true,
 			"returnsList": true,
-			"openapi": false,
-			"source": "internal/api/routes.go:1257"
+			"openapi": true,
+			"source": "internal/api/routes.go:1357"
 		},
 		{
 			"method": "GET",
@@ -18608,8 +20127,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": true,
-			"openapi": false,
-			"source": "internal/api/routes.go:1256"
+			"openapi": true,
+			"source": "internal/api/routes.go:1356"
 		},
 		{
 			"method": "GET",
@@ -18622,8 +20141,8 @@
 			"multipart": false,
 			"paginated": false,
 			"returnsList": true,
-			"openapi": false,
-			"source": "internal/api/routes.go:1259"
+			"openapi": true,
+			"source": "internal/api/routes.go:1359"
 		},
 		{
 			"method": "GET",
@@ -18637,7 +20156,7 @@
 			"paginated": false,
 			"returnsList": true,
 			"openapi": true,
-			"source": "internal/api/routes.go:1253"
+			"source": "internal/api/routes.go:1353"
 		},
 		{
 			"method": "POST",
@@ -18687,7 +20206,7 @@
 			"paginated": false,
 			"returnsList": false,
 			"openapi": true,
-			"source": "internal/api/routes.go:1254"
+			"source": "internal/api/routes.go:1354"
 		}
 	]
 }

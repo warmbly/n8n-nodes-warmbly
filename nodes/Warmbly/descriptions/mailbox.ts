@@ -45,6 +45,36 @@ export const mailboxOperations: INodeProperties[] = [
 				action: 'Check domain authentication',
 			},
 			{
+				name: 'Clear Warmup Filter Tag',
+				value: 'clearWarmupFilterTag',
+				action: 'Turn off a mailbox\'s warmup filter tag',
+				description: 'Turn off a mailbox\'s warmup filter tag',
+			},
+			{
+				name: 'Connect Many via OAuth',
+				value: 'connectOAuthBulk',
+				action: 'Connect many mailboxes from completed OAuth sign-ins',
+				description: 'Connect many mailboxes from completed OAuth sign-ins',
+			},
+			{
+				name: 'Connect Many via SMTP/IMAP',
+				value: 'connectSmtpBulk',
+				action: 'Connect many mailboxes with SMTP and IMAP credentials',
+				description: 'Connect many mailboxes with SMTP and IMAP credentials',
+			},
+			{
+				name: 'Connect via OAuth',
+				value: 'connectOAuth',
+				action: 'Connect a mailbox from a completed OAuth sign-in',
+				description: 'Connect a mailbox from a completed OAuth sign-in',
+			},
+			{
+				name: 'Connect via SMTP/IMAP',
+				value: 'connectSmtp',
+				action: 'Connect a mailbox with SMTP and IMAP credentials',
+				description: 'Connect a mailbox with SMTP and IMAP credentials',
+			},
+			{
 				name: 'Delete',
 				value: 'delete',
 				action: 'Delete a mailbox',
@@ -110,6 +140,12 @@ export const mailboxOperations: INodeProperties[] = [
 				action: 'Get warmup ban status',
 			},
 			{
+				name: 'Get Warmup Filter Tag',
+				value: 'getWarmupFilterTag',
+				action: 'Get a mailbox\'s warmup filter tag',
+				description: 'Get a mailbox\'s warmup filter tag',
+			},
+			{
 				name: 'Hold Sending',
 				value: 'hold',
 				action: 'Hold sending from a mailbox',
@@ -154,6 +190,12 @@ export const mailboxOperations: INodeProperties[] = [
 				value: 'send',
 				action: 'Send from a mailbox',
 				description: 'Send from a mailbox',
+			},
+			{
+				name: 'Set Warmup Filter Tag',
+				value: 'setWarmupFilterTag',
+				action: 'Set a mailbox\'s warmup filter tag',
+				description: 'Set a mailbox\'s warmup filter tag',
 			},
 			{
 				name: 'Start Warmup',
@@ -467,6 +509,353 @@ export const mailboxFields: INodeProperties[] = [
 		type: 'string',
 		default: '',
 		required: true,
+		description: 'The mailbox whose warmup filter tag to read or change',
+		displayOptions: {
+			show: {
+				resource: [
+					'mailbox',
+				],
+				operation: [
+					'clearWarmupFilterTag',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Additional Fields',
+		name: 'additionalFields',
+		type: 'collection',
+		placeholder: 'Add Field',
+		default: {},
+		displayOptions: {
+			show: {
+				resource: [
+					'mailbox',
+				],
+				operation: [
+					'clearWarmupFilterTag',
+				],
+			},
+		},
+		options: [
+			{
+				displayName: 'Idempotency Key',
+				name: 'idempotencyKey',
+				type: 'string',
+				default: '',
+				description: 'Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.',
+			},
+		],
+	},
+	{
+		displayName: 'Sign-Ins',
+		name: 'grants',
+		type: 'json',
+		default: '',
+		required: true,
+		description: 'Up to 50 sign-ins as a JSON array, each {"provider": "gmail", "refresh_token": "..."} or {"provider": "outlook", "code": "...", "redirect_uri": "..."}, with an optional "email" and "code_verifier".',
+		displayOptions: {
+			show: {
+				resource: [
+					'mailbox',
+				],
+				operation: [
+					'connectOAuthBulk',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Additional Fields',
+		name: 'additionalFields',
+		type: 'collection',
+		placeholder: 'Add Field',
+		default: {},
+		displayOptions: {
+			show: {
+				resource: [
+					'mailbox',
+				],
+				operation: [
+					'connectOAuthBulk',
+				],
+			},
+		},
+		options: [
+			{
+				displayName: 'Idempotency Key',
+				name: 'idempotencyKey',
+				type: 'string',
+				default: '',
+				description: 'Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.',
+			},
+			{
+				displayName: 'Warmup',
+				name: 'warmup',
+				type: 'json',
+				default: '',
+				description: 'Warmup to start on every connected mailbox, as JSON: {"enabled": true, "start": 2, "max": 40, "increase": 2, "reply_rate": 30}. Unset numbers keep the mailbox defaults.',
+			},
+		],
+	},
+	{
+		displayName: 'Mailboxes',
+		name: 'accounts',
+		type: 'json',
+		default: '',
+		required: true,
+		description: 'Up to 50 mailboxes as a JSON array, each {"email": "...", "name": "...", "smtp": {...}, "imap": {...}} with the same server settings as a single connect',
+		displayOptions: {
+			show: {
+				resource: [
+					'mailbox',
+				],
+				operation: [
+					'connectSmtpBulk',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Additional Fields',
+		name: 'additionalFields',
+		type: 'collection',
+		placeholder: 'Add Field',
+		default: {},
+		displayOptions: {
+			show: {
+				resource: [
+					'mailbox',
+				],
+				operation: [
+					'connectSmtpBulk',
+				],
+			},
+		},
+		options: [
+			{
+				displayName: 'Idempotency Key',
+				name: 'idempotencyKey',
+				type: 'string',
+				default: '',
+				description: 'Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.',
+			},
+			{
+				displayName: 'Warmup',
+				name: 'warmup',
+				type: 'json',
+				default: '',
+				description: 'Warmup to start on every connected mailbox, as JSON: {"enabled": true, "start": 2, "max": 40, "increase": 2, "reply_rate": 30}. Unset numbers keep the mailbox defaults.',
+			},
+		],
+	},
+	{
+		displayName: 'Provider',
+		name: 'provider',
+		type: 'options',
+		options: [
+			{
+				name: 'Gmail',
+				value: 'gmail',
+			},
+			{
+				name: 'Outlook',
+				value: 'outlook',
+			},
+		],
+		default: 'gmail',
+		required: true,
+		description: 'The mailbox provider the sign-in was made with',
+		displayOptions: {
+			show: {
+				resource: [
+					'mailbox',
+				],
+				operation: [
+					'connectOAuth',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Additional Fields',
+		name: 'additionalFields',
+		type: 'collection',
+		placeholder: 'Add Field',
+		default: {},
+		displayOptions: {
+			show: {
+				resource: [
+					'mailbox',
+				],
+				operation: [
+					'connectOAuth',
+				],
+			},
+		},
+		options: [
+			{
+				displayName: 'Authorization Code',
+				name: 'code',
+				type: 'string',
+				typeOptions: {
+					password: true,
+				},
+				default: '',
+				description: 'An authorization code from your own OAuth app, sent with the redirect URI it was issued for',
+			},
+			{
+				displayName: 'Code Verifier',
+				name: 'code_verifier',
+				type: 'string',
+				typeOptions: {
+					password: true,
+				},
+				default: '',
+				description: 'The PKCE code verifier, when the sign-in used PKCE',
+			},
+			{
+				displayName: 'Email',
+				name: 'email',
+				type: 'string',
+				default: '',
+				description: 'When set, must be the address the sign-in belongs to',
+				placeholder: 'name@email.com',
+			},
+			{
+				displayName: 'Idempotency Key',
+				name: 'idempotencyKey',
+				type: 'string',
+				default: '',
+				description: 'Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.',
+			},
+			{
+				displayName: 'Redirect URI',
+				name: 'redirect_uri',
+				type: 'string',
+				default: '',
+				description: 'The redirect URI the authorization code was issued for',
+			},
+			{
+				displayName: 'Refresh Token',
+				name: 'refresh_token',
+				type: 'string',
+				typeOptions: {
+					password: true,
+				},
+				default: '',
+				description: 'A refresh token from your own OAuth app. Send this or an authorization code.',
+			},
+			{
+				displayName: 'Warmup',
+				name: 'warmup',
+				type: 'json',
+				default: '',
+				description: 'Warmup to start as the mailbox connects, as JSON: {"enabled": true, "start": 2, "max": 40, "increase": 2, "reply_rate": 30}. Unset numbers keep the mailbox defaults.',
+			},
+		],
+	},
+	{
+		displayName: 'Email',
+		name: 'email',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'The mailbox address',
+		placeholder: 'name@email.com',
+		displayOptions: {
+			show: {
+				resource: [
+					'mailbox',
+				],
+				operation: [
+					'connectSmtp',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'SMTP Settings',
+		name: 'smtp',
+		type: 'json',
+		default: '',
+		required: true,
+		description: 'Server settings as JSON: {"host": "smtp.example.com", "port": 587, "username": "name@example.com", "password": "...", "security": "starttls"}.',
+		displayOptions: {
+			show: {
+				resource: [
+					'mailbox',
+				],
+				operation: [
+					'connectSmtp',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'IMAP Settings',
+		name: 'imap',
+		type: 'json',
+		default: '',
+		required: true,
+		description: 'Server settings as JSON: {"host": "imap.example.com", "port": 993, "username": "name@example.com", "password": "...", "security": "ssl"}.',
+		displayOptions: {
+			show: {
+				resource: [
+					'mailbox',
+				],
+				operation: [
+					'connectSmtp',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Additional Fields',
+		name: 'additionalFields',
+		type: 'collection',
+		placeholder: 'Add Field',
+		default: {},
+		displayOptions: {
+			show: {
+				resource: [
+					'mailbox',
+				],
+				operation: [
+					'connectSmtp',
+				],
+			},
+		},
+		options: [
+			{
+				displayName: 'Idempotency Key',
+				name: 'idempotencyKey',
+				type: 'string',
+				default: '',
+				description: 'Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.',
+			},
+			{
+				displayName: 'Sender Name',
+				name: 'name',
+				type: 'string',
+				default: '',
+				description: 'The name mail from this mailbox is sent under',
+			},
+			{
+				displayName: 'Warmup',
+				name: 'warmup',
+				type: 'json',
+				default: '',
+				description: 'Warmup to start as the mailbox connects, as JSON: {"enabled": true, "start": 2, "max": 40, "increase": 2, "reply_rate": 30}. Unset numbers keep the mailbox defaults.',
+			},
+		],
+	},
+	{
+		displayName: 'Mailbox ID',
+		name: 'id',
+		type: 'string',
+		default: '',
+		required: true,
 		description: 'The mailbox id.',
 		displayOptions: {
 			show: {
@@ -718,6 +1107,24 @@ export const mailboxFields: INodeProperties[] = [
 				],
 				operation: [
 					'warmupBanStatus',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Mailbox ID',
+		name: 'id',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'The mailbox whose warmup filter tag to read or change',
+		displayOptions: {
+			show: {
+				resource: [
+					'mailbox',
+				],
+				operation: [
+					'getWarmupFilterTag',
 				],
 			},
 		},
@@ -1180,6 +1587,57 @@ export const mailboxFields: INodeProperties[] = [
 				type: 'string',
 				default: '',
 				description: 'Thread id to attach the message to.',
+			},
+		],
+	},
+	{
+		displayName: 'Mailbox ID',
+		name: 'id',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'The mailbox whose warmup filter tag to read or change',
+		displayOptions: {
+			show: {
+				resource: [
+					'mailbox',
+				],
+				operation: [
+					'setWarmupFilterTag',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Update Fields',
+		name: 'updateFields',
+		type: 'collection',
+		placeholder: 'Add Field',
+		default: {},
+		displayOptions: {
+			show: {
+				resource: [
+					'mailbox',
+				],
+				operation: [
+					'setWarmupFilterTag',
+				],
+			},
+		},
+		options: [
+			{
+				displayName: 'Idempotency Key',
+				name: 'idempotencyKey',
+				type: 'string',
+				default: '',
+				description: 'Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.',
+			},
+			{
+				displayName: 'Tag',
+				name: 'tag',
+				type: 'string',
+				default: '',
+				description: 'The code appended to warmup mail this mailbox receives, for a mail filter to match. Leave empty to issue a new random one.',
 			},
 		],
 	},
