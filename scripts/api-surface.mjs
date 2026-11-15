@@ -26,9 +26,11 @@ import {
 	indexEnums,
 	indexHandlers,
 	indexInterfaceMethods,
+	indexStringTypes,
 	indexStructs,
 	parenDepth,
 	stripPkg,
+	typedQueryReads,
 } from './lib/go-source.mjs';
 
 const REPO = resolve(
@@ -154,6 +156,14 @@ const handlers = indexHandlers([HANDLER_DIR]);
 const structs = indexStructs([MODELS_DIR, HANDLER_DIR, join(REPO, 'internal/app')]);
 const handlerServices = indexHandlerServices(HANDLER_DIR);
 const goEnums = indexEnums([MODELS_DIR, HANDLER_DIR, join(REPO, 'internal/app')]);
+// String aliases anywhere in the backend's own packages, so a field typed with
+// one (source.ProviderID) reads as a string even without a const block.
+const goStringTypes = indexStringTypes([
+	MODELS_DIR,
+	HANDLER_DIR,
+	join(REPO, 'internal/app'),
+	join(REPO, 'internal/pkg'),
+]);
 const interfaceMethods = indexInterfaceMethods(join(REPO, 'internal/app'));
 
 /** Package-level helpers that read the request on a handler's behalf. */
@@ -322,6 +332,7 @@ export function wireType(goType) {
 	// A named type: an enum-ish string alias, or a nested object.
 	const decl = structs.get(stripPkg(t));
 	if (decl) return 'json';
+	if (goStringTypes.has(stripPkg(t))) return 'string';
 	if (/Kind|Status|State|Type|Source|Mode|Match|Category|Direction|Provider$/.test(stripPkg(t))) {
 		return 'string';
 	}
@@ -611,17 +622,23 @@ for (const route of reachable) {
 		}
 	}
 	const seenQuery = new Set();
+	// `models.ClientReportRange(c.Query("range"))` names the enum the value is.
+	const typedQuery = typedQueryReads(body);
 	for (const { name, array } of [...queryParams(body), ...fromQueryStruct]) {
 		if (seenQuery.has(name)) continue;
 		seenQuery.add(name);
 		const hint = hints?.params.get(name);
+		const goEnum = typedQuery.has(name) ? goEnums.get(typedQuery.get(name)) : undefined;
+		const values = goEnum ?? hint?.enum;
+		let type = array ? 'stringArray' : openApiType(hint) ?? 'string';
+		if (values && type === 'string') type = 'options';
 		params.push({
 			in: 'query',
 			name,
-			type: array ? 'stringArray' : openApiType(hint) ?? 'string',
+			type,
 			required: hint?.required ?? false,
 			description: hint?.description || cliDescription(route.method, path, name),
-			enum: hint?.enum,
+			enum: values,
 		});
 	}
 

@@ -330,6 +330,37 @@ export function indexEnums(dirs) {
 	return enums;
 }
 
+/**
+ * Every `type X string` alias declared under `dirs`, whether or not a const
+ * block enumerates it. An alias whose values are registered at runtime (an
+ * outreach tool's ProviderID, say) is still a plain string on the wire.
+ */
+export function indexStringTypes(dirs) {
+	const names = new Set();
+	for (const dir of dirs) {
+		for (const file of goFiles(dir)) {
+			const src = readFileSync(file, 'utf8');
+			for (const m of src.matchAll(/^type (\w+) string$/gm)) names.add(m[1]);
+		}
+	}
+	return names;
+}
+
+/**
+ * A query read wrapped in a type conversion, `models.Range(c.Query("range"))`,
+ * as a map of query name to the Go type it is converted to.
+ */
+export function typedQueryReads(body) {
+	const out = new Map();
+	for (const m of body.matchAll(
+		/(?:\b(\w+)\.)?\b(\w+)\(\s*c\.(?:Query|DefaultQuery)\("([^"]+)"/g,
+	)) {
+		const [, , type, name] = m;
+		if (!out.has(name)) out.set(name, type);
+	}
+	return out;
+}
+
 /** Resolve embedded structs so a caller sees one flat field list. */
 export function flattenStruct(structs, name, seen = new Set()) {
 	const decl = structs.get(name.replace(/^\*/, '')) ?? structs.get(stripPkg(name));

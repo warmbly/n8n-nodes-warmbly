@@ -68,4 +68,34 @@ describe('go-source extractor', () => {
 		`);
 		expect(result).toEqual(['enabled']);
 	});
+
+	it('reads the Go type a query value is converted to', () => {
+		const result = run(`
+			import { typedQueryReads } from ${JSON.stringify(LIB)};
+			const body = [
+				'out, err := svc.Preview(ctx, id, models.ClientReportRange(c.Query("range")))',
+				'cat := AdvisorCategory(c.DefaultQuery("category", "all"))',
+				'q := strings.TrimSpace(c.Query("q"))',
+				'plain := c.Query("cursor")',
+			].join('\\n');
+			console.log(JSON.stringify([...typedQueryReads(body)]));
+		`);
+		expect(result).toEqual([
+			['range', 'ClientReportRange'],
+			['category', 'AdvisorCategory'],
+			['q', 'TrimSpace'],
+		]);
+	});
+
+	it('indexes string aliases that have no const block', () => {
+		const root = goTree({
+			'pkg/source/source.go': 'package source\n\ntype ProviderID string\n\ntype Config struct {\n}\n',
+			'pkg/tool/tool.go': 'package tool\n\nconst ID source.ProviderID = "tool"\n',
+		});
+		const result = run(`
+			import { indexStringTypes } from ${JSON.stringify(LIB)};
+			console.log(JSON.stringify([...indexStringTypes([${JSON.stringify(root)}])]));
+		`);
+		expect(result).toEqual(['ProviderID']);
+	});
 });
