@@ -189,8 +189,34 @@ export const advisorFields: INodeProperties[] = [
 			{
 				displayName: 'Category',
 				name: 'category',
-				type: 'string',
-				default: '',
+				type: 'options',
+				options: [
+					{
+						name: 'Campaign',
+						value: 'campaign',
+					},
+					{
+						name: 'Copy',
+						value: 'copy',
+					},
+					{
+						name: 'Deliverability',
+						value: 'deliverability',
+					},
+					{
+						name: 'List',
+						value: 'list',
+					},
+					{
+						name: 'Mailbox',
+						value: 'mailbox',
+					},
+					{
+						name: 'Warmup',
+						value: 'warmup',
+					},
+				],
+				default: 'deliverability',
 			},
 			{
 				displayName: 'Entity ID',
@@ -220,8 +246,34 @@ export const advisorFields: INodeProperties[] = [
 			{
 				displayName: 'Surface',
 				name: 'surface',
-				type: 'string',
-				default: '',
+				type: 'options',
+				options: [
+					{
+						name: 'Analytics',
+						value: 'analytics',
+					},
+					{
+						name: 'Campaigns',
+						value: 'campaigns',
+					},
+					{
+						name: 'Contacts',
+						value: 'contacts',
+					},
+					{
+						name: 'Deliverability',
+						value: 'deliverability',
+					},
+					{
+						name: 'Emails',
+						value: 'emails',
+					},
+					{
+						name: 'Settings',
+						value: 'settings',
+					},
+				],
+				default: 'campaigns',
 			},
 		],
 	},

@@ -3,6 +3,64 @@
 All notable changes to `n8n-nodes-warmbly` are documented here. This project
 adheres to [Semantic Versioning](https://semver.org/).
 
+## [0.3.0] - 2026-11-15
+
+Catches the node up with the Warmbly API: 175 new operations (305 → 480) and
+three new trigger events.
+
+### Breaking
+
+- The campaign **Kind** option is gone from Create and from the Get Many
+  filters; the API no longer accepts it. Workflows that set it should drop it.
+- Form **Get Submissions** now pages with **Return All** and **Limit**; the
+  free-text Limit filter it had before is gone. Workflows that set it should
+  use the new Limit field.
+
+### Added
+
+- **39 more operations (441 → 480) across 5 new resources**: Client Report
+  (create, update, preview, share links and email schedules), Tool Migration
+  (bring mailboxes, campaigns, leads and blocklists over from another outreach
+  tool), Client Connect Link, Mailbox Sign-In Link and Mailbox OAuth App.
+- Mailbox **Connect via OAuth** and **Connect via SMTP/IMAP**, each with a
+  bulk variant, and **Get / Set / Clear Warmup Filter Tag**.
+- Campaign **Copy to Workspaces** and **Get Lead Timezones**; reply template
+  **Copy to Workspaces**.
+- New parameters: campaign **Timezone Mode** and **Warmup Graduation** on
+  Create and Update, the ramp fields on campaign Estimate, and **Web Search**
+  on lead Enrich.
+- **136 new operations (305 → 441) across 15 new resources**: Lead (the lead
+  finder: search, query, facets, points, enrich, export, bulk edit and add to
+  contacts), Lead Person, Lead Enrichment, Lead Search, Contact Import, CRM,
+  CRM Contact, Apollo, Salesforce, Placement, Placement Test, Placement Batch,
+  Placement Monitor, Campaign Lead and Email Image.
+- New operations on existing resources: campaign send plan and warmup
+  placement; contact Salesforce link, sync and unlink; mailbox certificates,
+  send identity, direct tracking, resume sending, sync settings and bulk
+  delete, status and warmup; Clay and community-app settings and connection
+  inbound URL and signing key on integrations; OAuth application listing and
+  logo; template analysis; unibox thread drafts and folder moves; analytics
+  direct mail, inbox tagging and warmup placement; permanent API key delete;
+  bulk CRM task update and delete.
+- New parameters the API gained: contact selections (all, filters, exclude) on
+  bulk contact actions, campaign entry delay, follow-up sender and stop on
+  meeting, many mailbox settings, unibox tag, automated and archived filters,
+  and more.
+- **Three trigger events**: `template.created`, `template.updated` and
+  `template.deleted` (65 event types in total). Event descriptions now match
+  what the API delivers.
+
+### Fixed
+
+- The advisor recommendations **Category** and **Surface** filters are
+  dropdowns of the values the API accepts.
+- Spec generation now reads route registrations that wrap over several lines
+  (the contact lookup lost its query parameters), embedded request structs
+  from another package, same-named structs in different packages, and bodies
+  decoded from raw JSON, so these operations get their full set of fields.
+- Fields named like a secret use a password input, and result-count fields
+  follow n8n's Limit conventions.
+
 ## [0.2.0] - 2026-09-07
 
 Full coverage of the current Warmbly API, and the node is now generated from

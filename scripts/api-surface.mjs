@@ -26,8 +26,11 @@ import {
 	indexEnums,
 	indexHandlers,
 	indexInterfaceMethods,
+	indexStringTypes,
 	indexStructs,
+	parenDepth,
 	stripPkg,
+	typedQueryReads,
 } from './lib/go-source.mjs';
 
 const REPO = resolve(
@@ -119,7 +122,14 @@ function parseRoutes() {
 
 		const r = routeRe.exec(line);
 		if (!r) continue;
-		const [, groupVar, method, path, rest] = r;
+		const [, groupVar, method, path] = r;
+		// A registration can wrap over several lines; read until its parens close.
+		let rest = r[4];
+		let open = parenDepth(line);
+		for (let j = i + 1; open > 0 && j < lines.length; j++) {
+			rest += ' ' + lines[j];
+			open += parenDepth(lines[j]);
+		}
 		const handlers = [...rest.matchAll(/h\.(\w+)\b/g)].map((m) => m[1]);
 		routes.push({
 			method,
@@ -146,6 +156,14 @@ const handlers = indexHandlers([HANDLER_DIR]);
 const structs = indexStructs([MODELS_DIR, HANDLER_DIR, join(REPO, 'internal/app')]);
 const handlerServices = indexHandlerServices(HANDLER_DIR);
 const goEnums = indexEnums([MODELS_DIR, HANDLER_DIR, join(REPO, 'internal/app')]);
+// String aliases anywhere in the backend's own packages, so a field typed with
+// one (source.ProviderID) reads as a string even without a const block.
+const goStringTypes = indexStringTypes([
+	MODELS_DIR,
+	HANDLER_DIR,
+	join(REPO, 'internal/app'),
+	join(REPO, 'internal/pkg'),
+]);
 const interfaceMethods = indexInterfaceMethods(join(REPO, 'internal/app'));
 
 /** Package-level helpers that read the request on a handler's behalf. */
@@ -226,7 +244,7 @@ function boundQuery(body) {
 }
 
 /** The struct a handler binds the JSON body to, if any. */
-function boundBody(body) {
+function boundBody(body, depth = 0) {
 	const bind = /(?:ShouldBindJSON|BindJSON|ShouldBindWith|ShouldBind)\(&(\w+)\)/.exec(body);
 	if (!bind) {
 		// A handler that reads the body itself takes whatever JSON the caller
@@ -237,9 +255,24 @@ function boundBody(body) {
 	const variable = bind[1];
 
 	const typed = new RegExp(`var ${variable} ((?:\\w+\\.)?\\w+)\\s*$`, 'm').exec(body);
+	if (typed && typed[1] === 'json.RawMessage' && depth < 2) {
+		// The handler reads the bytes, then decodes them into the real type
+		// (a bare object is wrapped into a one-item array first).
+		const decoded = new RegExp(
+			`json\\.Unmarshal\\(\\s*${variable}\\s*,\\s*&(\\w+)\\)`,
+		).exec(body);
+		if (decoded) {
+			const inner = boundBody(body.replace(bind[0], `ShouldBindJSON(&${decoded[1]})`), depth + 1);
+			if (inner && inner.kind !== 'unknown') return inner;
+		}
+	}
 	if (typed) return { kind: 'named', type: typed[1] };
 
-	const literal = new RegExp(`${variable}\\s*:?=\\s*((?:\\w+\\.)?\\w+)\\{\\}`, 'm').exec(body);
+	// `req := models.Request{Defaults: …}` seeds defaults before binding.
+	const literal = new RegExp(
+		`${variable}\\s*:?=\\s*&?((?:\\w+\\.)?\\w+)\\{`,
+		'm',
+	).exec(body);
 	if (literal) return { kind: 'named', type: literal[1] };
 
 	const anon = new RegExp(`var ${variable} struct \\{([\\s\\S]*?)\\n\\t\\}`, 'm').exec(body);
@@ -299,6 +332,7 @@ export function wireType(goType) {
 	// A named type: an enum-ish string alias, or a nested object.
 	const decl = structs.get(stripPkg(t));
 	if (decl) return 'json';
+	if (goStringTypes.has(stripPkg(t))) return 'string';
 	if (/Kind|Status|State|Type|Source|Mode|Match|Category|Direction|Provider$/.test(stripPkg(t))) {
 		return 'string';
 	}
@@ -588,17 +622,23 @@ for (const route of reachable) {
 		}
 	}
 	const seenQuery = new Set();
+	// `models.ClientReportRange(c.Query("range"))` names the enum the value is.
+	const typedQuery = typedQueryReads(body);
 	for (const { name, array } of [...queryParams(body), ...fromQueryStruct]) {
 		if (seenQuery.has(name)) continue;
 		seenQuery.add(name);
 		const hint = hints?.params.get(name);
+		const goEnum = typedQuery.has(name) ? goEnums.get(typedQuery.get(name)) : undefined;
+		const values = goEnum ?? hint?.enum;
+		let type = array ? 'stringArray' : openApiType(hint) ?? 'string';
+		if (values && type === 'string') type = 'options';
 		params.push({
 			in: 'query',
 			name,
-			type: array ? 'stringArray' : openApiType(hint) ?? 'string',
+			type,
 			required: hint?.required ?? false,
 			description: hint?.description || cliDescription(route.method, path, name),
-			enum: hint?.enum,
+			enum: values,
 		});
 	}
 
