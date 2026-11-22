@@ -12,6 +12,7 @@ import { campaignOperations, campaignFields } from './campaign';
 import { campaignVariantOperations, campaignVariantFields } from './campaignVariant';
 import { folderOperations, folderFields } from './folder';
 import { campaignLeadOperations, campaignLeadFields } from './campaignLead';
+import { campaignReviewOperations, campaignReviewFields } from './campaignReview';
 import { campaignStepOperations, campaignStepFields } from './campaignStep';
 import { clientConnectLinkOperations, clientConnectLinkFields } from './clientConnectLink';
 import { clientReportOperations, clientReportFields } from './clientReport';
@@ -49,6 +50,11 @@ import { placementTestOperations, placementTestFields } from './placementTest';
 import { templateOperations, templateFields } from './template';
 import { salesforceOperations, salesforceFields } from './salesforce';
 import { segmentOperations, segmentFields } from './segment';
+import { storeOperations, storeFields } from './store';
+import { storeDnsRecordOperations, storeDnsRecordFields } from './storeDnsRecord';
+import { storeDomainOperations, storeDomainFields } from './storeDomain';
+import { storeMailboxOperations, storeMailboxFields } from './storeMailbox';
+import { storeOrderOperations, storeOrderFields } from './storeOrder';
 import { suppressionOperations, suppressionFields } from './suppression';
 import { teamOperations, teamFields } from './team';
 import { toolMigrationOperations, toolMigrationFields } from './toolMigration';
@@ -111,6 +117,10 @@ export const resourceProperty: INodeProperties = {
 		{
 			name: 'Campaign Lead',
 			value: 'campaignLead',
+		},
+		{
+			name: 'Campaign Review',
+			value: 'campaignReview',
 		},
 		{
 			name: 'Campaign Step',
@@ -261,6 +271,26 @@ export const resourceProperty: INodeProperties = {
 			value: 'segment',
 		},
 		{
+			name: 'Store',
+			value: 'store',
+		},
+		{
+			name: 'Store DNS Record',
+			value: 'storeDnsRecord',
+		},
+		{
+			name: 'Store Domain',
+			value: 'storeDomain',
+		},
+		{
+			name: 'Store Mailbox',
+			value: 'storeMailbox',
+		},
+		{
+			name: 'Store Order',
+			value: 'storeOrder',
+		},
+		{
 			name: 'Suppression',
 			value: 'suppression',
 		},
@@ -305,6 +335,7 @@ export const operationProperties: INodeProperties[] = [
 	...campaignVariantOperations,
 	...folderOperations,
 	...campaignLeadOperations,
+	...campaignReviewOperations,
 	...campaignStepOperations,
 	...clientConnectLinkOperations,
 	...clientReportOperations,
@@ -342,6 +373,11 @@ export const operationProperties: INodeProperties[] = [
 	...templateOperations,
 	...salesforceOperations,
 	...segmentOperations,
+	...storeOperations,
+	...storeDnsRecordOperations,
+	...storeDomainOperations,
+	...storeMailboxOperations,
+	...storeOrderOperations,
 	...suppressionOperations,
 	...teamOperations,
 	...toolMigrationOperations,
@@ -364,6 +400,7 @@ export const fieldProperties: INodeProperties[] = [
 	...campaignVariantFields,
 	...folderFields,
 	...campaignLeadFields,
+	...campaignReviewFields,
 	...campaignStepFields,
 	...clientConnectLinkFields,
 	...clientReportFields,
@@ -401,6 +438,11 @@ export const fieldProperties: INodeProperties[] = [
 	...templateFields,
 	...salesforceFields,
 	...segmentFields,
+	...storeFields,
+	...storeDnsRecordFields,
+	...storeDomainFields,
+	...storeMailboxFields,
+	...storeOrderFields,
 	...suppressionFields,
 	...teamFields,
 	...toolMigrationFields,

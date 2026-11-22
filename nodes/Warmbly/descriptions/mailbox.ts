@@ -117,6 +117,12 @@ export const mailboxOperations: INodeProperties[] = [
 				description: 'Get many mailboxes',
 			},
 			{
+				name: 'Get Partner Enablement',
+				value: 'getPartnerEnablement',
+				action: 'Get the managing partner\'s per-mailbox enablement',
+				description: 'Get the managing partner\'s per-mailbox enablement',
+			},
+			{
 				name: 'Get Send Identity',
 				value: 'getSendIdentity',
 				action: 'Get Send Identity mailbox',

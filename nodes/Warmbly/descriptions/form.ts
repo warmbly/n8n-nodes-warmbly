@@ -617,6 +617,13 @@ export const formFields: INodeProperties[] = [
 				description: 'Where to send a visitor after submitting',
 			},
 			{
+				displayName: 'Segment IDs',
+				name: 'segment_ids',
+				type: 'string',
+				default: '',
+				description: 'Segments to add contacts who submit the form to. Comma-separated list, up to 20.',
+			},
+			{
 				displayName: 'Status',
 				name: 'status',
 				type: 'options',

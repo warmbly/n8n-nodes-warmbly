@@ -40,11 +40,12 @@ HTTP plumbing.
 
 It ships two nodes:
 
-- **Warmbly** is an action node covering **305 operations across 36 resources**:
+- **Warmbly** is an action node covering **520 operations across 62 resources**:
   campaigns and sequences, mailboxes and warmup, the unibox, contacts, segments
-  and suppressions, hosted forms, CRM, analytics, the deliverability advisor,
-  lead sync, meetings, integrations, automations, webhooks, OAuth applications
-  and the agent tool registry.
+  and suppressions, hosted forms, the lead finder, CRM, analytics, the
+  deliverability advisor, inbox placement, client reports, the domain and
+  mailbox store, lead sync, meetings, integrations, automations, webhooks,
+  OAuth applications and the agent tool registry.
 - **Warmbly Trigger** is a webhook trigger that starts a workflow the moment a
   Warmbly event fires (a reply lands, a meeting is booked, a mailbox is
   quarantined, a deal moves stage), with the delivery signature verified for you.
@@ -129,43 +130,69 @@ calls never reach your logic.
 ## Operations
 
 <details>
-<summary><strong>All 305 operations, by resource</strong></summary>
+<summary><strong>All 520 operations, by resource</strong></summary>
 
 | Resource | # | Operations |
 |----------|---|------------|
 | **Advisor** | 9 | Apply Finding, Dismiss Finding, Get Many, Get Settings, Get Summary, Refresh, Snooze Finding, Submit Feedback, Undo Finding |
 | **Agent Tool** | 2 | Call, Get Many |
 | **AI Skill** | 4 | Create, Delete, Get Many, Update |
-| **Analytics** | 10 | Compare Campaigns, Get Account, Get Accounts, Get Campaign, Get Campaign Daily Stats, Get Campaign Hourly Stats, Get Dashboard, Get Deliverability, Get Usage, Get Warmup |
-| **API Key** | 11 | Create, Get, Get Analytics, Get Logs, Get Many, Get Permissions, Get Usage Analytics, Get Usage Summary, Revoke, Revoke Own Key, Update |
+| **Analytics** | 13 | Compare Campaigns, Get Account, Get Accounts, Get Campaign, Get Campaign Daily Stats, Get Campaign Hourly Stats, Get Dashboard, Get Deliverability, Get Direct Mail, Get Inbox Tagging Review, Get Usage, Get Warmup, Get Warmup Placement |
+| **API Key** | 12 | Create, Delete Permanently, Get, Get Analytics, Get Logs, Get Many, Get Permissions, Get Usage Analytics, Get Usage Summary, Revoke, Revoke Own Key, Update |
+| **Apollo** | 12 | Create Import Source, Delete Import Source, Get Enrichment, Get Enrichments, Get Import Sources, Get Lists, Get Overview, Preview Import, Replace Key, Run Import Source, Start Enrichment, Update Import Source |
 | **Audit Log** | 1 | Get Many |
 | **Automation** | 8 | Create, Delete, Get, Get Many, Get Runs, Test, Update, Update Layout |
-| **Campaign** | 30 | Create, Delete, Delete Attachment, Duplicate, Estimate, Generate AI Variable, Generate Edit, Generate Writing, Get, Get A/B Analysis, Get Advanced Settings, Get Attachments, Get Forms, Get Logs, Get Many, Get Overview, Get Segments, Get Senders, Preview Template, Replace Segments, Replace Senders, Run Preflight, Send Test Email, Start, Stop, Update, Update Advanced Settings, Update Step Layout, Upload Attachment, Verify Tracking Domain |
+| **Campaign** | 34 | Copy to Workspaces, Create, Delete, Delete Attachment, Duplicate, Estimate, Generate AI Variable, Generate Edit, Generate Writing, Get, Get A/B Analysis, Get Advanced Settings, Get Attachments, Get Forms, Get Lead Timezones, Get Logs, Get Many, Get Overview, Get Segments, Get Send Plan, Get Senders, Get Warmup Placement, Preview Template, Replace Segments, Replace Senders, Run Preflight, Send Test Email, Start, Stop, Update, Update Advanced Settings, Update Step Layout, Upload Attachment, Verify Tracking Domain |
 | **Campaign A/B Variant** | 4 | Create, Delete, Get Many, Update |
 | **Campaign Folder** | 4 | Create, Delete, Move, Update |
+| **Campaign Lead** | 10 | Delete Email, Get CC, Get Emails, Get Hold, Pause, Resume, Set CC, Set Email, Suggest CC, Write Email With AI |
+| **Campaign Review** | 6 | Approve Leads, Get, Get Leads, Reopen Leads, Turn On or Off, Write AI Copy |
 | **Campaign Step** | 4 | Create, Delete, Get Many, Update |
-| **Contact** | 23 | Bulk Delete, Bulk Update, Commit Import, Create, Delete, Export, Get, Get Activities, Get Campaigns, Get Custom Fields, Get Deals, Get Emails, Get Research, Get Segments, Get Timeline, Get Verification, Look Up by Email, Preview Import, Request Verification, Research, Research Many, Search, Update |
+| **Client Connect Link** | 4 | Create, Get Many, Get Uses, Revoke |
+| **Client Report** | 10 | Create, Create Share Link, Delete, Delete Schedule, Get, Get Many, Preview, Revoke Share Link, Set Schedule, Update |
+| **Contact** | 26 | Bulk Delete, Bulk Update, Commit Import, Create, Delete, Export, Get, Get Activities, Get Campaigns, Get Custom Fields, Get Deals, Get Emails, Get Research, Get Salesforce, Get Segments, Get Timeline, Get Verification, Look Up by Email, Preview Import, Request Verification, Research, Research Many, Search, Sync Salesforce, Unlink Salesforce, Update |
 | **Contact Category** | 4 | Create, Delete, Move, Update |
+| **Contact Import** | 8 | Analyze, Cancel, Create, Download Failures, Get, Get Many, Save Draft, Start |
 | **Contact Note** | 4 | Create, Delete, Get Many, Update |
-| **CRM Task** | 7 | Create, Delete, Get, Get Many, Get Summary, Search, Update |
+| **CRM** | 14 | Discard Sync Failures, Get Backfill, Get Lists, Get Metadata, Get Owners, Get Settings, Get Sync Health, Import List, Map Owner, Preview Import, Retry Sync Failures, Start Backfill, Sync Now, Update Settings |
+| **CRM Contact** | 4 | Get, Link, Refresh, Update |
+| **CRM Task** | 9 | Bulk Delete, Bulk Update, Create, Delete, Get, Get Many, Get Summary, Search, Update |
 | **CRM Task Type** | 4 | Create, Delete, Get Many, Update |
 | **Dead Letter** | 2 | Get Many, Replay |
 | **Deal** | 7 | Create, Delete, Get, Get Many, Get Summary, Search, Update |
 | **Deliverability** | 1 | Ingest Event |
+| **Email Image** | 3 | Delete, Get Many, Upload |
 | **Form** | 15 | Create, Delete, Delete Asset, Delete Submission, Get, Get Config, Get Domain, Get Many, Get Prefilled Link, Get Stats, Get Submissions, Set Domain, Update, Upload Asset, Verify Domain |
-| **Integration** | 16 | Create, Create Event Subscription, Delete, Delete Event Subscription, Get, Get Bookings, Get Catalog, Get Event Subscriptions, Get Field Mappings, Get Many, Get Sync Runs, Get Webhook Secret, Push Contacts, Replace Field Mappings, Test Connection, Update Config |
+| **Integration** | 22 | Create, Create Event Subscription, Delete, Delete Event Subscription, Get, Get Bookings, Get Catalog, Get Clay Settings, Get Community App, Get Community Apps, Get Event Subscriptions, Get Field Mappings, Get Many, Get Sync Runs, Get Webhook Secret, Push Contacts, Replace Field Mappings, Rotate Inbound URL, Set Signing Key, Test Connection, Update Clay Settings, Update Config |
+| **Lead** | 13 | Add To Contacts, Bulk Delete, Bulk Update, Enrich, Export, Geocode, Get, Get Config, Get Facets, Get Points, Query, Search, Update |
+| **Lead Enrichment** | 2 | Get, Get Many |
+| **Lead Person** | 4 | Add, Delete, Find Email, Update |
+| **Lead Search** | 3 | Delete, Get Many, Update |
 | **Lead Sync Source** | 9 | Create, Delete, Get, Get Google Connection, Get Google Spreadsheet, Get Many, Preview Google Sheet, Sync Now, Update |
-| **Mailbox** | 25 | Bulk Tag, Check Domain Authentication, Delete, Get, Get Allowance, Get Behavior, Get Behavior Plan, Get Many, Get Sync Status, Get Tracking Domain, Get Warmup Ban Status, Hold Sending, Pause Warmup, Refresh Auth Check, Release Sending, Resume Warmup, Send Email, Start Warmup, Stop Warmup, Submit Warmup Appeal, Update, Update Behavior, Update Tracking Domain, Verify Address, Verify Tracking Domain |
+| **Mailbox** | 42 | Bulk Delete, Bulk Set Status, Bulk Tag, Bulk Warmup, Check Domain Authentication, Clear Warmup Filter Tag, Connect Many via OAuth, Connect Many via SMTP/IMAP, Connect via OAuth, Connect via SMTP/IMAP, Delete, Get, Get Allowance, Get Behavior, Get Behavior Plan, Get Certificates, Get Many, Get Partner Enablement, Get Send Identity, Get Sync Status, Get Tracking Domain, Get Warmup Ban Status, Get Warmup Filter Tag, Hold Sending, Pause Warmup, Refresh Auth Check, Refresh Send Identity, Release Sending, Resume Sending, Resume Warmup, Send Email, Set Warmup Filter Tag, Start Warmup, Stop Warmup, Submit Warmup Appeal, Update, Update Behavior, Update Direct Tracking, Update Sync, Update Tracking Domain, Verify Address, Verify Tracking Domain |
+| **Mailbox OAuth App** | 3 | Delete, Get Many, Set |
+| **Mailbox Sign-In Link** | 4 | Create, Get, Get Many, Revoke |
 | **Mailbox Tag** | 4 | Create, Delete, Move, Update |
 | **Meeting** | 4 | Create, Delete, Get Many, Get Summary |
-| **OAuth Application** | 11 | Create, Delete, Get, Get Many, Get Webhook Deliveries, Get Webhook Endpoints, Get Webhook Secret, Rotate Secret, Rotate Webhook Secret, Update, Upload Logo |
+| **OAuth Application** | 16 | Create, Delete, Delete Listing, Delete Logo, Get, Get Listing, Get Many, Get Webhook Deliveries, Get Webhook Endpoints, Get Webhook Secret, Rotate Secret, Rotate Webhook Secret, Set Listing, Update, Upload Application Logo, Upload Logo |
 | **Outreach Settings** | 2 | Get Settings, Update Settings |
 | **Pipeline** | 8 | Create, Create Stage, Delete, Delete Stage, Get, Get Many, Update, Update Stage |
-| **Reply Template** | 9 | Create, Delete, Duplicate, Get, Get Many, Render, Reorder, Score Content, Update |
+| **Placement** | 4 | Get Coverage, Get Overview, Get Seeds, Set Seed |
+| **Placement Batch** | 6 | Cancel, Create, Get, Get Many, Get Senders, Preview |
+| **Placement Monitor** | 3 | Delete, Get, Set |
+| **Placement Test** | 4 | Cancel, Create, Get, Get Many |
+| **Reply Template** | 11 | Analyze, Copy to Workspaces, Create, Delete, Duplicate, Get, Get Many, Render, Reorder, Score Content, Update |
+| **Salesforce** | 16 | Create Import Source, Delete Import Source, Get Activity, Get Campaigns, Get Import Sources, Get List Views, Get Metadata, Get Overview, Get Settings, Get Users, Preview Import, Retry Activity, Run Import Source, Sync Now, Update Import Source, Update Settings |
 | **Segment** | 11 | Add to Campaign, Create, Delete, Get, Get Fields, Get Many, Get Overrides, Look Up Members, Preview, Set Members, Update |
+| **Store** | 5 | Create Quote, Get Photo, Get Status, Set Registrant, Upload Photo |
+| **Store DNS Record** | 4 | Check, Create, Delete, Update |
+| **Store Domain** | 11 | Check Connection, Connect, Get, Get Many, Regenerate Connection, Remove, Renew, Search, Start Microsoft Consent, Transfer Out, Update |
+| **Store Mailbox** | 6 | Cancel, Get Many, Get Sign-In, Resume, Set Photo, Update |
+| **Store Order** | 3 | Create, Get, Get Many |
 | **Suppression** | 3 | Add, Get Many, Remove |
 | **Team** | 7 | Add Member, Create, Delete, Get, Get Many, Remove Member, Update |
-| **Unibox** | 24 | Approve Agent Draft, Cancel Scheduled Send, Compose, Delete Draft, Discard Agent Draft, Draft Compose, Draft Reply, Get Agent Drafts, Get Compose Candidates, Get Drafts, Get Many, Get Message, Get Overview, Get Scheduled Sends, Get Snoozes, Get Thread, Get Thread Labels, Get Unseen Count, Mark Seen, Reply, Save Draft, Set Thread Labels, Snooze, Unsnooze |
+| **Tool Migration** | 8 | Cancel, Create, Dismiss, Get, Get Many, Get Providers, Link Senders, Start |
+| **Unibox** | 26 | Approve Agent Draft, Cancel Scheduled Send, Compose, Delete Draft, Discard Agent Draft, Draft Compose, Draft Reply, Get Agent Drafts, Get Compose Candidates, Get Drafts, Get Many, Get Message, Get Overview, Get Scheduled Sends, Get Snoozes, Get Thread, Get Thread Labels, Get Unseen Count, Mark Seen, Move Folder, Reply, Save Draft, Set Thread Labels, Snooze, Unsnooze, Upsert Thread Draft |
 | **Warmup Routing Rule** | 4 | Create, Delete, Get Many, Update |
 | **Webhook** | 11 | Create, Delete, Get All Deliveries, Get Deliveries, Get Event Types, Get Many, Get Throttle Drops, Redeliver, Rotate Secret, Update, Verify Endpoint |
 | **Workspace** | 3 | Get Identity, Get Plans, Get Timezones |
@@ -174,7 +201,7 @@ calls never reach your logic.
 
 ## Triggers
 
-The Warmbly Trigger can fire on **62 event types**. Leave **Events** empty to
+The Warmbly Trigger can fire on **65 event types**. Leave **Events** empty to
 receive every event except the high-volume (firehose) ones, or pick exactly what
 you need. A few of the most useful:
 

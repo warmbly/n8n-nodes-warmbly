@@ -16,10 +16,22 @@ export const campaignLeadOperations: INodeProperties[] = [
 		},
 		options: [
 			{
+				name: 'Delete Email',
+				value: 'deleteEmail',
+				action: 'Delete a campaign lead\'s own copy of an email step',
+				description: 'Delete a campaign lead\'s own copy of an email step',
+			},
+			{
 				name: 'Get CC',
 				value: 'getCC',
 				action: 'Get CC campaign lead',
 				description: 'Get CC campaign lead',
+			},
+			{
+				name: 'Get Emails',
+				value: 'getEmails',
+				action: 'Get a campaign lead\'s emails as they will be sent',
+				description: 'Get a campaign lead\'s emails as they will be sent',
 			},
 			{
 				name: 'Get Hold',
@@ -46,10 +58,22 @@ export const campaignLeadOperations: INodeProperties[] = [
 				description: 'Set CC campaign lead',
 			},
 			{
+				name: 'Set Email',
+				value: 'setEmail',
+				action: 'Set a campaign lead\'s own copy of an email step',
+				description: 'Set a campaign lead\'s own copy of an email step',
+			},
+			{
 				name: 'Suggest CC',
 				value: 'suggestCC',
 				action: 'Suggest CC campaign lead',
 				description: 'Suggest CC campaign lead',
+			},
+			{
+				name: 'Write Email With AI',
+				value: 'writeEmail',
+				action: 'Write a campaign lead\'s email step with AI',
+				description: 'Write a campaign lead\'s email step with AI',
 			},
 		],
 		default: 'getCC',
@@ -57,6 +81,86 @@ export const campaignLeadOperations: INodeProperties[] = [
 ];
 
 export const campaignLeadFields: INodeProperties[] = [
+	{
+		displayName: 'Campaign ID',
+		name: 'id',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'The campaign',
+		displayOptions: {
+			show: {
+				resource: [
+					'campaignLead',
+				],
+				operation: [
+					'deleteEmail',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Contact ID',
+		name: 'contactId',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'The lead, by contact ID',
+		displayOptions: {
+			show: {
+				resource: [
+					'campaignLead',
+				],
+				operation: [
+					'deleteEmail',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Step ID',
+		name: 'stepId',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'The email step',
+		displayOptions: {
+			show: {
+				resource: [
+					'campaignLead',
+				],
+				operation: [
+					'deleteEmail',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Additional Fields',
+		name: 'additionalFields',
+		type: 'collection',
+		placeholder: 'Add Field',
+		default: {},
+		displayOptions: {
+			show: {
+				resource: [
+					'campaignLead',
+				],
+				operation: [
+					'deleteEmail',
+				],
+			},
+		},
+		options: [
+			{
+				displayName: 'Idempotency Key',
+				name: 'idempotencyKey',
+				type: 'string',
+				default: '',
+				description: 'Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.',
+			},
+		],
+	},
 	{
 		displayName: 'ID',
 		name: 'id',
@@ -88,6 +192,42 @@ export const campaignLeadFields: INodeProperties[] = [
 				],
 				operation: [
 					'getCC',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Campaign ID',
+		name: 'id',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'The campaign',
+		displayOptions: {
+			show: {
+				resource: [
+					'campaignLead',
+				],
+				operation: [
+					'getEmails',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Contact ID',
+		name: 'contactId',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'The lead, by contact ID',
+		displayOptions: {
+			show: {
+				resource: [
+					'campaignLead',
+				],
+				operation: [
+					'getEmails',
 				],
 			},
 		},
@@ -343,6 +483,107 @@ export const campaignLeadFields: INodeProperties[] = [
 		],
 	},
 	{
+		displayName: 'Campaign ID',
+		name: 'id',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'The campaign',
+		displayOptions: {
+			show: {
+				resource: [
+					'campaignLead',
+				],
+				operation: [
+					'setEmail',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Contact ID',
+		name: 'contactId',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'The lead, by contact ID',
+		displayOptions: {
+			show: {
+				resource: [
+					'campaignLead',
+				],
+				operation: [
+					'setEmail',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Step ID',
+		name: 'stepId',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'The email step',
+		displayOptions: {
+			show: {
+				resource: [
+					'campaignLead',
+				],
+				operation: [
+					'setEmail',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Update Fields',
+		name: 'updateFields',
+		type: 'collection',
+		placeholder: 'Add Field',
+		default: {},
+		displayOptions: {
+			show: {
+				resource: [
+					'campaignLead',
+				],
+				operation: [
+					'setEmail',
+				],
+			},
+		},
+		options: [
+			{
+				displayName: 'Body (HTML)',
+				name: 'body_html',
+				type: 'string',
+				default: '',
+				description: 'This lead\'s email body as HTML',
+			},
+			{
+				displayName: 'Body (Plain Text)',
+				name: 'body_plain',
+				type: 'string',
+				default: '',
+				description: 'This lead\'s email body as plain text',
+			},
+			{
+				displayName: 'Idempotency Key',
+				name: 'idempotencyKey',
+				type: 'string',
+				default: '',
+				description: 'Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.',
+			},
+			{
+				displayName: 'Subject',
+				name: 'subject',
+				type: 'string',
+				default: '',
+				description: 'This lead\'s subject line. Ignored on a follow-up that replies in the lead\'s thread.',
+			},
+		],
+	},
+	{
 		displayName: 'ID',
 		name: 'id',
 		type: 'string',
@@ -376,5 +617,92 @@ export const campaignLeadFields: INodeProperties[] = [
 				],
 			},
 		},
+	},
+	{
+		displayName: 'Campaign ID',
+		name: 'id',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'The campaign',
+		displayOptions: {
+			show: {
+				resource: [
+					'campaignLead',
+				],
+				operation: [
+					'writeEmail',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Contact ID',
+		name: 'contactId',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'The lead, by contact ID',
+		displayOptions: {
+			show: {
+				resource: [
+					'campaignLead',
+				],
+				operation: [
+					'writeEmail',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Step ID',
+		name: 'stepId',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'The email step',
+		displayOptions: {
+			show: {
+				resource: [
+					'campaignLead',
+				],
+				operation: [
+					'writeEmail',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Additional Fields',
+		name: 'additionalFields',
+		type: 'collection',
+		placeholder: 'Add Field',
+		default: {},
+		displayOptions: {
+			show: {
+				resource: [
+					'campaignLead',
+				],
+				operation: [
+					'writeEmail',
+				],
+			},
+		},
+		options: [
+			{
+				displayName: 'Idempotency Key',
+				name: 'idempotencyKey',
+				type: 'string',
+				default: '',
+				description: 'Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.',
+			},
+			{
+				displayName: 'Rewrite',
+				name: 'rewrite',
+				type: 'boolean',
+				default: false,
+				description: 'Whether to replace copy already written with a new generation. Each rewrite is charged again, so do not retry it automatically.',
+			},
+		],
 	},
 ];

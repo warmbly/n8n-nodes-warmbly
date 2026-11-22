@@ -5987,6 +5987,839 @@
 			"description": "Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.",
 			"displayName": "Idempotency Key",
 			"type": "string"
+		},
+		"apollo.createImportSource.additionalFields.segment_ids": {
+			"displayName": "Segment IDs",
+			"type": "string",
+			"default": "",
+			"description": "Segments to add imported contacts to. Comma-separated list, up to 20."
+		},
+		"apollo.updateImportSource.updateFields.campaign_id": {
+			"displayName": "Campaign ID",
+			"type": "string",
+			"default": "",
+			"description": "Campaign to enrol imported contacts in"
+		},
+		"apollo.updateImportSource.updateFields.category_ids": {
+			"displayName": "Category IDs",
+			"type": "string",
+			"default": "",
+			"description": "Categories to add imported contacts to. Comma-separated list."
+		},
+		"apollo.updateImportSource.updateFields.enabled": {
+			"displayName": "Enabled",
+			"type": "boolean",
+			"default": false,
+			"description": "Whether the import source is active"
+		},
+		"apollo.updateImportSource.updateFields.list_id": {
+			"displayName": "List ID",
+			"type": "string",
+			"default": "",
+			"description": "The Apollo list to import from"
+		},
+		"apollo.updateImportSource.updateFields.list_name": {
+			"displayName": "List Name",
+			"type": "string",
+			"default": "",
+			"description": "The Apollo list name, for display"
+		},
+		"apollo.updateImportSource.updateFields.name": {
+			"displayName": "Name",
+			"type": "string",
+			"default": "",
+			"description": "Import source name"
+		},
+		"apollo.updateImportSource.updateFields.recurring": {
+			"displayName": "Recurring",
+			"type": "boolean",
+			"default": false,
+			"description": "Whether the import runs again on a schedule"
+		},
+		"apollo.updateImportSource.updateFields.segment_ids": {
+			"displayName": "Segment IDs",
+			"type": "string",
+			"default": "",
+			"description": "Segments to add imported contacts to. Comma-separated list, up to 20."
+		},
+		"apollo.updateImportSource.updateFields.verified_only": {
+			"displayName": "Verified Only",
+			"type": "boolean",
+			"default": false,
+			"description": "Whether to import only people with a verified email address"
+		},
+		"campaignLead.deleteEmail.top.contactId": {
+			"displayName": "Contact ID",
+			"type": "string",
+			"default": "",
+			"description": "The lead, by contact ID",
+			"required": true
+		},
+		"campaignLead.deleteEmail.top.id": {
+			"displayName": "Campaign ID",
+			"type": "string",
+			"default": "",
+			"description": "The campaign",
+			"required": true
+		},
+		"campaignLead.deleteEmail.top.stepId": {
+			"displayName": "Step ID",
+			"type": "string",
+			"default": "",
+			"description": "The email step",
+			"required": true
+		},
+		"campaignLead.getEmails.top.contactId": {
+			"displayName": "Contact ID",
+			"type": "string",
+			"default": "",
+			"description": "The lead, by contact ID",
+			"required": true
+		},
+		"campaignLead.getEmails.top.id": {
+			"displayName": "Campaign ID",
+			"type": "string",
+			"default": "",
+			"description": "The campaign",
+			"required": true
+		},
+		"campaignLead.setEmail.top.contactId": {
+			"displayName": "Contact ID",
+			"type": "string",
+			"default": "",
+			"description": "The lead, by contact ID",
+			"required": true
+		},
+		"campaignLead.setEmail.top.id": {
+			"displayName": "Campaign ID",
+			"type": "string",
+			"default": "",
+			"description": "The campaign",
+			"required": true
+		},
+		"campaignLead.setEmail.top.stepId": {
+			"displayName": "Step ID",
+			"type": "string",
+			"default": "",
+			"description": "The email step",
+			"required": true
+		},
+		"campaignLead.setEmail.updateFields.body_html": {
+			"displayName": "Body (HTML)",
+			"type": "string",
+			"default": "",
+			"description": "This lead's email body as HTML"
+		},
+		"campaignLead.setEmail.updateFields.body_plain": {
+			"displayName": "Body (Plain Text)",
+			"type": "string",
+			"default": "",
+			"description": "This lead's email body as plain text"
+		},
+		"campaignLead.setEmail.updateFields.subject": {
+			"displayName": "Subject",
+			"type": "string",
+			"default": "",
+			"description": "This lead's subject line. Ignored on a follow-up that replies in the lead's thread."
+		},
+		"campaignLead.writeEmail.additionalFields.rewrite": {
+			"displayName": "Rewrite",
+			"type": "boolean",
+			"default": false,
+			"description": "Whether to replace copy already written with a new generation. Each rewrite is charged again, so do not retry it automatically."
+		},
+		"campaignLead.writeEmail.top.contactId": {
+			"displayName": "Contact ID",
+			"type": "string",
+			"default": "",
+			"description": "The lead, by contact ID",
+			"required": true
+		},
+		"campaignLead.writeEmail.top.id": {
+			"displayName": "Campaign ID",
+			"type": "string",
+			"default": "",
+			"description": "The campaign",
+			"required": true
+		},
+		"campaignLead.writeEmail.top.stepId": {
+			"displayName": "Step ID",
+			"type": "string",
+			"default": "",
+			"description": "The email step",
+			"required": true
+		},
+		"campaignReview.approve.additionalFields.all": {
+			"displayName": "All",
+			"type": "boolean",
+			"default": false,
+			"description": "Whether to approve every lead waiting for review"
+		},
+		"campaignReview.approve.additionalFields.contact_ids": {
+			"displayName": "Contact IDs",
+			"type": "string",
+			"default": "",
+			"description": "Leads to approve. Comma-separated list. Leave empty and turn on All to approve every waiting lead."
+		},
+		"campaignReview.approve.top.id": {
+			"displayName": "Campaign ID",
+			"type": "string",
+			"default": "",
+			"description": "The campaign",
+			"required": true
+		},
+		"campaignReview.get.top.id": {
+			"displayName": "Campaign ID",
+			"type": "string",
+			"default": "",
+			"description": "The campaign",
+			"required": true
+		},
+		"campaignReview.getLeads.filters.missing": {
+			"displayName": "Missing Field",
+			"type": "options",
+			"default": "FirstName",
+			"description": "Only leads with this field empty",
+			"options": [
+				{
+					"name": "Company",
+					"value": "Company"
+				},
+				{
+					"name": "First Name",
+					"value": "FirstName"
+				},
+				{
+					"name": "Last Name",
+					"value": "LastName"
+				},
+				{
+					"name": "Phone",
+					"value": "Phone"
+				}
+			]
+		},
+		"campaignReview.getLeads.filters.q": {
+			"displayName": "Search",
+			"type": "string",
+			"default": "",
+			"description": "Matches email, name or company"
+		},
+		"campaignReview.getLeads.filters.status": {
+			"displayName": "Status",
+			"type": "options",
+			"default": "all",
+			"description": "Only leads in this review state",
+			"options": [
+				{
+					"name": "All",
+					"value": "all"
+				},
+				{
+					"name": "Held",
+					"value": "held"
+				},
+				{
+					"name": "Ready",
+					"value": "ready"
+				},
+				{
+					"name": "Started",
+					"value": "started"
+				},
+				{
+					"name": "Waiting",
+					"value": "waiting"
+				}
+			]
+		},
+		"campaignReview.getLeads.top.id": {
+			"displayName": "Campaign ID",
+			"type": "string",
+			"default": "",
+			"description": "The campaign",
+			"required": true
+		},
+		"campaignReview.reopen.additionalFields.all": {
+			"displayName": "All",
+			"type": "boolean",
+			"default": false,
+			"description": "Whether to reopen every lead not yet emailed"
+		},
+		"campaignReview.reopen.top.contact_ids": {
+			"displayName": "Contact IDs",
+			"type": "string",
+			"default": "",
+			"description": "Leads to put back into review. Only leads not yet emailed are reopened. Comma-separated list.",
+			"required": true
+		},
+		"campaignReview.reopen.top.id": {
+			"displayName": "Campaign ID",
+			"type": "string",
+			"default": "",
+			"description": "The campaign",
+			"required": true
+		},
+		"campaignReview.set.top.enabled": {
+			"displayName": "Enabled",
+			"type": "boolean",
+			"default": false,
+			"description": "Whether new leads wait for a member to approve their first email. Turning review off approves every waiting lead, which starts sending to them.",
+			"required": true
+		},
+		"campaignReview.set.top.id": {
+			"displayName": "Campaign ID",
+			"type": "string",
+			"default": "",
+			"description": "The campaign",
+			"required": true
+		},
+		"campaignReview.write.additionalFields.after": {
+			"displayName": "After",
+			"type": "string",
+			"default": "",
+			"description": "The \"next\" cursor from the previous pass. Call again with it while \"remaining\" is above zero."
+		},
+		"campaignReview.write.additionalFields.contact_ids": {
+			"displayName": "Contact IDs",
+			"type": "string",
+			"default": "",
+			"description": "Only write these leads. Comma-separated list. Omit to write every lead still missing copy."
+		},
+		"campaignReview.write.additionalFields.step_id": {
+			"displayName": "Step ID",
+			"type": "string",
+			"default": "",
+			"description": "Only write this email step. Omit to write every AI step."
+		},
+		"campaignReview.write.additionalFields.waiting_only": {
+			"displayName": "Waiting Only",
+			"type": "boolean",
+			"default": false,
+			"description": "Whether to limit the pass to leads waiting for review"
+		},
+		"campaignReview.write.top.id": {
+			"displayName": "Campaign ID",
+			"type": "string",
+			"default": "",
+			"description": "The campaign",
+			"required": true
+		},
+		"form.update.updateFields.segment_ids": {
+			"displayName": "Segment IDs",
+			"type": "string",
+			"default": "",
+			"description": "Segments to add contacts who submit the form to. Comma-separated list, up to 20."
+		},
+		"salesforce.createImportSource.additionalFields.segment_ids": {
+			"displayName": "Segment IDs",
+			"type": "string",
+			"default": "",
+			"description": "Segments to add imported contacts to. Comma-separated list, up to 20."
+		},
+		"salesforce.updateImportSource.updateFields.campaign_id": {
+			"displayName": "Campaign ID",
+			"type": "string",
+			"default": "",
+			"description": "Campaign to enrol imported contacts in"
+		},
+		"salesforce.updateImportSource.updateFields.category_ids": {
+			"displayName": "Category IDs",
+			"type": "string",
+			"default": "",
+			"description": "Categories to add imported contacts to. Comma-separated list."
+		},
+		"salesforce.updateImportSource.updateFields.enabled": {
+			"displayName": "Enabled",
+			"type": "boolean",
+			"default": false,
+			"description": "Whether the import source is active"
+		},
+		"salesforce.updateImportSource.updateFields.name": {
+			"displayName": "Name",
+			"type": "string",
+			"default": "",
+			"description": "Import source name"
+		},
+		"salesforce.updateImportSource.updateFields.object": {
+			"displayName": "Object",
+			"type": "string",
+			"default": "",
+			"description": "The Salesforce object a list view belongs to, such as Lead or Contact"
+		},
+		"salesforce.updateImportSource.updateFields.recurring": {
+			"displayName": "Recurring",
+			"type": "boolean",
+			"default": false,
+			"description": "Whether the import runs again on a schedule"
+		},
+		"salesforce.updateImportSource.updateFields.segment_ids": {
+			"displayName": "Segment IDs",
+			"type": "string",
+			"default": "",
+			"description": "Segments to add imported contacts to. Comma-separated list, up to 20."
+		},
+		"salesforce.updateImportSource.updateFields.source_id": {
+			"displayName": "Source ID",
+			"type": "string",
+			"default": "",
+			"description": "The Salesforce list view or campaign ID"
+		},
+		"salesforce.updateImportSource.updateFields.source_kind": {
+			"displayName": "Source Kind",
+			"type": "options",
+			"default": "list_view",
+			"description": "What to import from",
+			"options": [
+				{
+					"name": "Campaign",
+					"value": "campaign"
+				},
+				{
+					"name": "List View",
+					"value": "list_view"
+				}
+			]
+		},
+		"salesforce.updateImportSource.updateFields.source_label": {
+			"displayName": "Source Label",
+			"type": "string",
+			"default": "",
+			"description": "The list view or campaign name, for display"
+		},
+		"store.createQuote.top.items": {
+			"displayName": "Items",
+			"type": "json",
+			"default": "",
+			"description": "What to price, as a JSON array. A domain: {\"type\": \"domain\", \"domain\": \"acme.com\", \"years\": 1}. Mailboxes on a domain: {\"type\": \"mailboxes\", \"domain\": \"acme.com\", \"provider\": \"google\" or \"microsoft\", \"mailboxes\": [{\"local_part\": \"jane\", \"first_name\": \"Jane\", \"last_name\": \"Doe\"}]}. Prices hold for fifteen minutes.",
+			"required": true
+		},
+		"store.getPhoto.top.id": {
+			"displayName": "Photo ID",
+			"type": "string",
+			"default": "",
+			"description": "The uploaded photo. Answers with the JPEG image data.",
+			"required": true
+		},
+		"store.setRegistrant.updateFields.address1": {
+			"displayName": "Address Line 1",
+			"type": "string",
+			"default": "",
+			"description": "Street address"
+		},
+		"store.setRegistrant.updateFields.address2": {
+			"displayName": "Address Line 2",
+			"type": "string",
+			"default": "",
+			"description": "Second address line"
+		},
+		"store.setRegistrant.updateFields.city": {
+			"displayName": "City",
+			"type": "string",
+			"default": "",
+			"description": "City"
+		},
+		"store.setRegistrant.updateFields.country": {
+			"displayName": "Country",
+			"type": "string",
+			"default": "",
+			"description": "Two-letter country code, such as GB"
+		},
+		"store.setRegistrant.updateFields.email": {
+			"displayName": "Email",
+			"type": "string",
+			"default": "",
+			"description": "Registrant email address",
+			"placeholder": "name@email.com"
+		},
+		"store.setRegistrant.updateFields.first_name": {
+			"displayName": "First Name",
+			"type": "string",
+			"default": "",
+			"description": "Registrant first name"
+		},
+		"store.setRegistrant.updateFields.last_name": {
+			"displayName": "Last Name",
+			"type": "string",
+			"default": "",
+			"description": "Registrant last name"
+		},
+		"store.setRegistrant.updateFields.organization": {
+			"displayName": "Organization",
+			"type": "string",
+			"default": "",
+			"description": "Company name, if the domains belong to one"
+		},
+		"store.setRegistrant.updateFields.phone": {
+			"displayName": "Phone",
+			"type": "string",
+			"default": "",
+			"description": "Phone number as +<country code>.<number>, such as +44.2071234567"
+		},
+		"store.setRegistrant.updateFields.postal_code": {
+			"displayName": "Postal Code",
+			"type": "string",
+			"default": "",
+			"description": "Postal code"
+		},
+		"store.setRegistrant.updateFields.state": {
+			"displayName": "State",
+			"type": "string",
+			"default": "",
+			"description": "State or region"
+		},
+		"store.uploadPhoto.additionalFields.from": {
+			"displayName": "From",
+			"type": "string",
+			"default": "",
+			"description": "Leave empty. The photo is the file in the input binary field."
+		},
+		"storeDnsRecord.check.top.id": {
+			"displayName": "Domain ID",
+			"type": "string",
+			"default": "",
+			"description": "The store domain",
+			"required": true
+		},
+		"storeDnsRecord.create.additionalFields.priority": {
+			"displayName": "Priority",
+			"type": "number",
+			"default": 10,
+			"description": "Priority, for MX and SRV records",
+			"typeOptions": {
+				"minValue": 0
+			}
+		},
+		"storeDnsRecord.create.additionalFields.ttl": {
+			"displayName": "TTL",
+			"type": "number",
+			"default": 3600,
+			"description": "Time to live in seconds",
+			"typeOptions": {
+				"minValue": 1
+			}
+		},
+		"storeDnsRecord.create.top.content": {
+			"displayName": "Content",
+			"type": "string",
+			"default": "",
+			"description": "The record's value",
+			"required": true
+		},
+		"storeDnsRecord.create.top.id": {
+			"displayName": "Domain ID",
+			"type": "string",
+			"default": "",
+			"description": "The store domain",
+			"required": true
+		},
+		"storeDnsRecord.create.top.name": {
+			"displayName": "Name",
+			"type": "string",
+			"default": "",
+			"description": "Host name. Use @ for the domain itself.",
+			"required": true
+		},
+		"storeDnsRecord.create.top.type": {
+			"displayName": "Type",
+			"type": "options",
+			"default": "TXT",
+			"description": "Record type",
+			"required": true,
+			"options": [
+				{
+					"name": "A",
+					"value": "A"
+				},
+				{
+					"name": "AAAA",
+					"value": "AAAA"
+				},
+				{
+					"name": "CAA",
+					"value": "CAA"
+				},
+				{
+					"name": "CNAME",
+					"value": "CNAME"
+				},
+				{
+					"name": "MX",
+					"value": "MX"
+				},
+				{
+					"name": "SRV",
+					"value": "SRV"
+				},
+				{
+					"name": "TXT",
+					"value": "TXT"
+				}
+			]
+		},
+		"storeDnsRecord.delete.top.id": {
+			"displayName": "Domain ID",
+			"type": "string",
+			"default": "",
+			"description": "The store domain",
+			"required": true
+		},
+		"storeDnsRecord.delete.top.record_id": {
+			"displayName": "Record ID",
+			"type": "string",
+			"default": "",
+			"description": "The DNS record",
+			"required": true
+		},
+		"storeDnsRecord.update.top.id": {
+			"displayName": "Domain ID",
+			"type": "string",
+			"default": "",
+			"description": "The store domain",
+			"required": true
+		},
+		"storeDnsRecord.update.top.record_id": {
+			"displayName": "Record ID",
+			"type": "string",
+			"default": "",
+			"description": "The DNS record",
+			"required": true
+		},
+		"storeDnsRecord.update.updateFields.content": {
+			"displayName": "Content",
+			"type": "string",
+			"default": "",
+			"description": "The record's value"
+		},
+		"storeDnsRecord.update.updateFields.name": {
+			"displayName": "Name",
+			"type": "string",
+			"default": "",
+			"description": "Host name. Use @ for the domain itself."
+		},
+		"storeDnsRecord.update.updateFields.priority": {
+			"displayName": "Priority",
+			"type": "number",
+			"default": 10,
+			"description": "Priority, for MX and SRV records",
+			"typeOptions": {
+				"minValue": 0
+			}
+		},
+		"storeDnsRecord.update.updateFields.ttl": {
+			"displayName": "TTL",
+			"type": "number",
+			"default": 3600,
+			"description": "Time to live in seconds",
+			"typeOptions": {
+				"minValue": 1
+			}
+		},
+		"storeDomain.checkConnection.top.id": {
+			"displayName": "Domain ID",
+			"type": "string",
+			"default": "",
+			"description": "The store domain",
+			"required": true
+		},
+		"storeDomain.connect.top.domain": {
+			"displayName": "Domain",
+			"type": "string",
+			"default": "",
+			"description": "The domain name, such as acme.com",
+			"required": true
+		},
+		"storeDomain.connect.top.method": {
+			"displayName": "Method",
+			"type": "options",
+			"default": "nameservers",
+			"description": "How the domain is connected",
+			"required": true,
+			"options": [
+				{
+					"name": "Manual (Add Records at Your DNS Provider)",
+					"value": "manual"
+				},
+				{
+					"name": "Nameservers (Move DNS Here)",
+					"value": "nameservers"
+				}
+			]
+		},
+		"storeDomain.delete.top.id": {
+			"displayName": "Domain ID",
+			"type": "string",
+			"default": "",
+			"description": "The store domain",
+			"required": true
+		},
+		"storeDomain.get.top.id": {
+			"displayName": "Domain ID",
+			"type": "string",
+			"default": "",
+			"description": "The store domain",
+			"required": true
+		},
+		"storeDomain.regenerateConnection.top.id": {
+			"displayName": "Domain ID",
+			"type": "string",
+			"default": "",
+			"description": "The store domain",
+			"required": true
+		},
+		"storeDomain.renew.top.id": {
+			"displayName": "Domain ID",
+			"type": "string",
+			"default": "",
+			"description": "The store domain",
+			"required": true
+		},
+		"storeDomain.search.filters.suggestions": {
+			"displayName": "Suggestions",
+			"type": "boolean",
+			"default": true,
+			"description": "Whether to include suggested alternatives. Turn off for exact matches only."
+		},
+		"storeDomain.search.filters.tlds": {
+			"displayName": "Endings",
+			"type": "string",
+			"default": "",
+			"description": "Only these endings. Comma-separated list, such as com,io."
+		},
+		"storeDomain.search.top.q": {
+			"displayName": "Query",
+			"type": "string",
+			"default": "",
+			"description": "The name or keywords to search for",
+			"required": true
+		},
+		"storeDomain.startMicrosoftConsent.additionalFields.order_id": {
+			"displayName": "Order ID",
+			"type": "string",
+			"default": "",
+			"description": "The order the approval starts from, where the administrator lands back after approving"
+		},
+		"storeDomain.startMicrosoftConsent.top.id": {
+			"displayName": "Domain ID",
+			"type": "string",
+			"default": "",
+			"description": "The store domain",
+			"required": true
+		},
+		"storeDomain.transferOut.top.id": {
+			"displayName": "Domain ID",
+			"type": "string",
+			"default": "",
+			"description": "The store domain",
+			"required": true
+		},
+		"storeDomain.update.top.id": {
+			"displayName": "Domain ID",
+			"type": "string",
+			"default": "",
+			"description": "The store domain",
+			"required": true
+		},
+		"storeDomain.update.updateFields.auto_renew": {
+			"displayName": "Auto Renew",
+			"type": "boolean",
+			"default": false,
+			"description": "Whether the domain renews automatically. Needs the billing permission."
+		},
+		"storeDomain.update.updateFields.forwarding_url": {
+			"displayName": "Forwarding URL",
+			"type": "string",
+			"default": "",
+			"description": "Where visitors to the domain are redirected"
+		},
+		"storeMailbox.cancel.top.id": {
+			"displayName": "Mailbox ID",
+			"type": "string",
+			"default": "",
+			"description": "The store mailbox",
+			"required": true
+		},
+		"storeMailbox.getSignIn.top.id": {
+			"displayName": "Mailbox ID",
+			"type": "string",
+			"default": "",
+			"description": "The store mailbox",
+			"required": true
+		},
+		"storeMailbox.resume.top.id": {
+			"displayName": "Mailbox ID",
+			"type": "string",
+			"default": "",
+			"description": "The store mailbox",
+			"required": true
+		},
+		"storeMailbox.setPhoto.top.id": {
+			"displayName": "Mailbox ID",
+			"type": "string",
+			"default": "",
+			"description": "The store mailbox",
+			"required": true
+		},
+		"storeMailbox.setPhoto.top.photo_id": {
+			"displayName": "Photo ID",
+			"type": "string",
+			"default": "",
+			"description": "The uploaded photo, from Store > Upload Photo",
+			"required": true
+		},
+		"storeMailbox.update.top.id": {
+			"displayName": "Mailbox ID",
+			"type": "string",
+			"default": "",
+			"description": "The store mailbox",
+			"required": true
+		},
+		"storeMailbox.update.updateFields.first_name": {
+			"displayName": "First Name",
+			"type": "string",
+			"default": "",
+			"description": "Sender first name"
+		},
+		"storeMailbox.update.updateFields.last_name": {
+			"displayName": "Last Name",
+			"type": "string",
+			"default": "",
+			"description": "Sender last name"
+		},
+		"storeOrder.create.additionalFields.enable_auto_reload": {
+			"displayName": "Enable Auto Reload",
+			"type": "boolean",
+			"default": true,
+			"description": "Whether to turn on the balance's automatic reload, sized to the mailboxes. Defaults to on unless the workspace already set up automatic reload."
+		},
+		"storeOrder.create.additionalFields.expected_due_now_micros": {
+			"displayName": "Expected Due Now (Micros)",
+			"type": "number",
+			"default": 0,
+			"description": "The quote's total due now, in millionths of the currency unit. If the price has changed the order is refused and nothing is charged.",
+			"typeOptions": {
+				"minValue": 0
+			}
+		},
+		"storeOrder.create.additionalFields.forwarding_url": {
+			"displayName": "Forwarding URL",
+			"type": "string",
+			"default": "",
+			"description": "Where visitors to the bought domains are redirected"
+		},
+		"storeOrder.create.top.quote_id": {
+			"displayName": "Quote ID",
+			"type": "string",
+			"default": "",
+			"description": "The quote to buy, from Store > Create Quote",
+			"required": true
+		},
+		"storeOrder.get.top.id": {
+			"displayName": "Order ID",
+			"type": "string",
+			"default": "",
+			"description": "The store order",
+			"required": true
 		}
 	},
 	"operations": {
@@ -6968,6 +7801,11 @@
 			"action": "Stop warmup",
 			"name": "Stop Warmup"
 		},
+		"mailbox.getPartnerEnablement": {
+			"action": "Get the managing partner's per-mailbox enablement",
+			"description": "Get the managing partner's per-mailbox enablement",
+			"name": "Get Partner Enablement"
+		},
 		"mailboxOAuthApp.set": {
 			"action": "Create or update a mailbox OAuth app",
 			"description": "Create or update a mailbox OAuth app",
@@ -7422,6 +8260,151 @@
 			"action": "List timezones",
 			"description": "List timezones",
 			"name": "Get Timezones"
+		},
+		"campaignLead.deleteEmail": {
+			"action": "Delete a campaign lead's own copy of an email step",
+			"description": "Delete a campaign lead's own copy of an email step",
+			"name": "Delete Email"
+		},
+		"campaignLead.getEmails": {
+			"action": "Get a campaign lead's emails as they will be sent",
+			"description": "Get a campaign lead's emails as they will be sent",
+			"name": "Get Emails"
+		},
+		"campaignLead.setEmail": {
+			"action": "Set a campaign lead's own copy of an email step",
+			"description": "Set a campaign lead's own copy of an email step",
+			"name": "Set Email"
+		},
+		"campaignLead.writeEmail": {
+			"action": "Write a campaign lead's email step with AI",
+			"description": "Write a campaign lead's email step with AI",
+			"name": "Write Email With AI"
+		},
+		"campaignReview.approve": {
+			"action": "Approve leads waiting for review",
+			"description": "Approve leads waiting for review",
+			"name": "Approve Leads"
+		},
+		"campaignReview.get": {
+			"action": "Get a campaign review readiness report",
+			"description": "Get a campaign review readiness report",
+			"name": "Get"
+		},
+		"campaignReview.getLeads": {
+			"action": "Get the leads in a campaign review",
+			"description": "Get the leads in a campaign review",
+			"name": "Get Leads"
+		},
+		"campaignReview.reopen": {
+			"action": "Put leads back into review",
+			"description": "Put leads back into review",
+			"name": "Reopen Leads"
+		},
+		"campaignReview.set": {
+			"action": "Turn campaign review on or off",
+			"description": "Turn campaign review on or off",
+			"name": "Turn On or Off"
+		},
+		"campaignReview.write": {
+			"action": "Write AI copy ahead for leads in review",
+			"description": "Write AI copy ahead for leads in review",
+			"name": "Write AI Copy"
+		},
+		"store.createQuote": {
+			"action": "Create a priced quote for domains and mailboxes",
+			"description": "Create a priced quote for domains and mailboxes",
+			"name": "Create Quote"
+		},
+		"store.getPhoto": {
+			"action": "Get an uploaded profile photo",
+			"description": "Get an uploaded profile photo",
+			"name": "Get Photo"
+		},
+		"store.getStatus": {
+			"action": "Get the store status for the workspace",
+			"description": "Get the store status for the workspace",
+			"name": "Get Status"
+		},
+		"store.setRegistrant": {
+			"action": "Set the domain registrant contact",
+			"description": "Set the domain registrant contact",
+			"name": "Set Registrant"
+		},
+		"store.uploadPhoto": {
+			"action": "Upload a mailbox profile photo",
+			"description": "Upload a mailbox profile photo",
+			"name": "Upload Photo"
+		},
+		"storeDnsRecord.check": {
+			"action": "Look up a store domain's DNS records in public DNS",
+			"description": "Look up a store domain's DNS records in public DNS",
+			"name": "Check"
+		},
+		"storeDomain.checkConnection": {
+			"action": "Check a connected domain's setup",
+			"description": "Check a connected domain's setup",
+			"name": "Check Connection"
+		},
+		"storeDomain.connect": {
+			"action": "Connect a domain registered elsewhere",
+			"description": "Connect a domain registered elsewhere",
+			"name": "Connect"
+		},
+		"storeDomain.delete": {
+			"action": "Remove a connected store domain",
+			"description": "Remove a connected store domain",
+			"name": "Remove"
+		},
+		"storeDomain.regenerateConnection": {
+			"action": "Regenerate a connected domain's setup records",
+			"description": "Regenerate a connected domain's setup records",
+			"name": "Regenerate Connection"
+		},
+		"storeDomain.renew": {
+			"action": "Renew a store domain",
+			"description": "Renew a store domain",
+			"name": "Renew"
+		},
+		"storeDomain.search": {
+			"action": "Search for domains to buy",
+			"description": "Search for domains to buy",
+			"name": "Search"
+		},
+		"storeDomain.startMicrosoftConsent": {
+			"action": "Get the Microsoft 365 administrator approval link for a store domain",
+			"description": "Get the Microsoft 365 administrator approval link for a store domain",
+			"name": "Start Microsoft Consent"
+		},
+		"storeDomain.transferOut": {
+			"action": "Get the transfer code to move a store domain to another registrar",
+			"description": "Get the transfer code to move a store domain to another registrar",
+			"name": "Transfer Out"
+		},
+		"storeMailbox.cancel": {
+			"action": "Cancel a store mailbox at the end of its paid month",
+			"description": "Cancel a store mailbox at the end of its paid month",
+			"name": "Cancel"
+		},
+		"storeMailbox.getSignIn": {
+			"action": "Get a store mailbox's sign-in details",
+			"description": "Get a store mailbox's sign-in details",
+			"name": "Get Sign-In"
+		},
+		"storeMailbox.resume": {
+			"action": "Resume a cancelled store mailbox",
+			"description": "Resume a cancelled store mailbox",
+			"name": "Resume"
+		},
+		"storeMailbox.setPhoto": {
+			"action": "Set a store mailbox's profile photo",
+			"description": "Set a store mailbox's profile photo",
+			"name": "Set Photo"
+		},
+		"storeOrder.create": {
+			"action": "Place a store order and charge the workspace",
+			"description": "Place a store order and charge the workspace",
+			"name": "Create"
 		}
 	},
 	"resources": {
@@ -7704,6 +8687,36 @@
 			"defaultOperation": "getPlans",
 			"displayName": "Workspace",
 			"noun": "workspace"
+		},
+		"campaignReview": {
+			"defaultOperation": "get",
+			"displayName": "Campaign Review",
+			"noun": "campaign review"
+		},
+		"store": {
+			"defaultOperation": "getStatus",
+			"displayName": "Store",
+			"noun": "store"
+		},
+		"storeDnsRecord": {
+			"defaultOperation": "create",
+			"displayName": "Store DNS Record",
+			"noun": "store DNS record"
+		},
+		"storeDomain": {
+			"defaultOperation": "getAll",
+			"displayName": "Store Domain",
+			"noun": "store domain"
+		},
+		"storeMailbox": {
+			"defaultOperation": "getAll",
+			"displayName": "Store Mailbox",
+			"noun": "store mailbox"
+		},
+		"storeOrder": {
+			"defaultOperation": "getAll",
+			"displayName": "Store Order",
+			"noun": "store order"
 		}
 	}
 }

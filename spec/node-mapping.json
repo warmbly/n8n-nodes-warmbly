@@ -59,6 +59,12 @@
 		"route": "DELETE /campaigns/{}/steps/{}",
 		"handler": "DeleteSequence"
 	},
+	"DELETE /campaigns/{}/leads/{}/emails/{}": {
+		"resource": "campaignLead",
+		"operation": "deleteEmail",
+		"route": "DELETE /campaigns/{}/leads/{}/emails/{}",
+		"handler": "DeleteCampaignLeadEmail"
+	},
 	"DELETE /categories/{}": {
 		"resource": "contactCategory",
 		"operation": "delete",
@@ -341,6 +347,24 @@
 		"route": "DELETE /webhooks/{}",
 		"handler": "DeleteWebhookEndpoint"
 	},
+	"DELETE /store/domains/{}": {
+		"resource": "storeDomain",
+		"operation": "delete",
+		"route": "DELETE /store/domains/{}",
+		"handler": "RemoveStoreDomain"
+	},
+	"DELETE /store/domains/{}/dns/{}": {
+		"resource": "storeDnsRecord",
+		"operation": "delete",
+		"route": "DELETE /store/domains/{}/dns/{}",
+		"handler": "DeleteStoreDNSRecord"
+	},
+	"DELETE /store/mailboxes/{}": {
+		"resource": "storeMailbox",
+		"operation": "cancel",
+		"route": "DELETE /store/mailboxes/{}",
+		"handler": "CancelStoreMailbox"
+	},
 	"GET /advisor/recommendations": {
 		"resource": "advisor",
 		"operation": "getAll",
@@ -587,6 +611,12 @@
 		"route": "GET /campaigns/{}/leads/{}/hold",
 		"handler": "GetCampaignLeadHold"
 	},
+	"GET /campaigns/{}/leads/{}/emails": {
+		"resource": "campaignLead",
+		"operation": "getEmails",
+		"route": "GET /campaigns/{}/leads/{}/emails",
+		"handler": "GetCampaignLeadEmails"
+	},
 	"GET /campaigns/{}/logs": {
 		"resource": "campaign",
 		"operation": "getLogs",
@@ -628,6 +658,18 @@
 		"operation": "getWarmupPlacement",
 		"route": "GET /campaigns/{}/warmup-placement",
 		"handler": "GetCampaignWarmupPlacement"
+	},
+	"GET /campaigns/{}/review": {
+		"resource": "campaignReview",
+		"operation": "get",
+		"route": "GET /campaigns/{}/review",
+		"handler": "GetCampaignReview"
+	},
+	"GET /campaigns/{}/review/leads": {
+		"resource": "campaignReview",
+		"operation": "getLeads",
+		"route": "GET /campaigns/{}/review/leads",
+		"handler": "ListCampaignReviewLeads"
 	},
 	"GET /contacts/custom-fields": {
 		"resource": "contact",
@@ -916,6 +958,12 @@
 		"operation": "warmupBanStatus",
 		"route": "GET /emails/{}/warmup/ban-status",
 		"handler": "GetWarmupBanStatus"
+	},
+	"GET /emails/partner": {
+		"resource": "mailbox",
+		"operation": "getPartnerEnablement",
+		"route": "GET /emails/partner",
+		"handler": "WorkspacePartnerMailboxes"
 	},
 	"GET /forms": {
 		"resource": "form",
@@ -1475,6 +1523,54 @@
 		"route": "GET /webhooks/{}/deliveries",
 		"handler": "ListWebhookDeliveries"
 	},
+	"GET /store/domains": {
+		"resource": "storeDomain",
+		"operation": "getAll",
+		"route": "GET /store/domains",
+		"handler": "ListStoreDomains"
+	},
+	"GET /store/domains/{}": {
+		"resource": "storeDomain",
+		"operation": "get",
+		"route": "GET /store/domains/{}",
+		"handler": "GetStoreDomain"
+	},
+	"GET /store/domains/search": {
+		"resource": "storeDomain",
+		"operation": "search",
+		"route": "GET /store/domains/search",
+		"handler": "SearchStoreDomains"
+	},
+	"GET /store/mailboxes": {
+		"resource": "storeMailbox",
+		"operation": "getAll",
+		"route": "GET /store/mailboxes",
+		"handler": "ListStoreMailboxes"
+	},
+	"GET /store/orders": {
+		"resource": "storeOrder",
+		"operation": "getAll",
+		"route": "GET /store/orders",
+		"handler": "ListStoreOrders"
+	},
+	"GET /store/orders/{}": {
+		"resource": "storeOrder",
+		"operation": "get",
+		"route": "GET /store/orders/{}",
+		"handler": "GetStoreOrder"
+	},
+	"GET /store/photos/{}": {
+		"resource": "store",
+		"operation": "getPhoto",
+		"route": "GET /store/photos/{}",
+		"handler": "GetStorePhoto"
+	},
+	"GET /store/status": {
+		"resource": "store",
+		"operation": "getStatus",
+		"route": "GET /store/status",
+		"handler": "GetStoreStatus"
+	},
 	"PATCH /ai/skills/{}": {
 		"resource": "aiSkill",
 		"operation": "update",
@@ -1781,6 +1877,24 @@
 		"route": "PATCH /webhooks/{}",
 		"handler": "UpdateWebhookEndpoint"
 	},
+	"PATCH /store/domains/{}": {
+		"resource": "storeDomain",
+		"operation": "update",
+		"route": "PATCH /store/domains/{}",
+		"handler": "PatchStoreDomain"
+	},
+	"PATCH /store/domains/{}/dns/{}": {
+		"resource": "storeDnsRecord",
+		"operation": "update",
+		"route": "PATCH /store/domains/{}/dns/{}",
+		"handler": "UpdateStoreDNSRecord"
+	},
+	"PATCH /store/mailboxes/{}": {
+		"resource": "storeMailbox",
+		"operation": "update",
+		"route": "PATCH /store/mailboxes/{}",
+		"handler": "PatchStoreMailbox"
+	},
 	"POST /advisor/recommendations/{}/apply": {
 		"resource": "advisor",
 		"operation": "apply",
@@ -1901,6 +2015,12 @@
 		"route": "POST /campaigns/{}/leads/{}/resume",
 		"handler": "ResumeCampaignLead"
 	},
+	"POST /campaigns/{}/leads/{}/emails/{}/write": {
+		"resource": "campaignLead",
+		"operation": "writeEmail",
+		"route": "POST /campaigns/{}/leads/{}/emails/{}/write",
+		"handler": "WriteCampaignLeadEmailAI"
+	},
 	"POST /campaigns/{}/preflight": {
 		"resource": "campaign",
 		"operation": "preflight",
@@ -1936,6 +2056,24 @@
 		"operation": "verifyTrackingDomain",
 		"route": "POST /campaigns/{}/tracking-domain/verify",
 		"handler": "VerifyCampaignTrackingDomain"
+	},
+	"POST /campaigns/{}/review/approve": {
+		"resource": "campaignReview",
+		"operation": "approve",
+		"route": "POST /campaigns/{}/review/approve",
+		"handler": "ApproveCampaignReviewLeads"
+	},
+	"POST /campaigns/{}/review/reopen": {
+		"resource": "campaignReview",
+		"operation": "reopen",
+		"route": "POST /campaigns/{}/review/reopen",
+		"handler": "ReopenCampaignReviewLeads"
+	},
+	"POST /campaigns/{}/review/write": {
+		"resource": "campaignReview",
+		"operation": "write",
+		"route": "POST /campaigns/{}/review/write",
+		"handler": "WriteCampaignReviewAI"
 	},
 	"POST /categories": {
 		"resource": "contactCategory",
@@ -2753,11 +2891,95 @@
 		"route": "POST /webhooks/{}/verify",
 		"handler": "VerifyWebhookEndpoint"
 	},
+	"POST /store/domains/{}/connection/check": {
+		"resource": "storeDomain",
+		"operation": "checkConnection",
+		"route": "POST /store/domains/{}/connection/check",
+		"handler": "CheckStoreDomainConnection"
+	},
+	"POST /store/domains/{}/connection/regenerate": {
+		"resource": "storeDomain",
+		"operation": "regenerateConnection",
+		"route": "POST /store/domains/{}/connection/regenerate",
+		"handler": "RegenerateStoreDomainConnection"
+	},
+	"POST /store/domains/{}/dns": {
+		"resource": "storeDnsRecord",
+		"operation": "create",
+		"route": "POST /store/domains/{}/dns",
+		"handler": "AddStoreDNSRecord"
+	},
+	"POST /store/domains/{}/dns/check": {
+		"resource": "storeDnsRecord",
+		"operation": "check",
+		"route": "POST /store/domains/{}/dns/check",
+		"handler": "CheckStoreDNS"
+	},
+	"POST /store/domains/{}/microsoft-consent": {
+		"resource": "storeDomain",
+		"operation": "startMicrosoftConsent",
+		"route": "POST /store/domains/{}/microsoft-consent",
+		"handler": "StartStoreMicrosoftConsent"
+	},
+	"POST /store/domains/{}/renew": {
+		"resource": "storeDomain",
+		"operation": "renew",
+		"route": "POST /store/domains/{}/renew",
+		"handler": "RenewStoreDomain"
+	},
+	"POST /store/domains/{}/transfer-out": {
+		"resource": "storeDomain",
+		"operation": "transferOut",
+		"route": "POST /store/domains/{}/transfer-out",
+		"handler": "TransferOutStoreDomain"
+	},
+	"POST /store/domains/connect": {
+		"resource": "storeDomain",
+		"operation": "connect",
+		"route": "POST /store/domains/connect",
+		"handler": "ConnectStoreDomain"
+	},
+	"POST /store/mailboxes/{}/resume": {
+		"resource": "storeMailbox",
+		"operation": "resume",
+		"route": "POST /store/mailboxes/{}/resume",
+		"handler": "ResumeStoreMailbox"
+	},
+	"POST /store/mailboxes/{}/sign-in": {
+		"resource": "storeMailbox",
+		"operation": "getSignIn",
+		"route": "POST /store/mailboxes/{}/sign-in",
+		"handler": "StoreMailboxSignIn"
+	},
+	"POST /store/orders": {
+		"resource": "storeOrder",
+		"operation": "create",
+		"route": "POST /store/orders",
+		"handler": "CreateStoreOrder"
+	},
+	"POST /store/photos": {
+		"resource": "store",
+		"operation": "uploadPhoto",
+		"route": "POST /store/photos",
+		"handler": "UploadStorePhoto"
+	},
+	"POST /store/quotes": {
+		"resource": "store",
+		"operation": "createQuote",
+		"route": "POST /store/quotes",
+		"handler": "CreateStoreQuote"
+	},
 	"PUT /campaigns/{}/leads/{}/cc": {
 		"resource": "campaignLead",
 		"operation": "setCC",
 		"route": "PUT /campaigns/{}/leads/{}/cc",
 		"handler": "SetCampaignLeadCC"
+	},
+	"PUT /campaigns/{}/leads/{}/emails/{}": {
+		"resource": "campaignLead",
+		"operation": "setEmail",
+		"route": "PUT /campaigns/{}/leads/{}/emails/{}",
+		"handler": "PutCampaignLeadEmail"
 	},
 	"PUT /campaigns/{}/placement-monitor": {
 		"resource": "placementMonitor",
@@ -2776,6 +2998,12 @@
 		"operation": "replaceSenders",
 		"route": "PUT /campaigns/{}/senders",
 		"handler": "ReplaceCampaignSenders"
+	},
+	"PUT /campaigns/{}/review": {
+		"resource": "campaignReview",
+		"operation": "set",
+		"route": "PUT /campaigns/{}/review",
+		"handler": "SetCampaignReview"
 	},
 	"PUT /crm/owners/{}": {
 		"resource": "crm",
@@ -2878,5 +3106,17 @@
 		"operation": "setThreadLabels",
 		"route": "PUT /unibox/thread/labels",
 		"handler": "SetUniboxThreadLabels"
+	},
+	"PUT /store/mailboxes/{}/photo": {
+		"resource": "storeMailbox",
+		"operation": "setPhoto",
+		"route": "PUT /store/mailboxes/{}/photo",
+		"handler": "SetStoreMailboxPhoto"
+	},
+	"PUT /store/registrant": {
+		"resource": "store",
+		"operation": "setRegistrant",
+		"route": "PUT /store/registrant",
+		"handler": "PutStoreRegistrant"
 	}
 }
