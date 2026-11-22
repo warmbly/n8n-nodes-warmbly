@@ -17,6 +17,12 @@
 		"route": "DELETE /api-keys/{}",
 		"handler": "RevokeAPIKey"
 	},
+	"DELETE /api-keys/{}/permanent": {
+		"resource": "apiKey",
+		"operation": "deletePermanently",
+		"route": "DELETE /api-keys/{}/permanent",
+		"handler": "DeleteAPIKey"
+	},
 	"DELETE /automations/{}": {
 		"resource": "automation",
 		"operation": "delete",
@@ -41,11 +47,23 @@
 		"route": "DELETE /campaigns/{}/attachments/{}",
 		"handler": "DeleteCampaignAttachment"
 	},
+	"DELETE /campaigns/{}/placement-monitor": {
+		"resource": "placementMonitor",
+		"operation": "delete",
+		"route": "DELETE /campaigns/{}/placement-monitor",
+		"handler": "DeletePlacementMonitor"
+	},
 	"DELETE /campaigns/{}/steps/{}": {
 		"resource": "campaignStep",
 		"operation": "delete",
 		"route": "DELETE /campaigns/{}/steps/{}",
 		"handler": "DeleteSequence"
+	},
+	"DELETE /campaigns/{}/leads/{}/emails/{}": {
+		"resource": "campaignLead",
+		"operation": "deleteEmail",
+		"route": "DELETE /campaigns/{}/leads/{}/emails/{}",
+		"handler": "DeleteCampaignLeadEmail"
 	},
 	"DELETE /categories/{}": {
 		"resource": "contactCategory",
@@ -71,6 +89,12 @@
 		"route": "DELETE /contacts/{}/notes/{}",
 		"handler": "DeleteContactNote"
 	},
+	"DELETE /contacts/{}/salesforce/links/{}": {
+		"resource": "contact",
+		"operation": "unlinkSalesforce",
+		"route": "DELETE /contacts/{}/salesforce/links/{}",
+		"handler": "UnlinkContactSalesforce"
+	},
 	"DELETE /crm/deals/{}": {
 		"resource": "deal",
 		"operation": "delete",
@@ -95,17 +119,47 @@
 		"route": "DELETE /crm/task-types/{}",
 		"handler": "DeleteTaskType"
 	},
+	"DELETE /crm/tasks": {
+		"resource": "crmTask",
+		"operation": "bulkDelete",
+		"route": "DELETE /crm/tasks",
+		"handler": "BulkDeleteCRMTasks"
+	},
 	"DELETE /crm/tasks/{}": {
 		"resource": "crmTask",
 		"operation": "delete",
 		"route": "DELETE /crm/tasks/{}",
 		"handler": "DeleteCRMTask"
 	},
+	"DELETE /email-images/{}": {
+		"resource": "emailImage",
+		"operation": "delete",
+		"route": "DELETE /email-images/{}",
+		"handler": "DeleteEmailImage"
+	},
+	"DELETE /emails/connect/links/{}": {
+		"resource": "mailboxSignInLink",
+		"operation": "revoke",
+		"route": "DELETE /emails/connect/links/{}",
+		"handler": "RevokeMailboxConnectLink"
+	},
+	"DELETE /emails/oauth-apps/{}": {
+		"resource": "mailboxOAuthApp",
+		"operation": "delete",
+		"route": "DELETE /emails/oauth-apps/{}",
+		"handler": "DeleteMailboxOAuthApp"
+	},
 	"DELETE /emails/{}": {
 		"resource": "mailbox",
 		"operation": "delete",
 		"route": "DELETE /emails/{}",
 		"handler": "DeleteEmail"
+	},
+	"DELETE /emails/{}/warmup-filter-tag": {
+		"resource": "mailbox",
+		"operation": "clearWarmupFilterTag",
+		"route": "DELETE /emails/{}/warmup-filter-tag",
+		"handler": "ClearWarmupFilterTag"
 	},
 	"DELETE /folders/{}": {
 		"resource": "folder",
@@ -131,6 +185,12 @@
 		"route": "DELETE /forms/{}/submissions/{}",
 		"handler": "DeleteFormSubmission"
 	},
+	"DELETE /integrations/apollo/{}/import-sources/{}": {
+		"resource": "apollo",
+		"operation": "deleteImportSource",
+		"route": "DELETE /integrations/apollo/{}/import-sources/{}",
+		"handler": "DeleteApolloImportSource"
+	},
 	"DELETE /integrations/connections/{}": {
 		"resource": "integration",
 		"operation": "delete",
@@ -143,11 +203,35 @@
 		"route": "DELETE /integrations/connections/{}/events/{}",
 		"handler": "DeleteConnectionEventSubscription"
 	},
+	"DELETE /integrations/salesforce/{}/import-sources/{}": {
+		"resource": "salesforce",
+		"operation": "deleteImportSource",
+		"route": "DELETE /integrations/salesforce/{}/import-sources/{}",
+		"handler": "DeleteSalesforceImportSource"
+	},
 	"DELETE /lead-sync/sources/{}": {
 		"resource": "leadSync",
 		"operation": "delete",
 		"route": "DELETE /lead-sync/sources/{}",
 		"handler": "DeleteLeadSyncSource"
+	},
+	"DELETE /leads": {
+		"resource": "lead",
+		"operation": "bulkDelete",
+		"route": "DELETE /leads",
+		"handler": "DeleteLeads"
+	},
+	"DELETE /leads/searches/{}": {
+		"resource": "leadSearch",
+		"operation": "delete",
+		"route": "DELETE /leads/searches/{}",
+		"handler": "DeleteLeadSearch"
+	},
+	"DELETE /leads/{}/people/{}": {
+		"resource": "leadPerson",
+		"operation": "delete",
+		"route": "DELETE /leads/{}/people/{}",
+		"handler": "DeleteLeadPerson"
 	},
 	"DELETE /meetings/{}": {
 		"resource": "meeting",
@@ -155,11 +239,47 @@
 		"route": "DELETE /meetings/{}",
 		"handler": "DeleteMeeting"
 	},
+	"DELETE /migrations/{}": {
+		"resource": "toolMigration",
+		"operation": "dismiss",
+		"route": "DELETE /migrations/{}",
+		"handler": "DismissToolMigration"
+	},
 	"DELETE /oauth/applications/{}": {
 		"resource": "oauthApp",
 		"operation": "delete",
 		"route": "DELETE /oauth/applications/{}",
 		"handler": "DeleteOAuthApplication"
+	},
+	"DELETE /oauth/applications/{}/listing": {
+		"resource": "oauthApp",
+		"operation": "deleteListing",
+		"route": "DELETE /oauth/applications/{}/listing",
+		"handler": "DeleteOAuthAppListing"
+	},
+	"DELETE /oauth/applications/{}/logo": {
+		"resource": "oauthApp",
+		"operation": "deleteLogo",
+		"route": "DELETE /oauth/applications/{}/logo",
+		"handler": "DeleteOAuthApplicationLogo"
+	},
+	"DELETE /reports/{}": {
+		"resource": "clientReport",
+		"operation": "delete",
+		"route": "DELETE /reports/{}",
+		"handler": "DeleteClientReport"
+	},
+	"DELETE /reports/{}/link": {
+		"resource": "clientReport",
+		"operation": "revokeLink",
+		"route": "DELETE /reports/{}/link",
+		"handler": "RevokeClientReportLink"
+	},
+	"DELETE /reports/{}/schedule": {
+		"resource": "clientReport",
+		"operation": "deleteSchedule",
+		"route": "DELETE /reports/{}/schedule",
+		"handler": "DeleteClientReportSchedule"
 	},
 	"DELETE /segments/{}": {
 		"resource": "segment",
@@ -226,6 +346,24 @@
 		"operation": "delete",
 		"route": "DELETE /webhooks/{}",
 		"handler": "DeleteWebhookEndpoint"
+	},
+	"DELETE /store/domains/{}": {
+		"resource": "storeDomain",
+		"operation": "delete",
+		"route": "DELETE /store/domains/{}",
+		"handler": "RemoveStoreDomain"
+	},
+	"DELETE /store/domains/{}/dns/{}": {
+		"resource": "storeDnsRecord",
+		"operation": "delete",
+		"route": "DELETE /store/domains/{}/dns/{}",
+		"handler": "DeleteStoreDNSRecord"
+	},
+	"DELETE /store/mailboxes/{}": {
+		"resource": "storeMailbox",
+		"operation": "cancel",
+		"route": "DELETE /store/mailboxes/{}",
+		"handler": "CancelStoreMailbox"
 	},
 	"GET /advisor/recommendations": {
 		"resource": "advisor",
@@ -305,6 +443,18 @@
 		"route": "GET /analytics/deliverability",
 		"handler": "GetDeliverabilityDashboard"
 	},
+	"GET /analytics/direct": {
+		"resource": "analytics",
+		"operation": "getDirectMail",
+		"route": "GET /analytics/direct",
+		"handler": "GetDirectMailAnalytics"
+	},
+	"GET /analytics/inbox-tagging": {
+		"resource": "analytics",
+		"operation": "getInboxTaggingReview",
+		"route": "GET /analytics/inbox-tagging",
+		"handler": "GetInboxTaggingReview"
+	},
 	"GET /analytics/usage": {
 		"resource": "analytics",
 		"operation": "getUsage",
@@ -316,6 +466,12 @@
 		"operation": "getWarmup",
 		"route": "GET /analytics/warmup",
 		"handler": "GetWarmupAnalytics"
+	},
+	"GET /analytics/warmup/placement": {
+		"resource": "analytics",
+		"operation": "getWarmupPlacement",
+		"route": "GET /analytics/warmup/placement",
+		"handler": "GetWarmupPlacement"
 	},
 	"GET /api-keys": {
 		"resource": "apiKey",
@@ -431,17 +587,59 @@
 		"route": "GET /campaigns/{}/forms",
 		"handler": "GetCampaignForms"
 	},
+	"GET /campaigns/{}/lead-timezones": {
+		"resource": "campaign",
+		"operation": "getLeadTimezones",
+		"route": "GET /campaigns/{}/lead-timezones",
+		"handler": "GetCampaignLeadTimezones"
+	},
+	"GET /campaigns/{}/leads/{}/cc": {
+		"resource": "campaignLead",
+		"operation": "getCC",
+		"route": "GET /campaigns/{}/leads/{}/cc",
+		"handler": "GetCampaignLeadCC"
+	},
+	"GET /campaigns/{}/leads/{}/cc/suggestions": {
+		"resource": "campaignLead",
+		"operation": "suggestCC",
+		"route": "GET /campaigns/{}/leads/{}/cc/suggestions",
+		"handler": "SuggestCampaignLeadCC"
+	},
+	"GET /campaigns/{}/leads/{}/hold": {
+		"resource": "campaignLead",
+		"operation": "getHold",
+		"route": "GET /campaigns/{}/leads/{}/hold",
+		"handler": "GetCampaignLeadHold"
+	},
+	"GET /campaigns/{}/leads/{}/emails": {
+		"resource": "campaignLead",
+		"operation": "getEmails",
+		"route": "GET /campaigns/{}/leads/{}/emails",
+		"handler": "GetCampaignLeadEmails"
+	},
 	"GET /campaigns/{}/logs": {
 		"resource": "campaign",
 		"operation": "getLogs",
 		"route": "GET /campaigns/{}/logs",
 		"handler": "GetCampaignLogs"
 	},
+	"GET /campaigns/{}/placement-monitor": {
+		"resource": "placementMonitor",
+		"operation": "get",
+		"route": "GET /campaigns/{}/placement-monitor",
+		"handler": "GetPlacementMonitor"
+	},
 	"GET /campaigns/{}/segments": {
 		"resource": "campaign",
 		"operation": "getSegments",
 		"route": "GET /campaigns/{}/segments",
 		"handler": "ListCampaignSegments"
+	},
+	"GET /campaigns/{}/send-plan": {
+		"resource": "campaign",
+		"operation": "getSendPlan",
+		"route": "GET /campaigns/{}/send-plan",
+		"handler": "GetCampaignSendPlan"
 	},
 	"GET /campaigns/{}/senders": {
 		"resource": "campaign",
@@ -455,11 +653,47 @@
 		"route": "GET /campaigns/{}/steps",
 		"handler": "GetSequences"
 	},
+	"GET /campaigns/{}/warmup-placement": {
+		"resource": "campaign",
+		"operation": "getWarmupPlacement",
+		"route": "GET /campaigns/{}/warmup-placement",
+		"handler": "GetCampaignWarmupPlacement"
+	},
+	"GET /campaigns/{}/review": {
+		"resource": "campaignReview",
+		"operation": "get",
+		"route": "GET /campaigns/{}/review",
+		"handler": "GetCampaignReview"
+	},
+	"GET /campaigns/{}/review/leads": {
+		"resource": "campaignReview",
+		"operation": "getLeads",
+		"route": "GET /campaigns/{}/review/leads",
+		"handler": "ListCampaignReviewLeads"
+	},
 	"GET /contacts/custom-fields": {
 		"resource": "contact",
 		"operation": "getCustomFields",
 		"route": "GET /contacts/custom-fields",
 		"handler": "ListContactCustomFields"
+	},
+	"GET /contacts/imports": {
+		"resource": "contactImport",
+		"operation": "getAll",
+		"route": "GET /contacts/imports",
+		"handler": "ListContactImports"
+	},
+	"GET /contacts/imports/{}": {
+		"resource": "contactImport",
+		"operation": "get",
+		"route": "GET /contacts/imports/{}",
+		"handler": "GetContactImport"
+	},
+	"GET /contacts/imports/{}/failed.csv": {
+		"resource": "contactImport",
+		"operation": "downloadFailures",
+		"route": "GET /contacts/imports/{}/failed.csv",
+		"handler": "DownloadContactImportFailures"
 	},
 	"GET /contacts/lookup": {
 		"resource": "contact",
@@ -515,6 +749,12 @@
 		"route": "GET /contacts/{}/research",
 		"handler": "ListContactResearch"
 	},
+	"GET /contacts/{}/salesforce": {
+		"resource": "contact",
+		"operation": "getSalesforce",
+		"route": "GET /contacts/{}/salesforce",
+		"handler": "GetContactSalesforce"
+	},
 	"GET /contacts/{}/segments": {
 		"resource": "contact",
 		"operation": "getSegments",
@@ -526,6 +766,18 @@
 		"operation": "getTimeline",
 		"route": "GET /contacts/{}/timeline",
 		"handler": "ListContactTimeline"
+	},
+	"GET /crm/backfill": {
+		"resource": "crm",
+		"operation": "getBackfill",
+		"route": "GET /crm/backfill",
+		"handler": "GetCRMBackfill"
+	},
+	"GET /crm/contacts/{}": {
+		"resource": "crmContact",
+		"operation": "get",
+		"route": "GET /crm/contacts/{}",
+		"handler": "GetCRMContact"
 	},
 	"GET /crm/deals": {
 		"resource": "deal",
@@ -539,6 +791,24 @@
 		"route": "GET /crm/deals/{}",
 		"handler": "GetDeal"
 	},
+	"GET /crm/lists": {
+		"resource": "crm",
+		"operation": "getLists",
+		"route": "GET /crm/lists",
+		"handler": "ListCRMLists"
+	},
+	"GET /crm/metadata": {
+		"resource": "crm",
+		"operation": "getMetadata",
+		"route": "GET /crm/metadata",
+		"handler": "GetCRMMetadata"
+	},
+	"GET /crm/owners": {
+		"resource": "crm",
+		"operation": "getOwners",
+		"route": "GET /crm/owners",
+		"handler": "ListCRMOwners"
+	},
 	"GET /crm/pipelines": {
 		"resource": "pipeline",
 		"operation": "getAll",
@@ -550,6 +820,18 @@
 		"operation": "get",
 		"route": "GET /crm/pipelines/{}",
 		"handler": "GetPipeline"
+	},
+	"GET /crm/settings": {
+		"resource": "crm",
+		"operation": "getSettings",
+		"route": "GET /crm/settings",
+		"handler": "GetCRMSettings"
+	},
+	"GET /crm/sync": {
+		"resource": "crm",
+		"operation": "getSyncHealth",
+		"route": "GET /crm/sync",
+		"handler": "GetCRMSyncHealth"
 	},
 	"GET /crm/task-types": {
 		"resource": "crmTaskType",
@@ -569,6 +851,12 @@
 		"route": "GET /crm/tasks/{}",
 		"handler": "GetCRMTask"
 	},
+	"GET /email-images": {
+		"resource": "emailImage",
+		"operation": "getAll",
+		"route": "GET /email-images",
+		"handler": "ListEmailImages"
+	},
 	"GET /emails": {
 		"resource": "mailbox",
 		"operation": "getAll",
@@ -580,6 +868,36 @@
 		"operation": "getAllowance",
 		"route": "GET /emails/allowance",
 		"handler": "GetMailboxAllowance"
+	},
+	"GET /emails/client-links": {
+		"resource": "clientConnectLink",
+		"operation": "getAll",
+		"route": "GET /emails/client-links",
+		"handler": "ListConnectLinks"
+	},
+	"GET /emails/client-links/{}/uses": {
+		"resource": "clientConnectLink",
+		"operation": "getUses",
+		"route": "GET /emails/client-links/{}/uses",
+		"handler": "ListConnectLinkUses"
+	},
+	"GET /emails/connect/links": {
+		"resource": "mailboxSignInLink",
+		"operation": "getAll",
+		"route": "GET /emails/connect/links",
+		"handler": "ListMailboxConnectLinks"
+	},
+	"GET /emails/connect/links/{}": {
+		"resource": "mailboxSignInLink",
+		"operation": "get",
+		"route": "GET /emails/connect/links/{}",
+		"handler": "GetMailboxConnectLink"
+	},
+	"GET /emails/oauth-apps": {
+		"resource": "mailboxOAuthApp",
+		"operation": "getAll",
+		"route": "GET /emails/oauth-apps",
+		"handler": "ListMailboxOAuthApps"
 	},
 	"GET /emails/{}": {
 		"resource": "mailbox",
@@ -605,6 +923,18 @@
 		"route": "GET /emails/{}/behavior/plan",
 		"handler": "GetEmailBehaviorPlan"
 	},
+	"GET /emails/{}/certificates": {
+		"resource": "mailbox",
+		"operation": "getCertificates",
+		"route": "GET /emails/{}/certificates",
+		"handler": "GetEmailCertificates"
+	},
+	"GET /emails/{}/identity": {
+		"resource": "mailbox",
+		"operation": "getSendIdentity",
+		"route": "GET /emails/{}/identity",
+		"handler": "GetEmailSendIdentity"
+	},
 	"GET /emails/{}/sync": {
 		"resource": "mailbox",
 		"operation": "getSyncStatus",
@@ -617,11 +947,23 @@
 		"route": "GET /emails/{}/track",
 		"handler": "GetEmailTrackingDomain"
 	},
+	"GET /emails/{}/warmup-filter-tag": {
+		"resource": "mailbox",
+		"operation": "getWarmupFilterTag",
+		"route": "GET /emails/{}/warmup-filter-tag",
+		"handler": "GetWarmupFilterTag"
+	},
 	"GET /emails/{}/warmup/ban-status": {
 		"resource": "mailbox",
 		"operation": "warmupBanStatus",
 		"route": "GET /emails/{}/warmup/ban-status",
 		"handler": "GetWarmupBanStatus"
+	},
+	"GET /emails/partner": {
+		"resource": "mailbox",
+		"operation": "getPartnerEnablement",
+		"route": "GET /emails/partner",
+		"handler": "WorkspacePartnerMailboxes"
 	},
 	"GET /forms": {
 		"resource": "form",
@@ -665,6 +1007,36 @@
 		"route": "GET /forms/{}/submissions",
 		"handler": "ListFormSubmissions"
 	},
+	"GET /integrations/apollo/{}": {
+		"resource": "apollo",
+		"operation": "getOverview",
+		"route": "GET /integrations/apollo/{}",
+		"handler": "ApolloOverview"
+	},
+	"GET /integrations/apollo/{}/enrichments": {
+		"resource": "apollo",
+		"operation": "getEnrichments",
+		"route": "GET /integrations/apollo/{}/enrichments",
+		"handler": "ListApolloEnrichments"
+	},
+	"GET /integrations/apollo/{}/enrichments/{}": {
+		"resource": "apollo",
+		"operation": "getEnrichment",
+		"route": "GET /integrations/apollo/{}/enrichments/{}",
+		"handler": "GetApolloEnrichment"
+	},
+	"GET /integrations/apollo/{}/import-sources": {
+		"resource": "apollo",
+		"operation": "getImportSources",
+		"route": "GET /integrations/apollo/{}/import-sources",
+		"handler": "ListApolloImportSources"
+	},
+	"GET /integrations/apollo/{}/lists": {
+		"resource": "apollo",
+		"operation": "getLists",
+		"route": "GET /integrations/apollo/{}/lists",
+		"handler": "ApolloLists"
+	},
 	"GET /integrations/bookings": {
 		"resource": "integration",
 		"operation": "getBookings",
@@ -676,6 +1048,24 @@
 		"operation": "getCatalog",
 		"route": "GET /integrations/catalog",
 		"handler": "ListIntegrationCatalog"
+	},
+	"GET /integrations/clay/{}": {
+		"resource": "integration",
+		"operation": "getClaySettings",
+		"route": "GET /integrations/clay/{}",
+		"handler": "GetClaySettings"
+	},
+	"GET /integrations/community": {
+		"resource": "integration",
+		"operation": "getCommunityApps",
+		"route": "GET /integrations/community",
+		"handler": "ListCommunityApps"
+	},
+	"GET /integrations/community/{}": {
+		"resource": "integration",
+		"operation": "getCommunityApp",
+		"route": "GET /integrations/community/{}",
+		"handler": "GetCommunityApp"
 	},
 	"GET /integrations/connections": {
 		"resource": "integration",
@@ -713,6 +1103,54 @@
 		"route": "GET /integrations/connections/{}/webhook-secret",
 		"handler": "GetConnectionWebhookSecret"
 	},
+	"GET /integrations/salesforce/{}/activity": {
+		"resource": "salesforce",
+		"operation": "getActivity",
+		"route": "GET /integrations/salesforce/{}/activity",
+		"handler": "ListSalesforceActivity"
+	},
+	"GET /integrations/salesforce/{}/campaigns": {
+		"resource": "salesforce",
+		"operation": "getCampaigns",
+		"route": "GET /integrations/salesforce/{}/campaigns",
+		"handler": "SalesforceCampaigns"
+	},
+	"GET /integrations/salesforce/{}/import-sources": {
+		"resource": "salesforce",
+		"operation": "getImportSources",
+		"route": "GET /integrations/salesforce/{}/import-sources",
+		"handler": "ListSalesforceImportSources"
+	},
+	"GET /integrations/salesforce/{}/list-views": {
+		"resource": "salesforce",
+		"operation": "getListViews",
+		"route": "GET /integrations/salesforce/{}/list-views",
+		"handler": "SalesforceListViews"
+	},
+	"GET /integrations/salesforce/{}/metadata": {
+		"resource": "salesforce",
+		"operation": "getMetadata",
+		"route": "GET /integrations/salesforce/{}/metadata",
+		"handler": "SalesforceMetadata"
+	},
+	"GET /integrations/salesforce/{}/overview": {
+		"resource": "salesforce",
+		"operation": "getOverview",
+		"route": "GET /integrations/salesforce/{}/overview",
+		"handler": "SalesforceOverview"
+	},
+	"GET /integrations/salesforce/{}/settings": {
+		"resource": "salesforce",
+		"operation": "getSettings",
+		"route": "GET /integrations/salesforce/{}/settings",
+		"handler": "GetSalesforceSettings"
+	},
+	"GET /integrations/salesforce/{}/users": {
+		"resource": "salesforce",
+		"operation": "getUsers",
+		"route": "GET /integrations/salesforce/{}/users",
+		"handler": "SalesforceUsers"
+	},
 	"GET /lead-sync/google/connection": {
 		"resource": "leadSync",
 		"operation": "getGoogleConnection",
@@ -730,6 +1168,42 @@
 		"operation": "get",
 		"route": "GET /lead-sync/sources/{}",
 		"handler": "GetLeadSyncSource"
+	},
+	"GET /leads/config": {
+		"resource": "lead",
+		"operation": "getConfig",
+		"route": "GET /leads/config",
+		"handler": "LeadFinderConfig"
+	},
+	"GET /leads/enrichments": {
+		"resource": "leadEnrichment",
+		"operation": "getAll",
+		"route": "GET /leads/enrichments",
+		"handler": "LeadEnrichmentRuns"
+	},
+	"GET /leads/enrichments/{}": {
+		"resource": "leadEnrichment",
+		"operation": "get",
+		"route": "GET /leads/enrichments/{}",
+		"handler": "LeadEnrichmentRun"
+	},
+	"GET /leads/geocode": {
+		"resource": "lead",
+		"operation": "geocode",
+		"route": "GET /leads/geocode",
+		"handler": "LeadFinderGeocode"
+	},
+	"GET /leads/searches": {
+		"resource": "leadSearch",
+		"operation": "getAll",
+		"route": "GET /leads/searches",
+		"handler": "LeadSearches"
+	},
+	"GET /leads/{}": {
+		"resource": "lead",
+		"operation": "get",
+		"route": "GET /leads/{}",
+		"handler": "GetLead"
 	},
 	"GET /me": {
 		"resource": "workspace",
@@ -749,6 +1223,24 @@
 		"route": "GET /meetings/summary",
 		"handler": "MeetingsSummary"
 	},
+	"GET /migrations": {
+		"resource": "toolMigration",
+		"operation": "getAll",
+		"route": "GET /migrations",
+		"handler": "ListToolMigrations"
+	},
+	"GET /migrations/providers": {
+		"resource": "toolMigration",
+		"operation": "getProviders",
+		"route": "GET /migrations/providers",
+		"handler": "ListToolMigrationProviders"
+	},
+	"GET /migrations/{}": {
+		"resource": "toolMigration",
+		"operation": "get",
+		"route": "GET /migrations/{}",
+		"handler": "GetToolMigration"
+	},
 	"GET /oauth/applications": {
 		"resource": "oauthApp",
 		"operation": "getAll",
@@ -760,6 +1252,12 @@
 		"operation": "get",
 		"route": "GET /oauth/applications/{}",
 		"handler": "GetOAuthApplication"
+	},
+	"GET /oauth/applications/{}/listing": {
+		"resource": "oauthApp",
+		"operation": "getListing",
+		"route": "GET /oauth/applications/{}/listing",
+		"handler": "GetOAuthAppListing"
 	},
 	"GET /oauth/applications/{}/webhook-deliveries": {
 		"resource": "oauthApp",
@@ -785,11 +1283,77 @@
 		"route": "GET /outreach/settings",
 		"handler": "GetOutreachSettings"
 	},
+	"GET /placement/batches": {
+		"resource": "placementBatch",
+		"operation": "getAll",
+		"route": "GET /placement/batches",
+		"handler": "ListPlacementBatches"
+	},
+	"GET /placement/batches/{}": {
+		"resource": "placementBatch",
+		"operation": "get",
+		"route": "GET /placement/batches/{}",
+		"handler": "GetPlacementBatch"
+	},
+	"GET /placement/batches/{}/senders": {
+		"resource": "placementBatch",
+		"operation": "getSenders",
+		"route": "GET /placement/batches/{}/senders",
+		"handler": "ListPlacementBatchSenders"
+	},
+	"GET /placement/coverage": {
+		"resource": "placement",
+		"operation": "getCoverage",
+		"route": "GET /placement/coverage",
+		"handler": "GetPlacementCoverage"
+	},
+	"GET /placement/overview": {
+		"resource": "placement",
+		"operation": "getOverview",
+		"route": "GET /placement/overview",
+		"handler": "GetPlacementOverview"
+	},
+	"GET /placement/seeds": {
+		"resource": "placement",
+		"operation": "getSeeds",
+		"route": "GET /placement/seeds",
+		"handler": "ListPlacementSeeds"
+	},
+	"GET /placement/tests": {
+		"resource": "placementTest",
+		"operation": "getAll",
+		"route": "GET /placement/tests",
+		"handler": "ListPlacementTests"
+	},
+	"GET /placement/tests/{}": {
+		"resource": "placementTest",
+		"operation": "get",
+		"route": "GET /placement/tests/{}",
+		"handler": "GetPlacementTest"
+	},
 	"GET /plans": {
 		"resource": "workspace",
 		"operation": "getPlans",
 		"route": "GET /plans",
 		"handler": "ListPlans"
+	},
+	"GET /reports": {
+		"resource": "clientReport",
+		"operation": "getAll",
+		"route": "GET /reports",
+		"handler": "ListClientReports"
+	},
+	"GET /reports/{}": {
+		"resource": "clientReport",
+		"operation": "get",
+		"route": "GET /reports/{}",
+		"handler": "GetClientReport"
+	},
+	"GET /reports/{}/preview": {
+		"resource": "clientReport",
+		"operation": "preview",
+		"route": "GET /reports/{}/preview",
+		"handler": "PreviewClientReport"
 	},
 	"GET /segments": {
 		"resource": "segment",
@@ -959,6 +1523,54 @@
 		"route": "GET /webhooks/{}/deliveries",
 		"handler": "ListWebhookDeliveries"
 	},
+	"GET /store/domains": {
+		"resource": "storeDomain",
+		"operation": "getAll",
+		"route": "GET /store/domains",
+		"handler": "ListStoreDomains"
+	},
+	"GET /store/domains/{}": {
+		"resource": "storeDomain",
+		"operation": "get",
+		"route": "GET /store/domains/{}",
+		"handler": "GetStoreDomain"
+	},
+	"GET /store/domains/search": {
+		"resource": "storeDomain",
+		"operation": "search",
+		"route": "GET /store/domains/search",
+		"handler": "SearchStoreDomains"
+	},
+	"GET /store/mailboxes": {
+		"resource": "storeMailbox",
+		"operation": "getAll",
+		"route": "GET /store/mailboxes",
+		"handler": "ListStoreMailboxes"
+	},
+	"GET /store/orders": {
+		"resource": "storeOrder",
+		"operation": "getAll",
+		"route": "GET /store/orders",
+		"handler": "ListStoreOrders"
+	},
+	"GET /store/orders/{}": {
+		"resource": "storeOrder",
+		"operation": "get",
+		"route": "GET /store/orders/{}",
+		"handler": "GetStoreOrder"
+	},
+	"GET /store/photos/{}": {
+		"resource": "store",
+		"operation": "getPhoto",
+		"route": "GET /store/photos/{}",
+		"handler": "GetStorePhoto"
+	},
+	"GET /store/status": {
+		"resource": "store",
+		"operation": "getStatus",
+		"route": "GET /store/status",
+		"handler": "GetStoreStatus"
+	},
 	"PATCH /ai/skills/{}": {
 		"resource": "aiSkill",
 		"operation": "update",
@@ -1031,6 +1643,12 @@
 		"route": "PATCH /contacts",
 		"handler": "UpdateContactBulk"
 	},
+	"PATCH /contacts/imports/{}": {
+		"resource": "contactImport",
+		"operation": "saveDraft",
+		"route": "PATCH /contacts/imports/{}",
+		"handler": "SaveContactImportDraft"
+	},
 	"PATCH /contacts/{}": {
 		"resource": "contact",
 		"operation": "update",
@@ -1042,6 +1660,12 @@
 		"operation": "update",
 		"route": "PATCH /contacts/{}/notes/{}",
 		"handler": "UpdateContactNote"
+	},
+	"PATCH /crm/contacts/{}": {
+		"resource": "crmContact",
+		"operation": "update",
+		"route": "PATCH /crm/contacts/{}",
+		"handler": "UpdateCRMContact"
 	},
 	"PATCH /crm/deals/{}": {
 		"resource": "deal",
@@ -1067,6 +1691,12 @@
 		"route": "PATCH /crm/task-types/{}",
 		"handler": "UpdateTaskType"
 	},
+	"PATCH /crm/tasks": {
+		"resource": "crmTask",
+		"operation": "bulkUpdate",
+		"route": "PATCH /crm/tasks",
+		"handler": "BulkUpdateCRMTasks"
+	},
 	"PATCH /crm/tasks/{}": {
 		"resource": "crmTask",
 		"operation": "update",
@@ -1084,6 +1714,12 @@
 		"operation": "update",
 		"route": "PATCH /emails/{}",
 		"handler": "UpdateEmail"
+	},
+	"PATCH /emails/{}/direct-tracking": {
+		"resource": "mailbox",
+		"operation": "updateDirectTracking",
+		"route": "PATCH /emails/{}/direct-tracking",
+		"handler": "UpdateEmailDirectTracking"
 	},
 	"PATCH /emails/{}/track": {
 		"resource": "mailbox",
@@ -1109,17 +1745,59 @@
 		"route": "PATCH /forms/{}",
 		"handler": "UpdateForm"
 	},
+	"PATCH /integrations/apollo/{}/import-sources/{}": {
+		"resource": "apollo",
+		"operation": "updateImportSource",
+		"route": "PATCH /integrations/apollo/{}/import-sources/{}",
+		"handler": "UpdateApolloImportSource"
+	},
+	"PATCH /integrations/clay/{}": {
+		"resource": "integration",
+		"operation": "updateClaySettings",
+		"route": "PATCH /integrations/clay/{}",
+		"handler": "UpdateClaySettings"
+	},
 	"PATCH /integrations/connections/{}/config": {
 		"resource": "integration",
 		"operation": "updateConfig",
 		"route": "PATCH /integrations/connections/{}/config",
 		"handler": "UpdateConnectionConfig"
 	},
+	"PATCH /integrations/salesforce/{}/import-sources/{}": {
+		"resource": "salesforce",
+		"operation": "updateImportSource",
+		"route": "PATCH /integrations/salesforce/{}/import-sources/{}",
+		"handler": "UpdateSalesforceImportSource"
+	},
 	"PATCH /lead-sync/sources/{}": {
 		"resource": "leadSync",
 		"operation": "update",
 		"route": "PATCH /lead-sync/sources/{}",
 		"handler": "UpdateLeadSyncSource"
+	},
+	"PATCH /leads": {
+		"resource": "lead",
+		"operation": "bulkUpdate",
+		"route": "PATCH /leads",
+		"handler": "UpdateLeads"
+	},
+	"PATCH /leads/searches/{}": {
+		"resource": "leadSearch",
+		"operation": "update",
+		"route": "PATCH /leads/searches/{}",
+		"handler": "UpdateLeadSearch"
+	},
+	"PATCH /leads/{}": {
+		"resource": "lead",
+		"operation": "update",
+		"route": "PATCH /leads/{}",
+		"handler": "UpdateLead"
+	},
+	"PATCH /leads/{}/people/{}": {
+		"resource": "leadPerson",
+		"operation": "update",
+		"route": "PATCH /leads/{}/people/{}",
+		"handler": "UpdateLeadPerson"
 	},
 	"PATCH /oauth/applications/{}": {
 		"resource": "oauthApp",
@@ -1132,6 +1810,12 @@
 		"operation": "update",
 		"route": "PATCH /outreach/settings",
 		"handler": "UpdateOutreachSettings"
+	},
+	"PATCH /reports/{}": {
+		"resource": "clientReport",
+		"operation": "update",
+		"route": "PATCH /reports/{}",
+		"handler": "UpdateClientReport"
 	},
 	"PATCH /segments/{}": {
 		"resource": "segment",
@@ -1169,6 +1853,12 @@
 		"route": "PATCH /templates/{}",
 		"handler": "UpdateTemplate"
 	},
+	"PATCH /unibox/folder": {
+		"resource": "unibox",
+		"operation": "moveFolder",
+		"route": "PATCH /unibox/folder",
+		"handler": "UniboxMoveFolder"
+	},
 	"PATCH /unibox/seen": {
 		"resource": "unibox",
 		"operation": "markSeen",
@@ -1186,6 +1876,24 @@
 		"operation": "update",
 		"route": "PATCH /webhooks/{}",
 		"handler": "UpdateWebhookEndpoint"
+	},
+	"PATCH /store/domains/{}": {
+		"resource": "storeDomain",
+		"operation": "update",
+		"route": "PATCH /store/domains/{}",
+		"handler": "PatchStoreDomain"
+	},
+	"PATCH /store/domains/{}/dns/{}": {
+		"resource": "storeDnsRecord",
+		"operation": "update",
+		"route": "PATCH /store/domains/{}/dns/{}",
+		"handler": "UpdateStoreDNSRecord"
+	},
+	"PATCH /store/mailboxes/{}": {
+		"resource": "storeMailbox",
+		"operation": "update",
+		"route": "PATCH /store/mailboxes/{}",
+		"handler": "PatchStoreMailbox"
 	},
 	"POST /advisor/recommendations/{}/apply": {
 		"resource": "advisor",
@@ -1283,11 +1991,35 @@
 		"route": "POST /campaigns/{}/attachments",
 		"handler": "UploadCampaignAttachment"
 	},
+	"POST /campaigns/{}/copy-to": {
+		"resource": "campaign",
+		"operation": "copyToWorkspaces",
+		"route": "POST /campaigns/{}/copy-to",
+		"handler": "CopyCampaignToWorkspaces"
+	},
 	"POST /campaigns/{}/duplicate": {
 		"resource": "campaign",
 		"operation": "duplicate",
 		"route": "POST /campaigns/{}/duplicate",
 		"handler": "DuplicateCampaign"
+	},
+	"POST /campaigns/{}/leads/{}/pause": {
+		"resource": "campaignLead",
+		"operation": "pause",
+		"route": "POST /campaigns/{}/leads/{}/pause",
+		"handler": "PauseCampaignLead"
+	},
+	"POST /campaigns/{}/leads/{}/resume": {
+		"resource": "campaignLead",
+		"operation": "resume",
+		"route": "POST /campaigns/{}/leads/{}/resume",
+		"handler": "ResumeCampaignLead"
+	},
+	"POST /campaigns/{}/leads/{}/emails/{}/write": {
+		"resource": "campaignLead",
+		"operation": "writeEmail",
+		"route": "POST /campaigns/{}/leads/{}/emails/{}/write",
+		"handler": "WriteCampaignLeadEmailAI"
 	},
 	"POST /campaigns/{}/preflight": {
 		"resource": "campaign",
@@ -1325,6 +2057,24 @@
 		"route": "POST /campaigns/{}/tracking-domain/verify",
 		"handler": "VerifyCampaignTrackingDomain"
 	},
+	"POST /campaigns/{}/review/approve": {
+		"resource": "campaignReview",
+		"operation": "approve",
+		"route": "POST /campaigns/{}/review/approve",
+		"handler": "ApproveCampaignReviewLeads"
+	},
+	"POST /campaigns/{}/review/reopen": {
+		"resource": "campaignReview",
+		"operation": "reopen",
+		"route": "POST /campaigns/{}/review/reopen",
+		"handler": "ReopenCampaignReviewLeads"
+	},
+	"POST /campaigns/{}/review/write": {
+		"resource": "campaignReview",
+		"operation": "write",
+		"route": "POST /campaigns/{}/review/write",
+		"handler": "WriteCampaignReviewAI"
+	},
 	"POST /categories": {
 		"resource": "contactCategory",
 		"operation": "create",
@@ -1354,6 +2104,30 @@
 		"operation": "importPreview",
 		"route": "POST /contacts/import/preview",
 		"handler": "ImportPreviewContacts"
+	},
+	"POST /contacts/imports": {
+		"resource": "contactImport",
+		"operation": "create",
+		"route": "POST /contacts/imports",
+		"handler": "CreateContactImport"
+	},
+	"POST /contacts/imports/{}/analyze": {
+		"resource": "contactImport",
+		"operation": "analyze",
+		"route": "POST /contacts/imports/{}/analyze",
+		"handler": "AnalyzeContactImport"
+	},
+	"POST /contacts/imports/{}/cancel": {
+		"resource": "contactImport",
+		"operation": "cancel",
+		"route": "POST /contacts/imports/{}/cancel",
+		"handler": "CancelContactImport"
+	},
+	"POST /contacts/imports/{}/start": {
+		"resource": "contactImport",
+		"operation": "start",
+		"route": "POST /contacts/imports/{}/start",
+		"handler": "StartContactImport"
 	},
 	"POST /contacts/research/batch": {
 		"resource": "contact",
@@ -1385,6 +2159,30 @@
 		"route": "POST /contacts/{}/research",
 		"handler": "ResearchContact"
 	},
+	"POST /contacts/{}/salesforce/sync": {
+		"resource": "contact",
+		"operation": "syncSalesforce",
+		"route": "POST /contacts/{}/salesforce/sync",
+		"handler": "SyncContactSalesforce"
+	},
+	"POST /crm/backfill": {
+		"resource": "crm",
+		"operation": "startBackfill",
+		"route": "POST /crm/backfill",
+		"handler": "StartCRMBackfill"
+	},
+	"POST /crm/contacts/{}/link": {
+		"resource": "crmContact",
+		"operation": "link",
+		"route": "POST /crm/contacts/{}/link",
+		"handler": "LinkCRMContact"
+	},
+	"POST /crm/contacts/{}/refresh": {
+		"resource": "crmContact",
+		"operation": "refresh",
+		"route": "POST /crm/contacts/{}/refresh",
+		"handler": "RefreshCRMContact"
+	},
 	"POST /crm/deals": {
 		"resource": "deal",
 		"operation": "create",
@@ -1403,6 +2201,18 @@
 		"route": "POST /crm/deals/summary",
 		"handler": "DealsSummary"
 	},
+	"POST /crm/lists/import": {
+		"resource": "crm",
+		"operation": "importList",
+		"route": "POST /crm/lists/import",
+		"handler": "ImportCRMList"
+	},
+	"POST /crm/lists/preview": {
+		"resource": "crm",
+		"operation": "previewImport",
+		"route": "POST /crm/lists/preview",
+		"handler": "PreviewCRMImport"
+	},
 	"POST /crm/pipelines": {
 		"resource": "pipeline",
 		"operation": "create",
@@ -1414,6 +2224,24 @@
 		"operation": "createStage",
 		"route": "POST /crm/pipelines/{}/stages",
 		"handler": "CreateStage"
+	},
+	"POST /crm/sync": {
+		"resource": "crm",
+		"operation": "syncNow",
+		"route": "POST /crm/sync",
+		"handler": "SyncCRMNow"
+	},
+	"POST /crm/sync/discard": {
+		"resource": "crm",
+		"operation": "discardSyncFailures",
+		"route": "POST /crm/sync/discard",
+		"handler": "DiscardCRMSyncFailures"
+	},
+	"POST /crm/sync/retry": {
+		"resource": "crm",
+		"operation": "retrySyncFailures",
+		"route": "POST /crm/sync/retry",
+		"handler": "RetryCRMSyncFailures"
 	},
 	"POST /crm/task-types": {
 		"resource": "crmTaskType",
@@ -1445,6 +2273,72 @@
 		"route": "POST /deliverability/events",
 		"handler": "IngestDeliverabilityEvent"
 	},
+	"POST /email-images": {
+		"resource": "emailImage",
+		"operation": "upload",
+		"route": "POST /email-images",
+		"handler": "UploadEmailImage"
+	},
+	"POST /emails/bulk/delete": {
+		"resource": "mailbox",
+		"operation": "bulkDelete",
+		"route": "POST /emails/bulk/delete",
+		"handler": "BulkDeleteEmails"
+	},
+	"POST /emails/bulk/status": {
+		"resource": "mailbox",
+		"operation": "bulkSetStatus",
+		"route": "POST /emails/bulk/status",
+		"handler": "BulkStatusEmails"
+	},
+	"POST /emails/bulk/warmup": {
+		"resource": "mailbox",
+		"operation": "bulkWarmup",
+		"route": "POST /emails/bulk/warmup",
+		"handler": "BulkWarmupEmails"
+	},
+	"POST /emails/client-links": {
+		"resource": "clientConnectLink",
+		"operation": "create",
+		"route": "POST /emails/client-links",
+		"handler": "CreateConnectLink"
+	},
+	"POST /emails/client-links/{}/revoke": {
+		"resource": "clientConnectLink",
+		"operation": "revoke",
+		"route": "POST /emails/client-links/{}/revoke",
+		"handler": "RevokeConnectLink"
+	},
+	"POST /emails/connect/links": {
+		"resource": "mailboxSignInLink",
+		"operation": "create",
+		"route": "POST /emails/connect/links",
+		"handler": "CreateMailboxConnectLink"
+	},
+	"POST /emails/connect/oauth": {
+		"resource": "mailbox",
+		"operation": "connectOAuth",
+		"route": "POST /emails/connect/oauth",
+		"handler": "ConnectMailboxGrant"
+	},
+	"POST /emails/connect/oauth/bulk": {
+		"resource": "mailbox",
+		"operation": "connectOAuthBulk",
+		"route": "POST /emails/connect/oauth/bulk",
+		"handler": "ConnectMailboxGrantBulk"
+	},
+	"POST /emails/connect/smtp-imap": {
+		"resource": "mailbox",
+		"operation": "connectSmtp",
+		"route": "POST /emails/connect/smtp-imap",
+		"handler": "ConnectMailboxSMTP"
+	},
+	"POST /emails/connect/smtp-imap/bulk": {
+		"resource": "mailbox",
+		"operation": "connectSmtpBulk",
+		"route": "POST /emails/connect/smtp-imap/bulk",
+		"handler": "ConnectMailboxSMTPBulk"
+	},
 	"POST /emails/verify": {
 		"resource": "mailbox",
 		"operation": "verify",
@@ -1463,11 +2357,23 @@
 		"route": "POST /emails/{}/hold",
 		"handler": "HoldEmail"
 	},
+	"POST /emails/{}/identity/refresh": {
+		"resource": "mailbox",
+		"operation": "refreshSendIdentity",
+		"route": "POST /emails/{}/identity/refresh",
+		"handler": "RefreshEmailSendIdentity"
+	},
 	"POST /emails/{}/release": {
 		"resource": "mailbox",
 		"operation": "release",
 		"route": "POST /emails/{}/release",
 		"handler": "ReleaseEmail"
+	},
+	"POST /emails/{}/resume-sending": {
+		"resource": "mailbox",
+		"operation": "resumeSending",
+		"route": "POST /emails/{}/resume-sending",
+		"handler": "ResumeEmailSending"
 	},
 	"POST /emails/{}/send": {
 		"resource": "mailbox",
@@ -1553,6 +2459,30 @@
 		"route": "POST /generation/write",
 		"handler": "GenerateWriting"
 	},
+	"POST /integrations/apollo/{}/enrichments": {
+		"resource": "apollo",
+		"operation": "startEnrichment",
+		"route": "POST /integrations/apollo/{}/enrichments",
+		"handler": "StartApolloEnrichment"
+	},
+	"POST /integrations/apollo/{}/import-sources": {
+		"resource": "apollo",
+		"operation": "createImportSource",
+		"route": "POST /integrations/apollo/{}/import-sources",
+		"handler": "CreateApolloImportSource"
+	},
+	"POST /integrations/apollo/{}/import-sources/{}/run": {
+		"resource": "apollo",
+		"operation": "runImportSource",
+		"route": "POST /integrations/apollo/{}/import-sources/{}/run",
+		"handler": "RunApolloImportSource"
+	},
+	"POST /integrations/apollo/{}/import/preview": {
+		"resource": "apollo",
+		"operation": "previewImport",
+		"route": "POST /integrations/apollo/{}/import/preview",
+		"handler": "PreviewApolloImport"
+	},
 	"POST /integrations/connections": {
 		"resource": "integration",
 		"operation": "create",
@@ -1571,11 +2501,47 @@
 		"route": "POST /integrations/connections/{}/push",
 		"handler": "PushContactsToIntegration"
 	},
+	"POST /integrations/connections/{}/rotate-inbound-url": {
+		"resource": "integration",
+		"operation": "rotateInboundUrl",
+		"route": "POST /integrations/connections/{}/rotate-inbound-url",
+		"handler": "RotateConnectionInboundURL"
+	},
 	"POST /integrations/connections/{}/test": {
 		"resource": "integration",
 		"operation": "test",
 		"route": "POST /integrations/connections/{}/test",
 		"handler": "TestConnection"
+	},
+	"POST /integrations/salesforce/{}/activity/retry": {
+		"resource": "salesforce",
+		"operation": "retryActivity",
+		"route": "POST /integrations/salesforce/{}/activity/retry",
+		"handler": "RetrySalesforceActivity"
+	},
+	"POST /integrations/salesforce/{}/import-sources": {
+		"resource": "salesforce",
+		"operation": "createImportSource",
+		"route": "POST /integrations/salesforce/{}/import-sources",
+		"handler": "CreateSalesforceImportSource"
+	},
+	"POST /integrations/salesforce/{}/import-sources/{}/run": {
+		"resource": "salesforce",
+		"operation": "runImportSource",
+		"route": "POST /integrations/salesforce/{}/import-sources/{}/run",
+		"handler": "RunSalesforceImportSource"
+	},
+	"POST /integrations/salesforce/{}/import/preview": {
+		"resource": "salesforce",
+		"operation": "previewImport",
+		"route": "POST /integrations/salesforce/{}/import/preview",
+		"handler": "PreviewSalesforceImport"
+	},
+	"POST /integrations/salesforce/{}/sync-now": {
+		"resource": "salesforce",
+		"operation": "syncNow",
+		"route": "POST /integrations/salesforce/{}/sync-now",
+		"handler": "SalesforceSyncNow"
 	},
 	"POST /lead-sync/google/preview": {
 		"resource": "leadSync",
@@ -1601,11 +2567,89 @@
 		"route": "POST /lead-sync/sources/{}/sync",
 		"handler": "SyncLeadSyncSourceNow"
 	},
+	"POST /leads/contacts": {
+		"resource": "lead",
+		"operation": "addToContacts",
+		"route": "POST /leads/contacts",
+		"handler": "AddLeadsToContacts"
+	},
+	"POST /leads/enrich": {
+		"resource": "lead",
+		"operation": "enrich",
+		"route": "POST /leads/enrich",
+		"handler": "EnrichLeads"
+	},
+	"POST /leads/export": {
+		"resource": "lead",
+		"operation": "export",
+		"route": "POST /leads/export",
+		"handler": "ExportLeads"
+	},
+	"POST /leads/facets": {
+		"resource": "lead",
+		"operation": "getFacets",
+		"route": "POST /leads/facets",
+		"handler": "LeadFacets"
+	},
+	"POST /leads/points": {
+		"resource": "lead",
+		"operation": "getPoints",
+		"route": "POST /leads/points",
+		"handler": "LeadPoints"
+	},
+	"POST /leads/query": {
+		"resource": "lead",
+		"operation": "query",
+		"route": "POST /leads/query",
+		"handler": "QueryLeads"
+	},
+	"POST /leads/search": {
+		"resource": "lead",
+		"operation": "search",
+		"route": "POST /leads/search",
+		"handler": "SearchLeads"
+	},
+	"POST /leads/{}/people": {
+		"resource": "leadPerson",
+		"operation": "add",
+		"route": "POST /leads/{}/people",
+		"handler": "AddLeadPerson"
+	},
+	"POST /leads/{}/people/{}/find-email": {
+		"resource": "leadPerson",
+		"operation": "findEmail",
+		"route": "POST /leads/{}/people/{}/find-email",
+		"handler": "FindLeadPersonEmail"
+	},
 	"POST /meetings": {
 		"resource": "meeting",
 		"operation": "create",
 		"route": "POST /meetings",
 		"handler": "CreateMeeting"
+	},
+	"POST /migrations": {
+		"resource": "toolMigration",
+		"operation": "create",
+		"route": "POST /migrations",
+		"handler": "CreateToolMigration"
+	},
+	"POST /migrations/{}/cancel": {
+		"resource": "toolMigration",
+		"operation": "cancel",
+		"route": "POST /migrations/{}/cancel",
+		"handler": "CancelToolMigration"
+	},
+	"POST /migrations/{}/link-senders": {
+		"resource": "toolMigration",
+		"operation": "linkSenders",
+		"route": "POST /migrations/{}/link-senders",
+		"handler": "LinkToolMigrationSenders"
+	},
+	"POST /migrations/{}/start": {
+		"resource": "toolMigration",
+		"operation": "start",
+		"route": "POST /migrations/{}/start",
+		"handler": "StartToolMigration"
 	},
 	"POST /oauth/application-logo": {
 		"resource": "oauthApp",
@@ -1619,6 +2663,12 @@
 		"route": "POST /oauth/applications",
 		"handler": "CreateOAuthApplication"
 	},
+	"POST /oauth/applications/{}/logo": {
+		"resource": "oauthApp",
+		"operation": "uploadApplicationLogo",
+		"route": "POST /oauth/applications/{}/logo",
+		"handler": "UploadOAuthApplicationLogo"
+	},
 	"POST /oauth/applications/{}/rotate-secret": {
 		"resource": "oauthApp",
 		"operation": "rotateSecret",
@@ -1630,6 +2680,48 @@
 		"operation": "rotateWebhookSecret",
 		"route": "POST /oauth/applications/{}/webhook-secret/rotate",
 		"handler": "RotateOAuthAppWebhookSecret"
+	},
+	"POST /placement/batches": {
+		"resource": "placementBatch",
+		"operation": "create",
+		"route": "POST /placement/batches",
+		"handler": "CreatePlacementBatch"
+	},
+	"POST /placement/batches/preview": {
+		"resource": "placementBatch",
+		"operation": "preview",
+		"route": "POST /placement/batches/preview",
+		"handler": "PreviewPlacementBatch"
+	},
+	"POST /placement/batches/{}/cancel": {
+		"resource": "placementBatch",
+		"operation": "cancel",
+		"route": "POST /placement/batches/{}/cancel",
+		"handler": "CancelPlacementBatch"
+	},
+	"POST /placement/tests": {
+		"resource": "placementTest",
+		"operation": "create",
+		"route": "POST /placement/tests",
+		"handler": "CreatePlacementTest"
+	},
+	"POST /placement/tests/{}/cancel": {
+		"resource": "placementTest",
+		"operation": "cancel",
+		"route": "POST /placement/tests/{}/cancel",
+		"handler": "CancelPlacementTest"
+	},
+	"POST /reports": {
+		"resource": "clientReport",
+		"operation": "create",
+		"route": "POST /reports",
+		"handler": "CreateClientReport"
+	},
+	"POST /reports/{}/link": {
+		"resource": "clientReport",
+		"operation": "createLink",
+		"route": "POST /reports/{}/link",
+		"handler": "CreateClientReportLink"
 	},
 	"POST /segments": {
 		"resource": "segment",
@@ -1696,6 +2788,18 @@
 		"operation": "create",
 		"route": "POST /templates",
 		"handler": "CreateTemplate"
+	},
+	"POST /templates/analyze": {
+		"resource": "template",
+		"operation": "analyze",
+		"route": "POST /templates/analyze",
+		"handler": "AnalyzeTemplateContent"
+	},
+	"POST /templates/copy-to": {
+		"resource": "template",
+		"operation": "copyToWorkspaces",
+		"route": "POST /templates/copy-to",
+		"handler": "CopyTemplatesToWorkspaces"
 	},
 	"POST /templates/score": {
 		"resource": "template",
@@ -1787,6 +2891,102 @@
 		"route": "POST /webhooks/{}/verify",
 		"handler": "VerifyWebhookEndpoint"
 	},
+	"POST /store/domains/{}/connection/check": {
+		"resource": "storeDomain",
+		"operation": "checkConnection",
+		"route": "POST /store/domains/{}/connection/check",
+		"handler": "CheckStoreDomainConnection"
+	},
+	"POST /store/domains/{}/connection/regenerate": {
+		"resource": "storeDomain",
+		"operation": "regenerateConnection",
+		"route": "POST /store/domains/{}/connection/regenerate",
+		"handler": "RegenerateStoreDomainConnection"
+	},
+	"POST /store/domains/{}/dns": {
+		"resource": "storeDnsRecord",
+		"operation": "create",
+		"route": "POST /store/domains/{}/dns",
+		"handler": "AddStoreDNSRecord"
+	},
+	"POST /store/domains/{}/dns/check": {
+		"resource": "storeDnsRecord",
+		"operation": "check",
+		"route": "POST /store/domains/{}/dns/check",
+		"handler": "CheckStoreDNS"
+	},
+	"POST /store/domains/{}/microsoft-consent": {
+		"resource": "storeDomain",
+		"operation": "startMicrosoftConsent",
+		"route": "POST /store/domains/{}/microsoft-consent",
+		"handler": "StartStoreMicrosoftConsent"
+	},
+	"POST /store/domains/{}/renew": {
+		"resource": "storeDomain",
+		"operation": "renew",
+		"route": "POST /store/domains/{}/renew",
+		"handler": "RenewStoreDomain"
+	},
+	"POST /store/domains/{}/transfer-out": {
+		"resource": "storeDomain",
+		"operation": "transferOut",
+		"route": "POST /store/domains/{}/transfer-out",
+		"handler": "TransferOutStoreDomain"
+	},
+	"POST /store/domains/connect": {
+		"resource": "storeDomain",
+		"operation": "connect",
+		"route": "POST /store/domains/connect",
+		"handler": "ConnectStoreDomain"
+	},
+	"POST /store/mailboxes/{}/resume": {
+		"resource": "storeMailbox",
+		"operation": "resume",
+		"route": "POST /store/mailboxes/{}/resume",
+		"handler": "ResumeStoreMailbox"
+	},
+	"POST /store/mailboxes/{}/sign-in": {
+		"resource": "storeMailbox",
+		"operation": "getSignIn",
+		"route": "POST /store/mailboxes/{}/sign-in",
+		"handler": "StoreMailboxSignIn"
+	},
+	"POST /store/orders": {
+		"resource": "storeOrder",
+		"operation": "create",
+		"route": "POST /store/orders",
+		"handler": "CreateStoreOrder"
+	},
+	"POST /store/photos": {
+		"resource": "store",
+		"operation": "uploadPhoto",
+		"route": "POST /store/photos",
+		"handler": "UploadStorePhoto"
+	},
+	"POST /store/quotes": {
+		"resource": "store",
+		"operation": "createQuote",
+		"route": "POST /store/quotes",
+		"handler": "CreateStoreQuote"
+	},
+	"PUT /campaigns/{}/leads/{}/cc": {
+		"resource": "campaignLead",
+		"operation": "setCC",
+		"route": "PUT /campaigns/{}/leads/{}/cc",
+		"handler": "SetCampaignLeadCC"
+	},
+	"PUT /campaigns/{}/leads/{}/emails/{}": {
+		"resource": "campaignLead",
+		"operation": "setEmail",
+		"route": "PUT /campaigns/{}/leads/{}/emails/{}",
+		"handler": "PutCampaignLeadEmail"
+	},
+	"PUT /campaigns/{}/placement-monitor": {
+		"resource": "placementMonitor",
+		"operation": "set",
+		"route": "PUT /campaigns/{}/placement-monitor",
+		"handler": "PutPlacementMonitor"
+	},
 	"PUT /campaigns/{}/segments": {
 		"resource": "campaign",
 		"operation": "replaceSegments",
@@ -1799,11 +2999,47 @@
 		"route": "PUT /campaigns/{}/senders",
 		"handler": "ReplaceCampaignSenders"
 	},
+	"PUT /campaigns/{}/review": {
+		"resource": "campaignReview",
+		"operation": "set",
+		"route": "PUT /campaigns/{}/review",
+		"handler": "SetCampaignReview"
+	},
+	"PUT /crm/owners/{}": {
+		"resource": "crm",
+		"operation": "mapOwner",
+		"route": "PUT /crm/owners/{}",
+		"handler": "MapCRMOwner"
+	},
+	"PUT /crm/settings": {
+		"resource": "crm",
+		"operation": "updateSettings",
+		"route": "PUT /crm/settings",
+		"handler": "UpdateCRMSettings"
+	},
+	"PUT /emails/oauth-apps/{}": {
+		"resource": "mailboxOAuthApp",
+		"operation": "set",
+		"route": "PUT /emails/oauth-apps/{}",
+		"handler": "PutMailboxOAuthApp"
+	},
 	"PUT /emails/{}/behavior": {
 		"resource": "mailbox",
 		"operation": "updateBehavior",
 		"route": "PUT /emails/{}/behavior",
 		"handler": "UpdateEmailBehavior"
+	},
+	"PUT /emails/{}/sync": {
+		"resource": "mailbox",
+		"operation": "updateSync",
+		"route": "PUT /emails/{}/sync",
+		"handler": "UpdateEmailSync"
+	},
+	"PUT /emails/{}/warmup-filter-tag": {
+		"resource": "mailbox",
+		"operation": "setWarmupFilterTag",
+		"route": "PUT /emails/{}/warmup-filter-tag",
+		"handler": "SetWarmupFilterTag"
 	},
 	"PUT /forms/domain": {
 		"resource": "form",
@@ -1811,11 +3047,53 @@
 		"route": "PUT /forms/domain",
 		"handler": "SetFormsDomain"
 	},
+	"PUT /integrations/apollo/{}/key": {
+		"resource": "apollo",
+		"operation": "replaceKey",
+		"route": "PUT /integrations/apollo/{}/key",
+		"handler": "ReplaceApolloKey"
+	},
 	"PUT /integrations/connections/{}/field-mappings": {
 		"resource": "integration",
 		"operation": "replaceFieldMappings",
 		"route": "PUT /integrations/connections/{}/field-mappings",
 		"handler": "ReplaceConnectionFieldMappings"
+	},
+	"PUT /integrations/connections/{}/signing-key": {
+		"resource": "integration",
+		"operation": "setSigningKey",
+		"route": "PUT /integrations/connections/{}/signing-key",
+		"handler": "SetConnectionSigningKey"
+	},
+	"PUT /integrations/salesforce/{}/settings": {
+		"resource": "salesforce",
+		"operation": "updateSettings",
+		"route": "PUT /integrations/salesforce/{}/settings",
+		"handler": "UpdateSalesforceSettings"
+	},
+	"PUT /oauth/applications/{}/listing": {
+		"resource": "oauthApp",
+		"operation": "setListing",
+		"route": "PUT /oauth/applications/{}/listing",
+		"handler": "PutOAuthAppListing"
+	},
+	"PUT /placement/seeds/{}": {
+		"resource": "placement",
+		"operation": "setSeed",
+		"route": "PUT /placement/seeds/{}",
+		"handler": "SetPlacementSeed"
+	},
+	"PUT /reports/{}/schedule": {
+		"resource": "clientReport",
+		"operation": "setSchedule",
+		"route": "PUT /reports/{}/schedule",
+		"handler": "SetClientReportSchedule"
+	},
+	"PUT /unibox/ai-drafts/by-thread": {
+		"resource": "unibox",
+		"operation": "upsertThreadDraft",
+		"route": "PUT /unibox/ai-drafts/by-thread",
+		"handler": "UpsertThreadDraft"
 	},
 	"PUT /unibox/drafts/{}": {
 		"resource": "unibox",
@@ -1828,5 +3106,17 @@
 		"operation": "setThreadLabels",
 		"route": "PUT /unibox/thread/labels",
 		"handler": "SetUniboxThreadLabels"
+	},
+	"PUT /store/mailboxes/{}/photo": {
+		"resource": "storeMailbox",
+		"operation": "setPhoto",
+		"route": "PUT /store/mailboxes/{}/photo",
+		"handler": "SetStoreMailboxPhoto"
+	},
+	"PUT /store/registrant": {
+		"resource": "store",
+		"operation": "setRegistrant",
+		"route": "PUT /store/registrant",
+		"handler": "PutStoreRegistrant"
 	}
 }

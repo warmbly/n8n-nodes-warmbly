@@ -5,33 +5,59 @@ import { agentToolOperations, agentToolFields } from './agentTool';
 import { aiSkillOperations, aiSkillFields } from './aiSkill';
 import { analyticsOperations, analyticsFields } from './analytics';
 import { apiKeyOperations, apiKeyFields } from './apiKey';
+import { apolloOperations, apolloFields } from './apollo';
 import { auditLogOperations, auditLogFields } from './auditLog';
 import { automationOperations, automationFields } from './automation';
 import { campaignOperations, campaignFields } from './campaign';
 import { campaignVariantOperations, campaignVariantFields } from './campaignVariant';
 import { folderOperations, folderFields } from './folder';
+import { campaignLeadOperations, campaignLeadFields } from './campaignLead';
+import { campaignReviewOperations, campaignReviewFields } from './campaignReview';
 import { campaignStepOperations, campaignStepFields } from './campaignStep';
+import { clientConnectLinkOperations, clientConnectLinkFields } from './clientConnectLink';
+import { clientReportOperations, clientReportFields } from './clientReport';
 import { contactOperations, contactFields } from './contact';
 import { contactCategoryOperations, contactCategoryFields } from './contactCategory';
+import { contactImportOperations, contactImportFields } from './contactImport';
 import { contactNoteOperations, contactNoteFields } from './contactNote';
+import { crmOperations, crmFields } from './crm';
+import { crmContactOperations, crmContactFields } from './crmContact';
 import { crmTaskOperations, crmTaskFields } from './crmTask';
 import { crmTaskTypeOperations, crmTaskTypeFields } from './crmTaskType';
 import { deadLetterOperations, deadLetterFields } from './deadLetter';
 import { dealOperations, dealFields } from './deal';
 import { deliverabilityOperations, deliverabilityFields } from './deliverability';
+import { emailImageOperations, emailImageFields } from './emailImage';
 import { formOperations, formFields } from './form';
 import { integrationOperations, integrationFields } from './integration';
+import { leadOperations, leadFields } from './lead';
+import { leadEnrichmentOperations, leadEnrichmentFields } from './leadEnrichment';
+import { leadPersonOperations, leadPersonFields } from './leadPerson';
+import { leadSearchOperations, leadSearchFields } from './leadSearch';
 import { leadSyncOperations, leadSyncFields } from './leadSync';
 import { mailboxOperations, mailboxFields } from './mailbox';
+import { mailboxOAuthAppOperations, mailboxOAuthAppFields } from './mailboxOAuthApp';
+import { mailboxSignInLinkOperations, mailboxSignInLinkFields } from './mailboxSignInLink';
 import { mailboxTagOperations, mailboxTagFields } from './mailboxTag';
 import { meetingOperations, meetingFields } from './meeting';
 import { oauthAppOperations, oauthAppFields } from './oauthApp';
 import { outreachOperations, outreachFields } from './outreach';
 import { pipelineOperations, pipelineFields } from './pipeline';
+import { placementOperations, placementFields } from './placement';
+import { placementBatchOperations, placementBatchFields } from './placementBatch';
+import { placementMonitorOperations, placementMonitorFields } from './placementMonitor';
+import { placementTestOperations, placementTestFields } from './placementTest';
 import { templateOperations, templateFields } from './template';
+import { salesforceOperations, salesforceFields } from './salesforce';
 import { segmentOperations, segmentFields } from './segment';
+import { storeOperations, storeFields } from './store';
+import { storeDnsRecordOperations, storeDnsRecordFields } from './storeDnsRecord';
+import { storeDomainOperations, storeDomainFields } from './storeDomain';
+import { storeMailboxOperations, storeMailboxFields } from './storeMailbox';
+import { storeOrderOperations, storeOrderFields } from './storeOrder';
 import { suppressionOperations, suppressionFields } from './suppression';
 import { teamOperations, teamFields } from './team';
+import { toolMigrationOperations, toolMigrationFields } from './toolMigration';
 import { uniboxOperations, uniboxFields } from './unibox';
 import { warmupRoutingOperations, warmupRoutingFields } from './warmupRouting';
 import { webhookOperations, webhookFields } from './webhook';
@@ -65,6 +91,10 @@ export const resourceProperty: INodeProperties = {
 			value: 'apiKey',
 		},
 		{
+			name: 'Apollo',
+			value: 'apollo',
+		},
+		{
 			name: 'Audit Log',
 			value: 'auditLog',
 		},
@@ -85,8 +115,24 @@ export const resourceProperty: INodeProperties = {
 			value: 'folder',
 		},
 		{
+			name: 'Campaign Lead',
+			value: 'campaignLead',
+		},
+		{
+			name: 'Campaign Review',
+			value: 'campaignReview',
+		},
+		{
 			name: 'Campaign Step',
 			value: 'campaignStep',
+		},
+		{
+			name: 'Client Connect Link',
+			value: 'clientConnectLink',
+		},
+		{
+			name: 'Client Report',
+			value: 'clientReport',
 		},
 		{
 			name: 'Contact',
@@ -97,8 +143,20 @@ export const resourceProperty: INodeProperties = {
 			value: 'contactCategory',
 		},
 		{
+			name: 'Contact Import',
+			value: 'contactImport',
+		},
+		{
 			name: 'Contact Note',
 			value: 'contactNote',
+		},
+		{
+			name: 'CRM',
+			value: 'crm',
+		},
+		{
+			name: 'CRM Contact',
+			value: 'crmContact',
 		},
 		{
 			name: 'CRM Task',
@@ -121,6 +179,10 @@ export const resourceProperty: INodeProperties = {
 			value: 'deliverability',
 		},
 		{
+			name: 'Email Image',
+			value: 'emailImage',
+		},
+		{
 			name: 'Form',
 			value: 'form',
 		},
@@ -129,12 +191,36 @@ export const resourceProperty: INodeProperties = {
 			value: 'integration',
 		},
 		{
+			name: 'Lead',
+			value: 'lead',
+		},
+		{
+			name: 'Lead Enrichment',
+			value: 'leadEnrichment',
+		},
+		{
+			name: 'Lead Person',
+			value: 'leadPerson',
+		},
+		{
+			name: 'Lead Search',
+			value: 'leadSearch',
+		},
+		{
 			name: 'Lead Sync Source',
 			value: 'leadSync',
 		},
 		{
 			name: 'Mailbox',
 			value: 'mailbox',
+		},
+		{
+			name: 'Mailbox OAuth App',
+			value: 'mailboxOAuthApp',
+		},
+		{
+			name: 'Mailbox Sign-In Link',
+			value: 'mailboxSignInLink',
 		},
 		{
 			name: 'Mailbox Tag',
@@ -157,12 +243,52 @@ export const resourceProperty: INodeProperties = {
 			value: 'pipeline',
 		},
 		{
+			name: 'Placement',
+			value: 'placement',
+		},
+		{
+			name: 'Placement Batch',
+			value: 'placementBatch',
+		},
+		{
+			name: 'Placement Monitor',
+			value: 'placementMonitor',
+		},
+		{
+			name: 'Placement Test',
+			value: 'placementTest',
+		},
+		{
 			name: 'Reply Template',
 			value: 'template',
 		},
 		{
+			name: 'Salesforce',
+			value: 'salesforce',
+		},
+		{
 			name: 'Segment',
 			value: 'segment',
+		},
+		{
+			name: 'Store',
+			value: 'store',
+		},
+		{
+			name: 'Store DNS Record',
+			value: 'storeDnsRecord',
+		},
+		{
+			name: 'Store Domain',
+			value: 'storeDomain',
+		},
+		{
+			name: 'Store Mailbox',
+			value: 'storeMailbox',
+		},
+		{
+			name: 'Store Order',
+			value: 'storeOrder',
 		},
 		{
 			name: 'Suppression',
@@ -171,6 +297,10 @@ export const resourceProperty: INodeProperties = {
 		{
 			name: 'Team',
 			value: 'team',
+		},
+		{
+			name: 'Tool Migration',
+			value: 'toolMigration',
 		},
 		{
 			name: 'Unibox',
@@ -198,33 +328,59 @@ export const operationProperties: INodeProperties[] = [
 	...aiSkillOperations,
 	...analyticsOperations,
 	...apiKeyOperations,
+	...apolloOperations,
 	...auditLogOperations,
 	...automationOperations,
 	...campaignOperations,
 	...campaignVariantOperations,
 	...folderOperations,
+	...campaignLeadOperations,
+	...campaignReviewOperations,
 	...campaignStepOperations,
+	...clientConnectLinkOperations,
+	...clientReportOperations,
 	...contactOperations,
 	...contactCategoryOperations,
+	...contactImportOperations,
 	...contactNoteOperations,
+	...crmOperations,
+	...crmContactOperations,
 	...crmTaskOperations,
 	...crmTaskTypeOperations,
 	...deadLetterOperations,
 	...dealOperations,
 	...deliverabilityOperations,
+	...emailImageOperations,
 	...formOperations,
 	...integrationOperations,
+	...leadOperations,
+	...leadEnrichmentOperations,
+	...leadPersonOperations,
+	...leadSearchOperations,
 	...leadSyncOperations,
 	...mailboxOperations,
+	...mailboxOAuthAppOperations,
+	...mailboxSignInLinkOperations,
 	...mailboxTagOperations,
 	...meetingOperations,
 	...oauthAppOperations,
 	...outreachOperations,
 	...pipelineOperations,
+	...placementOperations,
+	...placementBatchOperations,
+	...placementMonitorOperations,
+	...placementTestOperations,
 	...templateOperations,
+	...salesforceOperations,
 	...segmentOperations,
+	...storeOperations,
+	...storeDnsRecordOperations,
+	...storeDomainOperations,
+	...storeMailboxOperations,
+	...storeOrderOperations,
 	...suppressionOperations,
 	...teamOperations,
+	...toolMigrationOperations,
 	...uniboxOperations,
 	...warmupRoutingOperations,
 	...webhookOperations,
@@ -237,33 +393,59 @@ export const fieldProperties: INodeProperties[] = [
 	...aiSkillFields,
 	...analyticsFields,
 	...apiKeyFields,
+	...apolloFields,
 	...auditLogFields,
 	...automationFields,
 	...campaignFields,
 	...campaignVariantFields,
 	...folderFields,
+	...campaignLeadFields,
+	...campaignReviewFields,
 	...campaignStepFields,
+	...clientConnectLinkFields,
+	...clientReportFields,
 	...contactFields,
 	...contactCategoryFields,
+	...contactImportFields,
 	...contactNoteFields,
+	...crmFields,
+	...crmContactFields,
 	...crmTaskFields,
 	...crmTaskTypeFields,
 	...deadLetterFields,
 	...dealFields,
 	...deliverabilityFields,
+	...emailImageFields,
 	...formFields,
 	...integrationFields,
+	...leadFields,
+	...leadEnrichmentFields,
+	...leadPersonFields,
+	...leadSearchFields,
 	...leadSyncFields,
 	...mailboxFields,
+	...mailboxOAuthAppFields,
+	...mailboxSignInLinkFields,
 	...mailboxTagFields,
 	...meetingFields,
 	...oauthAppFields,
 	...outreachFields,
 	...pipelineFields,
+	...placementFields,
+	...placementBatchFields,
+	...placementMonitorFields,
+	...placementTestFields,
 	...templateFields,
+	...salesforceFields,
 	...segmentFields,
+	...storeFields,
+	...storeDnsRecordFields,
+	...storeDomainFields,
+	...storeMailboxFields,
+	...storeOrderFields,
 	...suppressionFields,
 	...teamFields,
+	...toolMigrationFields,
 	...uniboxFields,
 	...warmupRoutingFields,
 	...webhookFields,

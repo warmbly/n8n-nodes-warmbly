@@ -16,6 +16,12 @@ export const campaignOperations: INodeProperties[] = [
 		},
 		options: [
 			{
+				name: 'Copy to Workspaces',
+				value: 'copyToWorkspaces',
+				action: 'Copy a campaign to other workspaces',
+				description: 'Copy a campaign to other workspaces',
+			},
+			{
 				name: 'Create',
 				value: 'create',
 				action: 'Create a campaign',
@@ -92,6 +98,12 @@ export const campaignOperations: INodeProperties[] = [
 				description: 'Get the forms feeding a campaign',
 			},
 			{
+				name: 'Get Lead Timezones',
+				value: 'getLeadTimezones',
+				action: 'Count a campaign\'s leads by timezone',
+				description: 'Count a campaign\'s leads by timezone',
+			},
+			{
 				name: 'Get Logs',
 				value: 'getLogs',
 				action: 'Get campaign logs',
@@ -116,10 +128,22 @@ export const campaignOperations: INodeProperties[] = [
 				description: 'Get campaign segments',
 			},
 			{
+				name: 'Get Send Plan',
+				value: 'getSendPlan',
+				action: 'Get Send Plan campaign',
+				description: 'Get Send Plan campaign',
+			},
+			{
 				name: 'Get Senders',
 				value: 'getSenders',
 				action: 'List campaign senders',
 				description: 'List campaign senders',
+			},
+			{
+				name: 'Get Warmup Placement',
+				value: 'getWarmupPlacement',
+				action: 'Get Warmup Placement campaign',
+				description: 'Get Warmup Placement campaign',
 			},
 			{
 				name: 'Preview Template',
@@ -196,6 +220,75 @@ export const campaignOperations: INodeProperties[] = [
 ];
 
 export const campaignFields: INodeProperties[] = [
+	{
+		displayName: 'Campaign ID',
+		name: 'id',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'The campaign to copy',
+		displayOptions: {
+			show: {
+				resource: [
+					'campaign',
+				],
+				operation: [
+					'copyToWorkspaces',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Workspace IDs',
+		name: 'organization_ids',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'IDs of the destination workspaces, comma-separated. You must be able to write to each one (up to 10).',
+		displayOptions: {
+			show: {
+				resource: [
+					'campaign',
+				],
+				operation: [
+					'copyToWorkspaces',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Additional Fields',
+		name: 'additionalFields',
+		type: 'collection',
+		placeholder: 'Add Field',
+		default: {},
+		displayOptions: {
+			show: {
+				resource: [
+					'campaign',
+				],
+				operation: [
+					'copyToWorkspaces',
+				],
+			},
+		},
+		options: [
+			{
+				displayName: 'Idempotency Key',
+				name: 'idempotencyKey',
+				type: 'string',
+				default: '',
+				description: 'Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.',
+			},
+			{
+				displayName: 'Reply Template IDs',
+				name: 'template_ids',
+				type: 'string',
+				default: '',
+				description: 'IDs of reply templates in this workspace to copy along with the campaign, comma-separated.',
+			},
+		],
+	},
 	{
 		displayName: 'Name',
 		name: 'name',
@@ -297,6 +390,12 @@ export const campaignFields: INodeProperties[] = [
 				description: 'Legacy daily end (HH:MM).',
 			},
 			{
+				displayName: 'Entry Delay Minutes',
+				name: 'entry_delay_minutes',
+				type: 'number',
+				default: 0,
+			},
+			{
 				displayName: 'ESP Match Mode',
 				name: 'esp_match_mode',
 				type: 'options',
@@ -324,18 +423,32 @@ export const campaignFields: INodeProperties[] = [
 				description: 'Comma-separated list.',
 			},
 			{
+				displayName: 'Follow Up Sender',
+				name: 'follow_up_sender',
+				type: 'options',
+				options: [
+					{
+						name: 'Rotate',
+						value: 'rotate',
+					},
+					{
+						name: 'Same',
+						value: 'same',
+					},
+					{
+						name: 'Same Domain',
+						value: 'same_domain',
+					},
+				],
+				default: 'same',
+				description: 'Which mailbox sends a lead\'s follow-ups: same (default, the mailbox that sent the first email), same_domain (rotate among mailboxes on that domain) or rotate (rotate across the pool).',
+			},
+			{
 				displayName: 'Idempotency Key',
 				name: 'idempotencyKey',
 				type: 'string',
 				default: '',
 				description: 'Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.',
-			},
-			{
-				displayName: 'Kind',
-				name: 'kind',
-				type: 'string',
-				default: '',
-				description: 'Kind defaults to "sequence". A "one_time" campaign accepts a single email step here and refuses further ones later.',
 			},
 			{
 				displayName: 'Link Tracking',
@@ -449,6 +562,12 @@ export const campaignFields: INodeProperties[] = [
 				description: 'Initial sequences (in order) — caller can also create them after. Provide as JSON.',
 			},
 			{
+				displayName: 'Stop On Meeting',
+				name: 'stop_on_meeting',
+				type: 'boolean',
+				default: false,
+			},
+			{
 				displayName: 'Stop On Reply',
 				name: 'stop_on_reply',
 				type: 'boolean',
@@ -465,6 +584,23 @@ export const campaignFields: INodeProperties[] = [
 				name: 'timezone',
 				type: 'string',
 				default: '',
+			},
+			{
+				displayName: 'Timezone Mode',
+				name: 'timezone_mode',
+				type: 'options',
+				options: [
+					{
+						name: 'Campaign',
+						value: 'campaign',
+					},
+					{
+						name: 'Recipient',
+						value: 'recipient',
+					},
+				],
+				default: 'campaign',
+				description: 'Whose clock the sending schedule runs on: the campaign\'s timezone, or each lead\'s own timezone (falling back to the campaign\'s when unknown)',
 			},
 			{
 				displayName: 'Tracking Domain',
@@ -515,6 +651,13 @@ export const campaignFields: INodeProperties[] = [
 				type: 'json',
 				default: '',
 				description: 'A/B variants for the first step.',
+			},
+			{
+				displayName: 'Warmup Graduation',
+				name: 'warmup_graduation',
+				type: 'boolean',
+				default: true,
+				description: 'Whether mailboxes whose warmup is running or paused earn volume in this campaign with replies: 5 a day, plus one a day for each lead who replied in the last seven days. Off uses each mailbox\'s own daily cap and the ramp.',
 			},
 		],
 	},
@@ -689,6 +832,13 @@ export const campaignFields: INodeProperties[] = [
 		},
 		options: [
 			{
+				displayName: 'Campaign ID',
+				name: 'campaign_id',
+				type: 'string',
+				default: '',
+				description: 'CampaignID projects a saved campaign, filling anything not sent from it.',
+			},
+			{
 				displayName: 'Daily Limit',
 				name: 'daily_limit',
 				type: 'number',
@@ -708,11 +858,45 @@ export const campaignFields: INodeProperties[] = [
 				description: 'Comma-separated list.',
 			},
 			{
+				displayName: 'End Time',
+				name: 'end_time',
+				type: 'string',
+				default: '',
+			},
+			{
 				displayName: 'Idempotency Key',
 				name: 'idempotencyKey',
 				type: 'string',
 				default: '',
 				description: 'Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.',
+			},
+			{
+				displayName: 'Ramp Ceiling',
+				name: 'ramp_ceiling',
+				type: 'number',
+				default: 0,
+				description: 'The daily volume the ramp stops at',
+			},
+			{
+				displayName: 'Ramp Enabled',
+				name: 'ramp_enabled',
+				type: 'boolean',
+				default: false,
+				description: 'Whether the campaign ramps its daily volume up',
+			},
+			{
+				displayName: 'Ramp Increment',
+				name: 'ramp_increment',
+				type: 'number',
+				default: 0,
+				description: 'Sends added per day while ramping',
+			},
+			{
+				displayName: 'Ramp Start',
+				name: 'ramp_start',
+				type: 'number',
+				default: 0,
+				description: 'Sends per day on the first day of the ramp',
 			},
 			{
 				displayName: 'Segment IDs',
@@ -728,10 +912,31 @@ export const campaignFields: INodeProperties[] = [
 				default: '',
 			},
 			{
+				displayName: 'Start Time',
+				name: 'start_time',
+				type: 'string',
+				default: '',
+				description: 'StartTime and EndTime are the daily sending window ("HH:MM"); absent means the scheduler\'s default window.',
+			},
+			{
+				displayName: 'Step Waits',
+				name: 'step_waits',
+				type: 'json',
+				default: '',
+				description: 'StepWaits is each follow-up\'s wait_after in days, in order. Empty is a single email. Provide as JSON.',
+			},
+			{
 				displayName: 'Timezone',
 				name: 'timezone',
 				type: 'string',
 				default: '',
+			},
+			{
+				displayName: 'Warmup Graduation',
+				name: 'warmup_graduation',
+				type: 'boolean',
+				default: true,
+				description: 'Whether mailboxes leaving warmup earn volume with replies. Unsent ramp fields come from the saved campaign, else a new campaign\'s defaults.',
 			},
 		],
 	},
@@ -993,6 +1198,24 @@ export const campaignFields: INodeProperties[] = [
 		},
 	},
 	{
+		displayName: 'Campaign ID',
+		name: 'id',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'The campaign whose leads to count by timezone',
+		displayOptions: {
+			show: {
+				resource: [
+					'campaign',
+				],
+				operation: [
+					'getLeadTimezones',
+				],
+			},
+		},
+	},
+	{
 		displayName: 'Return All',
 		name: 'returnAll',
 		type: 'boolean',
@@ -1114,12 +1337,6 @@ export const campaignFields: INodeProperties[] = [
 				description: 'Restrict to a single folder id.',
 			},
 			{
-				displayName: 'Kind',
-				name: 'kind',
-				type: 'string',
-				default: '',
-			},
-			{
 				displayName: 'Q',
 				name: 'q',
 				type: 'string',
@@ -1154,6 +1371,24 @@ export const campaignFields: INodeProperties[] = [
 		},
 	},
 	{
+		displayName: 'ID',
+		name: 'id',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'The campaign\'s id',
+		displayOptions: {
+			show: {
+				resource: [
+					'campaign',
+				],
+				operation: [
+					'getSendPlan',
+				],
+			},
+		},
+	},
+	{
 		displayName: 'Campaign ID',
 		name: 'id',
 		type: 'string',
@@ -1166,6 +1401,23 @@ export const campaignFields: INodeProperties[] = [
 				],
 				operation: [
 					'getSenders',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'ID',
+		name: 'id',
+		type: 'string',
+		default: '',
+		required: true,
+		displayOptions: {
+			show: {
+				resource: [
+					'campaign',
+				],
+				operation: [
+					'getWarmupPlacement',
 				],
 			},
 		},
@@ -1710,6 +1962,12 @@ export const campaignFields: INodeProperties[] = [
 				default: '',
 			},
 			{
+				displayName: 'Entry Delay Minutes',
+				name: 'entry_delay_minutes',
+				type: 'number',
+				default: 0,
+			},
+			{
 				displayName: 'ESP Match Mode',
 				name: 'esp_match_mode',
 				type: 'options',
@@ -1735,6 +1993,27 @@ export const campaignFields: INodeProperties[] = [
 				type: 'string',
 				default: '',
 				description: 'Comma-separated list.',
+			},
+			{
+				displayName: 'Follow Up Sender',
+				name: 'follow_up_sender',
+				type: 'options',
+				options: [
+					{
+						name: 'Rotate',
+						value: 'rotate',
+					},
+					{
+						name: 'Same',
+						value: 'same',
+					},
+					{
+						name: 'Same Domain',
+						value: 'same_domain',
+					},
+				],
+				default: 'same',
+				description: 'Which mailbox sends a lead\'s follow-ups: same (default, the mailbox that sent the first email), same_domain (rotate among mailboxes on that domain) or rotate (rotate across the pool).',
 			},
 			{
 				displayName: 'Guardrail Bounce Rate Max',
@@ -1919,6 +2198,12 @@ export const campaignFields: INodeProperties[] = [
 				description: 'Campaign lifecycle status.',
 			},
 			{
+				displayName: 'Stop On Meeting',
+				name: 'stop_on_meeting',
+				type: 'boolean',
+				default: false,
+			},
+			{
 				displayName: 'Stop On Reply',
 				name: 'stop_on_reply',
 				type: 'boolean',
@@ -1935,6 +2220,23 @@ export const campaignFields: INodeProperties[] = [
 				name: 'timezone',
 				type: 'string',
 				default: '',
+			},
+			{
+				displayName: 'Timezone Mode',
+				name: 'timezone_mode',
+				type: 'options',
+				options: [
+					{
+						name: 'Campaign',
+						value: 'campaign',
+					},
+					{
+						name: 'Recipient',
+						value: 'recipient',
+					},
+				],
+				default: 'campaign',
+				description: 'Whose clock the sending schedule runs on: the campaign\'s timezone, or each lead\'s own timezone (falling back to the campaign\'s when unknown)',
 			},
 			{
 				displayName: 'Tracking Domain',
@@ -1977,6 +2279,13 @@ export const campaignFields: INodeProperties[] = [
 				name: 'utm_tracking',
 				type: 'boolean',
 				default: false,
+			},
+			{
+				displayName: 'Warmup Graduation',
+				name: 'warmup_graduation',
+				type: 'boolean',
+				default: true,
+				description: 'Whether mailboxes whose warmup is running or paused earn volume in this campaign with replies: 5 a day, plus one a day for each lead who replied in the last seven days. Off uses each mailbox\'s own daily cap and the ramp.',
 			},
 		],
 	},

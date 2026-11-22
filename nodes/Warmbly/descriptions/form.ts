@@ -404,6 +404,46 @@ export const formFields: INodeProperties[] = [
 		],
 	},
 	{
+		displayName: 'Return All',
+		name: 'returnAll',
+		type: 'boolean',
+		default: false,
+		description: 'Whether to return all results or only up to a given limit',
+		displayOptions: {
+			show: {
+				resource: [
+					'form',
+				],
+				operation: [
+					'getSubmissions',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Limit',
+		name: 'limit',
+		type: 'number',
+		typeOptions: {
+			minValue: 1,
+		},
+		default: 50,
+		description: 'Max number of results to return',
+		displayOptions: {
+			show: {
+				resource: [
+					'form',
+				],
+				operation: [
+					'getSubmissions',
+				],
+				returnAll: [
+					false,
+				],
+			},
+		},
+	},
+	{
 		displayName: 'ID',
 		name: 'id',
 		type: 'string',
@@ -444,12 +484,6 @@ export const formFields: INodeProperties[] = [
 				type: 'string',
 				default: '',
 			},
-			{
-				displayName: 'Limit',
-				name: 'limit',
-				type: 'string',
-				default: '',
-			},
 		],
 	},
 	{
@@ -474,6 +508,7 @@ export const formFields: INodeProperties[] = [
 				name: 'forms_domain',
 				type: 'string',
 				default: '',
+				description: 'The custom forms domain',
 			},
 			{
 				displayName: 'Idempotency Key',
@@ -582,6 +617,13 @@ export const formFields: INodeProperties[] = [
 				description: 'Where to send a visitor after submitting',
 			},
 			{
+				displayName: 'Segment IDs',
+				name: 'segment_ids',
+				type: 'string',
+				default: '',
+				description: 'Segments to add contacts who submit the form to. Comma-separated list, up to 20.',
+			},
+			{
 				displayName: 'Status',
 				name: 'status',
 				type: 'options',
@@ -607,6 +649,12 @@ export const formFields: INodeProperties[] = [
 				name: 'success_message',
 				type: 'string',
 				default: '',
+			},
+			{
+				displayName: 'Triage Enabled',
+				name: 'triage_enabled',
+				type: 'boolean',
+				default: false,
 			},
 		],
 	},

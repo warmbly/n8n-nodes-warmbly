@@ -16,6 +16,18 @@ export const templateOperations: INodeProperties[] = [
 		},
 		options: [
 			{
+				name: 'Analyze',
+				value: 'analyze',
+				action: 'Analyze reply template',
+				description: 'Analyze reply template',
+			},
+			{
+				name: 'Copy to Workspaces',
+				value: 'copyToWorkspaces',
+				action: 'Copy reply templates to other workspaces',
+				description: 'Copy reply templates to other workspaces',
+			},
+			{
 				name: 'Create',
 				value: 'create',
 				action: 'Create a reply template',
@@ -75,6 +87,114 @@ export const templateOperations: INodeProperties[] = [
 ];
 
 export const templateFields: INodeProperties[] = [
+	{
+		displayName: 'Additional Fields',
+		name: 'additionalFields',
+		type: 'collection',
+		placeholder: 'Add Field',
+		default: {},
+		displayOptions: {
+			show: {
+				resource: [
+					'template',
+				],
+				operation: [
+					'analyze',
+				],
+			},
+		},
+		options: [
+			{
+				displayName: 'Body HTML',
+				name: 'body_html',
+				type: 'string',
+				default: '',
+				description: 'Used when body_plain is empty.',
+			},
+			{
+				displayName: 'Body Plain',
+				name: 'body_plain',
+				type: 'string',
+				default: '',
+				description: 'Preferred over HTML when present.',
+			},
+			{
+				displayName: 'Idempotency Key',
+				name: 'idempotencyKey',
+				type: 'string',
+				default: '',
+				description: 'Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.',
+			},
+			{
+				displayName: 'Subject',
+				name: 'subject',
+				type: 'string',
+				default: '',
+			},
+		],
+	},
+	{
+		displayName: 'Reply Template IDs',
+		name: 'template_ids',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'IDs of the reply templates to copy, comma-separated (up to 50).',
+		displayOptions: {
+			show: {
+				resource: [
+					'template',
+				],
+				operation: [
+					'copyToWorkspaces',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Workspace IDs',
+		name: 'organization_ids',
+		type: 'string',
+		default: '',
+		required: true,
+		description: 'IDs of the destination workspaces, comma-separated. You must be able to write to each one (up to 10).',
+		displayOptions: {
+			show: {
+				resource: [
+					'template',
+				],
+				operation: [
+					'copyToWorkspaces',
+				],
+			},
+		},
+	},
+	{
+		displayName: 'Additional Fields',
+		name: 'additionalFields',
+		type: 'collection',
+		placeholder: 'Add Field',
+		default: {},
+		displayOptions: {
+			show: {
+				resource: [
+					'template',
+				],
+				operation: [
+					'copyToWorkspaces',
+				],
+			},
+		},
+		options: [
+			{
+				displayName: 'Idempotency Key',
+				name: 'idempotencyKey',
+				type: 'string',
+				default: '',
+				description: 'Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.',
+			},
+		],
+	},
 	{
 		displayName: 'Name',
 		name: 'name',

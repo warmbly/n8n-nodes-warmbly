@@ -162,9 +162,11 @@ export function indexStructs(dirs) {
 				}
 				// A later package can redeclare a name; first definition wins and
 				// the collision is visible to the caller.
-				if (!structs.has(name)) {
-					structs.set(name, { name, file, fields, pkg: pkgOf(file) });
-				}
+				const decl = { name, file, fields, pkg: pkgOf(file) };
+				if (!structs.has(name)) structs.set(name, decl);
+				// Two packages can each declare `Settings`; `pkg.Name` tells them apart.
+				const qualified = `${decl.pkg}.${name}`;
+				if (!structs.has(qualified)) structs.set(qualified, decl);
 			}
 		}
 	}
@@ -190,7 +192,7 @@ function findNestedClose(lines, open) {
 // The type is everything between the field name and its tag: `[]string`,
 // `map[string]any`, `*models.Thing`, `json.RawMessage`.
 const FIELD_RE = /^\t(\w+)\s+([^\s`][^`]*?)\s+`([^`]*)`(?:\s*\/\/\s?(.*))?$/;
-const EMBED_RE = /^\t([A-Z][\w]*(?:\.\w+)?)(?:\s+`([^`]*)`)?\s*$/;
+const EMBED_RE = /^\t((?:[a-z]\w*\.)?[A-Z]\w*)(?:\s+`([^`]*)`)?\s*$/;
 
 function parseStructField(lines, i) {
 	const line = lines[i];
@@ -328,11 +330,42 @@ export function indexEnums(dirs) {
 	return enums;
 }
 
+/**
+ * Every `type X string` alias declared under `dirs`, whether or not a const
+ * block enumerates it. An alias whose values are registered at runtime (an
+ * outreach tool's ProviderID, say) is still a plain string on the wire.
+ */
+export function indexStringTypes(dirs) {
+	const names = new Set();
+	for (const dir of dirs) {
+		for (const file of goFiles(dir)) {
+			const src = readFileSync(file, 'utf8');
+			for (const m of src.matchAll(/^type (\w+) string$/gm)) names.add(m[1]);
+		}
+	}
+	return names;
+}
+
+/**
+ * A query read wrapped in a type conversion, `models.Range(c.Query("range"))`,
+ * as a map of query name to the Go type it is converted to.
+ */
+export function typedQueryReads(body) {
+	const out = new Map();
+	for (const m of body.matchAll(
+		/(?:\b(\w+)\.)?\b(\w+)\(\s*c\.(?:Query|DefaultQuery)\("([^"]+)"/g,
+	)) {
+		const [, , type, name] = m;
+		if (!out.has(name)) out.set(name, type);
+	}
+	return out;
+}
+
 /** Resolve embedded structs so a caller sees one flat field list. */
 export function flattenStruct(structs, name, seen = new Set()) {
-	const decl = structs.get(stripPkg(name));
-	if (!decl || seen.has(decl.name)) return [];
-	seen.add(decl.name);
+	const decl = structs.get(name.replace(/^\*/, '')) ?? structs.get(stripPkg(name));
+	if (!decl || seen.has(decl)) return [];
+	seen.add(decl);
 	const out = [];
 	for (const field of decl.fields) {
 		if (field.embed) {
@@ -346,4 +379,77 @@ export function flattenStruct(structs, name, seen = new Set()) {
 
 export function stripPkg(name) {
 	return name.replace(/^\*/, '').replace(/^\w+\./, '');
+}
+
+/** Net count of opened parentheses on a line, ignoring string literals and comments. */
+export function parenDepth(line) {
+	let depth = 0;
+	let quote = '';
+	for (let i = 0; i < line.length; i++) {
+		const ch = line[i];
+		if (quote) {
+			if (ch === '\\' && quote !== '`') i++;
+			else if (ch === quote) quote = '';
+			continue;
+		}
+		if (ch === '"' || ch === '`' || ch === "'") quote = ch;
+		else if (ch === '/' && line[i + 1] === '/') break;
+		else if (ch === '(') depth++;
+		else if (ch === ')') depth--;
+	}
+	return depth;
+}
+
+/**
+ * The variable a handler decodes its raw body into, when it reads the bytes
+ * itself (`raw, err := c.GetRawData()`) and then `json.Unmarshal(raw, &in)`,
+ * usually to tell an explicit `null` from an absent key. Decodes into a
+ * map (a presence probe) are skipped. Returns null when there is none.
+ */
+export function rawBodyTarget(body) {
+	const read = /(\w+),\s*\w+\s*:?=\s*c\.GetRawData\(\)/.exec(body);
+	if (!read) return null;
+	const decodes = body.matchAll(new RegExp(`json\\.Unmarshal\\(\\s*${read[1]}\\s*,\\s*&(\\w+)\\)`, 'g'));
+	for (const [, target] of decodes) {
+		const decl = new RegExp(`var ${target} (\\S+)`).exec(body);
+		if (decl && !decl[1].startsWith('map[')) return target;
+	}
+	return null;
+}
+
+/**
+ * The middleware each route group installs, read from its `.Use(...)` call
+ * (possibly wrapped over several lines): group variable -> call text.
+ */
+export function groupMiddleware(lines) {
+	const groups = new Map();
+	for (let i = 0; i < lines.length; i++) {
+		const use = /^\s*(\w+)\.Use\((.*)$/.exec(lines[i]);
+		if (!use) continue;
+		let text = use[2];
+		let open = parenDepth(lines[i]);
+		for (let j = i + 1; open > 0 && j < lines.length; j++) {
+			text += ' ' + lines[j];
+			open += parenDepth(lines[j]);
+		}
+		groups.set(use[1], `${groups.get(use[1]) ?? ''} ${text}`.trim());
+	}
+	return groups;
+}
+
+/** The group variables whose middleware includes `name(`. */
+export function groupsUsing(middleware, name) {
+	const re = new RegExp(`\\b${name}\\(`);
+	return new Set([...middleware].filter(([, text]) => re.test(text)).map(([group]) => group));
+}
+
+/**
+ * The first JSON body binding in a handler: `[call, variable]`, or null.
+ * Covers the one-argument binders (`c.ShouldBindJSON(&in)`) and the ones that
+ * take a binding too (`c.ShouldBindBodyWith(&req, binding.JSON)`, used when the
+ * body is read twice).
+ */
+export function bodyBindCall(body) {
+	const m = /(?:ShouldBindJSON|BindJSON|ShouldBindBodyWith|ShouldBindWith|ShouldBind)\(&(\w+)\s*(?:\)|,[^)]*\))/.exec(body);
+	return m ? [m[0], m[1]] : null;
 }

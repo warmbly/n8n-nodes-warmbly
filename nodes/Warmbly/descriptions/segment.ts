@@ -136,6 +136,13 @@ export const segmentFields: INodeProperties[] = [
 				default: '',
 				description: 'Optional client-generated key (1 to 255 chars). Retrying with the same key returns the original result instead of acting twice.',
 			},
+			{
+				displayName: 'Skip Active In Other Campaigns',
+				name: 'skip_active_in_other_campaigns',
+				type: 'boolean',
+				default: false,
+				description: 'SkipActiveInOtherCampaigns leaves out a member whose sequence is still running in another campaign.',
+			},
 		],
 	},
 	{
@@ -429,11 +436,32 @@ export const segmentFields: INodeProperties[] = [
 		},
 		options: [
 			{
+				displayName: 'All',
+				name: 'all',
+				type: 'boolean',
+				default: false,
+				description: 'All switches the selection from the id list to Filters.',
+			},
+			{
 				displayName: 'Contacts',
 				name: 'contacts',
 				type: 'string',
 				default: '',
 				description: 'Comma-separated list.',
+			},
+			{
+				displayName: 'Exclude',
+				name: 'exclude',
+				type: 'string',
+				default: '',
+				description: 'Exclude drops ids from the resolved set: the rows unticked after a select-all. Ignored unless All is set. Comma-separated list.',
+			},
+			{
+				displayName: 'Filters',
+				name: 'filters',
+				type: 'json',
+				default: '',
+				description: 'Filters is the same search body /contacts/search takes, so the set resolved here is exactly the set the list was showing. Provide as JSON.',
 			},
 			{
 				displayName: 'Idempotency Key',
