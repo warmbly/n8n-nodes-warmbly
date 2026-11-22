@@ -20,6 +20,7 @@ import { homedir } from 'os';
 import { join, resolve } from 'path';
 
 import {
+	bodyBindCall,
 	docAbove,
 	flattenStruct,
 	indexHandlerServices,
@@ -28,7 +29,10 @@ import {
 	indexInterfaceMethods,
 	indexStringTypes,
 	indexStructs,
+	groupMiddleware,
+	groupsUsing,
 	parenDepth,
+	rawBodyTarget,
 	stripPkg,
 	typedQueryReads,
 } from './lib/go-source.mjs';
@@ -54,8 +58,9 @@ const CLI_SPEC_FILE = join(REPO, 'cmd/cli/specs.go');
 /**
  * Walk the gin route table. Groups are resolved by variable name, so a route's
  * full path is its own literal appended to its group chain, and the chain also
- * says which auth group it sits under (`protected` = JWT or API key; `jwtOnly`
- * = session only, and so out of scope for a node driven by an API key).
+ * says which auth group it sits under (a group that installs
+ * CombinedAuthMiddleware, such as `protected`, takes a session or an API key;
+ * `jwtOnly` = session only, and so out of scope for a node driven by an API key).
  */
 function parseRoutes() {
 	const src = readFileSync(ROUTES_FILE, 'utf8');
@@ -142,7 +147,12 @@ function parseRoutes() {
 		});
 	}
 
-	return routes;
+	const middleware = groupMiddleware(lines);
+	return {
+		routes,
+		authGroups: groupsUsing(middleware, 'CombinedAuthMiddleware'),
+		idempotentGroups: groupsUsing(middleware, 'IdempotencyMiddleware'),
+	};
 }
 
 // ---------------------------------------------------------------------------
@@ -245,8 +255,11 @@ function boundQuery(body) {
 
 /** The struct a handler binds the JSON body to, if any. */
 function boundBody(body, depth = 0) {
-	const bind = /(?:ShouldBindJSON|BindJSON|ShouldBindWith|ShouldBind)\(&(\w+)\)/.exec(body);
+	const bind = bodyBindCall(body);
 	if (!bind) {
+		// `raw, _ := c.GetRawData()` then `json.Unmarshal(raw, &in)` binds `in`.
+		const target = rawBodyTarget(body);
+		if (target && depth < 2) return boundBody(`${body}\nShouldBindJSON(&${target})`, depth + 1);
 		// A handler that reads the body itself takes whatever JSON the caller
 		// sends (the agent-tool call passes the tool's argument object straight
 		// through), so there are no named fields to expose.
@@ -573,9 +586,12 @@ function cliDescription(method, path, name) {
 // 4. Assemble.
 // ---------------------------------------------------------------------------
 
-const routes = parseRoutes();
+const { routes, authGroups, idempotentGroups } = parseRoutes();
 const reachable = routes.filter(
-	(r) => r.chain.includes('protected') && !r.chain.includes('jwtOnly') && r.path.startsWith('/v1'),
+	(r) =>
+		r.chain.some((g) => authGroups.has(g)) &&
+		!r.chain.includes('jwtOnly') &&
+		r.path.startsWith('/v1'),
 );
 
 const unresolvedHandlers = [];
@@ -715,6 +731,8 @@ for (const route of reachable) {
 		paginated,
 		returnsList,
 		openapi: !!hints,
+		// A group without the idempotency middleware ignores Idempotency-Key.
+		...(route.chain.some((g) => idempotentGroups.has(g)) ? {} : { idempotencyKey: false }),
 		source: `internal/api/routes.go:${route.line}`,
 	});
 }

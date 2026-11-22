@@ -98,4 +98,64 @@ describe('go-source extractor', () => {
 		`);
 		expect(result).toEqual(['ProviderID']);
 	});
+	it('follows a raw body read into the struct it is decoded into', () => {
+		const result = run(`
+			import { rawBodyTarget } from ${JSON.stringify(LIB)};
+			const update = [
+				'raw, err := c.GetRawData()',
+				'var in apollo.SourceInput',
+				'if err := json.Unmarshal(raw, &in); err != nil {',
+				'var probe map[string]json.RawMessage',
+				'if json.Unmarshal(raw, &probe) == nil {',
+			].join('\\n');
+			const probeFirst = [
+				'body, _ := c.GetRawData()',
+				'var probe map[string]any',
+				'_ = json.Unmarshal(body, &probe)',
+				'var req models.Patch',
+				'_ = json.Unmarshal(body, &req)',
+			].join('\\n');
+			console.log(JSON.stringify([
+				rawBodyTarget(update),
+				rawBodyTarget(probeFirst),
+				rawBodyTarget('var in models.X\\nc.ShouldBindJSON(&in)'),
+			]));
+		`);
+		expect(result).toEqual(['in', 'req', null]);
+	});
+	it('reads group middleware across a wrapped Use call', () => {
+		const result = run(`
+			import { groupMiddleware, groupsUsing } from ${JSON.stringify(LIB)};
+			const lines = [
+				'protected := base.Group("")',
+				'protected.Use(m.CombinedAuthMiddleware(), m.IdempotencyMiddleware())',
+				'secrets := base.Group("/store")',
+				'secrets.Use(m.CombinedAuthMiddleware(), m.ResourceScopeGate(),',
+				'	m.RequireOrganization(), m.RateLimitMiddleware(models.RateLimitWrite))',
+				'jwtOnly := base.Group("")',
+				'jwtOnly.Use(m.AuthMiddleware())',
+			];
+			const mw = groupMiddleware(lines);
+			console.log(JSON.stringify([
+				[...groupsUsing(mw, 'CombinedAuthMiddleware')],
+				[...groupsUsing(mw, 'IdempotencyMiddleware')],
+			]));
+		`);
+		expect(result).toEqual([['protected', 'secrets'], ['protected']]);
+	});
+	it('finds a body bound with a binding argument', () => {
+		const result = run(`
+			import { bodyBindCall } from ${JSON.stringify(LIB)};
+			console.log(JSON.stringify([
+				bodyBindCall('if err := c.ShouldBindJSON(&in); err != nil {'),
+				bodyBindCall('if err := c.ShouldBindBodyWith(&req, binding.JSON); err != nil {'),
+				bodyBindCall('_ = c.ShouldBindQuery(&q)'),
+			]));
+		`);
+		expect(result).toEqual([
+			['ShouldBindJSON(&in)', 'in'],
+			['ShouldBindBodyWith(&req, binding.JSON)', 'req'],
+			null,
+		]);
+	});
 });

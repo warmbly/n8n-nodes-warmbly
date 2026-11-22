@@ -176,7 +176,7 @@ function buildMeta(op, resource, operation) {
 		});
 	}
 
-	if (WRITE_METHODS.has(op.method)) {
+	if (WRITE_METHODS.has(op.method) && op.idempotencyKey !== false) {
 		meta.fields.push({
 			name: 'idempotencyKey',
 			apiName: 'Idempotency-Key',

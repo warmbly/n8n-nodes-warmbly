@@ -399,3 +399,57 @@ export function parenDepth(line) {
 	}
 	return depth;
 }
+
+/**
+ * The variable a handler decodes its raw body into, when it reads the bytes
+ * itself (`raw, err := c.GetRawData()`) and then `json.Unmarshal(raw, &in)`,
+ * usually to tell an explicit `null` from an absent key. Decodes into a
+ * map (a presence probe) are skipped. Returns null when there is none.
+ */
+export function rawBodyTarget(body) {
+	const read = /(\w+),\s*\w+\s*:?=\s*c\.GetRawData\(\)/.exec(body);
+	if (!read) return null;
+	const decodes = body.matchAll(new RegExp(`json\\.Unmarshal\\(\\s*${read[1]}\\s*,\\s*&(\\w+)\\)`, 'g'));
+	for (const [, target] of decodes) {
+		const decl = new RegExp(`var ${target} (\\S+)`).exec(body);
+		if (decl && !decl[1].startsWith('map[')) return target;
+	}
+	return null;
+}
+
+/**
+ * The middleware each route group installs, read from its `.Use(...)` call
+ * (possibly wrapped over several lines): group variable -> call text.
+ */
+export function groupMiddleware(lines) {
+	const groups = new Map();
+	for (let i = 0; i < lines.length; i++) {
+		const use = /^\s*(\w+)\.Use\((.*)$/.exec(lines[i]);
+		if (!use) continue;
+		let text = use[2];
+		let open = parenDepth(lines[i]);
+		for (let j = i + 1; open > 0 && j < lines.length; j++) {
+			text += ' ' + lines[j];
+			open += parenDepth(lines[j]);
+		}
+		groups.set(use[1], `${groups.get(use[1]) ?? ''} ${text}`.trim());
+	}
+	return groups;
+}
+
+/** The group variables whose middleware includes `name(`. */
+export function groupsUsing(middleware, name) {
+	const re = new RegExp(`\\b${name}\\(`);
+	return new Set([...middleware].filter(([, text]) => re.test(text)).map(([group]) => group));
+}
+
+/**
+ * The first JSON body binding in a handler: `[call, variable]`, or null.
+ * Covers the one-argument binders (`c.ShouldBindJSON(&in)`) and the ones that
+ * take a binding too (`c.ShouldBindBodyWith(&req, binding.JSON)`, used when the
+ * body is read twice).
+ */
+export function bodyBindCall(body) {
+	const m = /(?:ShouldBindJSON|BindJSON|ShouldBindBodyWith|ShouldBindWith|ShouldBind)\(&(\w+)\s*(?:\)|,[^)]*\))/.exec(body);
+	return m ? [m[0], m[1]] : null;
+}
